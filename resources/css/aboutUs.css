@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://media.istockphoto.com/id/621833660/photo/movie.jpg?s=612x612&w=0&k=20&c=e5na6gfBWjdLDxG3i9Grrsd6CmfOZAYI4UAjzw5wRxk=');
+    background-size: cover;
+    height: 100vh;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.blur-background {
+    backdrop-filter: blur(50%);
+    background-image: url('https://images.squarespace-cdn.com/content/v1/57f5648637c581229b2e436f/1522788636811-EDLAD589AU4UYVGIK255/Screen+Shot+2018-04-03+at+4.49.58+PM.png?format=1500w');
+    background-size: cover;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.left-section {
+    width: 45%;
+}
+
+.right-section {
+    width: 45%;
+    text-align: right;
+    padding-right: 30px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 24px; 
+    font-weight: bold;
+    color: white; 
+}
+
+.divider {
+    width: 50%;
+}
+
+p.small-text {
+    margin-left: 20px;
+    color: white; 
+}
+
+.image-container {
+    margin-top: 20px;
+    margin-right: 20px; 
+    display: inline-block;
+}
+
+.frame {
+    border: 1px solid #ffffff;
+    max-width: 400px; 
+    height: auto;
+    box-sizing: border-box;
+}
+
+.framed-image {
+    size: 20px;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    position: static;
+}

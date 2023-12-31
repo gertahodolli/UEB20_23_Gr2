@@ -8,7 +8,53 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
     <title>National Theater of Kosovo</title>
+
+    <style>
+        .full-page {
+            height: 100vh; /* Set section to full viewport height */
+            background-image: url('first_image.jpg'); /* Default background image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            }
+            .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            }
+            
+            /* Style for the hover buttons */
+            .hover-button {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            }
+            .hover-button.left {
+            left: 0;
+            }
+            .hover-button.right {
+            right: 0;
+            }
+
+            .full-page:hover .hover-button {
+            display: block;
+            }
+    </style>
+
+
 </head>
+
+
 <body>
     <!-- Navbar -->
     <header>

@@ -185,9 +185,30 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-    <script>
+        <script type="text/javascript">
+            var i=0;
+            var img=[];
+            var time=3000
         
-    </script>
+            img[0] = '../resources/images/aboutUs.jpg';
+            img[1] = '../resources/images/aboutUs(2).jpg';
+            img[2] = '../resources/images/aboutUs(3).png';
+            
+        
+          function changeImg() {
+            document.slide.src =img[i];
+            if (i < img.length -1){
+              i++;
+            }else{
+              i=0;
+        
+            }
+            setTimeout("changeImg()",time);// body...
+          }
+        
+        
+          window.onload = changeImg;
+        </script>
 
 
     

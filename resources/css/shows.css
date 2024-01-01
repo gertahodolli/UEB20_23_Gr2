@@ -1,0 +1,67 @@
+.show-changes{
+    background-color: rgb(24,22,22);
+}
+
+.show-card {
+    perspective: 1000px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .show-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+  }
+  
+  .show-card:hover .show-image {
+    transform: rotateY(180deg);
+  }
+  
+  .show-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .show-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.5s ease;
+  }
+  
+  .show-card:hover .show-title {
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  .show-info {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .shows-img{
+    width: auto; /* Ensures images take up full width */
+    height: auto; /* Maintains aspect ratio */
+    max-height: 450px; /* Example height; adjust as needed */
+  }

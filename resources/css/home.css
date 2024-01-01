@@ -1,0 +1,17 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: rgb(24,22,22);
+  }
+
+.navbar-logo {
+    max-height: 50px; /* Adjust the max height as per your navbar */
+    width: auto;
+    margin-right: 10px; /* To provide space between the logo and text */
+  }
+
+
+
+
+

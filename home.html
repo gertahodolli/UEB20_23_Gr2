@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/home.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
     <title>National Theater of Kosovo</title>
+
+
+    <script src="resources/js/index.js"></script>
 
     <style>
         .full-page {
@@ -25,7 +28,7 @@
             color: white;
             text-align: center;
             }
-            
+
             /* Style for the hover buttons */
             .hover-button {
             display: none;
@@ -60,7 +63,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
-            <img src="./images/foto1.png" alt="National Theater of Kosovo" class="navbar-logo">
+            <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -105,17 +108,72 @@
         <div class="hover-button right">&gt;</div>
     </section>
 
-    <section id="about">
+
+    <!-- Section with two recent shows and link to calendar -->
+    <section class="container my-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center mb-5">Recent Shows</h2>
+        <!-- Show 1 -->
+        <div class="card mb-5">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="resources/shows/1984.png" alt="Show 1 Image" class="img-fluid">
+            </div>
+            <div class="col-md-8 recent-text-color">
+              <div class="card-body">
+                <h5 class="card-title">1984</h5>
+                <p class="card-text">Dramatizuar nga romani distopik i autorit George Orwell</p>
+                <p class="card-text"><b>Regjisor:</b> Igor Mendjisky</p>
+                <p class="card-text">Luajnë: Adrian Morina, Arta Selimi, Basri Lushtaku, Edona Reshitaj, Flaka Latifi, Shpejtim Kastrati, Xhejlane Godanci dhe Ylber Bardhi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Show 2 -->
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="resources/shows/club albania.png" alt="Show 2 Image" class="img-fluid">
+            </div>
+            <div class="col-md-8 recent-text-color">
+              <div class="card-body">
+                <h5 class="card-title">CLUB ALBANIA</h5>
+                <p class="card-text">Shfaqja është bazuar në komedinë, “Pas Vdekjes” nga A.Z. Çajupi</p>
+                <p class="card-text"><b>Regjisor:</b> Fatos Berisha</p>
+                <p class="card-text">Aktorë: Armond Morina, Ard Islami, Armend Smajli, Maylinda Kosumovic, Naim Berisha, Teuta Krasniqi dhe Ylber Bardhi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="calendar.html" class="btn btn-primary" id="goto-calendar">View Calendar</a>
+      </div>
+    </div>
     </section>
 
-    <section id="theater-info">
-    </section>
+
+    
+
+    
 
     
     <footer>
         
         <p>&copy; 2023 National Theater of Kosovo. All rights reserved.</p>
     </footer>
+
+    <!-- Bootstrap JS and other scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+        
+    </script>
+
+
+    
 
 </body>
 </html>

@@ -43,3 +43,15 @@ body, html {
     text-decoration: none; /* Remove default underline */
     border-radius: 5px; /* Round corners if desired */
 }
+
+
+.sponsor-changes{
+    color: rgb(169,168,168);
+    background-color: rgb(1,1,0);
+}
+
+.sponsor-img{
+    width: auto; /* Ensures images take up full width */
+    height: auto; /* Maintains aspect ratio */
+    max-height: 200px; /* Example height; adjust as needed */
+}

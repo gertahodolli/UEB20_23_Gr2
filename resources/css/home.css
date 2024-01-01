@@ -55,3 +55,13 @@ body, html {
     height: auto; /* Maintains aspect ratio */
     max-height: 200px; /* Example height; adjust as needed */
 }
+
+.social-links{
+    margin-bottom: 20px;
+    margin-top: 20px;;
+}
+
+.social-links i {
+    color: antiquewhite;
+    font-size: 1.5em;
+}

@@ -48,8 +48,13 @@ h2 {
     color: white; 
 }
 
+p {
+    color:white;
+}
+
 .divider {
-    width: 50%;
+    width: 23%;
+    border-top: 4px solid white; 
 }
 
 p.small-text {

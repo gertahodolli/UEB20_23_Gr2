@@ -28,5 +28,18 @@ body, html {
     border-radius: 5px; /* Round corners if desired */
 }
 
+.about-changes{
+    color: rgb(169,168,168);
+}
 
-
+#goto-about{
+    display: block;
+    width: fit-content; /* Adjust the width based on your design */
+    margin: 0 auto; /* Centers the link horizontally */
+    text-align: center; /* Centers the text within the link */
+    padding: 10px 20px; /* Adjust padding based on your button design */
+    background-color: #2c552b; /* Example background color */
+    color: white; /* Example text color */
+    text-decoration: none; /* Remove default underline */
+    border-radius: 5px; /* Round corners if desired */
+}

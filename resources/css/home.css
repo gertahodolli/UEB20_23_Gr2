@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,300;1,400;1,500&display=swap');
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     background-color: rgb(24,22,22);
-  }
+    font-family: 'Poppins', sans-serif;
+}
+
+div, h1, h2, p, a{
+    font-family: 'Poppins', sans-serif;
+}
 
 .navbar-logo {
     max-height: 50px; /* Adjust the max height as per your navbar */

@@ -21,7 +21,7 @@
 }
 
 #calendar a:visited {
-    color: #663399; /* Change color of visited links */
+    color: #ad5252; /* Change color of visited links */
 }
 
 #calendar a:active{
@@ -29,14 +29,16 @@
 }
 
 
-
+thead {
+    background-color: black;
+}
 
 #calendar {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(122, 121, 121, 0.7);
+
 }
 
 #calendar th,

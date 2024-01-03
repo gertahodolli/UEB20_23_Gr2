@@ -23,6 +23,10 @@ div, h1, h2, p, a{
     color: rgb(169,168,168);
 }
 
+#about-heading::after{
+    content: " the National Theater of Kosovo";
+}
+
 #goto-calendar{
     display: block;
     width: fit-content; /* Adjust the width based on your design */

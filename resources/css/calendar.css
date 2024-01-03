@@ -1,0 +1,68 @@
+.calendar-show{
+    background-color: #302f2f;
+    padding-top: 50px;
+    color: aliceblue;
+}
+
+.show-info{
+    background-color: rgb(35,34,34);
+    color: rgb(169,168,168);
+}
+
+
+#calendar a {
+    color: #4C4C4C;
+    text-decoration: none;
+}
+
+#calendar a:hover {
+    text-decoration: underline; /* Add underline on hover */
+    color: #0056b3; /* Change color on hover */
+}
+
+#calendar a:visited {
+    color: #663399; /* Change color of visited links */
+}
+
+#calendar a:active{
+    color: #663399;
+}
+
+
+
+
+#calendar {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#calendar th,
+#calendar td {
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+    color: aliceblue;
+}
+
+.muaji {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: rgb(35,34,34);
+    padding: 10px;
+    color: aliceblue;
+}
+
+
+.show-img{
+    width: auto; /* Ensures images take up full width */
+    height: auto; /* Maintains aspect ratio */
+    min-height: 350px;
+    max-height: 370px; /* Example height; adjust as needed */
+}

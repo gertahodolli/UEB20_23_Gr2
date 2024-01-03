@@ -1,0 +1,95 @@
+html{
+    background-color: #4C4C4C;
+}
+body{
+    background-color: #646464;
+}
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+}
+.card{
+    flex: 1;
+    margin: 10px;
+    overflow: hidden;
+    position: relative;
+    background-color: #575757;
+    /*height: 100%;
+    display: flex;
+    flex-direction: column;*/
+}
+.card img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+.card-content{
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #fff; /* Decrease border width and use solid white */
+    border-radius: 4px; /* Add border radius for a rounded appearance */
+}
+
+.quantity-display {
+    text-align: center;
+    background-color: #333333;
+    border: 1px solid #fff;
+    color: white;
+    padding: 5px;
+}
+
+.quantity-buttons {
+    display: flex;
+}
+
+.quantity-buttons button {
+    cursor: pointer;
+    background-color: #333333;
+    color: white;
+    border: 1px solid #fff; /* Decrease border width and use solid white */
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 0;
+    transition-duration: 0.4s;
+    border-radius: 4px; /* Add border radius for a rounded appearance */
+}
+
+/* Add white border to the right of the quantity display */
+.quantity-display {
+    border-right: 1px solid #fff; /* Decrease border width and use solid white */
+}
+
+/* Add white border to the right of the last button to complete the border around the buttons */
+.quantity-buttons button:last-child {
+    border-right: 1px solid #fff; /* Decrease border width and use solid white */
+    border-top-right-radius: 4px; /* Add border radius only to the top right corner */
+    border-bottom-right-radius: 4px; /* Add border radius only to the bottom right corner */
+}
+
+
+
+.btn.btn-primary{
+    background-color: rgba(145, 15,18,0.7);
+    border: none;
+    color: white;
+    background: linear-gradient(to bottom right, rgba(145, 15, 18, 0.7), rgb(128, 61, 61));
+    transition: background 0.5s;
+}
+
+.btn.btn-primary:hover {
+    background: linear-gradient(to top left, rgba(145, 15, 18, 0.7), rgb(128,61,61));
+}

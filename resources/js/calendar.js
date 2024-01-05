@@ -42,4 +42,15 @@ document.addEventListener('DOMContentLoaded', function() {
             updateShowInfo(selectedDate); // Update show information based on the selected date
         });
     });
-    });
+    
+
+    const activeLink = document.querySelector('.date-link.active');
+
+        
+    // Check if the link exists and make it active
+    if (activeLink) {
+        const selectedDate = '3'; // Date '3' is the default show to display
+        updateShowInfo(selectedDate); // Update show information based on the selected date
+        
+    }
+});

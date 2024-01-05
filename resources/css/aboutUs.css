@@ -82,3 +82,27 @@ p.small-text {
     height: auto;
     position: static;
 }
+
+/* pjesa 2 */
+
+/* body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+} */
+
+.container2 {
+    display: flex;
+}
+
+.left-side2,
+.right-side2 {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.separator2 {
+    border-right: 1px solid #ccc;
+    height: 100vh;
+}

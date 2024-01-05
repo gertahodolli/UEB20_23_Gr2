@@ -1,0 +1,42 @@
+.username {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    padding-bottom: 10px;
+  }
+.username-field {
+    flex: 1;
+    padding: 10px;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  .messages {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .username-rules {
+    color: red;
+    transition: all .33s ease-out;
+    opacity: 1;
+    margin: 0;
+    transform: scale(1);
+  }
+
+  .username-success {
+    color: green;
+    transition: all .33s ease-out;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    transform: scale(1);
+  }
+  
+  .hidden {
+    opacity: 0;
+    transform: scale(1.09);
+  }

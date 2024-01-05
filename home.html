@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>National Theater of Kosovo</title>
 
     <style>
@@ -145,7 +146,7 @@
             </div>
           </div>
         </div>
-        <a href="calendar.html" class="btn btn-primary" id="goto-calendar">View Calendar</a>
+        <a href="calendar.html" class="btn btn-style" id="goto-calendar">View Calendar</a>
       </div>
     </div>
     </section>
@@ -158,7 +159,7 @@
           <h2 id="about-heading">History of</h2>
           <p>The National Theater of Kosovo, abbreviated <abbr title="Teatri Kombetare i Kosoves">TKK</abbr> , is the main performing arts center in Kosovo, founded in 1945 in the city of Prizren in Kosovo. It is ranked as the highest in the country. The National Theater is the only theater in Kosovo and is therefore financed by the <span style="color: red;">Ministry of Culture, Youth and Sports</span> . This theater has shown more than <mark style="background-color: #4C4C4C">400 premieres</mark> which have been watched by more than 3 million viewers. 
           </p>
-          <a href="about.html" class="btn btn-secondary goto-about">About Us</a>
+          <a href="about.html" class="btn btn-style goto-about">About Us</a>
         </div>
         <div class="col-md-6">
           <img  name="slide" alt="Founder Image" class="img-fluid">
@@ -174,10 +175,10 @@
         <div class="col-md-12 text-center mb-5 mt-5">
           <h2>Our Sponsors</h2>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-6 text-center droppable" id="container1" ondrop="drop(event)" ondragover="allowDrop(event)">
           <img src="resources/images/sponsor1.jpg" alt="Sponsor 1" class="sponsor-img img-fluid mb-3">
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-6 text-center droppable" id="container2" ondrop="drop(event)" ondragover="allowDrop(event)">
           <img src="resources/images/sponsor2.png" alt="Sponsor 2" class="sponsor-img img-fluid mb-3">
         </div>
       </div>
@@ -241,6 +242,19 @@
         
           window.onload = changeImg;
         </script>
+
+        <script>
+
+          
+  
+        </script>
+
+  <script>
+    // Example of using jQuery selectors for changing color
+    $(document).ready(function() {
+      $('.btn-style').css('background-color', 'red'); // Change text color for buttons
+    });
+  </script>
 
 
     

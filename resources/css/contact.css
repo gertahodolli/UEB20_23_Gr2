@@ -6,7 +6,6 @@ body {
     color: rgb(255, 255, 255);
 }
 
-/* Background */
 body {
     background-image: url('https://i.pinimg.com/564x/d3/9c/d8/d39cd8b5f6f7f93be2cdb6df9738d702.jpg');
     background-size: cover;
@@ -15,24 +14,20 @@ body {
     position: relative;
 }
 
-/* Header */
 header {
     color: #ffffff;
     text-align: center;
     padding: 20px;
 }
 
-/* Main Sections */
 section {
     margin-top: 1px; 
 }
 
-/* Address */
 address {
     font-style: normal;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 20px;
@@ -67,8 +62,6 @@ p a[href^="tel:"]:hover {
     color: #cb6b6b; /* Kuq */
 }
 
-
-
 .contact-info
 {
     grid-column: span 1;
@@ -87,7 +80,7 @@ p a[href^="tel:"]:hover {
     margin-top: 1.3cm; /* Zvoglo margin-in midis tekstit dhe butonit */
 }
 
-/* Adjust margin-top for Live Chat Button */
+/*  margin-top for Live Chat Button */
 .inquiry-item1 button {
     margin-top: 2cm; /* Set the desired distance */
 }
@@ -96,8 +89,6 @@ p a[href^="tel:"]:hover {
 .contact-info button {
     margin-top: 1.3cm; /* Zvoglo margin-in midis tekstit dhe butonit */
 }
-
-
 
 /* Contact Link */
 .contact-info a {
@@ -110,17 +101,13 @@ p a[href^="tel:"]:hover {
 
 }
 
-/* Header Underline */
+/* Header underline */
 h1 {
     border-bottom: 0.1px solid rgb(255, 255, 255);
     margin-bottom: 3cm;
     padding-bottom: 0.5cm;
     text-align: center;
 }
-
-
-
-
 .horizontal-line {
     width: 100%;
     border-top: 1px solid #ddd; /* You can adjust the color and thickness */
@@ -128,8 +115,6 @@ h1 {
     margin-bottom: 2cm;
 }
 
-
-/* Box Office Container */
 .box-office-container {
     display: flex;
     align-items: flex-start;
@@ -137,25 +122,20 @@ h1 {
     gap: 2cm;
 }
 
-
-/* Box Office Heading */
 .box-office-heading {
     flex: 1;
     font-size: 25px;
 }
 
-/* Box Office Columns */
 .box-office-column {
     flex: 1;
 }
 
-/* Box Office Items */
 .box-office-item1,
 .box-office-item {
     margin-bottom: 2cm; /* Redukto margin-in midis elementeve */
 }
 
-/* Box Office Item Heading */
 .box-office-item1 h2,
 .box-office-item h2 {
     font-size: 20px;
@@ -163,15 +143,11 @@ h1 {
     margin-bottom: 0.5cm;
 }
 
-/* Standard Ticket Hours */
 .standard-ticket-hours ol {
     list-style-type: disc ; /* Remove default list styles */
     padding: 0;
 }
 
-
-/* Styling for the Submit button */
-/* Styling for the Popup */
 .popup {
     display: none;
     position: fixed;
@@ -184,7 +160,6 @@ h1 {
     z-index: 1;
 }
 
-/* Styling for the Live Chat Section inside the Popup */
 #liveChatSection {
     background-color: #373333;
     border: 1px solid #79b58d;
@@ -193,9 +168,6 @@ h1 {
     margin: 10% auto; /* Adjust the margin as needed */
     max-width: 400px;
 }
-
-/* Your existing styles for buttons, labels, inputs, etc. */
-
 
 
 #liveChatSection button {
@@ -214,18 +186,15 @@ h1 {
     background-color: #6e7377; /* Change background color on hover */
 }
 
-/* Required Fields styling */
 #requiredFields {
     margin-bottom: 10px; /* Margin below the required fields message */
 }
 
-/* Labels styling */
 label {
     display: block; /* Display labels as blocks for vertical alignment */
     margin-bottom: 5px; /* Margin between labels and input elements */
 }
 
-/* Input and Textarea styling */
         #liveChatSection input,
         #liveChatSection textarea {
             background-color: #373333;
@@ -237,8 +206,6 @@ label {
             padding: 10px; /* Padding inside the input and textarea */
         }
 
-
-/* Button styling */
 button {
     padding: 10px; /* Padding inside the button */
     background-color: #478460; /* Button background color */
@@ -251,13 +218,10 @@ button {
     margin-top: 70px;
 }
 
-/* Button hover effect */
 button:hover {
     background-color: #6e7377; /* Button background color on hover */
 }
 
-
-/* Enquiries Section */
 .enquiries-container {
     display: flex;
     align-items: flex-start;
@@ -266,24 +230,20 @@ button:hover {
 
 }
 
-/* Enquiries Heading */
 .enquiries-heading {
     flex: 1;
     font-size: 25px;
 }
 
-/* Enquiries Columns */
 .inquiry-column {
     flex: 1;
 }
 
-/* Enquiries Items */
 .inquiry-item1,
 .inquiry-item {
     margin-bottom: 2cm; /* Redukto margin-in midis elementeve */
 }
 
-/* Enquiries Item Heading */
 .inquiry-item1 h5,
 .inquiry-item h5 {
     font-size: 20px;
@@ -301,8 +261,6 @@ button:hover {
     font-size: 40px;
 }
 
-/* Normal Layout for Additional Headings with Line Break */
-/* Harta Section */
 .section {
     display: flex;
     flex-direction: column;
@@ -310,7 +268,6 @@ button:hover {
     padding: 15px;
 }
 
-/* Map Container */
 section iframe {
     width: 100%;
     max-width: 1100px; /* Set the maximum width as needed */
@@ -319,7 +276,6 @@ section iframe {
     margin: 15px 0; /* Adjust the top and bottom margin as needed */
 }
 
-/* Additional Section */
 .additional-section {
     width: 100%;
     max-width: 850px; /* Set the maximum width as needed */
@@ -328,13 +284,11 @@ section iframe {
     margin-bottom: 130px;
 }
 
-/* Additional Section Headings */
 .additional-section h5 {
     font-size: 20px;
     color: #fcfbfb;
 }
 
-/* Additional Section Paragraphs */
 .additional-section p {
     font-size: 16px;
     line-height: 1.5;
@@ -342,14 +296,13 @@ section iframe {
     margin-bottom: 10px; /* Adjust the bottom margin as needed */
 }
 
-/* FAQs Heading */
+/* FAQs */
 .faqs-heading {
     text-align: center;
     font-size: 32px;
     margin-bottom: 20px;
 }
 
-/* FAQs Container */
 .faqs-container {
     display: flex;
     gap: 20px;
@@ -357,41 +310,34 @@ section iframe {
     padding: 20px;
 }
 
-/* FAQ Column */
 .faq-column {
     flex: 1;
 }
 
-/* FAQs Details */
 .faqs-details {
     padding: 20px;
 }
 
-/* FAQs Title */
 .faqs-title {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-/* FAQs List */
 .faqs-list {
     list-style: none;
     padding: 0;
 }
 
-/* FAQs ListItem */
 .faqs-list li {
     margin-bottom: 15px;
 }
 
-/* FAQs Details Summary */
 .faqs-list details summary {
     cursor: pointer;
     outline: none;
     font-weight: bold;
 }
 
-/* FAQs Details Content */
 .faqs-list details p {
     margin-top: 10px;
     font-size: 15px;
@@ -405,14 +351,12 @@ section iframe {
     margin-top: 130px;
 }
 
-/* Accessibility Content */
 .accessibility-content {
     flex: 1;
     max-width: 50%;
     padding-right: 1cm;
 }
 
-/* Accessibility Image */
 .accessibility-image {
     flex: 1;
     max-width: 40%;

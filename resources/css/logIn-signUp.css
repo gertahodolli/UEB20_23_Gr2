@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+:root {
+  --error-color: #d9534f;
+  --success-color: #5cb85c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+::selection {
+  background: #c9d498;
+  color: #fff;
+}
+
+.mbul {
+  overflow: hidden;
+  max-width: 390px;
+  background: #fffdfd;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 15px 20px rgba(161, 33, 33, 0.767);
+}
+
+.mbul .title-text {
+  display: flex;
+  width: 200%;
+}
+
+.mbul .title {
+  width: 50%;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+
+.mbul .slide-controls {
+  position: relative;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px 0;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.slide-controls .slide {
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 48px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.9s ease;
+}
+
+.slide-controls label.signup {
+  color: #000;
+}
+
+.slide-controls .slider-tab {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  z-index: 0;
+  border-radius: 5px;
+  background: -webkit-linear-gradient(left,rgb(199, 39, 39), #e62020,rgb(158, 29, 29));
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+#signup:checked ~ .slider-tab {
+  left: 50%;
+}
+
+#signup:checked ~ label.signup {
+  color: #fff;
+  cursor: default;
+  user-select: none;
+}
+
+#signup:checked ~ label.login {
+  color: #000;
+}
+
+#login:checked ~ label.signup {
+  color: #000;
+}
+
+#login:checked ~ label.login {
+  cursor: default;
+  user-select: none;
+}
+
+.mbul .kuti {
+  width: 100%;
+  overflow: hidden;
+}
+
+.kuti .te_dhenat {
+  display: flex;
+  width: 200%;
+}
+
+.kuti .te_dhenat form {
+  width: 50%;
+}
+
+.te_dhenat form .field {
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.te_dhenat form .field input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 15px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  border-bottom-width: 2px;
+  font-size: 17px;
+}
+
+.te_dhenat form .field input:focus {
+  border-color: #ff5151;
+}
+
+.te_dhenat form .field input::placeholder {
+  color: rgb(37, 37, 27);
+  transition: all 0.3s ease;
+}
+
+form .field input:focus::placeholder {
+  color: #d6d39f;
+}
+
+.te_dhenat form .pass-link {
+  margin-top: 5px;
+}
+
+.te_dhenat form .signup-link {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.te_dhenat form .pass-link a,
+.te_dhenat form .signup-link a {
+  color: #362e2e;
+  text-decoration: none;
+}
+
+.te_dhenat form .pass-link a:hover,
+.te_dhenat form .signup-link a:hover {
+  text-decoration: underline;
+}
+
+form .btn {
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+form .btn .btn-layer {
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: -webkit-linear-gradient(left,rgb(104, 78, 78), #e62020,rgb(117, 110, 110));
+  transition: all 0.4s ease;;
+}
+
+form .btn:hover .btn-layer {
+  left: 0;
+}
+
+form .btn input[type="submit"] {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  padding-left: 0;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}

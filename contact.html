@@ -6,7 +6,48 @@
     <title>Contact Us - Theatre Name</title>
     <link rel="stylesheet" type="text/css" href="resources/css/contact.css">
 </head>
+    
 <body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mr-5" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item pr-3">
+                <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item dropdown pr-3" id="showsDropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Shows
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
+                  <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.html">Shows</a>
+                  <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.html">Calendar</a>
+                </div>
+            </li>
+            <li class="nav-item pr-3">
+                <a class="nav-link" href="biletat.html">Tickets</a>
+            </li>
+            <li class="nav-item pr-3">
+                <a class="nav-link" href="aboutUs.html">About Us</a>
+            </li>
+            <li class="nav-item pr-3">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+            <li class="nav-item mr-3">
+              <a class="nav-link btn btn-style" style="color: black;" href="signup.html">Sign Up</a>
+            </li>
+            </ul>
+        </div>
+        </nav>
+    </header>
+    
     <header>
         <h1>Contact Us & Hours</h1>
     </header>
@@ -52,7 +93,7 @@
 
 
    <!-- Live Chat Section -->
-<div id="liveChatPopup" class="popup">
+   <div id="liveChatPopup" class="popup">
     <div id="liveChatSection">
         <h2>Contact Me</h2>
         <p id="requiredFields">Fields marked with an * are required</p>
@@ -265,18 +306,20 @@
 </section>
 
     
+       <!-- Footer -->
     <footer class=" text-white text-center py-3 bg-color">
         <div class="container">
           <div class="row">
             <div class="col">
               <div class="footer-icons social-links">
-                <a href="https://www.facebook.com/YourFacebookPage" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/YourInstagramPage" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
-                <a href="mailto:your.email@example.com" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
               </div>
+              <p>Phone: +383 (44) 753 330</p>
             </div>
-            <div class="col">
-              <p>Address: National Theater, Kosovo</p>
+            <div class="col pt-4">
+              <address>Address: Street Luan Haradinaj, Prishtina</address>
             </div>
           </div>
           <div class="row">
@@ -285,10 +328,12 @@
             </div>
           </div>
         </div>
+        </footer>
+    
     </footer>
     
     
-<script src ="resources/js/contact.js"></script>
+<script src ="contact.js"></script>
 
 </body>
 </html>

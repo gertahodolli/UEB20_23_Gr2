@@ -1,4 +1,5 @@
 
+// Function to open the popup
 function submitLiveChat() {
     
     // Check if the required fields are filled before submission
@@ -17,7 +18,9 @@ function submitLiveChat() {
 function startLiveChat() {
         document.getElementById("liveChatSection").style.display = "block";
     }
-// Function to open the popup
+
+
+    // Function to open the popup
 function openPopup() {
     document.getElementById("liveChatPopup").style.display = "block";
 }
@@ -27,13 +30,14 @@ function closePopup() {
     document.getElementById("liveChatPopup").style.display = "none";
 }
 
-// Function to submit the live chat 
+// Function to submit the live chat (replace this with your actual submission logic)
 function submitLiveChat() {
     const name = document.getElementById("liveChatName").value.trim();
     const email = document.getElementById("liveChatEmail").value.trim();
     const message = document.getElementById("liveChatMessage").value.trim();
 
     if (name !== "" && email !== "" && message !== "") {
+        // Add your live chat submission logic here
         alert("Live chat message submitted!");
         document.getElementById("liveChatSection").style.display = "none";
     closePopup();
@@ -42,5 +46,9 @@ else {
     alert("Please fill out all required fields.");
 }
 }
+
+
+
+
 
  

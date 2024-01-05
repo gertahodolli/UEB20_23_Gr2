@@ -12,41 +12,45 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">
-            <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse mr-5" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item pr-3">
-                <a class="nav-link" href="home.html">Home</a>
-              </li>
-              <li class="nav-item dropdown pr-3">
-                <a class="nav-link dropdown-toggle" href="shows.html" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Shows
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownShows">
-                  <a class="dropdown-item" href="shows.html">Shows</a>
-                  <a class="dropdown-item" href="calendar.html">Calendar</a>
-                </div>
-              </li>
-              <li class="nav-item pr-3">
-                <a class="nav-link" href="biletat.html">Tickets</a>
-              </li>
-              <li class="nav-item pr-3">
-                <a class="nav-link" href="aboutUs.html">About Us</a>
-              </li>
-              <li class="nav-item pr-3">
-                <a class="nav-link" href="contact.html">Contact Us</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse mr-5" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+        <li class="nav-item pr-3">
+            <a class="nav-link" href="home.html">Home</a>
+        </li>
+        <li class="nav-item dropdown pr-3" id="showsDropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Shows
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
+              <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.html">Shows</a>
+              <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.html">Calendar</a>
+            </div>
+        </li>
+        <li class="nav-item pr-3">
+            <a class="nav-link" href="biletat.html">Tickets</a>
+        </li>
+        <li class="nav-item pr-3">
+            <a class="nav-link" href="aboutUs.html">About Us</a>
+        </li>
+        <li class="nav-item pr-3">
+            <a class="nav-link" href="contact.html">Contact Us</a>
+        </li>
+        <li class="nav-item mr-3">
+          <a class="nav-link btn btn-style" style="color: black;" href="signup.html">Sign Up</a>
+        </li>
+        </ul>
+    </div>
+    </nav>
+</header>
+
     <section class="show-changes">
         <div class="container pt-5">
             <h2 style="text-align: center; margin-bottom: 30px; color: aliceblue;">Shows</h2>
@@ -60,9 +64,11 @@
                         Club Albania
                       </div>
                       <div class="show-info">
-                        <h3>Show 1 Name</h3>
+                        <h3>Club Albania</h3>
                         <!-- Additional show details -->
-                        <p>Show 1 information goes here</p>
+                        <p>The play is based on the comedy, "After Death" by A.Z. Çajupi.</p>
+                        <p><b>Director:</b>  <u>Fatos Berisha</u></p>
+                        <p><i><b>Actors:</b></i> Armond Morina, Ard Islami, Armend Smajli, Maylinda Kosumovic, Naim Berisha, Teuta Krasniqi and Ylber Bardhi.</p>
                       </div>
                     </div>
                   </div>
@@ -77,9 +83,12 @@
                         1984
                       </div>
                       <div class="show-info">
-                        <h3>Show 1 Name</h3>
+                        <h3>1984</h3>
                         <!-- Additional show details -->
-                        <p>Show 1 information goes here</p>
+                        <p>Dramatized from author George Orwell's dystopian novel</p>
+                        <p><b>Director:</b>  <u>Igor Mendjisky</u></p>
+                        <p><i><b>Actors:</b></i> Adrian Morina, Arta Selimi, Basri Lushtaku, Edona Reshitaj, Flaka Latifi, Shpejtim Kastrati, Xhejlane Godanci dhe Ylber Bardhi.</p>
+
                       </div>
                     </div>
                   </div>
@@ -91,12 +100,14 @@
                     <div class="show-image">
                       <img src="resources/shows/udhetimi gjate drejt nates.png" alt="Show 1" class="shows-img">
                       <div class="show-title">
-                        Udhetimi gjate drejt nates
+                        Udhëtim i gjatë drejt natës
                       </div>
                       <div class="show-info">
-                        <h3>Show 1 Name</h3>
+                        <h3>Udhëtim i gjatë drejt natës</h3>
                         <!-- Additional show details -->
-                        <p>Show 1 information goes here</p>
+                        <p>“Udhetimi i gjate drejt nates” for the last time this year on December 13, 2023.</p>
+                        <p><b>Director:</b> <u>Iliriana Arifi</u></p>
+                        <p><i><b>Actors:</b></i> Ernest Malazogu, Arta Selimi, Allmir Suhodolli, Don Shala, Florie Bajoku</p>
                       </div>
                     </div>
                   </div>
@@ -110,12 +121,14 @@
                     <div class="show-image">
                       <img src="resources/shows/diqka rreth IV.png" alt="Show 1" class="shows-img">
                       <div class="show-title">
-                        Diqka rreth IV
+                        GJITHÇKA RRETH IV
                       </div>
                       <div class="show-info">
-                        <h3>Show 1 Name</h3>
+                        <h3>GJITHÇKA RRETH IV</h3>
                         <!-- Additional show details -->
-                        <p>Show 1 information goes here</p>
+                        <p>"The dramas and intrigues that a person weaves with a sick ego to achieve their goals, regardless of the destruction or harm inflicted on those around them."</p>
+                        <p><b>Director:</b> <u>Hervin Çuli.</u></p>
+                        <p><i><b>Actors:</b></i> Ermira Hysaj Çerkozi, Albulena Kryeziu Bokshi, Hervin Çuli, Adrian Morina, Kushtrim Sheremeti, Rovena Lule Kuka, Natasha Sela, Endriu Hysi.</p>
                       </div>
                     </div>
                   </div>
@@ -127,12 +140,14 @@
                     <div class="show-image">
                       <img src="resources/shows/Grate.png" alt="Show 1" class="shows-img">
                       <div class="show-title">
-                        Grate
+                        GRATË
                       </div>
                       <div class="show-info">
-                        <h3>Show 1 Name</h3>
+                        <h3>GRATË</h3>
                         <!-- Additional show details go here -->
-                        <p>Show 1 information goes here</p>
+                        <p>The play "WOMEN - or their sins in patriarchy!", is an authorial show in collaboration with the ensemble.</p>
+                        <p><b>Director:</b> <u>Nastazja Domaradzka</u></p>
+                        <p><i><b>Actresses:</b></i> Edona Reshitaj, Gresa Pallaska, Lumnije Sopi, Sheqerie Buqaj, Shengyl Ismaili, Xhejlane Godanci.</p>
                       </div>
                     </div>
                   </div>
@@ -144,19 +159,21 @@
                     <div class="show-image">
                       <img src="resources/shows/Ditevere.jpg" alt="Show 1" class="shows-img">
                       <div class="show-title">
-                        Dite Vere
+                        Ditë Vere
                       </div>
                       <div class="show-info">
-                        <h3>Show 1 Name</h3>
+                        <h3>Ditë Vere</h3>
                         <!-- Additional show details -->
-                        <p>Show 1 information goes here</p>
+                        <p>The show will be played in the open air at the Palace of Youth and Sports in Pristina, so after getting the tickets at the ticket office of the National Theatre, the theater attendants will accompany you to the location of the show.</p>
+                        <p><b>Director:</b> <u>Kaltrim Balaj</u></p>
+                        <p><i><b>Actresses:</b></i> Andi Bajgora, Art Pasha, Era Balaj, Lumnije Sopi, Veton Osmani, Adhurim Demi, Naim Berisha</p>
                       </div>
                     </div>
                   </div>
                 </div>
             </div>
 
-            <div class="row mt-4 mb-5 text-center">
+            <div class="row mt-4 mb-5 pb-5 text-center">
                 <div class="col-md-6">
                   <a href="calendar-page.html" class="btn btn-style ">Go to Calendar</a>
                 </div>
@@ -194,7 +211,7 @@
           </div>
         </div>
       </div>
-    </footer>
+      </footer>
 
     <script>
       // Example of using jQuery selectors for changing color

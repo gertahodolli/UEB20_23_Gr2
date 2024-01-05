@@ -180,11 +180,11 @@
         <div class="col-md-12 text-center mb-5 mt-5">
           <h2>Our Sponsors</h2>
         </div>
-        <div class="col-md-6 text-center droppable" id="container1" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <img src="resources/images/sponsor1.jpg" alt="Sponsor 1" class="sponsor-img img-fluid mb-3">
+        <div class="col-md-6 text-center draggable" draggable="true">
+          <img id="draggableImage1" draggable="true" src="resources/images/sponsor1.jpg" alt="Sponsor 1" class="sponsor-img img-fluid mb-3">
         </div>
-        <div class="col-md-6 text-center droppable" id="container2" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <img src="resources/images/sponsor2.png" alt="Sponsor 2" class="sponsor-img img-fluid mb-3">
+        <div class="col-md-6 text-center draggable" draggable="true">
+          <img id="draggableImage2" draggable="true" src="resources/images/sponsor2.png" alt="Sponsor 2" class="sponsor-img img-fluid mb-3">
         </div>
       </div>
     </div>
@@ -249,8 +249,56 @@
         </script>
 
         <script>
-
           
+          let dragged = null;
+
+          document.addEventListener("dragstart", function(event) {
+              // store a reference to the dragged element
+              dragged = event.target;
+          }, false);
+
+          document.addEventListener("dragend", function(event) {
+              // reset the transparency
+              if (dragged) {
+                  dragged.style.opacity = "";
+              }
+          }, false);
+
+          document.addEventListener("dragover", function(event) {
+              // prevent default to allow drop
+              event.preventDefault();
+          }, false);
+
+          document.addEventListener("dragenter", function(event) {
+              // highlight potential drop target when the draggable element enters it
+              if (event.target.classList.contains("draggable")) {
+                  event.target.style.background = "purple";
+              }
+          }, false);
+
+          document.addEventListener("dragleave", function(event) {
+              // reset background of potential drop target when the draggable element leaves it
+              if (event.target.classList.contains("draggable")) {
+                  event.target.style.background = "";
+              }
+          }, false);
+
+          document.addEventListener("drop", function(event) {
+              // prevent default action (open as link for some elements)
+              event.preventDefault();
+
+              // move dragged elem to the selected drop target
+              if (dragged && event.target.classList.contains("draggable")) {
+                  event.target.style.background = "";
+                  const temp = document.createElement('div');
+                  event.target.parentNode.insertBefore(temp, event.target);
+                  dragged.parentNode.insertBefore(event.target, dragged);
+                  temp.parentNode.insertBefore(dragged, temp);
+                  temp.parentNode.removeChild(temp);
+              }
+              dragged = null; // reset dragged element after drop
+          }, false);
+                    
   
         </script>
 

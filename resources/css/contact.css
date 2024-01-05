@@ -1,0 +1,444 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: rgb(255, 255, 255);
+}
+
+/* Background */
+body {
+    background-image: url('https://i.pinimg.com/564x/d3/9c/d8/d39cd8b5f6f7f93be2cdb6df9738d702.jpg');
+    background-size: cover;
+    height: 100vh;
+    overflow-y: scroll;
+    position: relative;
+}
+
+/* Header */
+header {
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Main Sections */
+section {
+    margin-top: 1px; 
+}
+
+/* Address */
+address {
+    font-style: normal;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+/* Largimi i underline */
+a {
+    text-decoration: none;
+    color: #ffffff; /* Kalter */
+    
+}
+
+/* Stilizimi për numrat e telefonit */
+p a[href^="tel:"] {
+    color: #ffffff; /* Kalter */
+    
+}
+
+/* Stilizimi për adresat email */
+p a[href^="mailto:"] {
+    color: #ffffff; /* Kalter */
+}
+
+/* Efekti hover për emaila*/
+a[href^="mailto:"]:hover {
+    color: #cb6b6b; /* Kuq */
+}
+
+/* Efekti hover për nr telit */
+p a[href^="tel:"]:hover {
+    color: #cb6b6b; /* Kuq */
+}
+
+
+
+.contact-info
+{
+    grid-column: span 1;
+    max-width: 300px; /* Set the maximum width as needed */
+}
+
+/* Live Chat Button */
+.contact-info button {
+    background-color: rgba(228, 223, 169, 0.825);
+    color: black;
+    border: 1px solid rgb(185, 181, 181);
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    width: 150px; /* Set width as needed */
+    margin-top: 1.3cm; /* Zvoglo margin-in midis tekstit dhe butonit */
+}
+
+/* Adjust margin-top for Live Chat Button */
+.inquiry-item1 button {
+    margin-top: 2cm; /* Set the desired distance */
+}
+
+/* Contact Info Button */
+.contact-info button {
+    margin-top: 1.3cm; /* Zvoglo margin-in midis tekstit dhe butonit */
+}
+
+
+
+/* Contact Link */
+.contact-info a {
+    text-decoration: none;
+    color: black;
+}
+
+.contact-info h2 {
+    font-size: 20px;
+
+}
+
+/* Header Underline */
+h1 {
+    border-bottom: 0.1px solid rgb(255, 255, 255);
+    margin-bottom: 3cm;
+    padding-bottom: 0.5cm;
+    text-align: center;
+}
+
+
+
+
+.horizontal-line {
+    width: 100%;
+    border-top: 1px solid #ddd; /* You can adjust the color and thickness */
+    margin: 15px 0; /* Adjust the margin as needed */
+    margin-bottom: 2cm;
+}
+
+
+/* Box Office Container */
+.box-office-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 2cm; /* Përmbaj margin-in midis headerit dhe përmbajtjes */
+    gap: 2cm;
+}
+
+
+/* Box Office Heading */
+.box-office-heading {
+    flex: 1;
+    font-size: 25px;
+}
+
+/* Box Office Columns */
+.box-office-column {
+    flex: 1;
+}
+
+/* Box Office Items */
+.box-office-item1,
+.box-office-item {
+    margin-bottom: 2cm; /* Redukto margin-in midis elementeve */
+}
+
+/* Box Office Item Heading */
+.box-office-item1 h2,
+.box-office-item h2 {
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 0.5cm;
+}
+
+/* Standard Ticket Hours */
+.standard-ticket-hours ol {
+    list-style-type: disc ; /* Remove default list styles */
+    padding: 0;
+}
+
+
+/* Styling for the Submit button */
+/* Styling for the Popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Apply blur effect to the background */
+    z-index: 1;
+}
+
+/* Styling for the Live Chat Section inside the Popup */
+#liveChatSection {
+    background-color: #373333;
+    border: 1px solid #79b58d;
+    padding: 30px;
+    text-align: left;
+    margin: 10% auto; /* Adjust the margin as needed */
+    max-width: 400px;
+}
+
+/* Your existing styles for buttons, labels, inputs, etc. */
+
+
+
+#liveChatSection button {
+    background-color: #667a6f; /* Button background color */
+    color: #ffffff; /* Text color */
+    border: none; /* Remove default border */
+    text-align: center; /* Center text inside the button */
+    text-decoration: none; /* Remove underlining of text */
+    display: inline-block; /* Make it an inline block to apply padding */
+    font-size: 16px; /* Set the font size */
+    width: 30%; /* Make the button fill the container */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    border-radius: 15px; /* Add border-radius for softer edges */
+}
+#liveChatSection button:hover {
+    background-color: #6e7377; /* Change background color on hover */
+}
+
+/* Required Fields styling */
+#requiredFields {
+    margin-bottom: 10px; /* Margin below the required fields message */
+}
+
+/* Labels styling */
+label {
+    display: block; /* Display labels as blocks for vertical alignment */
+    margin-bottom: 5px; /* Margin between labels and input elements */
+}
+
+/* Input and Textarea styling */
+        #liveChatSection input,
+        #liveChatSection textarea {
+            background-color: #373333;
+            border: 0.1px solid #ffffff; /* Green border for input cells */
+            margin-bottom: 10px; /* Margin between input and textarea elements */
+            display: block; /* Make input and textarea fill the container */
+            width: 100%; /* Make input and textarea fill the container */
+            box-sizing: border-box; /* Include padding and border in the width */
+            padding: 10px; /* Padding inside the input and textarea */
+        }
+
+
+/* Button styling */
+button {
+    padding: 10px; /* Padding inside the button */
+    background-color: #478460; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Change mouse cursor on hover */
+    display: block; /* Make the button a block element */
+    width: 60%; /* Make the button fill the container */
+    border-radius: 15px; /* Add border-radius for softer edges */
+    margin-top: 70px;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #6e7377; /* Button background color on hover */
+}
+
+
+/* Enquiries Section */
+.enquiries-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 2cm; /* Përmbaj margin-in midis headerit dhe përmbajtjes */
+    gap: 2cm;
+
+}
+
+/* Enquiries Heading */
+.enquiries-heading {
+    flex: 1;
+    font-size: 25px;
+}
+
+/* Enquiries Columns */
+.inquiry-column {
+    flex: 1;
+}
+
+/* Enquiries Items */
+.inquiry-item1,
+.inquiry-item {
+    margin-bottom: 2cm; /* Redukto margin-in midis elementeve */
+}
+
+/* Enquiries Item Heading */
+.inquiry-item1 h5,
+.inquiry-item h5 {
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 0.5cm;
+}
+
+/* harta */
+.center-text {
+    text-align: center;
+    margin-top: 3cm;
+    font-size: 15px;
+}
+.center-text h2 {
+    font-size: 40px;
+}
+
+/* Normal Layout for Additional Headings with Line Break */
+/* Harta Section */
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+/* Map Container */
+section iframe {
+    width: 100%;
+    max-width: 1100px; /* Set the maximum width as needed */
+    height: 500px; /* Set the desired height */
+    border: 0;
+    margin: 15px 0; /* Adjust the top and bottom margin as needed */
+}
+
+/* Additional Section */
+.additional-section {
+    width: 100%;
+    max-width: 850px; /* Set the maximum width as needed */
+    margin: 0 auto; /* Center the additional section */
+    text-align: center;
+    margin-bottom: 130px;
+}
+
+/* Additional Section Headings */
+.additional-section h5 {
+    font-size: 20px;
+    color: #fcfbfb;
+}
+
+/* Additional Section Paragraphs */
+.additional-section p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #ffffff;
+    margin-bottom: 10px; /* Adjust the bottom margin as needed */
+}
+
+/* FAQs Heading */
+.faqs-heading {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* FAQs Container */
+.faqs-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+/* FAQ Column */
+.faq-column {
+    flex: 1;
+}
+
+/* FAQs Details */
+.faqs-details {
+    padding: 20px;
+}
+
+/* FAQs Title */
+.faqs-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* FAQs List */
+.faqs-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* FAQs ListItem */
+.faqs-list li {
+    margin-bottom: 15px;
+}
+
+/* FAQs Details Summary */
+.faqs-list details summary {
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+}
+
+/* FAQs Details Content */
+.faqs-list details p {
+    margin-top: 10px;
+    font-size: 15px;
+}
+/* accesibility */
+.accessibility-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1cm;
+    margin-bottom: 5cm;
+    margin-top: 130px;
+}
+
+/* Accessibility Content */
+.accessibility-content {
+    flex: 1;
+    max-width: 50%;
+    padding-right: 1cm;
+}
+
+/* Accessibility Image */
+.accessibility-image {
+    flex: 1;
+    max-width: 40%;
+    height: auto;
+    max-height: 350px;
+    background-repeat: no-repeat;
+    
+}
+
+/* Word Wrap and Overflow Wrap */
+.accessibility-content p {
+    word-wrap: break-word; /* You can also use overflow-wrap: break-word; */
+}
+
+/* Text Shadows */
+.accessibility-content h2,
+.accessibility-content h3{
+    text-shadow: 4px 4px 4px #00943e; /* horizontal-offset vertical-offset blur-radius color */
+}
+
+/* footeri */
+footer {
+    background: #333333; 
+    padding: 15px 23px;
+    color: #EEEEEE;
+    /* color: #4C4C4C; */
+    text-align: center;
+}
+

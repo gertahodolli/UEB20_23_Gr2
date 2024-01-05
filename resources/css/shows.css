@@ -11,7 +11,7 @@
   
   .show-image {
     position: relative;
-    width: 100%;
+    width: auto;
     height: 100%;
     transition: transform 0.5s ease;
     transform-style: preserve-3d;

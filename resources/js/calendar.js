@@ -1,13 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Show data for different dates
     const shows = [
-        { date: '27', title: '1984', director: 'Director 1', runningTime: '1 hour', image: '../resources/shows/1984.png' },
-        { date: '28', title: 'Club Albania', director: 'Director 2', runningTime: '1.5 hours', image: '../resources/shows/club albania.png' },
-        { date: '30', title: 'Grate', director: 'Director 3', runningTime: '2 hours', image: '../resources/shows/Grate.png' },
-        { date: '3', title: 'Dite Vere', director: 'Director 3', runningTime: '2 hours', image: '../resources/shows/Ditevere.jpg' },
-        { date: '5', title: 'Udhetim i gjate drejt nates', director: 'Director 3', runningTime: '2 hours', image: '../resources/shows/udhetimi gjate drejt nates.png' },
-        { date: '9', title: 'Diqka rreth IV', director: 'Director 3', runningTime: '2 hours', image: '../resources/shows/diqka rreth IV.png' },
-        
+        { date: '3', title: 'Dite Vere', director: 'Kaltrim Balaj', runningTime: '2 hours', image: '../resources/shows/Ditevere.jpg' },
+        { date: '5', title: 'Udhetim i gjate drejt nates', director: 'Iliriana Arifi', runningTime: '2 hours', image: '../resources/shows/udhetimi gjate drejt nates.png' },
+        { date: '9', title: 'Diqka rreth IV', director: 'Hervin Çuli', runningTime: '2 hours', image: '../resources/shows/diqka rreth IV.png' },
+        { date: '10', title: 'Dite Vere', director: 'Kaltrim Balaj', runningTime: '2 hours', image: '../resources/shows/Ditevere.jpg' },
+        { date: '11', title: '1984', director: 'Igor Mendjisky', runningTime: '1 hour', image: '../resources/shows/1984.png' },
+        { date: '14', title: 'Club Albania', director: 'Fatos Berisha', runningTime: '1.5 hours', image: '../resources/shows/club albania.png' },
+        { date: '17', title: 'Grate', director: 'Nastazja Domaradzka', runningTime: '2 hours', image: '../resources/shows/Grate.png' },
+        { date: '21', title: '1984', director: 'Igor Mendjisky', runningTime: '1 hour', image: '../resources/shows/1984.png' },
+        { date: '23', title: 'Grate', director: 'Nastazja Domaradzka', runningTime: '2 hours', image: '../resources/shows/Grate.png' },
+        { date: '26', title: 'Club Albania', director: 'Fatos Berisha', runningTime: '1.5 hours', image: '../resources/shows/club albania.png' },
+        { date: '30', title: 'Diqka rreth IV', director: 'Hervin Çuli', runningTime: '2 hours', image: '../resources/shows/diqka rreth IV.png' }
     ];
 
     // Function to update show information based on the selected date

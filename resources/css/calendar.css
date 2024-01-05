@@ -10,6 +10,12 @@
 }
 
 
+.notAvailable {
+    color: gray !important; /* Replace with the desired font color */
+}
+
+
+
 #calendar a {
     color: #4C4C4C;
     text-decoration: none;

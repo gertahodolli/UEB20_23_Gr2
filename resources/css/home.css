@@ -76,3 +76,19 @@ div, h1, h2, p, a{
     color: antiquewhite;
     font-size: 1.5em;
 }
+
+#showsDropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+}
+
+#showsDropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    color: inherit; /* Keeps the default color */
+    background-color: transparent; /* Removes background color change on hover */
+    /* Any other styles you want to add for hovering */
+}

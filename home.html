@@ -52,6 +52,8 @@
             .full-page:hover .hover-button {
             display: block;
             }
+
+        
     </style>
 
 
@@ -73,13 +75,13 @@
             <li class="nav-item pr-3">
                 <a class="nav-link" href="home.html">Home</a>
             </li>
-            <li class="nav-item dropdown pr-3">
+            <li class="nav-item dropdown pr-3" id="showsDropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Shows
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownShows">
-                <a class="dropdown-item" href="shows.html">Shows</a>
-                <a class="dropdown-item" href="calendar.html">Calendar</a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
+                  <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.html">Shows</a>
+                  <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.html">Calendar</a>
                 </div>
             </li>
             <li class="nav-item pr-3">
@@ -90,6 +92,9 @@
             </li>
             <li class="nav-item pr-3">
                 <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+            <li class="nav-item mr-3">
+              <a class="nav-link btn btn-style" style="color: black;" href="signup.html">Sign Up</a>
             </li>
             </ul>
         </div>
@@ -113,7 +118,7 @@
     <section class="container my-5">
     <div class="row">
       <div class="col-md-12">
-        <h2 class="text-center mb-5">Recent Shows</h2>
+        <h2 class="text-center mb-5" style="color: aliceblue;">Recent Shows</h2>
         <!-- Show 1 -->
         <div class="card mb-5">
           <div class="row g-0">

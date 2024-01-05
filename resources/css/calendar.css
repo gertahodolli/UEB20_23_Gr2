@@ -72,5 +72,5 @@ thead {
     width: auto; /* Ensures images take up full width */
     height: auto; /* Maintains aspect ratio */
     min-height: 350px;
-    max-height: 370px; /* Example height; adjust as needed */
+    max-height: 350px; /* Example height; adjust as needed */
 }

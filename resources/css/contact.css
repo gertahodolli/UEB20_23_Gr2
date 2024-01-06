@@ -1,72 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,300;1,400;1,500&display=swap');
 
-/* colors: #4C4C4C Light Grey
-            #910F12 Dark Red
-            #EEEEEE Light Grey / White 
-            #333333  Dark Grey*/
-
-            .navbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: #4C4C4C;
-                padding: 1px;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-            
-            .navbar ul {
-                list-style: none;
-                display: flex;
-            }
-            
-            .navbar ul li {
-                margin-right: 30px;
-            }
-            
-            .navbar a {
-                text-decoration: none;
-                color: #EEEEEE; 
-                font-size: 18px;
-                font-weight: bold;
-                transition: color 0.3s, text-shadow 0.3s; 
-            }
-            
-            .navbar a:hover {
-                color: #910F12; 
-                text-shadow: 0 0 10px #FFFFFF; 
-            }
-            
-            .icon img {
-                width: 70px; 
-                height: 70px;
-            }
-            
-            
-            footer {
-                background: #333333; 
-                padding: 15px 23px;
-                color: #EEEEEE;
-                /* color: #4C4C4C; */
-                text-align: center;
-            }
-            .icons img
-              {   padding-bottom: 10px;
-                  float: center;
-                  width: 2.5%;
-                  margin-right: 0;
-                  padding-left: 10px;
-            }
-            .icons a {
-                text-decoration: none;
-            }
-
-body {
-    margin: 0;
-    padding: 0;
-    color: rgb(255, 255, 255);
-    font-family: 'Poppins', sans-serif;
-}
 
 /* Background */
 body {
@@ -75,17 +7,16 @@ body {
     height: 100vh;
     overflow-y: scroll;
     position: relative;
-}
-
-div, h1, h2, p, a{
     font-family: 'Poppins', sans-serif;
+    color: rgb(169,168,168);
 }
 
 /* Header */
 header {
-    color: #ffffff;
-    text-align: center;
     padding: 20px;
+    text-align: center;
+    color: white;
+ 
 }
 
 /* Main Sections */
@@ -98,22 +29,18 @@ address {
     font-style: normal;
 }
 
-/* Largimi i underline */
-a {
-    text-decoration: none;
-    color: #ffffff; /* Kalter */
-    
-}
+
 
 /* Stilizimi për numrat e telefonit */
 p a[href^="tel:"] {
-    color: #ffffff; /* Kalter */
-    
+    color: rgb(169,168,168);
+    text-decoration: none;
 }
 
 /* Stilizimi për adresat email */
 p a[href^="mailto:"] {
-    color: #ffffff; /* Kalter */
+    color: rgb(169,168,168);
+    text-decoration: none;
 }
 
 /* Efekti hover për emaila*/
@@ -126,8 +53,6 @@ p a[href^="tel:"]:hover {
     color: #cb6b6b; /* Kuq */
 }
 
-
-
 .contact-info
 {
     grid-column: span 1;
@@ -135,10 +60,10 @@ p a[href^="tel:"]:hover {
 }
 
 /* Live Chat Button */
-.contact-info button {
-    background-color: rgba(228, 223, 169, 0.825);
-    color: black;
-    border: 1px solid rgb(185, 181, 181);
+.contact-info button, .inquiry-item1 button {
+    background-color: rgba(120, 120, 120, 0.825);
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(83, 74, 74);
     border-radius: 8px;
     padding: 10px;
     cursor: pointer;
@@ -151,33 +76,17 @@ p a[href^="tel:"]:hover {
     margin-top: 2cm; 
 }
 
-/* Contact Info Button */
-.contact-info button {
-    margin-top: 1.3cm; 
-}
-
-
 /* Contact Link */
 .contact-info a {
     text-decoration: none;
-    color: black;
+    color: rgb(169,168,168);
 }
 
 .contact-info h2 {
     font-size: 20px;
+    color: rgb(169,168,168);
 
 }
-
-
-/* Header Underline */
-h1 {
-    border-bottom: 0.1px solid rgb(255, 255, 255);
-    margin-bottom: 3cm;
-    padding-bottom: 0.5cm;
-    text-align: center;
-}
-
-
 
 .horizontal-line {
     width: 100%;
@@ -187,49 +96,50 @@ h1 {
 }
 
 
+
+
 /* Box Office Container */
 .box-office-container {
     display: flex;
     align-items: flex-start;
-    margin-top: 2cm; /* Përmbaj margin-in midis headerit dhe përmbajtjes */
+    margin: 2cm 0; /* Adjusted margin-top and margin-bottom */
     gap: 2cm;
+    color: rgb(169,168,168);
+   
 }
 
-
-/* Box Office Heading */
 .box-office-heading {
-    flex: 1;
-    font-size: 25px;
+    font-size: 18px;
+    color: white;
+
 }
 
-/* Box Office Columns */
-.box-office-column {
+/* Box Office Heading and Columns */
+.box-office-heading, .box-office-column {
     flex: 1;
 }
 
 /* Box Office Items */
-.box-office-item1,
-.box-office-item {
-    margin-bottom: 2cm; /* Redukto margin-in midis elementeve */
+.box-office-item1, .box-office-item {
+    margin-bottom: 2cm;
 }
 
 /* Box Office Item Heading */
-.box-office-item1 h2,
-.box-office-item h2 {
+.box-office-item1 h2, .box-office-item h2 {
     font-size: 20px;
     text-align: left;
     margin-bottom: 0.5cm;
+    color: rgb(169,168,168);
 }
+
 
 /* Standard Ticket Hours */
 .standard-ticket-hours ol {
-    list-style-type: disc ; /* Remove default list styles */
+    list-style-type: disc;
     padding: 0;
 }
 
-
-/* Styling for the Submit button */
-/* Styling for the Popup */
+/* Popup and Live Chat Section styling */
 .popup {
     display: none;
     position: fixed;
@@ -237,57 +147,56 @@ h1 {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    backdrop-filter: blur(10px); /* Apply blur effect to the background */
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(100px);
     z-index: 1;
 }
 
-/* Styling for the Live Chat Section inside the Popup */
 #liveChatSection {
-    background-color: #373333;
-    border: 1px solid #79b58d;
     padding: 30px;
     text-align: left;
-    margin: 10% auto; /* Adjust the margin as needed */
+    margin: 10% auto;
     max-width: 400px;
+    background-color: #323130;
+    color: #ffffff; /* Set the text color to white */
 }
-
-/* Your existing styles for buttons, labels, inputs, etc. */
-
-
 
 #liveChatSection button {
-    background-color: #667a6f; /* Button background color */
-    color: #ffffff; /* Text color */
-    border: none; /* Remove default border */
-    text-align: center; /* Center text inside the button */
-    text-decoration: none; /* Remove underlining of text */
-    display: inline-block; /* Make it an inline block to apply padding */
-    font-size: 16px; /* Set the font size */
-    width: 30%; /* Make the button fill the container */
-    cursor: pointer; /* Add a pointer cursor on hover */
-    border-radius: 15px; /* Add border-radius for softer edges */
+    background-color: #323130;
+    color: #ffffff;
+    border: 0.3px solid #8d1a1a;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 30%;
+    cursor: pointer;
+    border-radius: 15px;
 }
+
 #liveChatSection button:hover {
-    background-color: #6e7377; /* Change background color on hover */
+    background-color: #666d71;
 }
 
-/* Required Fields styling */
-#requiredFields {
-    margin-bottom: 10px; /* Margin below the required fields message */
-}
-
-/* Labels styling */
+/* Required Fields and Labels styling */
+#requiredFields,
 label {
-    display: block; /* Display labels as blocks for vertical alignment */
-    margin-bottom: 5px; /* Margin between labels and input elements */
+    margin-bottom: 10px;
+    display: block;
 }
+
+label {
+    margin-bottom: 5px;
+    color: #ffffff; /* Set the text color to white */
+}
+
 
 /* Input and Textarea styling */
         #liveChatSection input,
         #liveChatSection textarea {
-            background-color: #373333;
-            border: 0.1px solid #ffffff; /* Green border for input cells */
+            color: rgb(255, 255, 255);
+            background-color: #323130;
+            border: 0.1px solid #bebebe; /* Green border for input cells */
             margin-bottom: 10px; /* Margin between input and textarea elements */
             display: block; /* Make input and textarea fill the container */
             width: 100%; /* Make input and textarea fill the container */
@@ -299,14 +208,14 @@ label {
 /* Button styling */
 button {
     padding: 10px; /* Padding inside the button */
-    background-color: #478460; /* Button background color */
+    background-color: #8d1a1a; /* Button background color */
     color: #ffffff; /* Button text color */
     border: none; /* Remove button border */
     cursor: pointer; /* Change mouse cursor on hover */
     display: block; /* Make the button a block element */
     width: 60%; /* Make the button fill the container */
-    border-radius: 15px; /* Add border-radius for softer edges */
-    margin-top: 70px;
+    border-radius: 20px; /* Add border-radius for softer edges */
+    margin-top: 2cm;;
     box-shadow: 5px 5px 4px rgba(82, 75, 75, 0.712); /* Shtimi i një hije me thellësi */
 
 }
@@ -329,7 +238,8 @@ button:hover {
 /* Enquiries Heading */
 .enquiries-heading {
     flex: 1;
-    font-size: 25px;
+    font-size: 18px;
+    color: white;
 }
 
 /* Enquiries Columns */
@@ -342,6 +252,10 @@ button:hover {
 .inquiry-item {
     margin-bottom: 2cm; /* Redukto margin-in midis elementeve */
 }
+.inquiry-item1 p,
+.inquiry-item p {
+    color: rgb(169,168,168);
+}
 
 /* Enquiries Item Heading */
 .inquiry-item1 h5,
@@ -349,6 +263,8 @@ button:hover {
     font-size: 20px;
     text-align: left;
     margin-bottom: 0.5cm;
+    color: rgb(169,168,168);
+
 }
 
 /* harta */
@@ -356,12 +272,14 @@ button:hover {
     text-align: center;
     margin-top: 3cm;
     font-size: 15px;
+    color: rgb(169,168,168) ;
 }
 .center-text h2 {
     font-size: 40px;
+    color: white;
+    margin-bottom: 1.6 cm;
 }
 
-/* Normal Layout for Additional Headings with Line Break */
 /* Harta Section */
 .section {
     display: flex;
@@ -370,35 +288,32 @@ button:hover {
     padding: 15px;
 }
 
-/* Map Container */
 section iframe {
     width: 100%;
-    max-width: 1100px; /* Set the maximum width as needed */
-    height: 500px; /* Set the desired height */
-    border: 0;
-    margin: 15px 0; /* Adjust the top and bottom margin as needed */
+    max-width: 1100px; 
+    height: 500px; 
+    border: 0; 
+    margin: 15px 0; 
 }
 
 /* Additional Section */
 .additional-section {
     width: 100%;
-    max-width: 850px; /* Set the maximum width as needed */
+    max-width: 850px; 
     margin: 0 auto; /* Center the additional section */
     text-align: center;
     margin-bottom: 130px;
+    color: rgb(169,168,168) ;
 }
 
-/* Additional Section Headings */
 .additional-section h5 {
     font-size: 20px;
-    color: #fcfbfb;
+    color: rgb(169,168,168);
 }
 
-/* Additional Section Paragraphs */
 .additional-section p {
     font-size: 16px;
     line-height: 1.5;
-    color: #ffffff;
     margin-bottom: 10px; /* Adjust the bottom margin as needed */
 }
 
@@ -407,6 +322,7 @@ section iframe {
     text-align: center;
     font-size: 32px;
     margin-bottom: 20px;
+    color: white;
 }
 
 /* FAQs Container */
@@ -449,12 +365,17 @@ section iframe {
     cursor: pointer;
     outline: none;
     font-weight: bold;
+    color: rgb(169,168,168);
 }
 
+.faqs-title {
+    color: rgb(169,168,168);
+}
 /* FAQs Details Content */
 .faqs-list details p {
     margin-top: 10px;
     font-size: 15px;
+    color: rgb(169,168,168); 
 }
 /* accesibility */
 .accessibility-section {
@@ -465,6 +386,7 @@ section iframe {
     margin-top: 130px;
 }
 
+
 /* Accessibility Content */
 .accessibility-content {
     flex: 1;
@@ -472,6 +394,12 @@ section iframe {
     padding-right: 1cm;
 }
 
+.accessibility-section h2, h3 {
+    color: rgb(255, 255, 255);
+}
+.accessibility-section p {
+    color: rgb(169,168,168);
+}
 /* Accessibility Image */
 .accessibility-image {
     flex: 1;
@@ -480,27 +408,17 @@ section iframe {
     max-height: 350px;
     background-repeat: no-repeat;
     border-radius: 2px;
-    box-shadow: none;
-    
-}
-    
-/* Word Wrap and Overflow Wrap */
-.accessibility-content p {
-    word-wrap: break-word; /* You can also use overflow-wrap: break-word; */
+    box-shadow: none;    
 }
 
+/* Word Wrap */
+.accessibility-content p {
+    word-wrap: break-word; 
+}
 /* Text Shadows */
 .accessibility-content h2
 {
-    text-shadow: 8px 8px 8px #00943e; /* horizontal-offset vertical-offset blur-radius color */
-}
-
-/* footeri */
-footer {
-    background: #333333; 
-    padding: 15px 23px;
-    color: #EEEEEE;
-    /* color: #4C4C4C; */
-    text-align: center;
+    text-shadow: 8px 8px 8px #8d1a1a; /* horizontal-offset vertical-offset blur-radius color */
+    
 }
 

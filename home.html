@@ -104,7 +104,7 @@
     <!-- Section with switching background picture -->
 
     <section class="full-page text-center">
-        <div class="overlay-text">
+        <div class="overlay-text fade-effect">
           <h1 id="showName">Show Name</h1>
           <p id="director">Director: Director's Name</p>
           <p id="runningTime">Running Time: XX:XX</p>
@@ -160,9 +160,9 @@
     <section class="py-5">
     <div class="container about-changes">
       <div class="row">
-        <div class="col-md-6 about-changes">
+        <div class="col-md-6 about-changes" id="slide-ani">
           <h2 id="about-heading">History of</h2>
-          <p>The National Theater of Kosovo, abbreviated <abbr title="Teatri Kombetare i Kosoves">TKK</abbr> , is the main performing arts center in Kosovo, founded in 1945 in the city of Prizren in Kosovo. It is ranked as the highest in the country. The National Theater is the only theater in Kosovo and is therefore financed by the <span style="color: red;">Ministry of Culture, Youth and Sports</span> . This theater has shown more than <mark style="background-color: #4C4C4C">400 premieres</mark> which have been watched by more than 3 million viewers. 
+          <p>The National Theater of Kosovo, abbreviated <abbr title="Teatri Kombetare i Kosoves">TKK</abbr> , is the main performing arts center in Kosovo, founded in 1945 in the city of Prizren in Kosovo. It is ranked as the highest in the country. The National Theater is the only theater in Kosovo and is therefore financed by the <span style="color: red;" >Ministry of Culture, Youth and Sports</span> . This theater has shown more than <mark style="background-color: #4C4C4C"><a href="#animate-trans" style="text-decoration: none;color: aliceblue;">400 premieres</a></mark> which have been watched by more than 3 million viewers. 
           </p>
           <a href="about.html" class="btn btn-style goto-about">About Us</a>
         </div>
@@ -191,7 +191,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class=" text-white text-center py-3 bg-color">
+    <footer class=" text-white text-center py-3 bg-color" id="animate-trans">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -308,6 +308,48 @@
       $('.btn-style').css('background-color', 'red'); // Change text color for buttons
     });
   </script>
+
+  <script>
+    $(document).ready(function() {
+    // Fade In 
+    $('.fade-effect').fadeIn(11000);
+
+    // Slide Out
+    $('#slide-ani').slideDown(3000);
+
+    
+    });
+
+
+  </script>
+
+<script>
+  $(document).ready(function(){
+    // Add smooth scrolling to all links
+    $("#animate-trans").on('click', function(event) {
+  
+      // Make sure this.hash has a value before overriding default behavior
+      if (this.hash !== "") {
+        // Prevent default anchor click behavior
+        event.preventDefault();
+  
+        // Store hash
+        var hash = this.hash;
+  
+        // Using jQuery's animate() method to add smooth page scroll
+        // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 800, function(){
+     
+          // Add hash (#) to URL when done scrolling (default click behavior)
+          window.location.hash = hash;
+        });
+      } // End if
+    });
+  });
+  </script>
+  
 
 
     

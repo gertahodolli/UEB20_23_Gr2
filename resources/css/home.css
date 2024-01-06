@@ -93,3 +93,10 @@ div, h1, h2, p, a{
     /* Any other styles you want to add for hovering */
 }
 
+.fade-effect{
+    display: none;
+}
+
+#slide-ani{
+    display: none;
+}

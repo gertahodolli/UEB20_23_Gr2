@@ -127,10 +127,11 @@
             </div>
             <div class="col-md-8 recent-text-color">
               <div class="card-body">
-                <h5 class="card-title">1984</h5>
+                <h5 class="card-title show-date1">1984</h5>
                 <p class="card-text">Dramatized from author George Orwell's dystopian novel</p>
                 <p class="card-text"><b>Director:</b>  <u>Igor Mendjisky</u></p>
                 <p class="card-text"><i>Actors:</i> Adrian Morina, Arta Selimi, Basri Lushtaku, Edona Reshitaj, Flaka Latifi, Shpejtim Kastrati, Xhejlane Godanci dhe Ylber Bardhi.</p>
+                <p class="card-text date1"><b>Date:</b>  3/12/2023</p>
               </div>
             </div>
           </div>
@@ -143,10 +144,11 @@
             </div>
             <div class="col-md-8 recent-text-color">
               <div class="card-body">
-                <h5 class="card-title">CLUB ALBANIA</h5>
+                <h5 class="card-title show-date2">CLUB ALBANIA</h5>
                 <p class="card-text">The show is based on the comedy, "Pas Vdekjes" by A.Z. Çajupi</p>
                 <p class="card-text"><b>Director:</b> <u>Fatos Berisha</u></p>
                 <p class="card-text"><i>Actors:</i> Armond Morina, Ard Islami, Armend Smajli, Maylinda Kosumovic, Naim Berisha, Teuta Krasniqi dhe Ylber Bardhi.</p>
+                <p class="card-text date2"><b>Date:</b>  3/12/2023</p>
               </div>
             </div>
           </div>
@@ -350,6 +352,30 @@
   });
   </script>
   
+  <script>
+    $(document).ready(function(){
+      $(".show-date1").click(function(){
+        $(".date1").hide(1000);
+      });
+    });
+    $(document).ready(function(){
+      $(".show-date1").click(function(){
+        $(".date1").show(1000);
+      });
+    });
+
+    $(document).ready(function(){
+      $(".show-date2").click(function(){
+        $(".date2").hide(1000);
+      });
+    });
+
+    $(document).ready(function(){
+      $(".show-date2").click(function(){
+        $(".date2").show(1000);
+      });
+    });
+  </script>
 
 
     

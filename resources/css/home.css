@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,300;1,400;1,500&display=swap');
 
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -7,6 +12,27 @@ body, html {
     background-color: rgb(24,22,22);
     font-family: 'Poppins', sans-serif;
 }
+
+
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('.resources/fonts/OpenSans-Medium.ttf'),
+    url('.resources/fonts/OpenSans-SemiBold.ttf') format('truetype'),
+    url('.resources/fonts/OpenSans-Italic.ttf') format('truetype'),
+    url('.resources/fonts/OpenSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+
+}
+
+
+.add-font-face{
+    font-family: 'Opem Sans', sans-serif !important;
+}
+
+
+
+
 
 div, h1, h2, p, a{
     font-family: 'Poppins', sans-serif;

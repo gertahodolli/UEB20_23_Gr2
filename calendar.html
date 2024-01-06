@@ -153,7 +153,7 @@
 
           <div class="row">
             <div class="col-12 text-center pt-5 pb-5">
-                <p>If you need info about one of our plays, call our theatre secretary, toll-free, at +383 (44) 753 330. Customer service is available from 9 a.m. to 9 p.m. Monday through Friday and 10 a.m. to 6 p.m.</p>
+                <p  id="myP">If you need info about one of our plays, call our theatre secretary, toll-free, at +383 (44) 753 330. Customer service is available from 9 a.m. to 9 p.m. Monday through Friday and 10 a.m. to 6 p.m.</p>
                 <a href="contact.html" class="btn btn-style rounded-pill ">Go to Contact</a>
             </div>
         </div>
@@ -199,5 +199,31 @@
       $('.btn-style').css('background-color', 'red'); // Change text color for buttons
     });
   </script>
+
+  <!-- Used match() and replace() -->
+
+  <script>
+    var pElement = document.getElementById('myP');
+
+    var pText = pElement.textContent;
+
+    // Use match to check if the word 'watched' exists in the paragraph
+    var matchResult = pText.match("info");
+
+    if (matchResult !== null) {
+      // If 'watched' is found, replace it with 'seen' using replace
+      var updatedText = pText.replace("info", "information");
+
+      // Update the paragraph content with the replaced text
+      pElement.textContent = updatedText;
+
+      // Log the updated text
+      console.log(updatedText);
+    } else {
+      // Log a message if the word 'watched' is not found
+      console.log("The word 'watched' is not present in the paragraph.");
+    }
+  </script>
+
 </body>
 </html>

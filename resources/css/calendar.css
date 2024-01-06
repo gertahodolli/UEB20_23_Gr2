@@ -62,6 +62,7 @@ thead {
     text-align: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-image: none;
     background-color: rgb(35,34,34);
     padding: 10px;
     color: aliceblue;

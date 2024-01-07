@@ -69,8 +69,7 @@
                         <p>EMAIL: <a href="mailto:boxoffice@example.com">boxoffice@gmail.com</a></p>
                         <p>IN PERSON: Street Luan Haradinaj, Prishtina</p>
                     </address>
-                    <button onclick="openPopup()">Start Live Chat</button>                </div>
-            </div>
+                    <button id="startLiveChatButton" onclick="openPopup()">Start Live Chat</button>            </div>
             <div class="box-office-column">
                 <div class="box-office-item">
                     <h2>Hours</h2>
@@ -97,15 +96,17 @@
     <div id="liveChatSection">
         <h2>Contact Me</h2>
         <p id="requiredFields">Fields marked with an * are required</p>
-
         <label for="liveChatName">Name*:</label>
-        <input type="text" id="liveChatName" name="liveChatName" required>
-
+        <input type="text" id="liveChatName" name="liveChatName" required onblur="validateName()" placeholder="Your Name">
+        <p id="nameFormatHint" class="hint" style="color: #8d1a1a; display: none;">Make sure to enter a valid name without numbers.</p>
+        
         <label for="liveChatEmail">Email*:</label>
-        <input type="email" id="liveChatEmail" name="liveChatEmail" required autocomplete="off">
-
+        <input type="email" id="liveChatEmail" name="liveChatEmail" required onblur="validateEmail()" placeholder="YourEmail@gmail.com">
+        <p id="emailFormatHint" class="hint" style="color: #8d1a1a; display: none;">Make sure to enter a valid email address.</p>
+        
         <label for="liveChatMessage">Message*:</label>
-        <textarea id="liveChatMessage" name="liveChatMessage" rows="4" required></textarea>
+        <textarea id="liveChatMessage" name="liveChatMessage" rows="4" required onblur="validateMessage()" placeholder="Your Message"></textarea>
+        <p id="messageFormatHint" class="hint" style="color: #8d1a1a; display: none;">Please enter a message before submitting.</p>
 
         <button onclick="submitLiveChat()">Submit</button>
         <button onclick="closePopup()">Close</button>
@@ -335,6 +336,8 @@
     
     
 <script src ="resources/js/contact.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </body>
 </html>

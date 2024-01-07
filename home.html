@@ -129,7 +129,7 @@
             <div class="col-md-8 recent-text-color">
               <div class="card-body">
                 <h5 class="card-title show-date1">1984</h5>
-                <p class="card-text">Dramatized from author George Orwell's dystopian novel</p>
+                <p class="card-text" id="try-catch">Dramatized from author George Orwell's dystopian novel</p>
                 <p class="card-text"><b>Director:</b>  <u>Igor Mendjisky</u></p>
                 <p class="card-text"><i>Actors:</i> Adrian Morina, Arta Selimi, Basri Lushtaku, Edona Reshitaj, Flaka Latifi, Shpejtim Kastrati, Xhejlane Godanci dhe Ylber Bardhi.</p>
                 <p class="card-text date1"><b>Date:</b>  3/12/2023</p>
@@ -401,10 +401,26 @@
 
     console.log(numberInSpan.toString());
     
+    console.log(Number.MAX_VALUE);
 
 
 
 
+
+  </script>
+
+
+  <!--Checking if the word book is mentioned in the paragraph, using try, catch, throw and warn-->
+
+  <script>
+    try {
+    const paragraph = document.getElementById('try-catch').innerText;
+    if (!paragraph.match(/\bbook\b/i)) {
+        throw new Error("The word 'book' is not in the paragraph");
+    }
+    } catch (error) {
+        console.warn(error.message);
+    }
 
   </script>
 

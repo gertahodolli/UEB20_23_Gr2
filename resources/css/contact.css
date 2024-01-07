@@ -150,6 +150,7 @@ p a[href^="tel:"]:hover {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(100px);
     z-index: 1;
+    
 }
 
 #liveChatSection {
@@ -217,7 +218,7 @@ button {
     border-radius: 20px; /* Add border-radius for softer edges */
     margin-top: 2cm;;
     box-shadow: 5px 5px 4px rgba(82, 75, 75, 0.712); /* Shtimi i një hije me thellësi */
-
+    transition: opacity 2s ease; /* Përdorimi i një tranzicioni për opacity */
 }
 
 /* Button hover effect */
@@ -366,6 +367,9 @@ section iframe {
     outline: none;
     font-weight: bold;
     color: rgb(169,168,168);
+    cursor: pointer;
+    font-weight: bold;
+    outline: none;
 }
 
 .faqs-title {
@@ -376,6 +380,11 @@ section iframe {
     margin-top: 10px;
     font-size: 15px;
     color: rgb(169,168,168); 
+    /* Customize the outline */
+    outline-style: solid;
+    outline-color: #5c5a5a; /* Set the outline color */
+    outline-width: 2px; /* Set the outline width */
+    outline-offset: 5px; /* Set the outline offset (distance from the element) */
 }
 /* accesibility */
 .accessibility-section {

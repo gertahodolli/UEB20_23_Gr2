@@ -5,19 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="./resources/css/style.css">
-        <link rel="stylesheet" href="./resources/css/carouselStyle.css">
         <link rel="stylesheet" href="./resources/css/biletat.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!--<script src="./resources/js/carousel.js" defer></script>-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="./resources/js/biletat.js" defer></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-oLUEvLE2e6RqR6B7jM6C/J11MyKGXMQiUpi4m5+Ml8E=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <title>Tickets</title>
         <style>
             main{
-                background-color: #3d3d3d;
+                background-color: #323130;
             }
         </style>
     </head>    
@@ -35,13 +38,13 @@
                 <li class="nav-item pr-3">
                     <a class="nav-link" href="home.html">Home</a>
                 </li>
-                <li class="nav-item dropdown pr-3">
+                <li class="nav-item dropdown pr-3" id="showsDropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Shows
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownShows">
-                    <a class="dropdown-item" href="shows.html">Shows</a>
-                    <a class="dropdown-item" href="calendar.html">Calendar</a>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
+                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.html">Shows</a>
+                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.html">Calendar</a>
                     </div>
                 </li>
                 <li class="nav-item pr-3">
@@ -52,6 +55,9 @@
                 </li>
                 <li class="nav-item pr-3">
                     <a class="nav-link" href="contact.html">Contact Us</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a class="nav-link btn btn-style" style="color: black;" href="logIn.html">Log In</a>
                 </li>
                 </ul>
             </div>
@@ -95,241 +101,390 @@
                     </div>
                 </div>
             </section>
-            <div class="container-fluid">
-                <h2 class="mt-4 mb-4">Upcoming Shows</h2>
-              
-                <!--<div id="theaterCarousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <a href="show1.html">
-                          <img src="./resources/shows/1984.jpg" class="d-block w-100" alt="Show 1">
-                        </a>
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>Show 1</h5>
-                          <p>Show 1 information goes here.</p>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <a href="show2.html">
-                          <img src="./resources/shows/clubAlbania.jpg" class="d-block w-100" alt="Show 2">
-                        </a>
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>Show 2</h5>
-                          <p>Show 2 information goes here.</p>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <a href="show3.html">
-                          <img src="./resources/shows/grate.jpg" class="d-block w-100" alt="Show 3">
-                        </a>
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>Show 3</h5>
-                          <p>Show 3 information goes here.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#theaterCarousel" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#theaterCarousel" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </div>-->
-              
-              </div>    
             <section id="ticket-showcase" class="my-5">
                 <div class="container">
                     <h3 class="mb-4">Shows that are currently playing:</h3>
                     <div class="row">
                         <div class="col-md-3 mb-4">
-                            <div class="card">
+                            <div class="card text-center">
                                 <img src="./resources/shows/clubAlbania.jpg" alt="CLUB ALBANIA" class="card-img-top">
-                                <div class="card-content">    
-                                    <div class="card-body">
-                                        <h5 class="card-title">CLUB ALBANIA</h5>
-                                        <p class="card-text">Date: 24/12/2023</p>
-                                        <p class="card-text">Time: 20:00</p>
-                                    </div>    
-                                    <div class="quantity-control">
-                                        <label for="quantity">Quantity: </label>
-                                        <div class="row">
-                                            <div class="col-md-6 quantity-buttons">
-                                                <button onclick="decrementQuantity(this)">-</button>
-                                                <div class="quantity-display" id="quantity-display">0</div>
-                                                <button onclick="incrementQuantity(this)">+</button>
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-primary" data-toggle="modal" data-target="#ticketModal">Buy ticket</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">CLUB ALBANIA</h5>
+                                    <p class="card-tex ticket-modal" data-type="date">Date: <span class="show-date"> 02/12/2023 <br>21/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
                                 </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>      
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
                             <div class="card">
                                 <img src="./resources/shows/grate.jpg" alt="Shfaqja e dyte" class="card-img-top">
-                                <div class="card-content">    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Grate</h5>
-                                        <p class="card-text">Date: 24/12/2023</p>
-                                        <p class="card-text">Time: 20:00</p>
-                                    </div>    
-                                    <div class="quantity-control">
-                                        <label for="quantity">Quantity: </label>
-                                        <div class="row">
-                                            <div class="col-md-6 quantity-buttons">
-                                                <button onclick="decrementQuantity(this)">-</button>
-                                                <div class="quantity-display" id="quantity-display">0</div>
-                                                <button onclick="incrementQuantity(this)">+</button>
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-primary" data-toggle="modal" data-target="#ticketModal">Buy ticket</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Grate</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 05/12/2023</br>07/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
                             <div class="card">
                                 <img src="./resources/shows/udhetimGjateDrejtNates.jpg" alt="Shfaqja e trete" class="card-img-top">
-                                <div class="card-content">    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Udhetim i gjate drejt nates</h5>
-                                        <p class="card-text">Date: 24/12/2023</p>
-                                        <p class="card-text">Time: 20:00</p>
-                                    </div>    
-                                    <div class="quantity-control">
-                                        <label for="quantity">Quantity: </label>
-                                        <div class="row">
-                                            <div class="col-md-6 quantity-buttons">
-                                                <button onclick="decrementQuantity(this)">-</button>
-                                                <div class="quantity-display" id="quantity-display">0</div>
-                                                <button onclick="incrementQuantity(this)">+</button>
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-primary" data-toggle="modal" data-target="#ticketModal">Buy ticket</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Udhetim i gjate drejt nates</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 13/12/2023 </span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 mb-4">
                             <div class="card">
                                 <img src="./resources/shows/1984.jpg" alt="Shfaqja e trete" class="card-img-top">
-                                <div class="card-content">    
-                                    <div class="card-body">
-                                        <h5 class="card-title">1984</h5>
-                                        <p class="card-text">Date: 24/12/2023</p>
-                                        <p class="card-text">Time: 20:00</p>
-                                    </div>    
-                                    <div class="quantity-control">
-                                        <label for="quantity">Quantity: </label>
-                                        <div class="row">
-                                            <div class="col-md-6 quantity-buttons">
-                                                <button onclick="decrementQuantity(this)">-</button>
-                                                <div class="quantity-display" id="quantity-display">0</div>
-                                                <button onclick="incrementQuantity(this)">+</button>
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-primary" data-toggle="modal" data-target="#ticketModal">Buy ticket</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">1984</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">15/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="card">
+                                <img src="./resources/shows/gjithckaRrethIV.jpg" alt="Shfaqja e trete" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Gjithcka rreth IV</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">16/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
-
             <!-- Modal for ticket information -->
-            <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+            <div class="modal" tabindex="-1" role="dialog" id="purchaseModal">
                 <div class="modal-dialog" role="document">
-                <div class="modal-content"  style="background-color: #3d3d3d";>
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="ticketModalLabel">Ticket Information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                    <!-- Ticket purchase form -->
-                    <form  style="background-color: #444444;">
-                        <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Buy Tickets</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <!-- Add other form fields for ticket information -->
-                        <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
-                        </div>
-                        <div class="form-group">
-                        <label for="creditCard">Credit Card</label>
-                        <input type="text" class="form-control" id="creditCard" placeholder="Enter your credit card number" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                    </div>
-                </div>
-                </div>
-            </div>
-  
-            <section id="ticket-showcase" class="my-5">
-                <div class="container">
-                    <h3>Shows that will be soon playing</h3>
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <div class="card">
-                                <img src="#" alt="Shfaqja e pare" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Emri i shfaqjes</h5>
-                                    <p class="card-text">Date: 24/12/2023</p>
-                                    <p class="card-text">Time: 20:00</p>
-                                </div>    
-                                <div class="quantity-control">
-                                    <label for="quantity">Quantity: </label>
-                                    <div class="row">
-                                        <div class="col-md-6 quantity-buttons">
-                                            <button onclick="decrementQuantity(this)">-</button>
-                                            <div class="quantity-display" id="quantity-display">0</div>
-                                            <button onclick="incrementQuantity(this)">+</button>
-                                        </div>
-                                        <div class="col-md-6 text-right">
-                                            <a href="#" class="btn btn-primary">Buy ticket</a>
-                                        </div>
+                        <div class="modal-body">
+                            <form id="purchaseForm">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                                </div>
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                </div>
+                                <!-- Date selection using radio buttons -->
+                                <div class="form-group">
+                                    <label for="showDate">Date Selection</label>
+                                    <input list="dateOptions" class="form-control" id="showDate" name="showDate">
+                                    <datalist id="show-dates"></datalist>
+                                    <div class="form-group" id="radioGroup">
+                                        <label>Show Dates:</label>
                                     </div>
                                 </div>
-                            </div>
+                                <label>Ticket Selection</label><br>
+                                <!-- Quantity selection using buttons -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="regularTicketCheckbox">
+                                            <label class="form-check-label" for="regularTicketCheckbox">Regular Ticket</label>
+                                            <div class="quantity-control" style="display: none;">
+                                                <label for="regularTicketQuantity">Quantity:</label>
+                                                <div class="row">
+                                                    <div class="col-md-6 quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control" id="regularTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="2hoursTicketCheckbox">
+                                            <label class="form-check-label" for="2hoursTicketCheckbox">Show over 2 hours Ticket</label>
+                                            <div class="quantity-control" style="display: none;">
+                                                <label for="2hoursTicketQuantity">Quantity:</label>
+                                                <div class="row">
+                                                    <div class="col-md-6 quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control" id="2hoursTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="studentTicketCheckbox">
+                                            <label class="form-check-label" for="studentTicketCheckbox">Student Ticket</label>
+                                            <div class="quantity-control" style="display: none;">
+                                                <label for="studentsTicketQuantity">Quantity:</label>
+                                                <div class="row">
+                                                    <div class="col-md-6 quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#studentTicketQuantity', '#studentTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control" id="studentTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#studentTicketQuantity', '#studentTicketQuantity-display')">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="students2hoursTicketCheckbox">
+                                            <label class="form-check-label" for="students2hoursTicketCheckbox">Student for shows over 2 hours Ticket</label>
+                                            <div class="quantity-control" style="display: none;">
+                                                <label for="students2hoursTicketQuantity">Quantity:</label>
+                                                <div class="row">
+                                                    <div class="col-md-6 quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#students2hoursTicketQuantity', '#students2hoursTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control" id="students2hoursTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#students2hoursTicketQuantity', '#students2hoursTicketQuantity-display')">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                                <button onclick="updateFinalPrice()">Update Final Price</button>
+                                <div class="finalPrice">0</div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalButton">Close</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#purchaseModal">Buy Tickets</button>
                         </div>
                     </div>
                 </div>
-            </section>        
+            </div><!-- Add this script to your HTML file or include it in your external JavaScript file -->
+            <script>
+                // Function to populate the date options with radio buttons
+                function populateDateOptions(card) {
+                    var dateOptions = [];
+                    var dateElement = card.find(".show-date");
+
+                    // Extract the date from the current card
+                    var date = dateElement.text();
+                    dateOptions.push(date);
+
+                    // Populate the date options with radio buttons
+                    var dateOptionsContainer = card.find(".date-options");
+                    dateOptionsContainer.empty();
+                    dateOptions.forEach(function(date, index) {
+                        dateOptionsContainer.append(`
+                            <label>
+                                <input type="radio" name="showDate" value="${date}" ${index === 0 ? 'checked' : ''}>
+                                ${date}
+                            </label>
+                        `);
+                    });
+                }
+
+                // Function to handle the "Buy Tickets" button click and open the modal
+                function handleBuyTicketsClick() {
+                    var card = $(this).closest(".card");
+                    var modal = card.find(".ticket-modal");
+
+                    // Populate the date options with radio buttons specific to the clicked card
+                    populateDateOptions(card);
+
+                    // Open the modal for the specific card
+                    modal.show();
+
+                    // You can add additional logic to handle form submission, etc.
+                }
+
+                // Document ready function
+                $(document).ready(function() {
+                    // Attach the click event to the "Buy Tickets" button for each card
+                    $(".buy-tickets-btn").click(handleBuyTicketsClick);
+
+                    // Add additional logic as needed
+                });
+                // Function to handle "Buy ticket" button click and open the purchase modal
+                function openTicketForm(button) {
+                    $('#purchaseModal').modal('show');
+                }
+                // Wait for the document to be ready
+                $(document).ready(function () {
+                    // Attach a click event handler to the close button
+                    $('#closeModalButton').click(function () {
+                        // Close the modal using jQuery
+                        $('#purchaseModal').modal('hide');
+                    });
+                });
+
+                $(document).ready(function () {
+                    // Attach a change event handler to each checkbox
+                    $('.form-check-input').change(function () {
+                        var checkboxId = $(this).attr('id');
+                        var quantityControl = $('#' + checkboxId).siblings('.quantity-control');
+
+                        // Toggle the visibility of the quantity control based on checkbox state
+                        quantityControl.toggle(this.checked);
+                    });
+                });
+                function incrementQuantity(quantityId, displayId) {
+                    var quantityInput = $(quantityId);
+                    var currentQuantity = parseInt(quantityInput.val()) || 0;
+                    quantityInput.val(currentQuantity + 1);
+                    updateDisplay(quantityInput, displayId);
+                }
+
+                function decrementQuantity(quantityId, displayId) {
+                    var quantityInput = $(quantityId);
+                    var currentQuantity = parseInt(quantityInput.val()) || 0;
+                    if (currentQuantity > 0) {
+                        quantityInput.val(currentQuantity - 1);
+                        updateDisplay(quantityInput, displayId);
+                    }
+                }
+
+                function updateDisplay(quantityInput, displayId) {
+                    var quantityDisplay = $(displayId);
+                    quantityDisplay.text(quantityInput.val());
+                }
+                class TicketManager {
+        constructor() {
+            this.ticketPrices = {
+                regular: 2,
+                over2Hours: 3,
+                students: 1,
+                studentsOver2Hours: 2
+            };
+            this.quantities = {
+                regular: 0,
+                over2Hours: 0,
+                students: 0,
+                studentsOver2Hours: 0
+            };
+        }
+
+        // Get total price for a specific ticket type
+        getTotalPrice(ticketType) {
+            return this.quantities[ticketType] * this.ticketPrices[ticketType];
+        }
+
+        // Update quantity for a specific ticket type
+        setQuantity(ticketType, quantity) {
+            this.quantities[ticketType] = quantity;
+        }
+
+        // Get ticket price for a specific ticket type
+        getTicketPrice(ticketType) {
+            return this.ticketPrices[ticketType];
+        }
+
+        // Calculate and update the final price
+        updateFinalPrice() {
+            var finalPrice = this.getTotalPrice('regular') +
+                this.getTotalPrice('over2Hours') +
+                this.getTotalPrice('students') +
+                this.getTotalPrice('studentsOver2Hours');
+
+            $('#finalPrice').text(finalPrice);
+        }
+    }
+
+    // Create an instance of TicketManager
+    var ticketManager = new TicketManager();
+
+    // Function to automatically display ticket prices and update the form
+    function displayTicketPrices() {
+        // Display ticket prices on the form
+        $('#regularPrice').text(ticketManager.getTicketPrice('regular'));
+        $('#over2HoursPrice').text(ticketManager.getTicketPrice('over2Hours'));
+        $('#kidsAndSeniorsPrice').text(ticketManager.getTicketPrice('kidsAndSeniors'));
+        $('#studentsPrice').text(ticketManager.getTicketPrice('students'));
+        $('#studentsOver2HoursPrice').text(ticketManager.getTicketPrice('studentsOver2Hours'));
+    }
+
+    // Function to handle input events and update the final price
+    function handleInputEvent() {
+        var id = $(this).attr('id');
+        var ticketType = id.replace('Quantity', '');
+
+        // Update quantity in the TicketManager
+        ticketManager.setQuantity(ticketType, parseInt($(this).val()));
+
+        // Update the final price
+        ticketManager.updateFinalPrice();
+    }
+
+    // Attach input event handlers to quantity input fields
+    $('input[id$="Quantity"]').on('input', handleInputEvent);
+
+    // Call the function to display ticket prices when the page loads
+    $(document).ready(function () {
+        displayTicketPrices();
+        ticketManager.updateFinalPrice(); // Initialize the final price
+    });
+            </script>
+          
+            <div class="container">
+                <div class="row video-section">
+                  <div class="col-md-6">
+                    <h2>Club Albania trailer</h2>
+                    <div class="video-container">
+                        <video controls>
+                        <!-- Update the src attribute with the correct file path or URL -->
+                        <source src="./resources/video/clubAlbania.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                        </video>
+                    </div>
+                  </div>
+            
+                  <div class="col-md-6">
+                    <h2>Udhetim i gjate drejt nates trailer</h2>
+                    <div class="video-container">
+                        <video controls>
+                        <source src="./resources/video/udhetimIGjateDrejtNates.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                        </video>
+                    </div>
+                  </div>
+                </div>
+              </div>      
         </main>
         <section class="footer">
-            <footer class=" text-white text-center py-3 bg-color">
+            <footer class=" text-white text-center py-3 bg-color" id="animate-trans">
                 <div class="container">
                   <div class="row">
                     <div class="col">
                       <div class="footer-icons social-links">
-                        <a href="https://www.facebook.com/YourFacebookPage" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/YourInstagramPage" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
-                        <a href="mailto:your.email@example.com" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
                       </div>
-                      <p>Phone: +1234567890</p>
+                      <p>Phone: +383 (44) 753 330</p>
                     </div>
-                    <div class="col">
-                      <address>Address: National Theater, Kosovo</address>
+                    <div class="col pt-4">
+                      <address>Address: Street Luan Haradinaj, Prishtina</address>
                     </div>
                   </div>
                   <div class="row">
@@ -338,7 +493,7 @@
                     </div>
                   </div>
                 </div>
-            </footer>
+                </footer>
         </section>    
     </body>
 </html>

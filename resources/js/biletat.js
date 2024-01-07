@@ -17,22 +17,9 @@ function equalizeCardHeights(){
     });
 }
 
-var quantity=0;
+let quantity = 0;
 
-function incrementQuantity(button){
-    var quantityDisplay=button.parentElement.parentElement.querySelector('.quantity-display');
-    var currentQuantity=parseInt(quantityDisplay.textContent);
-    quantityDisplay.textContent=currentQuantity+1;
+
+function showPurchaseModal() {
+    $('#purchaseModal').modal('show');
 }
-
-function decrementQuantity(button){
-    var quantityDisplay = button.parentElement.parentElement.querySelector('.quantity-display');
-    var currentQuantity = parseInt(quantityDisplay.textContent);
-    if (currentQuantity > 0) {
-        quantityDisplay.textContent = currentQuantity - 1;
-    }
-}
-
-//function updateQuantityDisplay(){
-//    document.getElementById('quantity-display').innerText=quantity;
-//}

@@ -6,6 +6,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./resources/css/biletat.css">
+        <link rel="stylesheet" href="./resources/css/home.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="./resources/js/biletat.js" defer></script>
@@ -20,8 +21,15 @@
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
         <title>Tickets</title>
         <style>
-            main{
-                background-color: #323130;
+            body, html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background-color: rgb(24,22,22);
+                font-family: 'Poppins', sans-serif;
+            }
+            header{
+                background-color: rgb(35,34,34);
             }
         </style>
     </head>    
@@ -106,12 +114,12 @@
                 <div class="container">
                     <h3 class="mb-4" style="color: lightgray;">Shows that are currently playing:</h3>
                     <div class="row">
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card text-center">
                                 <img src="./resources/shows/clubAlbania.jpg" alt="CLUB ALBANIA" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">CLUB ALBANIA</h5>
-                                    <p class="card-tex ticket-modal" data-type="date">Date: <span class="show-date"> 02/12/2023 <br>21/12/2023</span></p>
+                                    <p class="card-tex ticket-modal" data-type="date">Date: <span class="show-date"> 14/12/2023 <br>26/12/2023</span></p>
                                     <p class="card-text">Time: 20:00</p>
                                 </div>    
                                 <div class="card-footer">
@@ -119,12 +127,12 @@
                                 </div>      
                             </div>
                         </div>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card">
                                 <img src="./resources/shows/grate.jpg" alt="Shfaqja e dyte" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">Grate</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 05/12/2023</br>07/12/2023</span></p>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 17/12/2023</br>23/12/2023</span></p>
                                     <p class="card-text">Time: 20:00</p>
                                 </div>    
                                 <div class="card-footer">
@@ -132,12 +140,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card">
                                 <img src="./resources/shows/udhetimGjateDrejtNates.jpg" alt="Shfaqja e trete" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">Udhetim i gjate drejt nates</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 13/12/2023 </span></p>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 05/12/2023 </span></p>
                                     <p class="card-text">Time: 20:00</p>
                                 </div>    
                                 <div class="card-footer">
@@ -145,12 +153,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card">
                                 <img src="./resources/shows/1984.jpg" alt="Shfaqja e trete" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">1984</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">15/12/2023</span></p>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">11/12/2023 <br>21/12/2023</span></p>
                                     <p class="card-text">Time: 20:00</p>
                                 </div>    
                                 <div class="card-footer">
@@ -158,12 +166,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card">
                                 <img src="./resources/shows/gjithckaRrethIV.jpg" alt="Shfaqja e trete" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">Gjithcka rreth IV</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">16/12/2023</span></p>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">09/12/2023 <br>30/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="./resources/shows/diteVere2.jpg" alt="Shfaqja e trete" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Dite Vere</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">03/12/2023 <br>10/12/2023</span></p>
                                     <p class="card-text">Time: 20:00</p>
                                 </div>    
                                 <div class="card-footer">
@@ -217,10 +238,10 @@
                                             <div class="quantity-control" style="display: none;">
                                                 <label for="regularTicketQuantity">Quantity:</label>
                                                 <div class="row">
-                                                    <div class="col-md-6 quantity-buttons">
-                                                        <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">-</button>
-                                                        <input type="text" class="form-control" id="regularTicketQuantity" value="0" readonly>
-                                                        <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">+</button>
+                                                    <div class="col quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary quantity" onclick="decrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control value" id="regularTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary quantity" onclick="incrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">+</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,7 +255,7 @@
                                                 <label for="2hoursTicketQuantity">Quantity:</label>
                                                 <div class="row">
                                                     <div class="col-md-6 quantity-buttons">
-                                                        <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">-</button>
+                                                        <button type="button" class="btn btn-secondary " onclick="decrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">-</button>
                                                         <input type="text" class="form-control" id="2hoursTicketQuantity" value="0" readonly>
                                                         <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">+</button>
                                                     </div>
@@ -249,7 +270,7 @@
                                             <div class="quantity-control" style="display: none;">
                                                 <label for="studentsTicketQuantity">Quantity:</label>
                                                 <div class="row">
-                                                    <div class="col-md-6 quantity-buttons">
+                                                    <div class="col quantity-buttons">
                                                         <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#studentTicketQuantity', '#studentTicketQuantity-display')">-</button>
                                                         <input type="text" class="form-control" id="studentTicketQuantity" value="0" readonly>
                                                         <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#studentTicketQuantity', '#studentTicketQuantity-display')">+</button>
@@ -265,7 +286,7 @@
                                             <div class="quantity-control" style="display: none;">
                                                 <label for="students2hoursTicketQuantity">Quantity:</label>
                                                 <div class="row">
-                                                    <div class="col-md-6 quantity-buttons">
+                                                    <div class="col quantity-buttons">
                                                         <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#students2hoursTicketQuantity', '#students2hoursTicketQuantity-display')">-</button>
                                                         <input type="text" class="form-control" id="students2hoursTicketQuantity" value="0" readonly>
                                                         <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#students2hoursTicketQuantity', '#students2hoursTicketQuantity-display')">+</button>

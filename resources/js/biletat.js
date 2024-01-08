@@ -249,3 +249,20 @@ $(document).ready(() => {
                 }
             });
         });
+
+        // Function to update current date and time
+function updateDateTime() {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+    const formattedTime = currentDate.toLocaleTimeString();
+    const dateTimeString = `Current Date and Time: ${formattedDate} ${formattedTime}`;
+    
+    // Update the content of the element with id "currentDateTime"
+    document.getElementById("currentDateTime").textContent = dateTimeString;
+}
+
+// Call the function to update date and time initially
+updateDateTime();
+
+// Update date and time every second
+setInterval(updateDateTime, 1000);

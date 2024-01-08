@@ -1,25 +1,83 @@
+/* blur img url: https://images.squarespace-cdn.com/content/v1/57f5648637c581229b2e436f/1522788636811-EDLAD589AU4UYVGIK255/Screen+Shot+2018-04-03+at+4.49.58+PM.png?format=1500w */
+/* background-2: https://cdn.cheapism.com/images/AI-generated_image_of_an_old_movi.2e16d0ba.fill-1440x754.jpg */
+/* parallax-footer: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAA1BMVEUAAACnej3aAAAAR0lEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8GxYgAAb0jQ/cAAAAASUVORK5CYII=  */
+
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('https://media.istockphoto.com/id/621833660/photo/movie.jpg?s=612x612&w=0&k=20&c=e5na6gfBWjdLDxG3i9Grrsd6CmfOZAYI4UAjzw5wRxk=');
-    background-size: cover;
-    height: 100vh;
-    overflow-y: scroll;
-    position: relative;
 }
 
-.blur-background {
-    backdrop-filter: blur(50%);
-    background-image: url('https://images.squarespace-cdn.com/content/v1/57f5648637c581229b2e436f/1522788636811-EDLAD589AU4UYVGIK255/Screen+Shot+2018-04-03+at+4.49.58+PM.png?format=1500w');
+header {
+    position: relative;
+    background-image: url('https://images.squarespace-cdn.com/content/v1/57f5648637c581229b2e436f/1522788636811-EDLAD589AU4UYVGIK255/Screen+Shot+2018-04-03+at+4.49.58+PM.png?format=1500w'); 
     background-size: cover;
-    height: 100%;
+    background-attachment: fixed;
+    height: 100vh; 
+    display: flex;
+    align-items: center;
+    margin: 0; 
+}
+
+.container {
+    text-align: center;
+    color: white; 
+    z-index: 1; /* Ensure the content is on top of the background */
+}
+
+header::before {
+    content: "";
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
+    left: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)); 
+    z-index: 0;
+}
+
+.background-2 {
+    height: 250vh; 
+    background-image: url('https://cdn.cheapism.com/images/AI-generated_image_of_an_old_movi.2e16d0ba.fill-1440x754.jpg'); 
+    background-size: cover;
+    background-attachment: fixed;
+    filter: blur(5px) brightness(0.5); 
+}
+
+
+
+.blur-background {
+    height: 100vh; 
+    background-image: url('https://images.squarespace-cdn.com/content/v1/57f5648637c581229b2e436f/1522788636811-EDLAD589AU4UYVGIK255/Screen+Shot+2018-04-03+at+4.49.58+PM.png?format=1500w');
+    background-size: cover;
+    filter: blur(10px); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1; 
+}
+
+body {
+    background-color: #EEEEEE;
+}
+
+footer {
+    background: #333333; 
+    padding: 15px 23px;
+    color: #EEEEEE;
+    text-align: center;
+}
+
+.icons img {
+    padding-bottom: 10px;
+    float: center;
+    width: 2.5%;
+    margin-right: 0;
+    padding-left: 10px;
+}
+
+.icons a {
+    text-decoration: none;
 }
 
 .container {
@@ -33,6 +91,7 @@ body {
 
 .left-section {
     width: 45%;
+    text-align: left; 
 }
 
 .right-section {
@@ -83,26 +142,21 @@ p.small-text {
     position: static;
 }
 
-/* pjesa 2 */
-
-/* body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-} */
-
-.container2 {
+.parallax-footer {
+    height: 100vh; 
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAA1BMVEUAAACnej3aAAAAR0lEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8GxYgAAb0jQ/cAAAAASUVORK5CYII='); 
+    background-size: cover;
+    background-attachment: fixed;
+    color: white; 
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.left-side2,
-.right-side2 {
-    width: 50%;
-    padding: 20px;
-    box-sizing: border-box;
+.parallax-footer h2, .parallax-footer p {
+    text-align: center;
 }
 
-.separator2 {
-    border-right: 1px solid #ccc;
-    height: 100vh;
+.footer-container {
+    text-align: center; 
 }

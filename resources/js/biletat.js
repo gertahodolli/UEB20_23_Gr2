@@ -224,3 +224,28 @@ $(document).ready(() => {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Shtoni event listener për çdo radio button në grupin e datave
+            const showDateRadios = document.querySelectorAll('input[name="showDateRadio"]');
+            showDateRadios.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    // Kur ndodh një ndryshim, aktivizoni/disaktivizoni butonin e formës bazuar në zgjedhjen e datës
+                    const submitButton = document.getElementById('submitButton');
+                    submitButton.disabled = !document.querySelector('input[name="showDateRadio"]:checked');
+                });
+            });
+        
+            document.getElementById('purchaseForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Parandaloni paraqitjen e zakonshme të formës
+        
+                // Nëse zgjedhja e datës është bërë, atëherë bëni diçka
+                if (document.querySelector('input[name="showDateRadio"]:checked')) {
+                    // Kryeni logjikën për paraqitjen e formës
+                    console.log('Form submitted successfully!');
+                } else {
+                    // Nëse nuk është zgjedhur data, tregoni një mesazh gabimi ose veproni sipas nevojës
+                    alert('Ju lutemi, zgjidhni një datë para se të dërgoni formën.');
+                }
+            });
+        });

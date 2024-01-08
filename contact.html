@@ -211,7 +211,7 @@
                 <li>
                     <details>
                         <summary>How can I purchase tickets?</summary>
-                        <p>You can conveniently purchase tickets through our website or at the box office in person. Our online platform allows for easy browsing, seat selection, and secure payment.</p>
+                        <p>You can conveniently purchase <strong><a href="biletat.html" class="buy-tickets">tickets</a></strong> through our website or at the box office in person. Our online platform allows for easy browsing, seat selection, and secure payment.</p>
                     </details>
                 </li>
                 <li>
@@ -353,21 +353,20 @@
       </div>
   
 
-      <!-- Pjesa e formës për numër -->
-      <div class="form-section">
-        <label for="numri">Numri:</label>
-        <input type="text" id="numri" name="numri" pattern="[0-9]+" placeholder="Your number" required autocomplete="on">
-      </div>
   
-       <!-- Pjesa e formës për numër -->
-    <div class="form-section">
-        <label for="numri">Numri:</label>
-        <select id="numri" name="numri" required>
-          <option value="Option 1">Option 1</option>
-          <option value="Option 2">Option 2</option>
-          <option value="Option 3">Option 3</option>
-        </select>
-      </div>
+      
+      <div class="form-section">
+        <label for="rating">Overall Satisfaction:</label>
+        <input list="ratings" name="rating" id="rating" placeholder="Select your satisfaction level" required min="1" max="5">
+        <datalist id="ratings">
+          <option value="1">
+          <option value="2">
+          <option value="3">
+          <option value="4">
+          <option value="5">
+        </datalist>
+    </div>
+
 
       
       <!-- Pjesa e formës për feedback -->

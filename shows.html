@@ -232,5 +232,44 @@
 
     </script>
 
+    <!--Through filter, map and reduce funtions, sorted the shows in which Ylber Bardhi plays, shows which are directed by Kaltrim Balaj, and the total number of shows-->
+
+
+    <script>
+      // Get all the show elements
+      const showElements = document.querySelectorAll('.show-card');
+
+      // Convert NodeList to Array
+      const showsArray = Array.from(showElements);
+
+      // Filter shows where Actor Ylber Bardhi plays
+      const showsWithYlberBardhi = showsArray.filter(show => {
+        const actors = show.querySelector('.show-info').innerHTML;
+        return actors.includes('Ylber Bardhi');
+      }).map(show => {
+        return show.querySelector('.show-title').textContent;
+      });
+
+      // Extract shows directed by Kaltrim Balaj
+      const showsDirectedByKaltrimBalaj = showsArray.filter(show => {
+        const director = show.querySelector('.show-info').innerHTML;
+        return director.includes('Kaltrim Balaj');
+      }).map(show => {
+        return show.querySelector('.show-title').textContent;
+      });
+
+      // Use reduce for counting or summing up
+      const totalShows = showsArray.reduce((accumulator, currentShow) => {
+        // Perform any operation here (e.g., counting)
+        return accumulator + 1;
+      }, 0);
+
+      console.log('Shows with Ylber Bardhi:', showsWithYlberBardhi);
+      console.log('Shows directed by Kaltrim Balaj:', showsDirectedByKaltrimBalaj);
+      console.log('Total number of shows:', totalShows);
+
+      
+    </script>
+
 </body>
 </html>

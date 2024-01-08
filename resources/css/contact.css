@@ -1,6 +1,5 @@
 
 
-/* Background */
 body {
     background-image: url('https://i.pinimg.com/564x/d3/9c/d8/d39cd8b5f6f7f93be2cdb6df9738d702.jpg');
     background-size: cover;
@@ -11,25 +10,16 @@ body {
     color: rgb(169,168,168);
 }
 
-/* Header */
 header {
+    margin-top: 20px;
     padding: 20px;
     text-align: center;
     color: white;
- 
 }
 
-/* Main Sections */
 section {
     margin-top: 1px; 
 }
-
-/* Address */
-address {
-    font-style: normal;
-}
-
-
 
 /* Stilizimi për numrat e telefonit */
 p a[href^="tel:"] {
@@ -56,7 +46,7 @@ p a[href^="tel:"]:hover {
 .contact-info
 {
     grid-column: span 1;
-    max-width: 300px; /* Set the maximum width as needed */
+    max-width: 3px; 
 }
 
 /* Live Chat Button */
@@ -67,16 +57,14 @@ p a[href^="tel:"]:hover {
     border-radius: 8px;
     padding: 10px;
     cursor: pointer;
-    width: 150px; /* Set width as needed */
-    margin-top: 1.3cm; /* Zvoglo margin-in midis tekstit dhe butonit */
+    width: 150px; 
+    margin-top: 1.3cm; 
 }
 
-/* Adjust margin-top for Live Chat Button */
 .inquiry-item1 button {
     margin-top: 2cm; 
 }
 
-/* Contact Link */
 .contact-info a {
     text-decoration: none;
     color: rgb(169,168,168);
@@ -91,12 +79,8 @@ p a[href^="tel:"]:hover {
 .horizontal-line {
     width: 100%;
     border-top: 1px solid #ddd; /* You can adjust the color and thickness */
-    margin: 15px 0; /* Adjust the margin as needed */
-    margin-bottom: 2cm;
+    margin: 10px 0; /* Adjust the margin as needed */
 }
-
-
-
 
 /* Box Office Container */
 .box-office-container {
@@ -105,26 +89,21 @@ p a[href^="tel:"]:hover {
     margin: 2cm 0; /* Adjusted margin-top and margin-bottom */
     gap: 2cm;
     color: rgb(169,168,168);
-   
 }
 
 .box-office-heading {
     font-size: 18px;
     color: white;
-
 }
 
-/* Box Office Heading and Columns */
 .box-office-heading, .box-office-column {
     flex: 1;
 }
 
-/* Box Office Items */
 .box-office-item1, .box-office-item {
     margin-bottom: 2cm;
 }
 
-/* Box Office Item Heading */
 .box-office-item1 h2, .box-office-item h2 {
     font-size: 20px;
     text-align: left;
@@ -179,7 +158,6 @@ p a[href^="tel:"]:hover {
     background-color: #666d71;
 }
 
-/* Required Fields and Labels styling */
 #requiredFields,
 label {
     margin-bottom: 10px;
@@ -192,7 +170,6 @@ label {
 }
 
 
-/* Input and Textarea styling */
         #liveChatSection input,
         #liveChatSection textarea {
             color: rgb(255, 255, 255);
@@ -231,7 +208,7 @@ button:hover {
 .enquiries-container {
     display: flex;
     align-items: flex-start;
-    margin-top: 2cm; /* Përmbaj margin-in midis headerit dhe përmbajtjes */
+    margin-top: 1cm; /* Përmbaj margin-in midis headerit dhe përmbajtjes */
     gap: 2cm;
 
 }
@@ -251,7 +228,7 @@ button:hover {
 /* Enquiries Items */
 .inquiry-item1,
 .inquiry-item {
-    margin-bottom: 2cm; /* Redukto margin-in midis elementeve */
+    margin-bottom: 2cm; 
 }
 .inquiry-item1 p,
 .inquiry-item p {
@@ -282,7 +259,6 @@ button:hover {
     margin-bottom: 1.6 cm;
 }
 
-/* Harta Section */
 .section {
     display: flex;
     flex-direction: column;
@@ -298,11 +274,10 @@ section iframe {
     margin: 15px 0; 
 }
 
-/* Additional Section */
 .additional-section {
     width: 100%;
     max-width: 850px; 
-    margin: 0 auto; /* Center the additional section */
+    margin: 0 auto; 
     text-align: center;
     margin-bottom: 130px;
     color: rgb(169,168,168) ;
@@ -316,9 +291,10 @@ section iframe {
 .additional-section p {
     font-size: 16px;
     line-height: 1.5;
-    margin-bottom: 10px; /* Adjust the bottom margin as needed */
+    margin-bottom: 10px; 
 }
 
+/* faqs */
 /* FAQs Heading */
 .faqs-heading {
     text-align: center;
@@ -349,6 +325,7 @@ section iframe {
 .faqs-title {
     font-size: 24px;
     margin-bottom: 10px;
+    color: rgb(169,168,168);
 }
 
 /* FAQs List */
@@ -373,31 +350,26 @@ section iframe {
     outline: none;
 }
 
-.faqs-title {
-    color: rgb(169,168,168);
-}
-/* FAQs Details Content */
+
 .faqs-list details p {
     margin-top: 10px;
     font-size: 15px;
     color: rgb(169,168,168); 
-    /* Customize the outline */
-    outline-style: solid;
-    outline-color: #5c5a5a; /* Set the outline color */
-    outline-width: 2px; /* Set the outline width */
-    outline-offset: 5px; /* Set the outline offset (distance from the element) */
+    outline-style: solid;    
+    outline-color: #5c5a5a; 
+    outline-width: 2px; 
+    outline-offset: 5px; 
 }
 /* accesibility */
 .accessibility-section {
     display: flex;
     justify-content: space-between;
     margin: 0 1cm;
-    margin-bottom: 3cm;
+    margin-bottom: 1.5cm;
     margin-top: 130px;
 }
 
 
-/* Accessibility Content */
 .accessibility-content {
     flex: 1;
     max-width: 50%;
@@ -433,11 +405,113 @@ section iframe {
     
 }
 
-footer {
-    background: #333333; 
-    padding: 15px 23px;
-    color: #EEEEEE;
-    /* color: #4C4C4C; */
-    text-align: center;
+#feedbackIntro{
+    color: #bebebe; /* Ngjyra e tekstit (bardhë) */
 }
 
+/* Stili për popup formën */
+.popup1 {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(100px);
+    z-index: 1;
+}
+.feedback-section {
+    border: 1px solid #bebebe; 
+    padding: 1cm;
+    margin-bottom: 3cm;
+    margin-left: 1cm; 
+    width: 15cm; 
+}
+
+
+#feedbackPopup {
+    padding: 30px;
+    text-align: left;
+    margin: 10% auto;
+    max-width: 600px;
+    background-color: #323130;
+    color: #ffffff;
+    
+}
+
+#feedbackPopup button {
+    background-color: #323130;
+    color: #ffffff;
+    border: 0.3px solid #8d1a1a;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 20%;
+    cursor: pointer;
+    border-radius: 20px;
+   
+}
+
+#feedbackPopup button:hover {
+    background-color: #666d71;
+}
+
+
+
+label {
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+/* Stili për input dhe textarea */
+#feedbackPopup input,
+#feedbackPopup textarea {
+    color: rgb(255, 255, 255);
+    background-color: #323130;
+    border: 0.1px solid #bebebe;
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+/* Stili për butonat */
+button {
+    padding: 10px;
+    background-color: #8d1a1a;
+    color: #ffffff;
+    border-style: 1px solid #bebebe ;
+    border-radius: 15px;
+    cursor: pointer;
+    display: block;
+    width: 40%;
+    margin-top: 2cm;
+    box-shadow: 5px 5px 4px rgba(82, 75, 75, 0.712);
+    transition: opacity 2s ease;
+}
+#openFeedbackFormBtn {
+    margin-left: 3cm;
+  }
+
+
+/* Efekti hover për butonat */
+button:hover {
+    background-color: #6e7377;
+}
+ 
+
+
+    /* Footer */
+
+      footer {
+        background: #333333; 
+        padding: 15px 23px;
+        color: #EEEEEE;
+        /* color: #4C4C4C; */
+        text-align: center;
+    }
+    
+    

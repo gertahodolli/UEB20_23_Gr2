@@ -265,6 +265,10 @@ p.small-text {
 }
 
 .row section img {
-    border-radius: 5px;  /* Përdorim për të bërë korniza të rrumbullakëtuara (opcional) */
-    box-shadow: 0 0 50px rgba(73, 10, 10, 0.651);  /* Shtimi i një hijeje (opcional) */
+    border-radius: 5px; 
+    box-shadow: 0 0 50px rgba(73, 10, 10, 0.651); 
+}
+
+#history {
+    line-height: 1.6;
 }

@@ -15,6 +15,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="...">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-egFbsXOp+g8gP2Vj8DR5FPa/Wh0TSO+zreQ0ZwPvvlS7CdltqAcMQn3O4d2Zx15bwQPGssS1NN5cx+s/ISv6Bw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>About Us</title>
 </head>
 
@@ -166,9 +167,9 @@
 
     <div class="parallax-footer">
         <div class="container">
-            <h2>Contact Us</h2>
-            <p>Feel free to reach out to us for any inquiries or questions.</p>
-        </div>
+          <h1>National Theater <br>of <br>Kosovo</h1>
+          <p id="history">Here the history of the National Theater in Kosovo will be written...</p>
+         </div>
     </div>
 
     <footer class="text-white text-center py-3 bg-color" id="animate-trans">
@@ -198,7 +199,6 @@
     </footer>
 
     <!-- Modal -->
-   <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -265,9 +265,8 @@
     </div>
   </div>
   
-    
-    
-    <script>
+       
+  <script>
         function updateCurrentDateTime() {
             var currentDateTimeElement = document.getElementById("currentDateTime");
     
@@ -296,6 +295,33 @@
             setInterval(updateCurrentDateTime, 1000);
         };
     </script>
-    
+
+    <script>
+      (function() {
+        document.addEventListener('DOMContentLoaded', function () {
+          function TheaterHistory(years, developments, contribution, perspective) {
+            this.years = years;
+            this.developments = developments;
+            this.contribution = contribution;
+            this.perspective = perspective;
+          }
+
+          // Create an instance of the TheaterHistory object
+          var nationalTheaterHistory = new TheaterHistory(
+            "Founded in 1971, the theater has a rich history that includes its inception and early years.",
+            "Undergoing numerous developments and changes throughout the years, it has evolved into a dynamic cultural institution.",
+            "Having a profound impact on Kosovo's culture and art, the theater has become a symbol of artistic expression.",
+            "Today, the National Theater stands as one of the foremost cultural institutions in Kosovo, contributing significantly to the arts scene."
+          );
+
+          // Display the history on the page
+          var historyElement = document.getElementById('history');
+          historyElement.innerHTML = "<strong>Years:</strong> " + nationalTheaterHistory.years + "<br><br>" +
+                                    "<strong>Developments:</strong> " + nationalTheaterHistory.developments + "<br><br>" +
+                                    "<strong>Contribution:</strong> " + nationalTheaterHistory.contribution + "<br><br>" +
+                                    "<strong>Perspective:</strong> " + nationalTheaterHistory.perspective;
+        });
+      })();
+    </script>
 </body>
 </html>

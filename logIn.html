@@ -1,97 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="resources/css/logIn-signUp.css">
     <link rel="stylesheet" href="resources/css/username.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  </head>
-  <body onload='document.login_form.login_email.focus()' style="background: url('resources/images/loginBackground.jpg') no-repeat center; background-size: cover; background-attachment: fixed;">
+</head>
+<body onload='document.login_form.login_email.focus()' style="background: url('resources/images/loginBackground.jpg') no-repeat center; background-size: cover; background-attachment: fixed;">
     <div class="mbul">
-      <div class="title-text">
-        <div class="title login">Login Form</div>
-        <div class="title signup">Signup Form</div>
-      </div>
-      <div class="kuti">
-        <div class="slide-controls">
-          <input type="radio" name="slide" id="login" checked>
-          <input type="radio" name="slide" id="signup">
-          <label for="login" class="slide login">Login</label>
-          <label for="signup" class="slide signup">Signup</label>
-          <div class="slider-tab"></div>
+        <div class="title-text">
+            <div class="title login">Login Form</div>
+            <div class="title signup">Signup Form</div>
         </div>
-        <div class="te_dhenat">
-          <form action="#" class="login" name="login_form">
-            <div class="username field">
-              <input type="text" class="username-field" id="username-field" name="login_email" placeholder="Username" required>
+        <div class="kuti">
+            <div class="slide-controls">
+                <input type="radio" name="slide" id="login" checked>
+                <input type="radio" name="slide" id="signup">
+                <label for="login" class="slide login">Login</label>
+                <label for="signup" class="slide signup">Signup</label>
+                <div class="slider-tab"></div>
             </div>
-            <div class="messages">
-              <p class="username-rules" style="font-size: 12px;">
-                <i class="fas fa-exclamation-circle"></i>
-                Your username must be between 8 to 30 characters.
-              </p>
-              <p class="hidden username-success" style="font-size: 13px;">
-                <i class="fas fa-check-circle"></i>
-                Congrats, that username is valid
-              </p>
+            <div class="te_dhenat">
+                <form action="#" class="login" name="login_form">
+                    <div class="username field">
+                        <input type="text" class="username-field" id="username-field" name="login_email" placeholder="Username" required>
+                    </div>
+                    <div class="messages">
+                        <p class="username-rules" style="font-size: 12px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Your username must be between 8 to 30 characters.
+                        </p>
+                        <p class="hidden username-success" style="font-size: 13px;">
+                            <i class="fas fa-check-circle"></i>
+                            Congrats, that username is valid
+                        </p>
+                    </div>          
+                    <div class="field">
+                        <input type="password" placeholder="Password" id="login_password" required>
+                    </div>
+                    <div class="pass-link">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <div class="field btn">
+                        <div class="btn-layer"></div>
+                        <input type="submit" value="Login" onclick="ValidateEmail(document.login_form.login_email) && ValidateUsername(document.login_form.login_email)">
+                    </div>
+                    <div class="signup-link">
+                        Not a member? <a href="">Signup now</a>
+                    </div>
+                </form>
+                
+                <!-- SIGN UP -->
+                <form action="#" class="signup" name="signup_form">
+                    <div class="field">
+                        <input type="text" placeholder="Email Address" name="signup_email" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="Password" id="signup_password" required>
+                        <p class="password-rules" style="font-size: 12px; margin-top: 5px; color: #777;">
+                            <i class="fas fa-info-circle"></i> Strong Password Required
+                        </p>
+                    </div>          
+                    <div class="field">
+                        <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+                    </div>        
+                    <div class="field btn">
+                        <div class="btn-layer"></div>
+                        <input type="submit" value="Signup" onclick="ValidateEmail(document.signup_form.signup_email) && ValidatePassword(document.getElementById('signup_password')) && ValidateUsername(document.signup_form.username)" href="logIn.html">
+                    </div>          
+                </form>
             </div>
-            <div class="field">
-              <input type="password" placeholder="Password" required>
-            </div>
-            <div class="pass-link">
-              <a href="#">Forgot password?</a>
-            </div>
-            <div class="field btn">
-              <div class="btn-layer"></div>
-              <input type="submit" value="Login" onclick="ValidateEmail(document.login_form.login_email)">
-            </div>
-            <div class="signup-link">
-              Not a member? <a href="">Signup now</a>
-            </div>
-          </form>
-
-          <form action="#" class="signup" name="signup_form" onload='document.signup_form.signup_email.focus()'>
-            <div class="field">
-              <input type="text" placeholder="Email Address" name="signup_email" required>
-            </div>
-            <div class="field">
-              <input type="password" placeholder="Password" required>
-            </div>
-            <div class="field">
-              <input type="password" placeholder="Confirm password" required>
-            </div>
-            <div class="field btn">
-              <div class="btn-layer"></div>
-              <input type="submit" value="Signup" onclick="ValidateEmail(document.signup_form.signup_email)">
-            </div>
-          </form>
         </div>
-      </div>
     </div>
+
     <script>
-      const loginText = document.querySelector(".title-text .login");
-      const loginForm = document.querySelector("form.login");
-      const loginBtn = document.querySelector("label.login");
-      const signupBtn = document.querySelector("label.signup");
-      const signupLink = document.querySelector("form .signup-link a");
+        const loginText = document.querySelector(".title-text .login");
+        const loginForm = document.querySelector("form.login");
+        const loginBtn = document.querySelector("label.login");
+        const signupBtn = document.querySelector("label.signup");
+        const signupLink = document.querySelector("form .signup-link a");
 
-      signupBtn.onclick = (() => {
-        loginForm.style.marginLeft = "-50%";
-        loginText.style.marginLeft = "-50%";
-      });
+        signupBtn.onclick = (() => {
+            loginForm.style.marginLeft = "-50%";
+            loginText.style.marginLeft = "-50%";
+        });
 
-      loginBtn.onclick = (() => {
-        loginForm.style.marginLeft = "0%";
-        loginText.style.marginLeft = "0%";
-      });
+        loginBtn.onclick = (() => {
+            loginForm.style.marginLeft = "0%";
+            loginText.style.marginLeft = "0%";
+        });
 
-      signupLink.onclick = (() => {
-        signupBtn.click();
-        return false;
-      });
+        signupLink.onclick = (() => {
+            signupBtn.click();
+            return false;
+        });
     </script>
+
+<script>
+  function validateLoginForm() {
+    var emailValid = ValidateEmail(document.login_form.login_email);
+    var passwordValid = ValidatePassword(document.getElementById('login_password'));
+    var usernameValid = ValidateUsername(document.login_form.login_email);
+
+    var errorMessages = [];
+
+    if (!emailValid) {
+        errorMessages.push("Invalid email address!");
+    }
+
+    if (!passwordValid) {
+        errorMessages.push("Invalid password! Password should be at least 8 characters long and include a combination of lowercase, uppercase, and numeric characters.");
+    }
+
+    if (!usernameValid) {
+        errorMessages.push("Invalid username! Username must be between 4 and 20 characters.");
+    }
+
+    if (errorMessages.length > 0) {
+        alert(errorMessages.join('\n'));
+        return false;
+    }
+
+    document.querySelector(".title-text .login").click(); 
+    return true;
+}
+
+</script>
+
     <script src="resources/js/sublogin.js"></script>
     <script src="resources/js/username.js"></script>
-  </body>
+</body>
 </html>

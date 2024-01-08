@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="./resources/js/biletat.js" defer></script>
+        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-oLUEvLE2e6RqR6B7jM6C/J11MyKGXMQiUpi4m5+Ml8E=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -17,6 +18,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
         <title>Tickets</title>
         <style>
             main{
@@ -66,7 +68,7 @@
         <main>
             <section id="price-list" class="my-5">
                 <div class="container text-center">
-                    <h2 class="mb-4">Ticket information</h2>
+                    <h2 class="mb-4" style="color: lightgray;">Ticket information</h2>
                     <div class="row justify-content-center">
                     <table>
                         <thead>
@@ -103,7 +105,7 @@
             </section>
             <section id="ticket-showcase" class="my-5">
                 <div class="container">
-                    <h3 class="mb-4">Shows that are currently playing:</h3>
+                    <h3 class="mb-4" style="color: lightgray;">Shows that are currently playing:</h3>
                     <div class="row">
                         <div class="col-md-3 mb-4">
                             <div class="card text-center">
@@ -183,6 +185,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <div id="error-container"></div>
                         <div class="modal-body">
                             <form id="purchaseForm">
                                 <div class="form-group">
@@ -197,7 +200,6 @@
                                 <!-- Date selection using radio buttons -->
                                 <div class="form-group">
                                     <label for="showDate">Date Selection</label>
-                                    <input list="dateOptions" class="form-control" id="showDate" name="showDate">
                                     <datalist id="show-dates"></datalist>
                                     <div class="form-group" id="radioGroup">
                                         <label>Show Dates:</label>
@@ -285,7 +287,7 @@
             <div class="container">
                 <div class="row video-section">
                   <div class="col-md-6">
-                    <h2>Club Albania trailer</h2>
+                    <h2 style="color: lightgray;">"Club Albania" trailer</h2>
                     <div class="video-container">
                         <video controls>
                         <!-- Update the src attribute with the correct file path or URL -->
@@ -296,7 +298,7 @@
                   </div>
             
                   <div class="col-md-6">
-                    <h2>Udhetim i gjate drejt nates trailer</h2>
+                    <h2 style="color: lightgray;">"Udhetim i gjate drejt nates" trailer</h2>
                     <div class="video-container">
                         <video controls>
                         <source src="./resources/video/udhetimIGjateDrejtNates.mp4" type="video/mp4">
@@ -308,28 +310,31 @@
               </div>      
         </main>
         <section class="footer">
-            <footer class=" text-white text-center py-3 bg-color" id="animate-trans">
+            <footer class="text-white text-center py-3 bg-color">
                 <div class="container">
-                  <div class="row">
-                    <div class="col">
-                      <div class="footer-icons social-links">
-                        <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
-                        <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
-                      </div>
-                      <p>Phone: +383 (44) 753 330</p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="footer-icons social-links">
+                                <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
+                                <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
+                            </div>
+                            <p>Phone: +383 (44) 753 330</p>
+                        </div>
+                        <div class="col pt-4">
+                            <address>Address: Street Luan Haradinaj, Prishtina</address>
+                        </div>
+                        <div class="col pt-4">
+                            <p id="currentDateTime"></p>
+                        </div>
                     </div>
-                    <div class="col pt-4">
-                      <address>Address: Street Luan Haradinaj, Prishtina</address>
+                    <div class="row">
+                        <div class="col">
+                            <p>&copy; 2023 National Theater of Kosovo</p>
+                        </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <p>&copy; 2023 National Theater of Kosovo</p>
-                    </div>
-                  </div>
                 </div>
-                </footer>
+            </footer>
         </section>    
     </body>
 </html>

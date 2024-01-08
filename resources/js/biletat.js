@@ -16,53 +16,6 @@ function equalizeCardHeights(){
         card.style.height=maxCardHeight+'px';
     });
 }
-         // Function to populate the date options with radio buttons
-         function populateDateOptions(card) {
-            var dateOptions = [];
-            var dateElement = card.find(".show-date");
-
-            // Extract the date from the current card
-            var date = dateElement.text();
-            dateOptions.push(date);
-
-            // Populate the date options with radio buttons
-            var dateOptionsContainer = card.find(".date-options");
-            dateOptionsContainer.empty();
-            dateOptions.forEach(function(date, index) {
-                dateOptionsContainer.append(`
-                    <label>
-                        <input type="radio" name="showDate" value="${date}" ${index === 0 ? 'checked' : ''}>
-                        ${date}
-                    </label>
-                `);
-            });
-        }
-
-        // Function to handle the "Buy Tickets" button click and open the modal
-        function handleBuyTicketsClick() {
-            var card = $(this).closest(".card");
-            var modal = card.find(".ticket-modal");
-
-            // Populate the date options with radio buttons specific to the clicked card
-            populateDateOptions(card);
-
-            // Open the modal for the specific card
-            modal.show();
-
-            // You can add additional logic to handle form submission, etc.
-        }
-
-        // Document ready function
-        $(document).ready(function() {
-            // Attach the click event to the "Buy Tickets" button for each card
-            $(".buy-tickets-btn").click(handleBuyTicketsClick);
-
-            // Add additional logic as needed
-        });
-        // Function to handle "Buy ticket" button click and open the purchase modal
-        function openTicketForm(button) {
-            $('#purchaseModal').modal('show');
-        }
         // Wait for the document to be ready
         $(document).ready(function () {
             // Attach a click event handler to the close button
@@ -102,78 +55,121 @@ function equalizeCardHeights(){
             var quantityDisplay = $(displayId);
             quantityDisplay.text(quantityInput.val());
         }
-        class TicketManager {
-        constructor() {
-            this.ticketPrices = {
-                regular: 2,
-                over2Hours: 3,
-                students: 1,
-                studentsOver2Hours: 2
-            };
-            this.quantities = {
-                regular: 0,
-                over2Hours: 0,
-                students: 0,
-                studentsOver2Hours: 0
-            };
+        // Define a ShowCard class
+        class ShowCard {
+            constructor(cardElement) {
+                this.cardElement = cardElement;
+                this.dates = this.extractDates();
+                this.setupBuyTicketButton();
+            }
+
+            // Extract dates from the card
+            extractDates() {
+                const dateText = this.cardElement.find('.show-date').html().trim();
+                return dateText.split('<br>').map(date => date.trim());
+            }
+
+            // Setup "Buy ticket" button click event
+            setupBuyTicketButton() {
+                const buyButton = this.cardElement.find('.buy-tickets-btn');
+                buyButton.on('click', () => this.openTicketForm());
+            }
+
+            // Open the ticket form
+            openTicketForm(button) {
+                $('#purchaseModal').modal('show');
+                const radioGroup = $('#radioGroup');
+                radioGroup.empty();
+
+                // Create radio buttons for each date
+                this.dates.forEach(date => {
+                    const formattedDate = date.trim();
+                    const radioBtn = $(`
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="showDateRadio" value="${formattedDate}">
+                            <label class="form-check-label">${formattedDate}</label>
+                        </div>`
+                    );
+
+                    radioGroup.append(radioBtn);
+                });
+
+                // Open the ticket modal
+                $('#ticketModal').modal('show');
+            }
         }
 
-        // Get total price for a specific ticket type
-        getTotalPrice(ticketType) {
-            return this.quantities[ticketType] * this.ticketPrices[ticketType];
+// Initialize ShowCard instances for each card
+$(document).ready(() => {
+    const showCards = $('.card').toArray().map(cardElement => new ShowCard($(cardElement)));
+});
+
+        function updateDateTime() {
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString();
+            const formattedTime = currentDate.toLocaleTimeString();
+            const dateTimeString = `Current Date and Time: ${formattedDate} ${formattedTime}`;
+            
+            // Update the content of the element with id "currentDateTime"
+            document.getElementById("currentDateTime").textContent = dateTimeString;
         }
 
-        // Update quantity for a specific ticket type
-        setQuantity(ticketType, quantity) {
-            this.quantities[ticketType] = quantity;
-        }
 
-        // Get ticket price for a specific ticket type
-        getTicketPrice(ticketType) {
-            return this.ticketPrices[ticketType];
-        }
+        //Form Validation
+        $(document).ready(function() {
 
-        // Calculate and update the final price
-        updateFinalPrice() {
-            var finalPrice = this.getTotalPrice('regular') +
-                this.getTotalPrice('over2Hours') +
-                this.getTotalPrice('students') +
-                this.getTotalPrice('studentsOver2Hours');
-
-            $('#finalPrice').text(finalPrice);
-        }
-        }
-
-        // Create an instance of TicketManager
-        var ticketManager = new TicketManager();
-
-        // Function to automatically display ticket prices and update the form
-        function displayTicketPrices() {
-        // Display ticket prices on the form
-        $('#regularPrice').text(ticketManager.getTicketPrice('regular'));
-        $('#over2HoursPrice').text(ticketManager.getTicketPrice('over2Hours'));
-        $('#kidsAndSeniorsPrice').text(ticketManager.getTicketPrice('kidsAndSeniors'));
-        $('#studentsPrice').text(ticketManager.getTicketPrice('students'));
-        $('#studentsOver2HoursPrice').text(ticketManager.getTicketPrice('studentsOver2Hours'));
-        }
-
-        // Function to handle input events and update the final price
-        function handleInputEvent() {
-        var id = $(this).attr('id');
-        var ticketType = id.replace('Quantity', '');
-
-        // Update quantity in the TicketManager
-        ticketManager.setQuantity(ticketType, parseInt($(this).val()));
-
-        // Update the final price
-        ticketManager.updateFinalPrice();
-        }
-
-        // Attach input event handlers to quantity input fields
-        $('input[id$="Quantity"]').on('input', handleInputEvent);
-
-        // Call the function to display ticket prices when the page loads
-        $(document).ready(function () {
-        displayTicketPrices();
-        ticketManager.updateFinalPrice(); // Initialize the final price
+            // Initialize the form validation
+            var validator = $("#purchaseForm").validate({
+                // Define validation rules for each input field
+                rules: {
+                    fullName: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    // Add rules for other fields as needed
+                },
+                // Define error messages for each rule
+                messages: {
+                    fullName: "Please enter your full name",
+                    email: {
+                        required: "Please enter your email address",
+                        email: "Please enter a valid email address"
+                    },
+                    // Add messages for other fields as needed
+                },
+                // Display error messages in the error-container div
+                errorPlacement: function(error, element) {
+                    error.appendTo("#error-container");
+                }
+            });
+        
+            // Add custom validation for the date selection
+            validator.rules("add", {
+                showDate: {
+                    required: true
+                }
+            });
+        
+            // Add custom validation for at least one ticket selection
+            $.validator.addMethod("atLeastOneTicket", function(value, element) {
+                return $('#regularTicketCheckbox').is(':checked') || $('#2hoursTicketCheckbox').is(':checked') || $('#studentTicketCheckbox').is(':checked') || $('#students2hoursTicketCheckbox').is(':checked');
+            }, "Please select at least one ticket");
+        
+            // Apply the custom validation to the checkboxes
+            validator.rules("add", {
+                regularTicketCheckbox: {
+                    atLeastOneTicket: true
+                },
+                // Add rules for other checkboxes as needed
+            });
+        
+            // Event listener for the form submission
+            $("#purchaseForm").submit(function(event) {
+                // Validate the form using the 'valid' method
+                if (!validator.valid()) {
+                    // If the form is not valid, prevent submission
+                    event.preventDefault();
+                }
+            });
         });

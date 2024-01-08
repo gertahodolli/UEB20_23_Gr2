@@ -139,3 +139,89 @@ table {
   .description {
     margin-top: 10px;
   }
+
+  footer {
+    background: #333333; 
+    padding: 15px 23px;
+    color: #EEEEEE;
+    /* color: #4C4C4C; */
+    text-align: center;
+}
+
+/* Modal background color */
+.modal-content {
+  background-color: rgb(35, 35, 35);
+  color: lightgray;
+}
+
+/* Form input styles */
+.form-control {
+  background-color: rgb(35, 34, 34);
+  color: lightgray;
+}
+
+/* Checkbox and label styles */
+.form-check-label,
+.form-check-input {
+  color: lightgray;
+}
+
+/* Quantity buttons row style */
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+}
+
+/* Quantity control styles */
+.quantity-control {
+  margin-top: 10px;
+}
+
+/* Quantity buttons style */
+.btn.btn-secondary {
+  background-color: rgb(35, 34, 34);
+  color: lightgray;
+  border: 1px solid lightgray;
+}
+
+/* Update Final Price button style */
+button[onclick="updateFinalPrice()"] {
+  background-color: rgb(35, 34, 34);
+  color: lightgray;
+  border: 1px solid lightgray;
+  margin-top: 10px;
+}
+
+/* Final Price display style */
+.finalPrice {
+  color: lightgray;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* Close and Buy Tickets button style in the modal footer */
+.modal-footer .btn {
+  background-color: rgb(35, 34, 34);
+  color: lightgray;
+  border: 1px solid lightgray;
+}
+
+/* Increase and Decrease buttons style */
+.btn.btn-secondary[onclick^="incrementQuantity"],
+.btn.btn-secondary[onclick^="decrementQuantity"] {
+  background-color: rgb(35, 34, 34);
+  color: lightgray;
+  border: 1px solid lightgray;
+  width: 33%; /* Equal width for the buttons in the row */
+}
+
+/* Increase and Decrease buttons container style */
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+}
+
+/* Optional: Remove default button styles for a cleaner look */
+.btn {
+  box-shadow: none;
+}

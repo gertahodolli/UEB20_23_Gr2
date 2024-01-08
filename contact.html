@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <body>
     <!-- Navbar -->
@@ -387,37 +388,36 @@
 
 
        <!-- Footer -->
-        <footer class="text-white text-center py-3 bg-color">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="footer-icons social-links">
-                            <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
-                            <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
-                        </div>
-                        <p>Phone: +383 (44) 753 330</p>
-                    </div>
-                    <div class="col pt-4">
-                        <address>Address: Street Luan Haradinaj, Prishtina</address>
-                    </div>
-                    <div class="col pt-4">
-                        <p id="currentDateTime"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p>&copy; 2023 National Theater of Kosovo</p>
-                    </div>
-                </div>
+       <footer class=" text-white text-center py-3 bg-color" id="animate-trans">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="footer-icons social-links">
+                <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
+              </div>
+              <p>Phone: +383 (44) 753 330</p>
             </div>
+            <div class="col pt-4">
+              <address>Address: Street Luan Haradinaj, Prishtina</address>
+            </div>
+            <div class="col pt-4">
+              <p id="currentDateTime"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top" style="text-decoration: none;  color: aliceblue;">National Theater of Kosovo</a></p>
+            </div>
+          </div>
+        </div>
         </footer>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <script>
-            // Example of using jQuery selectors for changing color
             $(document).ready(function() {
-              $('.btn-style').css('background-color', 'red'); // Change text color for buttons
+              $('.btn-style').css('background-color', 'red'); 
             });
           </script>
     

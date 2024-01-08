@@ -64,7 +64,7 @@
 <body>
     <!-- Navbar -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="go-to-nav">
         <a class="navbar-brand" href="#">
             <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
         </a>
@@ -165,7 +165,7 @@
       <div class="row">
         <div class="col-md-6 about-changes" id="slide-ani">
           <h2 id="about-heading">History of</h2>
-          <p>The National Theater of Kosovo, abbreviated <abbr title="Teatri Kombetare i Kosoves">TKK</abbr> , is the main performing arts center in Kosovo, founded in 1945 in the city of Prizren in Kosovo. It is ranked as the highest in the country. The National Theater is the only theater in Kosovo and is therefore financed by the <span style="color: red;" >Ministry of Culture, Youth and Sports</span> . This theater has shown more than <mark style="background-color: #4C4C4C"><a href="#animate-trans" style="text-decoration: none;color: aliceblue;">400 premieres</a></mark> which have been watched by more than <span id="num-calc">3</span>  million viewers. 
+          <p>The National Theater of Kosovo, abbreviated <abbr title="Teatri Kombetare i Kosoves">TKK</abbr> , is the main performing arts center in Kosovo, founded in 1945 in the city of Prizren in Kosovo. It is ranked as the highest in the country. The National Theater is the only theater in Kosovo and is therefore financed by the <span style="color: red;" >Ministry of Culture, Youth and Sports</span> . This theater has shown more than <mark style="background-color: #4C4C4C"><a href="#animate-trans" id="myLink" style="text-decoration: none;color: aliceblue;">400 premieres</a></mark> which have been watched by more than <span id="num-calc">3</span>  million viewers. 
           </p>
           <a href="about.html" class="btn btn-style goto-about">About Us</a>
         </div>
@@ -176,8 +176,13 @@
     </div>
     </section>
 
-    <audio id="sound">
-      <source src="resources/images/swipe_down.wav" type="audio/mpeg">
+    <audio id="sound1">
+      <source  src="resources/images/sound1.mp3" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+
+    <audio id="sound2">
+      <source src="resources/images/swipe_down.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
 
@@ -219,7 +224,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <p>&copy; <span id="remove">2023</span> National Theater of Kosovo</p>
+          <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top">National Theater of Kosovo</a></p>
         </div>
       </div>
     </div>
@@ -336,50 +341,32 @@
   </script>
 
 <script>
-$(document).ready(function(){
-  let audio = document.getElementById("sound");
+  $(document).ready(function(){
+    
+    $("#animate-trans a").on('click', function(event) {
+      var hash = $(this).attr('href');
+      if (hash === '#animate-trans') {
+        event.preventDefault();
 
-  // Function to play the sound
-  function playSound() {
-    audio.play()
-      .then(() => {
-        console.log('Audio played successfully');
-      })
-      .catch(error => {
-        console.log('Error playing audio:', error);
-      });
-  }
 
-  $("#animate-trans").on('click', function(event) {
-    if (this.hash !== "") {
-      event.preventDefault();
-      var hash = this.hash;
-      
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, {
-        duration: 800,
-        complete: function(){
-          window.location.hash = hash;
-          playSound();
-        }
-      });
-    }
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, {
+          duration: 800,
+          complete: function(){
+            window.location.hash = hash;
+          }
+        });
+      }
+    });
+
   });
-
-  // Check audio loading and play on interaction
-  audio.oncanplay = function() {
-    console.log('Audio is ready to play');
-  };
-
-  audio.onerror = function() {
-    console.log('Error loading the audio file');
-  };
-});
-
 </script>
 
-  
+
+
+
+
   <script>
     $(document).ready(function(){
       $(".show-date1").click(function(){
@@ -480,7 +467,21 @@ $(document).ready(function(){
   });
 
 </script>
+
+<script>
+  document.getElementById('myLink').addEventListener('click', function() {
+  var audio = document.getElementById('sound2');
+  audio.play();
+  });
+</script>
  
+
+<script>
+  document.getElementById('top').addEventListener('click', function() {
+  var audio = document.getElementById('sound1');
+  audio.play();
+  });
+</script>
   
 
 

@@ -36,14 +36,23 @@ header::before {
 }
 
 .background-2 {
-    height: 250vh; 
-    background-image: url('https://cdn.cheapism.com/images/AI-generated_image_of_an_old_movi.2e16d0ba.fill-1440x754.jpg'); 
-    background-size: cover;
-    background-attachment: fixed;
-    filter: blur(5px) brightness(0.5); 
+    position: relative;
+    height: 340vh;
 }
 
-
+.background-2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('https://cdn.cheapism.com/images/AI-generated_image_of_an_old_movi.2e16d0ba.fill-1440x754.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    filter: blur(5px) brightness(0.5);
+    z-index: -1;
+}
 
 .blur-background {
     height: 100vh; 
@@ -119,6 +128,7 @@ p {
 p.small-text {
     margin-left: 20px;
     color: white; 
+    font-size: 15px;
 }
 
 .image-container {
@@ -135,7 +145,8 @@ p.small-text {
 }
 
 .framed-image {
-    size: 20px;
+    width: 440px;
+    height: 350px;
     display: block;
     max-width: 100%;
     height: auto;
@@ -159,4 +170,101 @@ p.small-text {
 
 .footer-container {
     text-align: center; 
+}
+
+.wrapper {
+    max-width: 100%; 
+    padding: 90px; 
+    position: relative;
+    box-sizing: border-box; 
+    color:#eeeeeed2;
+}
+
+.wrapper .center-line{
+    position: absolute;
+    height: 100%;
+    width: 4px;
+    background: rgb(28, 27, 27);
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+}
+
+.wrapper .row{
+    display: flex;
+}
+
+.wrapper .row-1{
+    justify-content: flex-start;
+}
+
+.wrapper .row-2{
+    justify-content: flex-end;
+}
+
+.wrapper .row section{
+    background: rgba(6, 6, 6, 0.87);
+    border-radius: 5px;
+    width: calc(50% - 40px);
+    padding: 20px;
+    position: relative;
+}
+ 
+.row section .icon,
+.center-line .scroll-icon{
+    position: absolute;
+    background: #0b0b0be8;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffffc6;
+    font-size: 17px;
+    box-shadow: 0 0 0 4px #333333, inset 0 2px 0 rgba(0,0,0,0.08), 0 3px 0 4px rgba(0,0,0,0.05);
+}
+  
+.center-line .scroll-icon{
+    bottom: 0px;
+    left: 50%;
+    font-size: 25px;
+    transform: translateX(-50%);
+}
+
+.row-1 section .icon{
+    top: 15px;
+    right: -60px;
+}
+
+.row-2 section .icon{
+    top: 15px;
+    left: -60px;
+}
+
+.row section .details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.row section .details .title{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.row section p{
+    margin: 10px 0 17px 0;
+}
+
+  .wrapper .row section img {
+    max-width: 50%;  /*  fotot te kene maksimumin e madhesise se prindit */
+    height: auto;  
+    display: block;  
+    margin: 0 auto; 
+    filter: brightness(0.7); 
+}
+
+.row section img {
+    border-radius: 5px;  /* Përdorim për të bërë korniza të rrumbullakëtuara (opcional) */
+    box-shadow: 0 0 50px rgba(73, 10, 10, 0.651);  /* Shtimi i një hijeje (opcional) */
 }

@@ -1,3 +1,7 @@
+$(document).ready(function() {
+    $('.btn-style').css('background-color', 'red'); // Change text color for buttons
+  });
+
 window.addEventListener('resize', equalizeCardHeights);
 window.addEventListener('load', equalizeCardHeights);
 
@@ -35,20 +39,51 @@ function equalizeCardHeights(){
                 quantityControl.toggle(this.checked);
             });
         });
-        function incrementQuantity(quantityId, displayId) {
+         // Function to calculate and update the final price
+    function updateFinalPrice() {
+        // Prices for each type of ticket
+        const regularTicketPrice = 2;
+        const hours2TicketPrice = 3;
+        const studentTicketPrice = 1;
+        const students2hoursTicketPrice = 2;
+
+        // Get the quantities selected by the user
+        const regularTicketQuantity = parseInt(document.getElementById('regularTicketQuantity').value);
+        const hours2TicketQuantity = parseInt(document.getElementById('2hoursTicketQuantity').value);
+        const studentTicketQuantity = parseInt(document.getElementById('studentTicketQuantity').value);
+        const students2hoursTicketQuantity = parseInt(document.getElementById('students2hoursTicketQuantity').value);
+
+        // Calculate the subtotal for each type of ticket
+        const regularTicketSubtotal = regularTicketQuantity * regularTicketPrice;
+        const hours2TicketSubtotal = hours2TicketQuantity * hours2TicketPrice;
+        const studentTicketSubtotal = studentTicketQuantity * studentTicketPrice;
+        const students2hoursTicketSubtotal = students2hoursTicketQuantity * students2hoursTicketPrice;
+
+        // Calculate the total price
+        const totalPrice = regularTicketSubtotal + hours2TicketSubtotal + studentTicketSubtotal + students2hoursTicketSubtotal;
+
+        // Update the final price in the output element
+        document.querySelector('.finalPrice').textContent = 'Total Price: €' + totalPrice.toFixed(2);
+    }
+
+    // Function to increment quantity
+    function incrementQuantity(quantityId, displayId) {
             var quantityInput = $(quantityId);
             var currentQuantity = parseInt(quantityInput.val()) || 0;
             quantityInput.val(currentQuantity + 1);
             updateDisplay(quantityInput, displayId);
+            updateFinalPrice();
         }
 
-        function decrementQuantity(quantityId, displayId) {
+    // Function to decrement quantity
+    function decrementQuantity(quantityId, displayId) {
             var quantityInput = $(quantityId);
             var currentQuantity = parseInt(quantityInput.val()) || 0;
             if (currentQuantity > 0) {
                 quantityInput.val(currentQuantity - 1);
                 updateDisplay(quantityInput, displayId);
             }
+            updateFinalPrice();
         }
 
         function updateDisplay(quantityInput, displayId) {
@@ -114,62 +149,78 @@ $(document).ready(() => {
             document.getElementById("currentDateTime").textContent = dateTimeString;
         }
 
-
-        //Form Validation
-        $(document).ready(function() {
-
-            // Initialize the form validation
-            var validator = $("#purchaseForm").validate({
-                // Define validation rules for each input field
-                rules: {
-                    fullName: "required",
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    // Add rules for other fields as needed
-                },
-                // Define error messages for each rule
-                messages: {
-                    fullName: "Please enter your full name",
-                    email: {
-                        required: "Please enter your email address",
-                        email: "Please enter a valid email address"
-                    },
-                    // Add messages for other fields as needed
-                },
-                // Display error messages in the error-container div
-                errorPlacement: function(error, element) {
-                    error.appendTo("#error-container");
-                }
-            });
-        
-            // Add custom validation for the date selection
-            validator.rules("add", {
-                showDate: {
-                    required: true
-                }
-            });
-        
-            // Add custom validation for at least one ticket selection
-            $.validator.addMethod("atLeastOneTicket", function(value, element) {
-                return $('#regularTicketCheckbox').is(':checked') || $('#2hoursTicketCheckbox').is(':checked') || $('#studentTicketCheckbox').is(':checked') || $('#students2hoursTicketCheckbox').is(':checked');
-            }, "Please select at least one ticket");
-        
-            // Apply the custom validation to the checkboxes
-            validator.rules("add", {
-                regularTicketCheckbox: {
-                    atLeastOneTicket: true
-                },
-                // Add rules for other checkboxes as needed
-            });
-        
-            // Event listener for the form submission
-            $("#purchaseForm").submit(function(event) {
-                // Validate the form using the 'valid' method
-                if (!validator.valid()) {
-                    // If the form is not valid, prevent submission
-                    event.preventDefault();
+          $("#submitButton").on("click", function() {
+            validateForm();
+            // Additional logic or form submission code can go here if needed.
+          });
+          
+          document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('purchaseForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                // Validate the form
+                if (validateForm()) {
+                    // If validation succeeds, you can proceed with your form submission logic
+                    // For example, document.getElementById('purchaseForm').submit();
+                    console.log('Form submitted successfully!');
                 }
             });
         });
+    
+        // Function to validate the form
+        function validateForm() {
+            // Reset all error messages
+            resetErrorMessages();
+    
+            // Flag to check if there are any validation errors
+            let hasErrors = false;
+    
+            // Validate Ticket Name
+            const fullName = document.getElementById('fullName').value.trim();
+            if (fullName === '') {
+                displayErrorMessage('fullName', 'Please enter your full name.');
+                hasErrors = true;
+            }
+    
+            // Validate Email
+            const email = document.getElementById('email').value.trim();
+            if (email === '' || !isValidEmail(email)) {
+                displayErrorMessage('email', 'Please enter a valid email address.');
+                hasErrors = true;
+            }
+    
+            // Validate Date Selection
+            const selectedDate = document.querySelector('input[name="showDate"]:checked');
+            if (!selectedDate) {
+                displayErrorMessage('showDate', 'Please select a date.');
+                hasErrors = true;
+            }
+    
+            // Validate Ticket Selection
+            const selectedTickets = document.querySelectorAll('input[type="checkbox"]:checked');
+            if (selectedTickets.length === 0) {
+                displayErrorMessage('ticketSelection', 'Please select at least one ticket option.');
+                hasErrors = true;
+            }
+    
+            // If there are any errors, prevent form submission
+            return !hasErrors;
+        }
+    
+        // Function to reset all error messages
+        function resetErrorMessages() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(message => message.textContent = '');
+        }
+    
+        // Function to display error message for a specific input field
+        function displayErrorMessage(fieldId, message) {
+            const errorField = document.getElementById(`${fieldId}-error`);
+            errorField.textContent = message;
+        }
+    
+        // Function to check if the email is valid
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }

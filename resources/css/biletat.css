@@ -225,3 +225,7 @@ button[onclick="updateFinalPrice()"] {
 .btn {
   box-shadow: none;
 }
+
+.error-message{
+  color: red;
+}

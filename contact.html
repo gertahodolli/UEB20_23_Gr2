@@ -43,6 +43,9 @@
                 <li class="nav-item pr-3">
                     <a class="nav-link" href="contact.html">Contact Us</a>
                 </li>
+                <li class="nav-item mr-3">
+                    <a class="nav-link btn btn-style" style="color: black;" href="logIn.html">Log In</a>
+                  </li>
                 </ul>
             </div>
             </nav>
@@ -106,6 +109,15 @@
         <input type="email" id="liveChatEmail" name="liveChatEmail" required onblur="validateEmail()" placeholder="YourEmail@gmail.com">
         <p id="emailFormatHint" class="hint" style="color: #8d1a1a; display: none;">Make sure to enter a valid email address.</p>
         
+        <div class="form-section">
+        <label for="liveChatInput">Choose Department:</label>
+        <select id="liveChatInput" name="liveChatInput" required>
+            <option value="Ticketing">Ticketing</option>
+            <option value="Technical Support">Technical Support</option>
+            <option value="General Inquiry" selected>General Inquiry</option>
+        </select>
+        </datalist>
+    </div>
         <label for="liveChatMessage">Message*:</label>
         <textarea id="liveChatMessage" name="liveChatMessage" rows="4" required onblur="validateMessage()" placeholder="Your Message"></textarea>
         <p id="messageFormatHint" class="hint" style="color: #8d1a1a; display: none;">Please enter a message before submitting.</p>
@@ -340,12 +352,24 @@
         <input type="email" id="email" name="email" required placeholder="Please enter your feedback here" autocomplete="on">
       </div>
   
+
       <!-- Pjesa e formës për numër -->
       <div class="form-section">
         <label for="numri">Numri:</label>
         <input type="text" id="numri" name="numri" pattern="[0-9]+" placeholder="Your number" required autocomplete="on">
       </div>
   
+       <!-- Pjesa e formës për numër -->
+    <div class="form-section">
+        <label for="numri">Numri:</label>
+        <select id="numri" name="numri" required>
+          <option value="Option 1">Option 1</option>
+          <option value="Option 2">Option 2</option>
+          <option value="Option 3">Option 3</option>
+        </select>
+      </div>
+
+      
       <!-- Pjesa e formës për feedback -->
       <div class="form-section">
         <label for="feedback">Feedback:</label>
@@ -389,12 +413,17 @@
                 </div>
             </div>
         </footer>
-    
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    
+        <script>
+            // Example of using jQuery selectors for changing color
+            $(document).ready(function() {
+              $('.btn-style').css('background-color', 'red'); // Change text color for buttons
+            });
+          </script>
     
     <script src ="resources/js/contact.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
 </body>
 </html>
 

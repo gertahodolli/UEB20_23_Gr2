@@ -1,42 +1,40 @@
-
+// Funksioni për të filluar bisedën e drejtpërdrejtë
 function startLiveChat() {
-    document.getElementById("liveChatSection").style.display = "block";
+  $("#liveChatSection").show();
 }
 
-// Function to open the popup
+// Funksioni për të hapur popup-in
 function openPopup() {
-document.getElementById("liveChatPopup").style.display = "block";
+  $("#liveChatPopup").show();
 }
 
-// Function to close the popup
+// Funksioni për të mbyllur popup-in
 function closePopup() {
-document.getElementById("liveChatPopup").style.display = "none";
+  $("#liveChatPopup").hide();
 }
 
-// Function to submit the live chat 
+// Funksioni për të dërguar bisedën e drejtpërdrejtë
 function submitLiveChat() {
-const name = document.getElementById("liveChatName").value.trim();
-const email = document.getElementById("liveChatEmail").value.trim();
-const message = document.getElementById("liveChatMessage").value.trim();
+  const name = $("#liveChatName").val().trim();
+  const email = $("#liveChatEmail").val().trim();
+  const message = $("#liveChatMessage").val().trim();
 
-// Validimi i emrit, email-it dhe mesazhit
-const isNameValid = validateName();
-const isEmailValid = validateEmail();
-const isMessageValid = message !== "";
+  // Validimi i emrit, email-it dhe mesazhit
+  const isNameValid = validateName();
+  const isEmailValid = validateEmail();
+  const isMessageValid = message !== "";
 
-
-// Kontrolloni nëse të gjitha fushat janë valide
-if (isNameValid && isEmailValid && isMessageValid) {
+  // Kontrolloni nëse të gjitha fushat janë valide
+  if (isNameValid && isEmailValid && isMessageValid) {
     alert("Your message has been successfully submitted!");
-    document.getElementById("liveChatSection").style.display = "none";
+    $("#liveChatSection").hide();
     closePopup();
-} 
-else {
+  } else {
     alert("Please fill out all required fields correctly.");
-}
+  }
 }
 
-
+// validimi i fushave permes funksioneve
 function validateName() {
 var name = document.getElementById('liveChatName').value;
 var nameFormatHint = document.getElementById('nameFormatHint');
@@ -118,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
       
   
-      // Pas dërgimit, mbyll formën dhe shfaq mesazhin e "Thank you"
+      // Pas dërgimit, mbyll formën dhe shfaq mesazhin e Thank you
       popup.style.display = 'none';
       alert('Thank you for your feedback!');
     });
@@ -142,9 +140,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('number').value,
         document.getElementById('feedback').value,
       );
-  
-      // Shfaqja e objektit në konsolë (mund të bëni diçka tjetër me këtë informacion)
-      console.log(feedbackInfo);
+
+        console.log(feedbackInfo);
     });
   });
   

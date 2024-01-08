@@ -203,6 +203,43 @@ button:hover {
     background-color: #6e7377; /* Button background color on hover */
 }
 
+/* Stilizimi i Dropdown */
+.form-section select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Ndryshimi i ngjyrës kur hover */
+.form-section select:hover {
+    border-color: #555;
+}
+
+/* Ndryshimi i ngjyrës kur fokusohet */
+.form-section select {
+    outline: none;
+    background-color: #555;
+    color: #ffffff;
+}
+
+/* Stilizimi i opsionit parazgjedhur */
+.form-section select option[selected] {
+    background-color: #3a3939;
+    color: #fff;
+}
+
+label[for="liveChatInput"] {
+    margin-right: 10px; 
+}
+
+.form-section select option {
+    background-color: #555;
+    color: #000;
+}
 
 /* Enquiries Section */
 .enquiries-container {
@@ -502,7 +539,6 @@ button:hover {
     background-color: #6e7377;
 }
  
-
 
     /* Footer */
 

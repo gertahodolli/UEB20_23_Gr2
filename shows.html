@@ -206,7 +206,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <p>&copy; 2023 National Theater of Kosovo</p>
+            <p>&copy; <span id="remove">2023</span> National Theater of Kosovo</p></p>
           </div>
         </div>
       </div>
@@ -219,6 +219,17 @@
       $(document).ready(function() {
         $('.btn-style').css('background-color', 'red'); // Change text color for buttons
       });
+    </script>
+
+
+    <!--Used remove to delete the span element containing the year-->
+
+    <script>
+      $(document).ready(function() {
+      // Select the element with the ID 'remove'
+      $('#remove').remove();
+    });
+
     </script>
 
 </body>

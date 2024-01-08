@@ -67,7 +67,7 @@
                       <div class="show-info">
                         <h3>Club Albania</h3>
                         <!-- Additional show details -->
-                        <p>The play is based on the comedy, "After Death" by A.Z. Çajupi.</p>
+                        <p>The play is based on the comedy, "After Death" by A.Z. &Ccedil;ajupi.</p>
                         <p><b>Director:</b>  <u>Fatos Berisha</u></p>
                         <p><i><b>Actors:</b></i> Armond Morina, Ard Islami, Armend Smajli, Maylinda Kosumovic, Naim Berisha, Teuta Krasniqi and Ylber Bardhi.</p>
                       </div>
@@ -101,12 +101,12 @@
                     <div class="show-image">
                       <img src="resources/shows/udhetimi gjate drejt nates.png" alt="Show 1" class="shows-img">
                       <div class="show-title">
-                        Udhëtim i gjatë drejt natës
+                        Udh&euml;tim i gjatë drejt natës
                       </div>
                       <div class="show-info">
-                        <h3>Udhëtim i gjatë drejt natës</h3>
+                        <h3>Udh&euml;tim i gjatë drejt natës</h3>
                         <!-- Additional show details -->
-                        <p>“Udhetimi i gjate drejt nates” for the last time this year on December 13, 2023.</p>
+                        <p>“Udh&euml;timi i gjate drejt nates” for the last time this year on December 13, 2023.</p>
                         <p><b>Director:</b> <u>Iliriana Arifi</u></p>
                         <p><i><b>Actors:</b></i> Ernest Malazogu, Arta Selimi, Allmir Suhodolli, Don Shala, Florie Bajoku</p>
                       </div>
@@ -141,10 +141,10 @@
                     <div class="show-image">
                       <img src="resources/shows/Grate.png" alt="Show 1" class="shows-img">
                       <div class="show-title">
-                        GRATË
+                        GRAT&Euml;
                       </div>
                       <div class="show-info">
-                        <h3>GRATË</h3>
+                        <h3>GRAT&Euml;</h3>
                         <!-- Additional show details go here -->
                         <p>The play "WOMEN - or their sins in patriarchy!", is an authorial show in collaboration with the ensemble.</p>
                         <p><b>Director:</b> <u>Nastazja Domaradzka</u></p>
@@ -200,20 +200,75 @@
           <div class="col pt-4">
             <address>Address: Street Luan Haradinaj, Prishtina</address>
           </div>
+          <div class="col pt-4">
+            <p id="currentDateTime"></p>
+          </div>
         </div>
         <div class="row">
           <div class="col">
-            <p>&copy; 2023 National Theater of Kosovo</p>
+            <p>&copy; <span id="remove">2023</span> National Theater of Kosovo</p></p>
           </div>
         </div>
       </div>
       </footer>
+
+      <script src ="resources/js/contact.js"></script>
 
     <script>
       // Example of using jQuery selectors for changing color
       $(document).ready(function() {
         $('.btn-style').css('background-color', 'red'); // Change text color for buttons
       });
+    </script>
+
+
+    <!--Used remove to delete the span element containing the year-->
+
+    <script>
+      $(document).ready(function() {
+      // Select the element with the ID 'remove'
+      $('#remove').remove();
+    });
+
+    </script>
+
+    <!--Through filter, map and reduce funtions, sorted the shows in which Ylber Bardhi plays, shows which are directed by Kaltrim Balaj, and the total number of shows-->
+
+
+    <script>
+      // Get all the show elements
+      const showElements = document.querySelectorAll('.show-card');
+
+      // Convert NodeList to Array
+      const showsArray = Array.from(showElements);
+
+      // Filter shows where Actor Ylber Bardhi plays
+      const showsWithYlberBardhi = showsArray.filter(show => {
+        const actors = show.querySelector('.show-info').innerHTML;
+        return actors.includes('Ylber Bardhi');
+      }).map(show => {
+        return show.querySelector('.show-title').textContent;
+      });
+
+      // Extract shows directed by Kaltrim Balaj
+      const showsDirectedByKaltrimBalaj = showsArray.filter(show => {
+        const director = show.querySelector('.show-info').innerHTML;
+        return director.includes('Kaltrim Balaj');
+      }).map(show => {
+        return show.querySelector('.show-title').textContent;
+      });
+
+      // Use reduce for counting or summing up
+      const totalShows = showsArray.reduce((accumulator, currentShow) => {
+        // Perform any operation here (e.g., counting)
+        return accumulator + 1;
+      }, 0);
+
+      console.log('Shows with Ylber Bardhi:', showsWithYlberBardhi);
+      console.log('Shows directed by Kaltrim Balaj:', showsDirectedByKaltrimBalaj);
+      console.log('Total number of shows:', totalShows);
+
+      
     </script>
 
 </body>

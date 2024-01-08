@@ -9,7 +9,7 @@ body {
 
 header {
     position: relative;
-    background-image: url('https://images.squarespace-cdn.com/content/v1/57f5648637c581229b2e436f/1522788636811-EDLAD589AU4UYVGIK255/Screen+Shot+2018-04-03+at+4.49.58+PM.png?format=1500w'); 
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW4ern-Ka3W0RdMVfPPMxVwRzeb67rub_sQGdkj_CYS3YHDL1YKzt6bGsG0yagnG1EUOQ&usqp=CAU'); 
     background-size: cover;
     background-attachment: fixed;
     height: 100vh; 
@@ -37,7 +37,7 @@ header::before {
 
 .background-2 {
     position: relative;
-    height: 340vh;
+    height: 350vh;
 }
 
 .background-2::before {
@@ -56,7 +56,7 @@ header::before {
 
 .blur-background {
     height: 100vh; 
-    background-image: url('https://images.squarespace-cdn.com/content/v1/57f5648637c581229b2e436f/1522788636811-EDLAD589AU4UYVGIK255/Screen+Shot+2018-04-03+at+4.49.58+PM.png?format=1500w');
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW4ern-Ka3W0RdMVfPPMxVwRzeb67rub_sQGdkj_CYS3YHDL1YKzt6bGsG0yagnG1EUOQ&usqp=CAU');
     background-size: cover;
     filter: blur(10px); 
     position: fixed;
@@ -67,7 +67,7 @@ header::before {
 }
 
 body {
-    background-color: #EEEEEE;
+    background-color: #000000;
 }
 
 footer {
@@ -113,21 +113,21 @@ h2 {
     margin-bottom: 10px;
     font-size: 24px; 
     font-weight: bold;
-    color: white; 
+    color: rgba(255, 255, 255, 0.619); 
 }
 
 p {
-    color:white;
+    color:rgba(255, 255, 255, 0.712);
 }
 
 .divider {
-    width: 23%;
+    width: 25%;
     border-top: 4px solid white; 
 }
 
 p.small-text {
     margin-left: 20px;
-    color: white; 
+    color: rgba(255, 255, 255, 0.748); 
     font-size: 15px;
 }
 
@@ -138,7 +138,7 @@ p.small-text {
 }
 
 .frame {
-    border: 1px solid #ffffff;
+    border: 1px solid #5e5858b5;
     max-width: 400px; 
     height: auto;
     box-sizing: border-box;

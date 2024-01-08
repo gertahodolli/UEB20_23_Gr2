@@ -1,0 +1,36 @@
+.modal-header {
+    background-color: #000000ec;
+    color: rgb(193, 189, 189);
+    padding: 15px;
+    border-bottom: 1px solid #231b1b;
+  }
+  
+
+  .modal-body {
+    background-color: #1b1718e9;
+    color: #d4c4c4;
+    padding: 20px;
+  }
+  
+
+  .modal-footer {
+    background-color: #343a40;
+    padding: 15px;
+    border-top: 1px solid #606b6d;
+  }
+  
+  .btn-primary {
+    background-color: #eaf2fa;
+    color: white;
+  }
+  
+
+  .btn-close {
+    color: white;
+  }
+
+  .form-check-input {
+    width: 20px;
+    height: 20px;
+  }
+  

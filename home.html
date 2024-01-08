@@ -176,6 +176,11 @@
     </div>
     </section>
 
+    <audio id="sound">
+      <source src="resources/images/swipe_down.wav" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
     <!-- Section with sponsors -->
     <section class="sponsor-changes">
     <div class="container my-2 pb-5">
@@ -208,6 +213,9 @@
         <div class="col pt-4">
           <address>Address: Street Luan Haradinaj, Prishtina</address>
         </div>
+        <div class="col pt-4">
+          <p id="currentDateTime"></p>
+        </div>
       </div>
       <div class="row">
         <div class="col">
@@ -224,6 +232,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+        <script src ="resources/js/contact.js"></script>
         <script src="resources/js/index.js"></script>
 
         <script type="text/javascript">
@@ -327,31 +336,49 @@
   </script>
 
 <script>
-  $(document).ready(function(){
-    // Add smooth scrolling to all links
-    $("#animate-trans").on('click', function(event) {
-  
-      // Make sure this.hash has a value before overriding default behavior
-      if (this.hash !== "") {
-        // Prevent default anchor click behavior
-        event.preventDefault();
-  
-        // Store hash
-        var hash = this.hash;
-  
-        // Using jQuery's animate() method to add smooth page scroll
-        // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-        $('html, body').animate({
-          scrollTop: $(hash).offset().top
-        }, 800, function(){
-     
-          // Add hash (#) to URL when done scrolling (default click behavior)
+$(document).ready(function(){
+  let audio = document.getElementById("sound");
+
+  // Function to play the sound
+  function playSound() {
+    audio.play()
+      .then(() => {
+        console.log('Audio played successfully');
+      })
+      .catch(error => {
+        console.log('Error playing audio:', error);
+      });
+  }
+
+  $("#animate-trans").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, {
+        duration: 800,
+        complete: function(){
           window.location.hash = hash;
-        });
-      } // End if
-    });
+          playSound();
+        }
+      });
+    }
   });
-  </script>
+
+  // Check audio loading and play on interaction
+  audio.oncanplay = function() {
+    console.log('Audio is ready to play');
+  };
+
+  audio.onerror = function() {
+    console.log('Error loading the audio file');
+  };
+});
+
+</script>
+
   
   <script>
     $(document).ready(function(){

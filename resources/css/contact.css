@@ -1,7 +1,5 @@
-
-
 body {
-    background-image: url('https://i.pinimg.com/564x/d3/9c/d8/d39cd8b5f6f7f93be2cdb6df9738d702.jpg');
+    
     background-size: cover;
     height: 100vh;
     overflow-y: scroll;
@@ -9,7 +7,6 @@ body {
     font-family: 'Poppins', sans-serif;
     color: rgb(169,168,168);
 }
-
 
 
 /* Stilizimi për numrat e telefonit */
@@ -223,6 +220,13 @@ label[for="liveChatInput"] {
     background-color: rgb(11, 11, 11);
 }
 
+.color{
+    background-color: rgb(11, 11, 11);
+}
+
+.contact{
+    color: aliceblue;
+}
 
 /* harta */
 .center-text {
@@ -337,7 +341,7 @@ section iframe {
     justify-content: space-between;
     margin: 0 1cm;
     margin-bottom: 1.5cm;
-    margin-top: 130px;
+    margin-top: 50px;
 }
 
 
@@ -347,7 +351,7 @@ section iframe {
     padding-right: 1cm;
 }
 
-.accessibility-section h2, h3 {
+.accessibility-section h2, h4 {
     color: rgb(255, 255, 255);
 }
 .accessibility-section p {
@@ -369,12 +373,7 @@ section iframe {
 .accessibility-content p {
     word-wrap: break-word; 
 }
-/* Text Shadows */
-.accessibility-content h2
-{
-    text-shadow: 8px 8px 8px #8d1a1a; /* horizontal-offset vertical-offset blur-radius color */
-    
-}
+
 
 #feedbackIntro{
     color: #bebebe; /* Ngjyra e tekstit (bardhë) */

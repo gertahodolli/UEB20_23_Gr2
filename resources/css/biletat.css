@@ -93,7 +93,9 @@ table {
     object-fit: cover;
     margin-bottom: 4cm;
   }
-
+  video:hover{
+    
+  }
   .description {
     margin-top: 10px;
   }
@@ -120,24 +122,27 @@ table {
 .modal-body {
   background-color: rgb(35,34,34);
   color: lightgray;
-
 }
 
 #fullName{
   background-color: #3d3d3d;
   border: 3 px solid lightgray;
   color: lightgray;
+  margin: 10px;
 }
 #email{
   background-color: #3d3d3d;
   border: 3 px solid lightgray;
   color: lightgray;
+  margin: 10px;
 }
 /* Style for input fields */
 .form-control {
   background-color: #3d3d3d;
 }
-
+#show-dates{
+  margin: 10px;
+}
 /* Style for checkboxes and radio buttons */
 .form-check-input {
   appearance: none;
@@ -146,7 +151,6 @@ table {
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;
-  margin-right: 5px;
   vertical-align: middle;
 }
 .form-check-input:checked{
@@ -172,6 +176,7 @@ table {
 /* Style for final price output */
 .finalPrice {
   color: lightgray;
+  margin: 10px;
 }
 
 /* Style for modal footer */

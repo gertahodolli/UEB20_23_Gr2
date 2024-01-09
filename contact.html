@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+
 <body>
     <!-- Navbar -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="go-to-nav">
             <a class="navbar-brand" href="#">
                 <img src="resources/images/logo2.png" alt="National Theater of Kosovo" class="navbar-logo">
             </a>
@@ -51,6 +52,9 @@
             </div>
             </nav>
     </header>
+
+    <!--Scroll to top button-->
+    <div id="arrow-button">&#8593;</div>
     
     <header>
         <h1>Contact Us & Hours</h1>
@@ -422,6 +426,32 @@
           </script>
     
     <script src ="resources/js/contact.js"></script>
+    <script>
+        $(document).ready(function(){
+          // Show/Hide arrow button on scroll
+          $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+              $('#arrow-button').fadeIn();
+            } else {
+              $('#arrow-button').fadeOut();
+            }
+          });
+      
+          // Instant scroll to the navigation bar
+          $("#arrow-button").on('click', function() {
+            $('html, body').stop().animate({
+              scrollTop: $('#go-to-nav').offset().top
+            }, {
+              duration: 0, // Set duration to 0 for instant scrolling
+              complete: function() {
+                // Play sound on complete
+                var audio = document.getElementById('sound1');
+                audio.play();
+              }
+            });
+          });
+        });
+      </script>
     
 </body>
 </html>

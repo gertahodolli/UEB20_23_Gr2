@@ -167,6 +167,35 @@ updateDateTime();
 setInterval(updateDateTime, 1000);
 
 
+//Scroll to top
+
+  $(document).ready(function(){
+    // Show/Hide arrow button on scroll
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        $('#arrow-button').fadeIn();
+      } else {
+        $('#arrow-button').fadeOut();
+      }
+    });
+
+    // Instant scroll to the navigation bar
+    $("#arrow-button").on('click', function() {
+      $('html, body').stop().animate({
+        scrollTop: $('#go-to-nav').offset().top
+      }, {
+        duration: 0, // Set duration to 0 for instant scrolling
+        complete: function() {
+          // Play sound on complete
+          var audio = document.getElementById('sound1');
+          audio.play();
+        }
+      });
+    });
+  });
+
+
+
 
 
 

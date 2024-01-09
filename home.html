@@ -54,6 +54,19 @@
             display: block;
             }
 
+            #arrow-button {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            background-color: #555; /* Grey background color */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            }
+
         
     </style>
 
@@ -101,6 +114,9 @@
         </div>
         </nav>
     </header>
+
+    <!--Scroll to top button-->
+    <div id="arrow-button">&#8593;</div>
 
     <!-- Section with switching background picture -->
 
@@ -483,6 +499,34 @@
   document.getElementById('top').addEventListener('click', function() {
   var audio = document.getElementById('sound1');
   audio.play();
+  });
+</script>
+
+<!--Scroll to Top-->
+<script>
+  $(document).ready(function(){
+    // Show/Hide arrow button on scroll
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        $('#arrow-button').fadeIn();
+      } else {
+        $('#arrow-button').fadeOut();
+      }
+    });
+
+    // Instant scroll to the navigation bar
+    $("#arrow-button").on('click', function() {
+      $('html, body').stop().animate({
+        scrollTop: $('#go-to-nav').offset().top
+      }, {
+        duration: 0, // Set duration to 0 for instant scrolling
+        complete: function() {
+          // Play sound on complete
+          var audio = document.getElementById('sound1');
+          audio.play();
+        }
+      });
+    });
   });
 </script>
   

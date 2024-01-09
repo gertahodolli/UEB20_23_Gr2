@@ -69,15 +69,30 @@
     max-height: 450px; /* Example height; adjust as needed */
   }
 
-  #arrow-button {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    cursor: pointer;
-    background-color: #555; /* Grey background color */
-    padding: 10px 15px;
+  .search-bar {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    }
+    border-bottom: 1px solid #fff; /* Line for searching */
+    background-color: transparent;
+    color: #fff; /* Text color */
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #fff; /* Placeholder text color */
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #fff; /* Icon color */
+}

@@ -10,13 +10,6 @@ body {
     color: rgb(169,168,168);
 }
 
-header {
-    margin-top: 20px;
-    padding: 20px;
-    text-align: center;
-    color: white;
-}
-
 section {
     margin-top: 1px; 
 }
@@ -334,7 +327,6 @@ section iframe {
 /* faqs */
 /* FAQs Heading */
 .faqs-heading {
-    text-align: center;
     font-size: 32px;
     margin-bottom: 20px;
     color: white;
@@ -347,18 +339,7 @@ section iframe {
     color: rgb(169,168,168);
 }
 
-/* FAQs Container */
-.faqs-container {
-    display: flex;
-    gap: 20px;
-    justify-content: space-around;
-    padding: 20px;
-}
 
-/* FAQ Column */
-.faq-column {
-    flex: 1;
-}
 
 /* FAQs Details */
 .faqs-details {
@@ -470,7 +451,7 @@ section iframe {
     padding: 1cm;
     margin-bottom: 3cm;
     margin-left: 1cm; 
-    width: 15cm; 
+    width: auto; 
 }
 
 
@@ -536,9 +517,7 @@ button {
     box-shadow: 5px 5px 4px rgba(82, 75, 75, 0.712);
     transition: opacity 2s ease;
 }
-#openFeedbackFormBtn {
-    margin-left: 3cm;
-  }
+
 
 
 /* Efekti hover për butonat */

@@ -56,7 +56,7 @@
     <!--Scroll to top button-->
     <div id="arrow-button">&#8593;</div>
     
-    <header>
+    <header class="container text-center mt-5" style="color: aliceblue;">
         <h1>Contact Us & Hours</h1>
     </header>
 
@@ -65,6 +65,7 @@
     <div class="background-container">
      <!-- Box Office -->
      <section>
+        <div class="container mt-5">
         <div class="box-office-container">
             <div class="box-office-heading">
                 <h2>Box Office</h2>
@@ -94,6 +95,7 @@
                     </section>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     
@@ -140,6 +142,7 @@
 
     <!-- Enquiries -->
     <section>
+        <div class="container mt-5"></div>
         <div class="horizontal-line"></div>
         <div class="enquiries-container">
             <div class="enquiries-heading">
@@ -170,11 +173,13 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
-    </div>
+
     
     <!-- Harta -->
     <section>
+        <div class="container-fluid bg-dark py-5">
         <div>
             <div class="center-text">
             <h2>Getting Here</h2>
@@ -197,6 +202,7 @@
             <p>The following transit lines have routes that pass near Theatre Name: 1 & 4</p>
         </section>
         </div>
+        </div>
     </section>
 
 
@@ -207,10 +213,12 @@
 
 <!-- FAQs -->
 
-<h2 class="faqs-heading">Frequently Asked Questions</h2>
-<section class="faqs-container">
-    <div class="faq-column">
-        <div class="faqs-details">
+<section class="container mt-5">
+    <div class="row text-center faqs-heading">
+        <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="row mt-5">
+        <div class="col-6">
             <h3 class="faqs-title">TICKET INFORMATION</h3>
             <ul class="faqs-list">
                 <li>
@@ -232,12 +240,10 @@
                     </details>
                 </li>
             </ul>
-        </div>
-    </div>
 
-    <div class="faq-column">
-        <div class="faqs-details">
-        <h3 class="faqs-title">VANUE AND SEATING</h3>
+        </div>
+        <div class="col-6">
+            <h3 class="faqs-title">VANUE AND SEATING</h3>
         <ul class="faqs-list">
             <li>
                 <details>
@@ -259,14 +265,13 @@
             </li>
         </ul>
         </div>
-    </div>
-</section>
 
-<section class="faqs-container">
-    <div class="faq-column">
-        <div class="faqs-details">
-        <h3 class="faqs-title">EVENT POLICIES</h3>
-        <ul class="faqs-list">
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-6">
+            <h3 class="faqs-title">EVENT POLICIES</h3>
+            <ul class="faqs-list">
             <li>
                 <details>
                     <summary>What is your policy on late arrivals?</summary>
@@ -287,12 +292,9 @@
             </li>
         </ul>
         </div>
-    </div>
-
-    <div class="faq-column">
-        <div class="faqs-details">
-        <h3 class="faqs-title">LOST AND FOUND</h3>
-        <ul class="faqs-list">
+        <div class="col-6">
+            <h3 class="faqs-title">LOST AND FOUND</h3>
+            <ul class="faqs-list">
             <li>
                 <details>
                     <summary>What should I do if I lose something at the theater?</summary>
@@ -307,15 +309,18 @@
             </li>
         </ul>
         </div>
+
     </div>
+    
 </section>
-   
           
 
 
 
 
 <!-- Accessibility -->
+<section class="container mt-5">
+<div class="horizontal-line"></div>
 <section class="accessibility-section">
     <div class="accessibility-content">
         <h2>Accessibility Information</h2>
@@ -330,15 +335,20 @@
     <img class="accessibility-image" src="resources/images/Teater.jpeg" alt="Teater" />
 
 </section>
+</section>
 
 
+<section class="container mt-5 mb-5">
 <section class="feedback-section">
+<div class="row">
 <!-- Paragrafi para butonit -->
-<p id="feedbackIntro">We value your feedback! Your thoughts and opinions are important to us. Please take a moment to share your feedback by clicking the button below. We appreciate your input and use it to enhance our services. Thank you for helping us improve!</p>
+<p class="p-2" id="feedbackIntro">We value your feedback! Your thoughts and opinions are important to us. Please take a moment to share your feedback by clicking the button below. We appreciate your input and use it to enhance our services. Thank you for helping us improve!</p>
 
 
    <!-- Feedback Button -->
-   <button id="openFeedbackFormBtn">Feedback</button>
+   <div class="text-center mt-1 mb-">
+    <button class="btn btn-style" id="openFeedbackFormBtn">Feedback</button>
+   </div>
 
   <!-- Feedback Popup Form -->
   <div id="feedbackPopup" class="popup1">
@@ -388,6 +398,8 @@
       </div>
     </form>
     </div>
+</div>
+</section>
 </section>
 
 

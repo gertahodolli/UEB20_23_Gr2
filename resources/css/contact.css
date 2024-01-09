@@ -10,9 +10,7 @@ body {
     color: rgb(169,168,168);
 }
 
-section {
-    margin-top: 1px; 
-}
+
 
 /* Stilizimi për numrat e telefonit */
 p a[href^="tel:"] {
@@ -75,33 +73,14 @@ p a[href^="tel:"]:hover {
     margin: 10px 0; /* Adjust the margin as needed */
 }
 
-/* Box Office Container */
+/* Box Office Container */ 
 .box-office-container {
-    display: flex;
-    align-items: flex-start;
-    margin: 2cm 0; /* Adjusted margin-top and margin-bottom */
-    gap: 2cm;
     color: rgb(169,168,168);
 }
 
 .box-office-heading {
     font-size: 18px;
     color: white;
-}
-
-.box-office-heading, .box-office-column {
-    flex: 1;
-}
-
-.box-office-item1, .box-office-item {
-    margin-bottom: 2cm;
-}
-
-.box-office-item1 h2, .box-office-item h2 {
-    font-size: 20px;
-    text-align: left;
-    margin-bottom: 0.5cm;
-    color: rgb(169,168,168);
 }
 
 
@@ -234,52 +213,20 @@ label[for="liveChatInput"] {
     color: #000;
 }
 
-/* Enquiries Section */
-.enquiries-container {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 1cm; /* Përmbaj margin-in midis headerit dhe përmbajtjes */
-    gap: 2cm;
-
+.box-office{
+    background-color: rgb(11, 11, 11);
 }
 
-/* Enquiries Heading */
-.enquiries-heading {
-    flex: 1;
-    font-size: 18px;
-    color: white;
-}
 
-/* Enquiries Columns */
-.inquiry-column {
-    flex: 1;
-}
-
-/* Enquiries Items */
-.inquiry-item1,
-.inquiry-item {
-    margin-bottom: 2cm; 
-}
-.inquiry-item1 p,
-.inquiry-item p {
-    color: rgb(169,168,168);
-}
-
-/* Enquiries Item Heading */
-.inquiry-item1 h5,
-.inquiry-item h5 {
-    font-size: 20px;
-    text-align: left;
-    margin-bottom: 0.5cm;
-    color: rgb(169,168,168);
-
+.enquiries{
+    color: aliceblue;
+    background-color: rgb(11, 11, 11);
 }
 
 
 /* harta */
 .center-text {
     text-align: center;
-    margin-top: 3cm;
     font-size: 15px;
     color: rgb(169,168,168) ;
 }
@@ -309,7 +256,6 @@ section iframe {
     max-width: 850px; 
     margin: 0 auto; 
     text-align: center;
-    margin-bottom: 130px;
     color: rgb(169,168,168) ;
 }
 

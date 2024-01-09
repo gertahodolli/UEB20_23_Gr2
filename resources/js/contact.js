@@ -185,11 +185,6 @@ setInterval(updateDateTime, 1000);
         scrollTop: $('#go-to-nav').offset().top
       }, {
         duration: 0, // Set duration to 0 for instant scrolling
-        complete: function() {
-          // Play sound on complete
-          var audio = document.getElementById('sound1');
-          audio.play();
-        }
       });
     });
   });

@@ -68,3 +68,16 @@
     height: auto; /* Maintains aspect ratio */
     max-height: 450px; /* Example height; adjust as needed */
   }
+
+  #arrow-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    background-color: #555; /* Grey background color */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    }

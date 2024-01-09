@@ -13,8 +13,6 @@ body, html {
     font-family: 'Poppins', sans-serif;
 }
 
-
-
 @font-face {
     font-family: 'Open Sans';
     src: url('.resources/fonts/OpenSans-Medium.ttf'),
@@ -25,14 +23,9 @@ body, html {
 
 }
 
-
 .add-font-face{
     font-family: 'Opem Sans', sans-serif !important;
 }
-
-
-
-
 
 div, h1, h2, p, a{
     font-family: 'Poppins', sans-serif;
@@ -125,4 +118,26 @@ div, h1, h2, p, a{
 
 #slide-ani{
     display: none;
+}
+
+.btn.btn-primary.butonat {
+    background: linear-gradient(to bottom right, rgba(145, 15, 18, 0.7), rgb(128, 61, 61));
+    color: white;
+    width: 170px;
+    border: 1px solid #3d3d3d;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 4px;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.5s;
+    box-sizing: border-box;
+}
+
+
+.btn.btn-primary:hover {
+    background: linear-gradient(to top left, rgba(145, 15, 18, 0.7), rgb(128,61,61));
+    border: 1px solid #333;
 }

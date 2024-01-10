@@ -33,10 +33,6 @@
     background-color: rgb(35,34,34);
     color: rgb(169,168,168);
 }
-
-
-
-
 .btn.btn-primary {
     width: 60%;
     background: linear-gradient(to bottom right, rgba(145, 15, 18, 0.7), rgb(128, 61, 61));
@@ -110,9 +106,22 @@ table {
   .description {
     margin-top: 10px;
   }
+  .position-relative {
+    position: relative;
+  }
+
+  .overlay-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: lightgray;
+      margin: 0;
+      text-align: center;
+      z-index: 1; /* Ensure the text is above the video */
+  }
 /* Modal background color */
 /* Style for the modal */
-
 /* Style for the modal content */
 .modal-content {
   background-color: rgb(35,34,34);

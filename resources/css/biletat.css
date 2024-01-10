@@ -109,7 +109,23 @@ table {
   .position-relative {
     position: relative;
   }
+  .video-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #000; /* Set initial background color to black */
+  }
 
+  .video-container video {
+    width: 100%;
+  }
+
+  .video-container:hover video {
+    display: block; /* Show the video controls on hover */
+  }
+
+  .video-container video {
+    display: none; /* Hide video controls by default */
+  }
   .overlay-text {
       position: absolute;
       top: 50%;

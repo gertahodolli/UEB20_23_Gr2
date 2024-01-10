@@ -1,3 +1,7 @@
+main, section{
+  background-color: rgb(11,11,11);
+}
+
 .card-container{
     display: flex;
     flex-wrap: wrap;
@@ -30,7 +34,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: rgb(35,34,34);
+    /*background-color: rgb(35,34,34);*/
     color: rgb(169,168,168);
 }
 .btn.btn-primary {
@@ -119,6 +123,10 @@ table {
       margin: 0;
       text-align: center;
       z-index: 1; /* Ensure the text is above the video */
+  }
+
+  .video-playing .overlay-text{
+    opacity: 0;
   }
 /* Modal background color */
 /* Style for the modal */

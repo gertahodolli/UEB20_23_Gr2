@@ -17,6 +17,7 @@
         integrity="...">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-egFbsXOp+g8gP2Vj8DR5FPa/Wh0TSO+zreQ0ZwPvvlS7CdltqAcMQn3O4d2Zx15bwQPGssS1NN5cx+s/ISv6Bw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>About Us</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
 </head>
@@ -193,7 +194,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <p>&copy; 2023 National Theater of Kosovo</p>
+                  <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top" style="text-decoration: none;  color: aliceblue;">National Theater of Kosovo</a></p>
                 </div>
             </div>
         </div>
@@ -324,5 +325,14 @@
         });
       })();
     </script>
+
+<script>
+  $(document).ready(function() {
+  // Select the element with the ID 'remove'
+  $('#remove').remove();
+});
+
+</script>
+
 </body>
 </html>

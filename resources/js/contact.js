@@ -35,6 +35,7 @@ function submitLiveChat() {
 }
 
 // validimi i fushave permes funksioneve
+//function to validate name
 function validateName() {
 var name = document.getElementById('liveChatName').value;
 var nameFormatHint = document.getElementById('nameFormatHint');
@@ -81,7 +82,7 @@ if (!isValidEmail) {
 
 return isValidEmail;
 }
-
+// function to validate message
 function validateMessage() {
 var message = document.getElementById('liveChatMessage').value;
 var messageFormatHint = document.getElementById('messageFormatHint');

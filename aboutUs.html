@@ -20,6 +20,37 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
+
+    <style>
+      #puzzle-container {
+          width: 300px;
+          height: 100px;
+          border: 2px solid #ccc;
+          position: relative;
+      }
+
+      #puzzle-drop-zone {
+          width: 100%;
+          height: 20px;
+          background-color: #ccc;
+          position: absolute;
+          bottom: 0;
+      }
+
+      #puzzle-piece {
+          width: 80px;
+          height: 80px;
+          background-color: #4CAF50;
+          color: #fff;
+          text-align: center;
+          line-height: 80px;
+          position: absolute;
+          cursor: move;
+          clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      }
+  </style>
+
+
 </head>
 
 <body>
@@ -258,9 +289,17 @@
               <label for="komente" class="form-label">Comment:</label>
               <input type="text" class="form-control" id="komente" name="komente" placeholder="Shkruani komentin tuaj..." required>
             </div>
-  
+            
+            <p style="font-size: small;">Are you a human? <b>Drag me in the middle...</b></p>
+            <div id="puzzle-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+              <div id="puzzle-piece" draggable="true" ondragstart="drag(event)">Drag me!</div>
+              <div id="puzzle-drop-zone"></div>
+            </div>
+            <br>
+
             <!-- Butoni Submit -->
             <button type="submit" class="btn btn-secondary">Apply now</button>
+          
           </form>
         </div>
       </div>
@@ -326,13 +365,45 @@
       })();
     </script>
 
-<script>
-  $(document).ready(function() {
-  // Select the element with the ID 'remove'
-  $('#remove').remove();
-});
+    <script>
+      $(document).ready(function() {
+      // Select the element with the ID 'remove'
+      $('#remove').remove();
+    });
 
+    </script>
+
+<script>
+  function allowDrop(event) {
+      event.preventDefault();
+  }
+
+  function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+  }
+
+  function drop(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      var draggedElement = document.getElementById(data);
+      var puzzleContainer = document.getElementById("puzzle-container");
+      var puzzleDropZone = document.getElementById("puzzle-drop-zone");
+
+      // Set the new position of the dragged element based on the mouse coordinates
+      draggedElement.style.left = (event.clientX - puzzleContainer.getBoundingClientRect().left - draggedElement.clientWidth / 2) + "px";
+      draggedElement.style.top = (event.clientY - puzzleContainer.getBoundingClientRect().top - draggedElement.clientHeight / 2) + "px";
+
+      // Check if the puzzle piece is in the correct horizontal position
+      if (draggedElement.offsetLeft >= 0 && draggedElement.offsetLeft + draggedElement.offsetWidth <= puzzleContainer.offsetWidth) {
+          // Puzzle piece is in the correct horizontal position, add additional logic if needed
+          puzzleDropZone.style.backgroundColor = "#4CAF50"; // Change color to indicate success
+      } else {
+          // Puzzle piece is not in the correct horizontal position
+          puzzleDropZone.style.backgroundColor = "#FF0000"; // Change color to indicate failure
+      }
+  }
 </script>
+
 
 </body>
 </html>

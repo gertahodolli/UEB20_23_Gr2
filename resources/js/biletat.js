@@ -237,17 +237,33 @@ $(document).ready(() => {
 
         document.addEventListener('DOMContentLoaded', function () {
             // Get all video elements on the page
-            var videos = document.querySelectorAll('video');
+            var videos = document.querySelectorAll('.video-container video');
         
-            // Add 'play' event listener to each video
+            // Add event listeners to each video
             videos.forEach(function (video) {
-              video.addEventListener('play', function () {
-                // Add a class to the parent container when video starts playing
-                video.closest('.video-container').classList.add('video-playing');
+              var overlayText = video.closest('.video-container').querySelector('.overlay-text');
+              var customControls = video.closest('.video-container').querySelector('.custom-controls');
+        
+              // Add event listener to hide overlay text and show controls when the video starts playing
+              video.addEventListener('loadedmetadata', function(){
+                overlayText.style.opacity=1;
+                customControls.style.opacity=0;
+                video.closest('.video-container').style.opacity=1;
+              })
+              // Add 'mouseenter' event listener to show controls on hover
+              video.addEventListener('mouseenter', function () {
+                customControls.style.opacity = 1;
+              });
+              video.addEventListener('mouseleave', function(){
+                overlayText.style.opacity=0;
+              })
+              // Add event listener to show overlay text and hide controls when the video is paused
+              video.addEventListener('pause', function () {
+                overlayText.style.opacity = 1;
+                customControls.style.opacity = 1;
               });
             });
           });
-
         // Function to update current date and time
 function updateDateTime() {
     const currentDate = new Date();

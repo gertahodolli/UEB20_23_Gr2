@@ -234,6 +234,20 @@ $(document).ready(() => {
             var audio = new Audio(soundPath);
             audio.play();
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all video elements on the page
+            var videos = document.querySelectorAll('video');
+        
+            // Add 'play' event listener to each video
+            videos.forEach(function (video) {
+              video.addEventListener('play', function () {
+                // Add a class to the parent container when video starts playing
+                video.closest('.video-container').classList.add('video-playing');
+              });
+            });
+          });
+
         // Function to update current date and time
 function updateDateTime() {
     const currentDate = new Date();

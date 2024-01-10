@@ -10,6 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>National Theater of Kosovo</title>
 
+    <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
+
     <style>
         .full-page {
             height: 100vh; /* Set section to full viewport height */
@@ -54,6 +56,24 @@
             display: block;
             }
 
+            #arrow-button {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            background-color: #555; /* Grey background color */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            }
+
+            .overlay-text {
+              text-shadow: 1px 1px 1px black; /* Add this line for a black border around the text */
+              /* Add any other styles you want for the text */
+            }
+
         
     </style>
 
@@ -65,7 +85,7 @@
     <!-- Navbar -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="go-to-nav">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="home.html">
             <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,28 +111,32 @@
             <li class="nav-item pr-3">
                 <a class="nav-link" href="aboutUs.html">About Us</a>
             </li>
-            <li class="nav-item pr-3">
+            <li class="nav-item pr-3" style="margin-right: 5px;">
                 <a class="nav-link" href="contact.html">Contact Us</a>
             </li>
-            <li class="nav-item mr-3">
-              <a class="nav-link btn btn-style" style="color: black;" href="logIn.html">Log In</a>
+            <li class="nav-item pr-3">
+              <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="logIn.html">Log In</a>
             </li>
             </ul>
         </div>
         </nav>
     </header>
 
+    <!--Scroll to top button-->
+    <div id="arrow-button">&#8593;</div>
+
     <!-- Section with switching background picture -->
 
     <section class="full-page text-center">
         <div class="overlay-text fade-effect">
-          <h1 id="showName">Show Name</h1>
-          <p id="director">Director: Director's Name</p>
-          <p id="runningTime">Running Time: XX:XX</p>
+          <h1 id="showName"></h1>
+          <p id="director"></p>
+          <p id="runningTime"></p>
         </div>
         <div class="hover-button left" >&lt;</div>
         <div class="hover-button right">&gt;</div>
     </section>
+    
 
 
     <!-- Section with two recent shows and link to calendar -->
@@ -154,7 +178,7 @@
             </div>
           </div>
         </div>
-        <a href="calendar.html" class="btn btn-style" id="goto-calendar">View Calendar</a>
+        <a href="calendar.html" class="btn btn-primary butonat" id="goto-calendar">View Calendar</a>
       </div>
     </div>
     </section>
@@ -165,9 +189,9 @@
       <div class="row">
         <div class="col-md-6 about-changes" id="slide-ani">
           <h2 id="about-heading">History of</h2>
-          <p>The National Theater of Kosovo, abbreviated <abbr title="Teatri Kombetare i Kosoves">TKK</abbr> , is the main performing arts center in Kosovo, founded in 1945 in the city of Prizren in Kosovo. It is ranked as the highest in the country. The National Theater is the only theater in Kosovo and is therefore financed by the <span style="color: red;" >Ministry of Culture, Youth and Sports</span> . This theater has shown more than <mark style="background-color: #4C4C4C"><a href="#animate-trans" id="myLink" style="text-decoration: none;color: aliceblue;">400 premieres</a></mark> which have been watched by more than <span id="num-calc">3</span>  million viewers. 
+          <p>The National Theater of Kosovo, abbreviated <abbr title="Teatri Kombetare i Kosoves">TKK</abbr> , is the main performing arts center in Kosovo, founded in 1945 in the city of Prizren in Kosovo. It is ranked as the highest in the country. The National Theater is the only theater in Kosovo and is therefore financed by the <span style="color: rgb(145, 15, 18);" >Ministry of Culture, Youth and Sports</span> . This theater has shown more than <mark style="background-color: #4C4C4C"><a href="#animate-trans" id="myLink" style="text-decoration: none;color: aliceblue;">400 premieres</a></mark> which have been watched by more than <span id="num-calc">3</span>  million viewers. 
           </p>
-          <a href="about.html" class="btn btn-style goto-about">About Us</a>
+          <a href="aboutUs.html" class="btn btn-primary butonat goto-about">About Us</a>
         </div>
         <div class="col-md-6">
           <img  name="slide" alt="Founder Image" class="img-fluid">
@@ -239,6 +263,7 @@
 
         <script src ="resources/js/contact.js"></script>
         <script src="resources/js/index.js"></script>
+
 
         <script type="text/javascript">
             var i=0;
@@ -319,173 +344,201 @@
   
         </script>
 
-  <script>
-    // Example of using jQuery selectors for changing color
-    $(document).ready(function() {
-      $('.btn-style').css('background-color', 'red'); // Change text color for buttons
-    });
-  </script>
+      <script>
+        // Example of using jQuery selectors for changing color
+        $(document).ready(function() {
+          $('.btn-style').css('background-color', 'red'); // Change text color for buttons
+        });
+      </script>
 
-  <script>
-    $(document).ready(function() {
-    // Fade In 
-    $('.fade-effect').fadeIn(11000);
+      <script>
+        $(document).ready(function() {
+        // Fade In 
+        $('.fade-effect').fadeIn(11000);
 
-    // Slide Out
-    $('#slide-ani').slideDown(3000);
+        // Slide Out
+        $('#slide-ani').slideDown(3000);
 
-    
-    });
-
-
-  </script>
-
-<script>
-  $(document).ready(function(){
-    
-    $("#animate-trans a").on('click', function(event) {
-      var hash = $(this).attr('href');
-      if (hash === '#animate-trans') {
-        event.preventDefault();
+        
+        });
 
 
-        $('html, body').animate({
-          scrollTop: $(hash).offset().top
-        }, {
-          duration: 800,
-          complete: function(){
-            window.location.hash = hash;
+      </script>
+
+    <script>
+      $(document).ready(function(){
+        
+        $("#animate-trans a").on('click', function(event) {
+          var hash = $(this).attr('href');
+          if (hash === '#animate-trans') {
+            event.preventDefault();
+
+
+            $('html, body').animate({
+              scrollTop: $(hash).offset().top
+            }, {
+              duration: 800,
+              complete: function(){
+                window.location.hash = hash;
+              }
+            });
           }
         });
-      }
-    });
 
-  });
-</script>
-
-
-
-
-
-  <script>
-    $(document).ready(function(){
-      $(".show-date1").click(function(){
-        $(".date1").hide(1000);
       });
+    </script>
+
+
+
+
+
+      <script>
+        $(document).ready(function(){
+          $(".show-date1").click(function(){
+            $(".date1").hide(1000);
+          });
+        });
+        $(document).ready(function(){
+          $(".show-date1").click(function(){
+            $(".date1").show(1000);
+          });
+        });
+
+        $(document).ready(function(){
+          $(".show-date2").click(function(){
+            $(".date2").hide(1000);
+          });
+        });
+
+        $(document).ready(function(){
+          $(".show-date2").click(function(){
+            $(".date2").show(1000);
+          });
+        });
+      </script>
+
+
+    <!--Used NaN, toExponential(), toString() -->
+
+      <script>
+        var spanElement = document.getElementById('num-calc');
+
+        // Get the text content of the span and convert it to a number
+        var numberInSpan = parseInt(spanElement.textContent, 10);
+
+        // Check if the conversion was successful
+        if (!isNaN(numberInSpan)) {
+          // Use the extracted number
+          console.log("Extracted number:", numberInSpan.toExponential(3));
+
+          // Now 'numberInSpan' variable holds the extracted number as a JavaScript number
+        } else {
+          console.log("No valid number found in the span.");
+        }
+
+        //COvert the number back to string
+
+        console.log(numberInSpan.toString());
+        
+        console.log(Number.MAX_VALUE);
+
+
+
+
+
+      </script>
+
+
+      <!--Checking if the word book is mentioned in the paragraph, using try, catch, throw and warn-->
+
+      <script>
+        try {
+        const paragraph = document.getElementById('try-catch').innerText;
+        if (!paragraph.match(/\bbook\b/i)) {
+            throw new Error("The word 'book' is not in the paragraph");
+        }
+        } catch (error) {
+            console.warn(error.message);
+        }
+        
+        // Example of using jQuery selectors for changing color
+        $(document).ready(function() {
+          $('.btn-style').css('background-color', 'red'); // Change text color for buttons
+        });
+
+      </script>
+
+      <!--Used jquery add() method-->
+
+      <script>
+        $(document).ready(function() {
+      // Create a new paragraph element
+      var newParagraph = $('<p></p>');
+
+      // Add the new paragraph to the element with class 'card-body'
+      $('.card-body').add(newParagraph.appendTo('.card-body'));
+
+      // Set the text for the newly added paragraph
+      newParagraph.html('<b>New date:</b> 5/12/2023');
     });
-    $(document).ready(function(){
-      $(".show-date1").click(function(){
-        $(".date1").show(1000);
+      </script>
+
+      <!--Used remove to delete the span element containing the year-->
+
+      <script>
+        $(document).ready(function() {
+        // Select the element with the ID 'remove'
+        $('#remove').remove();
       });
-    });
 
-    $(document).ready(function(){
-      $(".show-date2").click(function(){
-        $(".date2").hide(1000);
+    </script>
+
+
+    <!--Added audio files-->
+
+    <script>
+      document.getElementById('myLink').addEventListener('click', function() {
+      var audio = document.getElementById('sound2');
+      audio.play();
       });
-    });
-
-    $(document).ready(function(){
-      $(".show-date2").click(function(){
-        $(".date2").show(1000);
-      });
-    });
-  </script>
-
-
-<!--Used NaN, toExponential(), toString() -->
-
-  <script>
-    var spanElement = document.getElementById('num-calc');
-
-    // Get the text content of the span and convert it to a number
-    var numberInSpan = parseInt(spanElement.textContent, 10);
-
-    // Check if the conversion was successful
-    if (!isNaN(numberInSpan)) {
-      // Use the extracted number
-      console.log("Extracted number:", numberInSpan.toExponential(3));
-
-      // Now 'numberInSpan' variable holds the extracted number as a JavaScript number
-    } else {
-      console.log("No valid number found in the span.");
-    }
-
-    //COvert the number back to string
-
-    console.log(numberInSpan.toString());
+    </script>
     
-    console.log(Number.MAX_VALUE);
 
+    <script>
+      document.getElementById('top').addEventListener('click', function() {
+      var audio = document.getElementById('sound1');
+      audio.play();
+      });
+    </script>
 
+    <!--Scroll to Top-->
+    <script>
+      $(document).ready(function(){
+        // Show/Hide arrow button on scroll
+        $(window).scroll(function() {
+          if ($(this).scrollTop() > 100) {
+            $('#arrow-button').fadeIn();
+          } else {
+            $('#arrow-button').fadeOut();
+          }
+        });
 
-
-
-  </script>
-
-
-  <!--Checking if the word book is mentioned in the paragraph, using try, catch, throw and warn-->
-
-  <script>
-    try {
-    const paragraph = document.getElementById('try-catch').innerText;
-    if (!paragraph.match(/\bbook\b/i)) {
-        throw new Error("The word 'book' is not in the paragraph");
-    }
-    } catch (error) {
-        console.warn(error.message);
-    }
-    
-    // Example of using jQuery selectors for changing color
-    $(document).ready(function() {
-      $('.btn-style').css('background-color', 'red'); // Change text color for buttons
-    });
-
-  </script>
-
-  <!--Used jquery add() method-->
-
-  <script>
-    $(document).ready(function() {
-  // Create a new paragraph element
-  var newParagraph = $('<p></p>');
-
-  // Add the new paragraph to the element with class 'card-body'
-  $('.card-body').add(newParagraph.appendTo('.card-body'));
-
-  // Set the text for the newly added paragraph
-  newParagraph.html('<b>New date:</b> 5/12/2023');
-});
-  </script>
-
-  <!--Used remove to delete the span element containing the year-->
-
-  <script>
-    $(document).ready(function() {
-    // Select the element with the ID 'remove'
-    $('#remove').remove();
-  });
-
-</script>
-
-
-<!--Added audio files-->
-
-<script>
-  document.getElementById('myLink').addEventListener('click', function() {
-  var audio = document.getElementById('sound2');
-  audio.play();
-  });
-</script>
- 
-
-<script>
-  document.getElementById('top').addEventListener('click', function() {
-  var audio = document.getElementById('sound1');
-  audio.play();
-  });
-</script>
-  
+        // Instant scroll to the navigation bar
+        $("#arrow-button").on('click', function() {
+          $('html, body').stop().animate({
+            scrollTop: $('#go-to-nav').offset().top
+          }, {
+            duration: 0, // Set duration to 0 for instant scrolling
+            complete: function() {
+              // Play sound on complete
+              var audio = document.getElementById('sound1');
+              audio.play();
+            }
+          });
+        });
+      });
+    </script>
+      
 
 
 

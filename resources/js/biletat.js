@@ -155,22 +155,28 @@ $(document).ready(() => {
           });
           
           document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('purchaseForm').addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevent the default form submission
-    
+            $('#submitButton').click(function () {
                 // Validate the form
                 if (validateForm()) {
-                    $(document).ready(function () {
-                        // Attach a click event handler to the close button
-                        $('#submitButton').click(function () {
-                            // Close the modal using jQuery
-                            $('#purchaseModal').modal('hide');
-                        });
-                    });
                     console.log('Form submitted successfully!');
+        
+                    // Hide the form
+                    $('#purchaseModal').addClass('hidden');
+        
+                    // Show a success notification using SweetAlert2
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Ticket has been purchased successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(function () {
+                        // Reload the page
+                        location.reload();
+                    });
                 }
             });
         });
+        
     
         // Function to validate the form
         function validateForm() {

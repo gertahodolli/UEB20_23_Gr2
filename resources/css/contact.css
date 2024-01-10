@@ -1,26 +1,4 @@
 
-
-body {
-    background-image: url('https://i.pinimg.com/564x/d3/9c/d8/d39cd8b5f6f7f93be2cdb6df9738d702.jpg');
-    background-size: cover;
-    height: 100vh;
-    overflow-y: scroll;
-    position: relative;
-    font-family: 'Poppins', sans-serif;
-    color: rgb(169,168,168);
-}
-
-header {
-    margin-top: 20px;
-    padding: 20px;
-    text-align: center;
-    color: white;
-}
-
-section {
-    margin-top: 1px; 
-}
-
 /* Stilizimi për numrat e telefonit */
 p a[href^="tel:"] {
     color: rgb(169,168,168);
@@ -43,11 +21,7 @@ p a[href^="tel:"]:hover {
     color: #cb6b6b; /* Kuq */
 }
 
-.contact-info
-{
-    grid-column: span 1;
-    max-width: 3px; 
-}
+
 
 /* Live Chat Button */
 .contact-info button, .inquiry-item1 button {
@@ -61,64 +35,20 @@ p a[href^="tel:"]:hover {
     margin-top: 1.3cm; 
 }
 
-.inquiry-item1 button {
-    margin-top: 2cm; 
-}
-
-.contact-info a {
-    text-decoration: none;
-    color: rgb(169,168,168);
-}
-
-.contact-info h2 {
-    font-size: 20px;
-    color: rgb(169,168,168);
-
-}
 
 .horizontal-line {
     width: 100%;
-    border-top: 1px solid #ddd; /* You can adjust the color and thickness */
+    border-top: 1px solid #ddd; 
     margin: 10px 0; /* Adjust the margin as needed */
 }
 
-/* Box Office Container */
-.box-office-container {
-    display: flex;
-    align-items: flex-start;
-    margin: 2cm 0; /* Adjusted margin-top and margin-bottom */
-    gap: 2cm;
-    color: rgb(169,168,168);
-}
 
-.box-office-heading {
-    font-size: 18px;
-    color: white;
-}
-
-.box-office-heading, .box-office-column {
-    flex: 1;
-}
-
-.box-office-item1, .box-office-item {
-    margin-bottom: 2cm;
-}
-
-.box-office-item1 h2, .box-office-item h2 {
-    font-size: 20px;
-    text-align: left;
-    margin-bottom: 0.5cm;
-    color: rgb(169,168,168);
-}
-
-
-/* Standard Ticket Hours */
 .standard-ticket-hours ol {
     list-style-type: disc;
     padding: 0;
 }
 
-/* Popup and Live Chat Section styling */
+
 .popup {
     display: none;
     position: fixed;
@@ -126,10 +56,7 @@ p a[href^="tel:"]:hover {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(100px);
     z-index: 1;
-    
 }
 
 #liveChatSection {
@@ -138,72 +65,29 @@ p a[href^="tel:"]:hover {
     margin: 10% auto;
     max-width: 400px;
     background-color: #323130;
-    color: #ffffff; /* Set the text color to white */
+    color: #ffffff; 
 }
 
 #liveChatSection button {
-    background-color: #323130;
-    color: #ffffff;
-    border: 0.3px solid #8d1a1a;
     text-align: center;
-    text-decoration: none;
     display: inline-block;
-    font-size: 16px;
     width: 30%;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
-#liveChatSection button:hover {
-    background-color: #666d71;
+#liveChatSection input,
+#liveChatSection textarea {
+    color: rgb(255, 255, 255);
+    background-color: #323130;
+    border: 0.1px solid #bebebe; 
+    margin-bottom: 10px; 
+    display: block; 
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 10px;
 }
 
-#requiredFields,
-label {
-    margin-bottom: 10px;
-    display: block;
-}
-
-label {
-    margin-bottom: 5px;
-    color: #ffffff; /* Set the text color to white */
-}
-
-
-        #liveChatSection input,
-        #liveChatSection textarea {
-            color: rgb(255, 255, 255);
-            background-color: #323130;
-            border: 0.1px solid #bebebe; /* Green border for input cells */
-            margin-bottom: 10px; /* Margin between input and textarea elements */
-            display: block; /* Make input and textarea fill the container */
-            width: 100%; /* Make input and textarea fill the container */
-            box-sizing: border-box; /* Include padding and border in the width */
-            padding: 10px; /* Padding inside the input and textarea */
-        }
-
-
-/* Button styling */
-button {
-    padding: 10px; /* Padding inside the button */
-    background-color: #8d1a1a; /* Button background color */
-    color: #ffffff; /* Button text color */
-    border: none; /* Remove button border */
-    cursor: pointer; /* Change mouse cursor on hover */
-    display: block; /* Make the button a block element */
-    width: 60%; /* Make the button fill the container */
-    border-radius: 20px; /* Add border-radius for softer edges */
-    margin-top: 2cm;;
-    box-shadow: 5px 5px 4px rgba(82, 75, 75, 0.712); /* Shtimi i një hije me thellësi */
-    transition: opacity 2s ease; /* Përdorimi i një tranzicioni për opacity */
-}
-
-/* Button hover effect */
-button:hover {
-    background-color: #6e7377; /* Button background color on hover */
-}
-
-/* Stilizimi i Dropdown */
 .form-section select {
     width: 100%;
     padding: 8px;
@@ -214,12 +98,10 @@ button:hover {
     box-sizing: border-box;
 }
 
-/* Ndryshimi i ngjyrës kur hover */
 .form-section select:hover {
     border-color: #555;
 }
 
-/* Ndryshimi i ngjyrës kur fokusohet */
 .form-section select {
     outline: none;
     background-color: #555;
@@ -228,12 +110,8 @@ button:hover {
 
 /* Stilizimi i opsionit parazgjedhur */
 .form-section select option[selected] {
-    background-color: #3a3939;
+    background-color: #555;
     color: #fff;
-}
-
-label[for="liveChatInput"] {
-    margin-right: 10px; 
 }
 
 .form-section select option {
@@ -241,55 +119,21 @@ label[for="liveChatInput"] {
     color: #000;
 }
 
-/* Enquiries Section */
-.enquiries-container {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 1cm; /* Përmbaj margin-in midis headerit dhe përmbajtjes */
-    gap: 2cm;
-
+.color{
+    background-color: rgb(11, 11, 11);
 }
 
-/* Enquiries Heading */
-.enquiries-heading {
-    flex: 1;
-    font-size: 18px;
-    color: white;
+.contact{
+    color: aliceblue;
 }
-
-/* Enquiries Columns */
-.inquiry-column {
-    flex: 1;
-}
-
-/* Enquiries Items */
-.inquiry-item1,
-.inquiry-item {
-    margin-bottom: 2cm; 
-}
-.inquiry-item1 p,
-.inquiry-item p {
-    color: rgb(169,168,168);
-}
-
-/* Enquiries Item Heading */
-.inquiry-item1 h5,
-.inquiry-item h5 {
-    font-size: 20px;
-    text-align: left;
-    margin-bottom: 0.5cm;
-    color: rgb(169,168,168);
-
-}
-
 
 /* harta */
 .center-text {
     text-align: center;
-    margin-top: 3cm;
     font-size: 15px;
     color: rgb(169,168,168) ;
 }
+
 .center-text h2 {
     font-size: 40px;
     color: white;
@@ -312,11 +156,9 @@ section iframe {
 }
 
 .additional-section {
-    width: 100%;
     max-width: 850px; 
     margin: 0 auto; 
     text-align: center;
-    margin-bottom: 130px;
     color: rgb(169,168,168) ;
 }
 
@@ -332,9 +174,7 @@ section iframe {
 }
 
 /* faqs */
-/* FAQs Heading */
 .faqs-heading {
-    text-align: center;
     font-size: 32px;
     margin-bottom: 20px;
     color: white;
@@ -347,45 +187,29 @@ section iframe {
     color: rgb(169,168,168);
 }
 
-/* FAQs Container */
-.faqs-container {
-    display: flex;
-    gap: 20px;
-    justify-content: space-around;
-    padding: 20px;
+.buy-tickets:hover {
+    color: rgb(128, 61, 61)
 }
 
-/* FAQ Column */
-.faq-column {
-    flex: 1;
-}
-
-/* FAQs Details */
 .faqs-details {
     padding: 20px;
 }
 
-/* FAQs Title */
 .faqs-title {
     font-size: 24px;
-    margin-bottom: 10px;
     color: rgb(169,168,168);
 }
 
-/* FAQs List */
 .faqs-list {
     list-style: none;
     padding: 0;
 }
 
-/* FAQs ListItem */
 .faqs-list li {
     margin-bottom: 15px;
 }
 
-/* FAQs Details Summary */
 .faqs-list details summary {
-    cursor: pointer;
     outline: none;
     font-weight: bold;
     color: rgb(169,168,168);
@@ -393,7 +217,6 @@ section iframe {
     font-weight: bold;
     outline: none;
 }
-
 
 .faqs-list details p {
     margin-top: 10px;
@@ -404,15 +227,15 @@ section iframe {
     outline-width: 2px; 
     outline-offset: 5px; 
 }
+
 /* accesibility */
 .accessibility-section {
     display: flex;
     justify-content: space-between;
     margin: 0 1cm;
     margin-bottom: 1.5cm;
-    margin-top: 130px;
+    margin-top: 50px;
 }
-
 
 .accessibility-content {
     flex: 1;
@@ -420,12 +243,13 @@ section iframe {
     padding-right: 1cm;
 }
 
-.accessibility-section h2, h3 {
+.accessibility-section h2, h4 {
     color: rgb(255, 255, 255);
 }
 .accessibility-section p {
     color: rgb(169,168,168);
 }
+
 /* Accessibility Image */
 .accessibility-image {
     flex: 1;
@@ -435,18 +259,6 @@ section iframe {
     background-repeat: no-repeat;
     border-radius: 2px;
     box-shadow: none;    
-}
-
-
-/* Word Wrap */
-.accessibility-content p {
-    word-wrap: break-word; 
-}
-/* Text Shadows */
-.accessibility-content h2
-{
-    text-shadow: 8px 8px 8px #8d1a1a; /* horizontal-offset vertical-offset blur-radius color */
-    
 }
 
 #feedbackIntro{
@@ -470,9 +282,8 @@ section iframe {
     padding: 1cm;
     margin-bottom: 3cm;
     margin-left: 1cm; 
-    width: 15cm; 
+    width: auto; 
 }
-
 
 #feedbackPopup {
     padding: 30px;
@@ -481,7 +292,6 @@ section iframe {
     max-width: 600px;
     background-color: #323130;
     color: #ffffff;
-    
 }
 
 #feedbackPopup button {
@@ -494,15 +304,8 @@ section iframe {
     font-size: 16px;
     width: 20%;
     cursor: pointer;
-    border-radius: 20px;
-   
+    border-radius: 10px; 
 }
-
-#feedbackPopup button:hover {
-    background-color: #666d71;
-}
-
-
 
 label {
     margin-bottom: 5px;
@@ -536,25 +339,32 @@ button {
     box-shadow: 5px 5px 4px rgba(82, 75, 75, 0.712);
     transition: opacity 2s ease;
 }
-#openFeedbackFormBtn {
-    margin-left: 3cm;
-  }
-
 
 /* Efekti hover për butonat */
 button:hover {
     background-color: #6e7377;
 }
- 
 
-    /* Footer */
+/* Footer */
+footer {
+    background: #333333; 
+    padding: 15px 23px;
+    color: #EEEEEE;
+    /* color: #4C4C4C; */
+    text-align: center;
+}
 
-      footer {
-        background: #333333; 
-        padding: 15px 23px;
-        color: #EEEEEE;
-        /* color: #4C4C4C; */
-        text-align: center;
-    }
+#arrow-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    background-color: #555; /* Grey background color */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
     
     

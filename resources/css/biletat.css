@@ -200,3 +200,10 @@ table {
 .error-message{
   color: red;
 }
+footer {
+  background: #333333; 
+  padding: 15px 23px;
+  color: #EEEEEE;
+  /* color: #4C4C4C; */
+  text-align: center;
+}

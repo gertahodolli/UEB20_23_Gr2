@@ -13,56 +13,135 @@
 
 
 <body>
+    <div class="color">
     <!-- Navbar -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="go-to-nav">
-            <a class="navbar-brand" href="#">
-                <img src="resources/images/logo2.png" alt="National Theater of Kosovo" class="navbar-logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse mr-5" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="home.html">Home</a>
-                </li>
-                <li class="nav-item dropdown pr-3">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Shows
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownShows">
-                    <a class="dropdown-item" href="shows.html">Shows</a>
-                    <a class="dropdown-item" href="calendar.html">Calendar</a>
-                    </div>
-                </li>
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="biletat.html">Tickets</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="aboutUs.html">About Us</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="contact.html">Contact Us</a>
-                </li>
-                <li class="nav-item mr-3">
-                    <a class="nav-link btn btn-style" style="color: black;" href="logIn.html">Log In</a>
-                  </li>
-                </ul>
-            </div>
-            </nav>
+        <a class="navbar-brand" href="#">
+            <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mr-5" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item pr-3">
+                <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item dropdown pr-3" id="showsDropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Shows
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
+                  <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.html">Shows</a>
+                  <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.html">Calendar</a>
+                </div>
+            </li>
+            <li class="nav-item pr-3">
+                <a class="nav-link" href="biletat.html">Tickets</a>
+            </li>
+            <li class="nav-item pr-3">
+                <a class="nav-link" href="aboutUs.html">About Us</a>
+            </li>
+            <li class="nav-item pr-3">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+            <li class="nav-item mr-3">
+              <a class="nav-link btn btn-style" style="color: black;" href="logIn.html">Log In</a>
+            </li>
+            </ul>
+        </div>
+        </nav>
     </header>
 
     <!--Scroll to top button-->
     <div id="arrow-button">&#8593;</div>
+
+    <section class="contact">
+        <div class="container">
+        <div class="row text-center mt-5" style="color: aliceblue;">
+            <h1>Contact Us & Hours</h1>
+        </div>
+        <div class="row mt-5">
+                <div class="col-sm-4 ">
+                    <h2>Box Office</h2>
+                </div>
+                <div class="col-sm-4 ">
+                    <div class="">
+                        <h2>Contact</h2>
+                        <address>
+                            <p>CALL: <a href="tel:+38344753330">+383(44) 753330</a></p>
+                            <p>EMAIL: <a href="mailto:boxoffice@example.com">boxoffice@gmail.com</a></p>
+                            <p>IN PERSON: Street Luan Haradinaj, Prishtina</p>
+                        </address>
+                        <button class="btn btn-primary butonat" onclick="openPopup()">Start Live Chat</button>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="">
+                        <h2>Hours</h2>
+                        <h4>Days with Performance</h4>
+                        <p>Our box office remains open until 30 minutes after the start of each performance.</p>
+                        <h4>Standard Ticket Hours</h4>
+                        <section class="standard-ticket-hours">
+                            <ol>
+                                <li>Monday to Friday: 9:30 am - 5:00 pm</li>
+                                <li>Saturday: 10:30 am - 5:00 pm</li>
+                                <li>Sunday: Opens 1 hour prior to each performance</li>
+                            </ol>
+                        </section>
+                    </div>
+                </div>
+        </div>
+        
+        <div class="container mt-5">
+            <div class="horizontal-line"></div>
+            <div class="row mt-5 mb-5">
+                <div class="col-sm-4">
+                    <h2>Enquiries</h2>
+                </div>
+                <div class="col-sm-4">
+                    <div class="inquiry-item1">
+                        <h5>EDUCATION ENQUIRIES</h5>
+                        <p>ERTA BEKA / 383(44)733443</p>
+                        <p><a href="mailto:erta@gmail.com">erta@gmail.com</a></p>
+                    </div> 
+                    <div class="inquiry-item1">
+                        <h5>VENUE ENQUIRIES</h5>
+                        <p>MAJA BERISHA / 383(44)464647</p>
+                        <p><a href="mailto:majab@gmail.com">majab@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="inquiry-item">
+                        <h5>STAFFING ENQUIRIES</h5>
+                        <p>SAMI BISLIMI / 383(44)473503</p>
+                        <p><a href="mailto:samib@egmail.com">samib@egmail.com</a></p>
+                    </div>
+                    <div class="inquiry-item">
+                        <h5>SPONSORSHIP & DONATION</h5>
+                        <p>SARA GASHI / 383(44)464647</p>
+                        <p><a href="mailto:sara@gmail.com">sara@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
     
-    <section class="container text-center mt-5" style="color: aliceblue; background-color: rgb(11, 11, 11);">
+
+
+
+    <!--
+    
+    <section class="container text-center mt-5" style="color: aliceblue;">
         <h1>Contact Us & Hours</h1>
     </section>
 
+    -->
     
     
-     <!-- Box Office -->
+     <!-- Box Office 
      <section class="box-office">
         <div class="container mt-5">
         <div class="row box-office-container">
@@ -98,7 +177,7 @@
         </div>
     </section>
     
-    
+    -->
 
 
 
@@ -139,7 +218,7 @@
     
 
 
-    <!-- Enquiries -->
+    <!-- Enquiries 
     <section class="enquiries">
         <div class="container mt-5">
         <div class="horizontal-line"></div>
@@ -175,7 +254,8 @@
         </div>
     </section>
 
-    
+    -->
+
     <!-- Harta -->
     <section>
         <div class="container-fluid bg-dark py-5">
@@ -188,9 +268,9 @@
                 frameborder="0" style="border:0"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14866.283348271413!2d21.1567011!3d42.6610999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x189f57f3727e8636!2sYouth%20and%20Sports%20Center!5e0!3m2!1sen!2sus!4v1651405369999!5m2!1sen!2sus" allowfullscreen>
             </iframe>
-          <p>M564+CMP, Luan Haradinaj, Prishtina</p>
-        </div>
-        <section class="additional-section">
+            <p>M564+CMP, Luan Haradinaj, Prishtina</p>
+            </div>
+            <section class="additional-section">
             <h5>PARKING SPOTS</h5>
             <p>
                 Adjacent to the theater, our spacious and well-lit parking facility offers stress-free access. 
@@ -199,7 +279,7 @@
             </p>
             <h5>ON A BUS</h5>
             <p>The following transit lines have routes that pass near Theatre Name: 1 & 4</p>
-        </section>
+            </section>
         </div>
         </div>
     </section>
@@ -323,11 +403,12 @@
 <section class="accessibility-section">
     <div class="accessibility-content">
         <h2>Accessibility Information</h2>
-        <h3>Wheelchair Access</h3>
+        <br>
+        <h4>Wheelchair Access</h4>
         <p>Our venue is wheelchair accessible. If you require assistance, please contact our staff in advance.</p>
         <p>Additional information about wheelchair access can be provided upon request. We strive to make our events inclusive for all attendees.</p>
         
-        <h3>Hearing Aids</h3>
+        <h4>Hearing Aids</h4>
         <p>We provide assistive listening devices for visitors with hearing impairments. Please inquire at the box office.</p>
         <p>Our staff is trained to assist individuals with hearing aids and other hearing devices. If you have specific needs, feel free to reach out to us in advance.</p>
     </div>
@@ -346,7 +427,7 @@
 
    <!-- Feedback Button -->
    <div class="text-center mt-1 mb-">
-    <button class="btn btn-style" id="openFeedbackFormBtn">Feedback</button>
+    <button class="btn btn-primary butonat" id="openFeedbackFormBtn">Feedback</button>
    </div>
 
   <!-- Feedback Popup Form -->
@@ -463,7 +544,7 @@
           });
         });
       </script>
-    
+    </div>
 </body>
 </html>
 

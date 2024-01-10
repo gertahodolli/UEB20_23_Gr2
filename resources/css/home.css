@@ -157,3 +157,7 @@ div, h1, h2, p, a{
     transition: background 0.5s;
     box-sizing: border-box;
 }
+
+.bg-color{
+    background-color: rgb(24,22,22);
+  }

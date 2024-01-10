@@ -159,7 +159,9 @@ $(document).ready(() => {
                 // Validate the form
                 if (validateForm()) {
                     console.log('Form submitted successfully!');
-        
+                    //Play sound effect
+                    playSound('./resources/images/ding.mp3');
+                    
                     // Hide the form
                     $('#purchaseModal').addClass('hidden');
         
@@ -227,7 +229,11 @@ $(document).ready(() => {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
-
+        //Play sound effect
+        function playSound(soundPath) {
+            var audio = new Audio(soundPath);
+            audio.play();
+        }
         // Function to update current date and time
 function updateDateTime() {
     const currentDate = new Date();

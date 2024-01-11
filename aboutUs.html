@@ -31,10 +31,21 @@
 
       #puzzle-drop-zone {
           width: 100%;
-          height: 20px;
+          height: 2px;
           background-color: #ccc;
           position: absolute;
           bottom: 0;
+      }
+
+      #green-zone {
+          width: 40px; /* Adjust the width of the green zone */
+          height: 100%;
+          background-color: #4CAF50;
+          position: absolute;
+          left: 50%; /* Position it in the middle of the drop zone */
+          transform: translateX(-50%); /* Center it horizontally */
+          opacity: 0; /* Initially hide it */
+          transition: opacity 0.3s; /* Add a transition effect for smooth color change */
       }
 
       #puzzle-piece {
@@ -293,8 +304,10 @@
             <p style="font-size: small;">Are you a human? <b>Drag me in the middle...</b></p>
             <div id="puzzle-container" ondrop="drop(event)" ondragover="allowDrop(event)">
               <div id="puzzle-piece" draggable="true" ondragstart="drag(event)">Drag me!</div>
-              <div id="puzzle-drop-zone"></div>
-            </div>
+              <div id="puzzle-drop-zone">
+                  <div id="green-zone"></div>
+              </div>
+          </div>          
             <br>
 
             <!-- Butoni Submit -->
@@ -388,18 +401,26 @@
       var draggedElement = document.getElementById(data);
       var puzzleContainer = document.getElementById("puzzle-container");
       var puzzleDropZone = document.getElementById("puzzle-drop-zone");
+      var greenZone = document.getElementById("green-zone");
+      var form = document.getElementById("application-form"); // Add an ID to your form
 
       // Set the new position of the dragged element based on the mouse coordinates
       draggedElement.style.left = (event.clientX - puzzleContainer.getBoundingClientRect().left - draggedElement.clientWidth / 2) + "px";
       draggedElement.style.top = (event.clientY - puzzleContainer.getBoundingClientRect().top - draggedElement.clientHeight / 2) + "px";
 
-      // Check if the puzzle piece is in the correct horizontal position
-      if (draggedElement.offsetLeft >= 0 && draggedElement.offsetLeft + draggedElement.offsetWidth <= puzzleContainer.offsetWidth) {
-          // Puzzle piece is in the correct horizontal position, add additional logic if needed
-          puzzleDropZone.style.backgroundColor = "#4CAF50"; // Change color to indicate success
+      // Check if the puzzle piece is in the middle of the drop zone
+      var puzzleMiddleX = puzzleDropZone.offsetWidth / 2;
+      var puzzlePieceMiddleX = draggedElement.offsetLeft + draggedElement.offsetWidth / 2;
+
+      if (Math.abs(puzzlePieceMiddleX - puzzleMiddleX) < 10) { // Adjust the threshold as needed
+          // Puzzle piece is in the middle of the drop zone
+          greenZone.style.opacity = 1; // Show the green zone
+          form.removeAttribute("onsubmit"); // Remove the onsubmit attribute to allow form submission
       } else {
-          // Puzzle piece is not in the correct horizontal position
-          puzzleDropZone.style.backgroundColor = "#FF0000"; // Change color to indicate failure
+          // Puzzle piece is not in the middle of the drop zone
+          greenZone.style.opacity = 0; // Hide the green zone
+          alert("Try again!"); // Show an alert for trying again
+          form.setAttribute("onsubmit", "return false;"); // Disable form submission
       }
   }
 </script>

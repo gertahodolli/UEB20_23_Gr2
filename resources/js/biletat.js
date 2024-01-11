@@ -1,21 +1,29 @@
+/*this is a jquery method that waits for the html file to be fully loaded before using the jquery
+selector ($('.btn-style)) before changing the color of every element that has that class to red */ 
 $(document).ready(function() {
     $('.btn-style').css('background-color', 'red'); // Change text color for buttons
   });
 
+/*Adding an event listener for when the window has finished resizing and 
+loading so the equalizeCardHeights function can be called*/
 window.addEventListener('resize', equalizeCardHeights);
 window.addEventListener('load', equalizeCardHeights);
 
+//Creating the function
 function equalizeCardHeights(){
-    var cardContainer=document.querySelector('.card-container');
+    //Assinging all elements with this class to this variable
     var cards=document.querySelectorAll('.card');
-
+    
+    //Initializing this variable to 0
     var maxCardHeight=0;
-
+    
+    //Iterating through all the cards in the NodeList cards to find the one with max height
     cards.forEach(function (card){
         card.style.height='auto';
         maxCardHeight=Math.max(maxCardHeight, card.offsetHeight);
     });
 
+    //Setting the height of each of the card to max heaight
     cards.forEach(function (card){
         card.style.height=maxCardHeight+'px';
     });
@@ -29,25 +37,32 @@ function equalizeCardHeights(){
             });
         });
 
+        //function to show or hide the quantity controls in the forms
+        //Wait for the document to be ready
         $(document).ready(function () {
-            // Attach a change event handler to each checkbox
+            /* Attach a change event handler to each element targeted
+            by the jQuery selector(all the checkboxes)*/
             $('.form-check-input').change(function () {
+                //gets the id of the checkbox that triggered the change event
                 var checkboxId = $(this).attr('id');
+                /*jQuery object that finds siblings of the checkbox with the
+                class 'quantity-control'*/
                 var quantityControl = $('#' + checkboxId).siblings('.quantity-control');
 
                 // Toggle the visibility of the quantity control based on checkbox state
                 quantityControl.toggle(this.checked);
             });
         });
+
          // Function to calculate and update the final price
-    function updateFinalPrice() {
-        // Prices for each type of ticket
+        function updateFinalPrice() {
+        //Constant Prices for each type of ticket
         const regularTicketPrice = 2;
         const hours2TicketPrice = 3;
         const studentTicketPrice = 1;
         const students2hoursTicketPrice = 2;
 
-        // Get the quantities selected by the user
+        //Get the quantities selected by the user and turn them to int
         const regularTicketQuantity = parseInt(document.getElementById('regularTicketQuantity').value);
         const hours2TicketQuantity = parseInt(document.getElementById('2hoursTicketQuantity').value);
         const studentTicketQuantity = parseInt(document.getElementById('studentTicketQuantity').value);
@@ -68,30 +83,47 @@ function equalizeCardHeights(){
 
     // Function to increment quantity
     function incrementQuantity(quantityId, displayId) {
+            //Using jQuery to select the element with the specified ID 
             var quantityInput = $(quantityId);
+            /*Parsing the value as an integer, if the value isnt valid 
+            and the parsing fails, it defaults to 0*/
             var currentQuantity = parseInt(quantityInput.val()) || 0;
+            //Increments the quantity by 1
             quantityInput.val(currentQuantity + 1);
+            //Calling this function to update the display
             updateDisplay(quantityInput, displayId);
+            //Calling this function to recalculate the price
             updateFinalPrice();
         }
 
     // Function to decrement quantity
     function decrementQuantity(quantityId, displayId) {
+            //Using jQuery to select the element with the specified ID 
             var quantityInput = $(quantityId);
+            /*Parsing the value as an integer, if the value isnt valid 
+            and the parsing fails, it defaults to 0*/
             var currentQuantity = parseInt(quantityInput.val()) || 0;
+            //Checking if the current quantit is higher than zero
             if (currentQuantity > 0) {
+                //Decrement the wuantity and display this change
                 quantityInput.val(currentQuantity - 1);
                 updateDisplay(quantityInput, displayId);
             }
+            //Updating final price
             updateFinalPrice();
         }
 
+        //Function to update the display
         function updateDisplay(quantityInput, displayId) {
+            //Using jQuery to select the element with the specified ID 
             var quantityDisplay = $(displayId);
+            //Inserting the selected quantity to the element
             quantityDisplay.text(quantityInput.val());
         }
+
         // Define a ShowCard class
         class ShowCard {
+            //Takes as a parameter a card on the html file
             constructor(cardElement) {
                 this.cardElement = cardElement;
                 this.dates = this.extractDates();
@@ -100,24 +132,31 @@ function equalizeCardHeights(){
 
             // Extract dates from the card
             extractDates() {
+                /*Extracting the elements with the class show-date, splitting the html 
+                content then trimming it*/
                 const dateText = this.cardElement.find('.show-date').html().trim();
+                //splits a string into an array of substrings, trims the substrings
                 return dateText.split('<br>').map(date => date.trim());
             }
 
             // Setup "Buy ticket" button click event
             setupBuyTicketButton() {
+                //a click event handler that invokes the openTicketForm function
                 const buyButton = this.cardElement.find('.buy-tickets-btn');
                 buyButton.on('click', () => this.openTicketForm());
             }
 
             // Open the ticket form
             openTicketForm(button) {
+                //Opens the modal/form with ID purchaseModal
                 $('#purchaseModal').modal('show');
+                //empties the existing radioGroup
                 const radioGroup = $('#radioGroup');
                 radioGroup.empty();
 
                 // Create radio buttons for each date
                 this.dates.forEach(date => {
+                    //Iterate through dates and create radio buttons for each one
                     const formattedDate = date.trim();
                     const radioBtn = $(`
                         <div class="form-check">
@@ -125,33 +164,24 @@ function equalizeCardHeights(){
                             <label class="form-check-label">${formattedDate}</label>
                         </div>`
                     );
-
+                    //inserting the dates on radioBtn to radioGroup container
                     radioGroup.append(radioBtn);
                 });
-
                 // Open the ticket modal
                 $('#ticketModal').modal('show');
             }
         }
 
-// Initialize ShowCard instances for each card
-$(document).ready(() => {
-    const showCards = $('.card').toArray().map(cardElement => new ShowCard($(cardElement)));
-});
+        // Initialize ShowCard instances for each card
+        $(document).ready(() => {
+            /*converts the jQuery object of selected elements by $('.card') toa regylar js array and
+            then creating a new showCard object for every element with the class 'card'*/
+            const showCards = $('.card').toArray().map(cardElement => new ShowCard($(cardElement)));
+        });
 
-        function updateDateTime() {
-            const currentDate = new Date();
-            const formattedDate = currentDate.toLocaleDateString();
-            const formattedTime = currentDate.toLocaleTimeString();
-            const dateTimeString = `Current Date and Time: ${formattedDate} ${formattedTime}`;
-            
-            // Update the content of the element with id "currentDateTime"
-            document.getElementById("currentDateTime").textContent = dateTimeString;
-        }
-
+        //validating the form for purchasing tickets
           $("#submitButton").on("click", function() {
             validateForm();
-            // Additional logic or form submission code can go here if needed.
           });
           
           document.addEventListener('DOMContentLoaded', function () {
@@ -179,7 +209,6 @@ $(document).ready(() => {
             });
         });
         
-    
         // Function to validate the form
         function validateForm() {
             // Reset all error messages
@@ -229,6 +258,7 @@ $(document).ready(() => {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
+
         //Play sound effect
         function playSound(soundPath) {
             var audio = new Audio(soundPath);
@@ -239,7 +269,7 @@ $(document).ready(() => {
             // Get all video elements on the page
             var videos = document.querySelectorAll('.video-container video');
         
-            // Add event listeners to each video
+            // Iterate through the video elements and set the variables
             videos.forEach(function (video) {
               var overlayText = video.closest('.video-container').querySelector('.overlay-text');
               var customControls = video.closest('.video-container').querySelector('.custom-controls');

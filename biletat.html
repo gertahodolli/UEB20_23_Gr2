@@ -28,12 +28,12 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="go-to-nav">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.html"> <!--specifies the link to the homepage-->
                     <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
-                </a>
+                </a><!--this button is styled for toggling on smaller screens, utilizes bootstraps collapse plugin to handle the collapse behavior-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button><!--the elements below are the collapsible elements-->
                 <div class="collapse navbar-collapse mr-5" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item pr-3">
@@ -66,9 +66,9 @@
         </header>
         <main>
             <section id="price-list" class="my-5">
-                <div class="container text-center">
+                <div class="container text-center"><!--container=fixed width-->
                     <h2 class="mb-4" style="color: lightgray;">Ticket information</h2>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center"><!--row=bootstrap class for creating a row to contain columns-->
                     <table>
                         <thead>
                             <tr>
@@ -79,11 +79,11 @@
                         <tbody>
                             <tr>
                             <td>Regular Tickets</td>
-                            <td>2 euros</td>
+                            <td>€ 2</td>
                             </tr>
                             <tr>
                             <td>Show over 2 hours</td>
-                            <td>3 euros</td>
+                            <td>€ 3</td>
                             </tr>
                             <tr>
                             <td>Kids and Seniors</td>
@@ -91,11 +91,11 @@
                             </tr>
                             <tr>
                             <td>Student Tickets</td>
-                            <td>1 euro</td>
+                            <td>€ 1</td>
                             </tr>
                             <tr>
                             <td>Student for shows over 2 hours</td>
-                            <td>2 euros</td>
+                            <td>€ 2</td>
                             </tr>
                         </tbody>
                         </table>
@@ -120,7 +120,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <div class="card">
+                            <div class="card text-center">
                                 <img src="./resources/shows/Inkedgrate2.jpg" alt="Shfaqja e dyte" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">Grate</h5>
@@ -133,7 +133,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <div class="card">
+                            <div class="card text-center">
                                 <img src="./resources/shows/udhetimGjateDrejtNates.jpg" alt="Shfaqja e trete" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">Udhetim i gjate drejt nates</h5>
@@ -146,7 +146,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <div class="card">
+                            <div class="card text-center">
                                 <img src="./resources/shows/1984.jpg" alt="Shfaqja e trete" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">1984</h5>
@@ -159,7 +159,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <div class="card">
+                            <div class="card text-center">
                                 <img src="./resources/shows/gjithckaRrethIV.jpg" alt="Shfaqja e trete" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">Gjithcka rreth IV</h5>
@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
-                            <div class="card">
+                            <div class="card text-center">
                                 <img src="./resources/shows/diteVere2.jpg" alt="Shfaqja e trete" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">Dite Vere</h5>
@@ -194,9 +194,9 @@
                         <div class="modal-header">
                             <h5 class="modal-title">Buy Tickets</h5>
                         </div>
-                        <div id="error-container"></div>
                         <div class="modal-body">
                             <form id="purchaseForm" onsubmit="return validateForm()">
+                                <!--Full name-->
                                 <div class="form-group">
                                     <label for="fullName">Ticket Name</label>
                                     <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required autocomplete="on">
@@ -291,7 +291,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalButton">Close</button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#purchaseModal" id="submitButton">Buy Tickets</button>
+                            <button type="button" class="btn btn-primary" id="submitButton">Buy Tickets</button>
                         </div>
                     </div>
                 </div>
@@ -347,14 +347,13 @@
                   </div>
                 </div>
             </footer>
-           
             <script>
                 $(document).ready(function() {
                 // Select the element with the ID 'remove'
                 $('#remove').remove();
               });
               
-              </script>
-         
+            </script>
+        </main>
     </body>
 </html>

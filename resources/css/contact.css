@@ -56,6 +56,7 @@ p a[href^="tel:"]:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+    min-width: 400px;
 }
 
 #liveChatSection {
@@ -91,7 +92,7 @@ p a[href^="tel:"]:hover {
 @media screen and (max-width: 768px) {
     #liveChatSection {
         max-width: 90%; 
-        margin: 5% auto; 
+        
     }
 }
 

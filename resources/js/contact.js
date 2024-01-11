@@ -115,7 +115,15 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
       e.preventDefault(); // Parandalon shfletuesin nga dërgimi i formës në mënyrë tradicionale
   
-      
+      // Validimi i vlerësimit të përgjithshëm
+      var satisfactionField = document.getElementById("rating");
+      var satisfactionValue = satisfactionField.value;
+
+      if (satisfactionValue < 1 || satisfactionValue > 5 || isNaN(satisfactionValue)) {
+        alert("Please select a valid value for Overall Satisfaction (from 1 to 5).");
+        return; // Mos vazhdoni me dërgimin e formës nëse vlera është e pavlefshme
+      }
+    
   
       // Pas dërgimit, mbyll formën dhe shfaq mesazhin e Thank you
       popup.style.display = 'none';
@@ -145,6 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(feedbackInfo);
     });
   });
+
+
+
   
 
 

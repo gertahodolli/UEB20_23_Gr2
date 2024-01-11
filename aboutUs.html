@@ -20,6 +20,48 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
+
+    <style>
+      #puzzle-container {
+          width: 300px;
+          height: 100px;
+          border: 2px solid #ccc;
+          position: relative;
+      }
+
+      #puzzle-drop-zone {
+          width: 100%;
+          height: 2px;
+          background-color: #ccc;
+          position: absolute;
+          bottom: 0;
+      }
+
+      #green-zone {
+          width: 40px; /* Adjust the width of the green zone */
+          height: 100%;
+          background-color: #4CAF50;
+          position: absolute;
+          left: 50%; /* Position it in the middle of the drop zone */
+          transform: translateX(-50%); /* Center it horizontally */
+          opacity: 0; /* Initially hide it */
+          transition: opacity 0.3s; /* Add a transition effect for smooth color change */
+      }
+
+      #puzzle-piece {
+          width: 80px;
+          height: 80px;
+          background-color: #4CAF50;
+          color: #fff;
+          text-align: center;
+          line-height: 80px;
+          position: absolute;
+          cursor: move;
+          clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      }
+  </style>
+
+
 </head>
 
 <body>
@@ -258,9 +300,19 @@
               <label for="komente" class="form-label">Comment:</label>
               <input type="text" class="form-control" id="komente" name="komente" placeholder="Shkruani komentin tuaj..." required>
             </div>
-  
+            
+            <p style="font-size: small;">Are you a human? <b>Drag me in the middle...</b></p>
+            <div id="puzzle-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+              <div id="puzzle-piece" draggable="true" ondragstart="drag(event)">Drag me!</div>
+              <div id="puzzle-drop-zone">
+                  <div id="green-zone"></div>
+              </div>
+          </div>          
+            <br>
+
             <!-- Butoni Submit -->
             <button type="submit" class="btn btn-secondary">Apply now</button>
+          
           </form>
         </div>
       </div>
@@ -326,13 +378,53 @@
       })();
     </script>
 
-<script>
-  $(document).ready(function() {
-  // Select the element with the ID 'remove'
-  $('#remove').remove();
-});
+    <script>
+      $(document).ready(function() {
+      // Select the element with the ID 'remove'
+      $('#remove').remove();
+    });
 
+    </script>
+
+<script>
+  function allowDrop(event) {
+      event.preventDefault();
+  }
+
+  function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+  }
+
+  function drop(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      var draggedElement = document.getElementById(data);
+      var puzzleContainer = document.getElementById("puzzle-container");
+      var puzzleDropZone = document.getElementById("puzzle-drop-zone");
+      var greenZone = document.getElementById("green-zone");
+      var form = document.getElementById("application-form"); // Add an ID to your form
+
+      // Set the new position of the dragged element based on the mouse coordinates
+      draggedElement.style.left = (event.clientX - puzzleContainer.getBoundingClientRect().left - draggedElement.clientWidth / 2) + "px";
+      draggedElement.style.top = (event.clientY - puzzleContainer.getBoundingClientRect().top - draggedElement.clientHeight / 2) + "px";
+
+      // Check if the puzzle piece is in the middle of the drop zone
+      var puzzleMiddleX = puzzleDropZone.offsetWidth / 2;
+      var puzzlePieceMiddleX = draggedElement.offsetLeft + draggedElement.offsetWidth / 2;
+
+      if (Math.abs(puzzlePieceMiddleX - puzzleMiddleX) < 10) { // Adjust the threshold as needed
+          // Puzzle piece is in the middle of the drop zone
+          greenZone.style.opacity = 1; // Show the green zone
+          form.removeAttribute("onsubmit"); // Remove the onsubmit attribute to allow form submission
+      } else {
+          // Puzzle piece is not in the middle of the drop zone
+          greenZone.style.opacity = 0; // Hide the green zone
+          alert("Try again!"); // Show an alert for trying again
+          form.setAttribute("onsubmit", "return false;"); // Disable form submission
+      }
+  }
 </script>
+
 
 </body>
 </html>

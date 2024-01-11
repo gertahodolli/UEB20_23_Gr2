@@ -88,14 +88,32 @@ p a[href^="tel:"]:hover {
     padding: 10px;
 }
 
+/* Media query per rezolucione te vogla */
+@media screen and (max-width: 768px) {
+    #liveChatSection {
+        max-width: 90%; 
+        margin: 5% auto; 
+    }
+    
+}
+
+#requiredFields,
+label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #ffffff; 
+    border-radius: 10px;
+}
 .form-section select {
-    width: 100%;
     padding: 8px;
     margin-top: 8px;
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
 }
 
 .form-section select:hover {
@@ -255,17 +273,18 @@ section iframe {
     flex: 1;
     max-width: 40%;
     height: auto;
+       display: block;
     max-height: 350px;
     background-repeat: no-repeat;
     border-radius: 2px;
     box-shadow: none;    
 }
 
-#feedbackIntro{
-    color: #bebebe; /* Ngjyra e tekstit (bardhë) */
+#feedbackIntro {
+    color: #bebebe;
 }
 
-/* Stili për popup formën */
+/* Styles for the popup form */
 .popup1 {
     display: none;
     position: fixed;
@@ -277,21 +296,24 @@ section iframe {
     backdrop-filter: blur(100px);
     z-index: 1;
 }
+
 .feedback-section {
-    border: 1px solid #bebebe; 
-    padding: 1cm;
-    margin-bottom: 3cm;
-    margin-left: 1cm; 
-    width: auto; 
+    border: 1px solid #bebebe;
+    padding: 1em;
+    margin-bottom: 3em;
+    margin-left: 1em;
+    width: auto;
 }
 
 #feedbackPopup {
-    padding: 30px;
+    padding: 3%;
     text-align: left;
     margin: 10% auto;
-    max-width: 600px;
+    max-width: 40%; /* Adjusted maximum width for larger screens */
     background-color: #323130;
     color: #ffffff;
+    height: 600px; /* Set a fixed height in pixels */
+    overflow-y: auto; /* Add vertical scroll if content exceeds the fixed height */
 }
 
 #feedbackPopup button {
@@ -304,7 +326,7 @@ section iframe {
     font-size: 16px;
     width: 20%;
     cursor: pointer;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 label {
@@ -312,18 +334,27 @@ label {
     color: #ffffff;
 }
 
-/* Stili për input dhe textarea */
+/* Styles for input and textarea */
 #feedbackPopup input,
-#feedbackPopup textarea {
+#feedbackPopup textarea,
+#feedbackPopup select {
     color: rgb(255, 255, 255);
     background-color: #323130;
     border: 0.1px solid #bebebe;
     margin-bottom: 10px;
     display: block;
-    width: 100%;
+    width: 100%; 
     box-sizing: border-box;
     padding: 5px;
 }
+
+/* Media Query per rezolucione me te vogela */
+@media screen and (max-width: 768px) {
+    #feedbackPopup {
+        max-width: 90%;
+    }
+}
+
 
 /* Stili për butonat */
 button {

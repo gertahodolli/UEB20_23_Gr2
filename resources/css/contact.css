@@ -50,7 +50,9 @@ p a[href^="tel:"]:hover {
 
 
 .popup {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 0;
     right: 0;
@@ -62,7 +64,6 @@ p a[href^="tel:"]:hover {
 #liveChatSection {
     padding: 30px;
     text-align: left;
-    margin: 10% auto;
     max-width: 400px;
     background-color: #323130;
     color: #ffffff; 
@@ -88,13 +89,12 @@ p a[href^="tel:"]:hover {
     padding: 10px;
 }
 
-/* Media query per rezolucione te vogla */
+/* Media query for smaller screens */
 @media screen and (max-width: 768px) {
     #liveChatSection {
         max-width: 90%; 
         margin: 5% auto; 
     }
-    
 }
 
 #requiredFields,
@@ -286,7 +286,9 @@ section iframe {
 
 /* Styles for the popup form */
 .popup1 {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 0;
     right: 0;
@@ -300,20 +302,21 @@ section iframe {
 .feedback-section {
     border: 1px solid #bebebe;
     padding: 1em;
-    margin-bottom: 3em;
-    margin-left: 1em;
     width: auto;
 }
 
 #feedbackPopup {
     padding: 3%;
     text-align: left;
-    margin: 10% auto;
-    max-width: 40%; /* Adjusted maximum width for larger screens */
+    max-width: 40%;
     background-color: #323130;
     color: #ffffff;
-    height: 600px; /* Set a fixed height in pixels */
-    overflow-y: auto; /* Add vertical scroll if content exceeds the fixed height */
+    height: 600px;
+    overflow-y: auto;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
 #feedbackPopup button {
@@ -343,18 +346,17 @@ label {
     border: 0.1px solid #bebebe;
     margin-bottom: 10px;
     display: block;
-    width: 100%; 
+    width: 100%;
     box-sizing: border-box;
     padding: 5px;
 }
 
-/* Media Query per rezolucione me te vogela */
+/* Media Query for smaller screens */
 @media screen and (max-width: 768px) {
     #feedbackPopup {
-        max-width: 90%;
-    }
+        max-width: 90%; /* gjeresia maximale per rezolucione me te vogla */   
 }
-
+}
 
 /* Stili për butonat */
 button {

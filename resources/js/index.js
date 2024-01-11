@@ -11,7 +11,6 @@ const shows = [
       director: "Fatos Berisha",
       runningTime: '2:00'
     },
-    // Add more objects for other shows
     ];
   
       let currentIndex = 0;

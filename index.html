@@ -15,7 +15,7 @@
     <style>
         .full-page {
             height: 100vh; /* Set section to full viewport height */
-            background-image: url('first_image.jpg'),url('second_image.jpg'); /* Default background images */
+            background-image: url('resources/images/aboutUs(3).png'),url('second_image.jpg'); /* Default background images */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -70,8 +70,8 @@
             }
 
             .overlay-text {
-              text-shadow: 1px 1px 1px black; /* Add this line for a black border around the text */
-              /* Add any other styles you want for the text */
+              text-shadow: 2px 2px 2px black; /* black border around the text */
+              
             }
 
         
@@ -129,9 +129,9 @@
 
     <section class="full-page text-center">
         <div class="overlay-text fade-effect">
-          <h1 id="showName"></h1>
-          <p id="director"></p>
-          <p id="runningTime"></p>
+          <h1 id="showName">GJITHÇKA RRETH IV</h1>
+          <p id="director"><b>Director:</b> <u>Hervin Çuli.</u></p>
+          <p id="runningTime">Duration: 1:30</p>
         </div>
         <div class="hover-button left" >&lt;</div>
         <div class="hover-button right">&gt;</div>
@@ -354,7 +354,7 @@
       <script>
         $(document).ready(function() {
         // Fade In 
-        $('.fade-effect').fadeIn(11000);
+        $('.fade-effect').fadeIn(3000);
 
         // Slide Out
         $('#slide-ani').slideDown(3000);

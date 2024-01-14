@@ -40,13 +40,13 @@ function validateName() {
 var name = document.getElementById('liveChatName').value;
 var nameFormatHint = document.getElementById('nameFormatHint');
 
-// Kontrolloni nëse emri është i zbrazët
+// shikon nëse emri është i zbrazët
 if (name.trim() === '') {
     nameFormatHint.style.display = 'none';
     return false;
 }
 
-// Kontrolloni për praninë e numrave në emër
+// shikon për praninë e numrave në emër
 var containsNumbers = /\d/.test(name);
 
 // shikon se a eshte emri ne formatin e duhur
@@ -155,10 +155,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-
-  
-
-
 // FOOTERI
 
 // Function to update current date and time
@@ -201,9 +197,3 @@ setInterval(updateDateTime, 1000);
     });
   });
 
-
-
-
-
-
-  

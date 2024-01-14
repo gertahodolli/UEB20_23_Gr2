@@ -13,34 +13,15 @@ p a[href^="mailto:"] {
 
 /* Efekti hover për emaila*/
 a[href^="mailto:"]:hover {
-    color: #cb6b6b; /* Kuq */
+    color: #cb6b6b; 
 }
 
 /* Efekti hover për nr telit */
 p a[href^="tel:"]:hover {
-    color: #cb6b6b; /* Kuq */
+    color: #cb6b6b; 
 }
 
 
-
-/* Live Chat Button */
-.contact-info button, .inquiry-item1 button {
-    background-color: rgba(120, 120, 120, 0.825);
-    color: rgb(0, 0, 0);
-    border: 1px solid rgb(83, 74, 74);
-    border-radius: 8px;
-    padding: 10px;
-    cursor: pointer;
-    width: 150px; 
-    margin-top: 1.3cm; 
-}
-
-
-.horizontal-line {
-    width: 100%;
-    border-top: 1px solid #ddd; 
-    margin: 10px 0; /* Adjust the margin as needed */
-}
 
 
 .standard-ticket-hours ol {
@@ -55,7 +36,6 @@ p a[href^="tel:"]:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
     min-width: 400px;
 }
 
@@ -65,7 +45,6 @@ p a[href^="tel:"]:hover {
     max-width: 400px;
     background-color: #323130;
     color: #ffffff; 
-    
 }
 
 #liveChatSection button {
@@ -232,7 +211,6 @@ section iframe {
     color: rgb(169,168,168);
     cursor: pointer;
     font-weight: bold;
-    outline: none;
 }
 
 .faqs-list details p {
@@ -272,7 +250,7 @@ section iframe {
     flex: 1;
     max-width: 40%;
     height: auto;
-       display: block;
+    display: block;
     max-height: 350px;
     background-repeat: no-repeat;
     border-radius: 2px;
@@ -293,9 +271,8 @@ section iframe {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(230, 204, 204, 0.9);
     backdrop-filter: blur(100px);
-    z-index: 1;
 }
 
 .feedback-section {

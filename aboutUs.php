@@ -63,7 +63,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.php">
             <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
         </a>
 
@@ -75,7 +75,7 @@
         <div class="collapse navbar-collapse mr-5" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item pr-3">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item dropdown pr-3" id="showsDropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button"
@@ -83,21 +83,21 @@
                         Shows
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
-                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.html">Shows</a>
-                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.html">Calendar</a>
+                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.php">Shows</a>
+                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.php">Calendar</a>
                     </div>
                 </li>
                 <li class="nav-item pr-3">
-                    <a class="nav-link" href="biletat.html">Tickets</a>
+                    <a class="nav-link" href="biletat.php">Tickets</a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a class="nav-link" href="aboutUs.html">About Us</a>
+                    <a class="nav-link" href="aboutUs.php">About Us</a>
                 </li>
                 <li class="nav-item pr-3" style="margin-right: 5px;">
-                  <a class="nav-link" href="contact.html">Contact Us</a>
+                  <a class="nav-link" href="contact.php">Contact Us</a>
                 </li>
                 <li class="nav-item pr-3">
-                  <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="logIn.html">Log In</a>
+                  <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="logIn.php">Log In</a>
                 </li>
             </ul>
         </div>

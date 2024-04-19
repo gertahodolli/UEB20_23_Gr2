@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" >
+        <script src="./libraries/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
+        <link rel="stylesheet" href="./resources/css/home.css">
+        <link rel="stylesheet" href="./resources/css/biletat.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="./resources/js/biletat.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
+        <title>Tickets</title>
+    </head>    
+    <style>
+        body{
+            background-color: rgb(11, 11, 11);
+        }
+        .navbar{
+            height: 75px;
+        }
+        footer{
+            background: #333333;
+        }
+    </style>
+    <body>
+        <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="go-to-nav">
+                <a class="navbar-brand" href="index.php"> <!--specifies the link to the homepage-->
+                    <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
+                </a><!--this button is styled for toggling on smaller screens, utilizes bootstraps collapse plugin to handle the collapse behavior-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button><!--the elements below are the collapsible elements-->
+                <div class="collapse navbar-collapse mr-5" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item pr-3">
+                        <a class="nav-link" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item dropdown pr-3" id="showsDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Shows
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
+                          <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.php">Shows</a>
+                          <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.php">Calendar</a>
+                        </div>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <a class="nav-link" href="biletat.php">Tickets</a>
+                    </li>
+                    <li class="nav-item pr-3">
+                        <a class="nav-link" href="aboutUs.php">About Us</a>
+                    </li>
+                    <li class="nav-item pr-3" style="margin-right: 5px;">
+                        <a class="nav-link" href="contact.php">Contact Us</a>
+                    </li>
+                    <li class="nav-item pr-3">
+                      <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="logIn.php">Log In</a>
+                    </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <section id="price-list" class="my-5">
+                <div class="container text-center"><!--container=fixed width-->
+                    <h2 class="mb-4" style="color: lightgray;">Ticket information</h2>
+                    <div class="row justify-content-center"><!--row=bootstrap class for creating a row to contain columns-->
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>Ticket Type</th>
+                            <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>Regular Tickets</td>
+                            <td>€ 2</td>
+                            </tr>
+                            <tr>
+                            <td>Show over 2 hours</td>
+                            <td>€ 3</td>
+                            </tr>
+                            <tr>
+                            <td>Kids and Seniors</td>
+                            <td>Free</td>
+                            </tr>
+                            <tr>
+                            <td>Student Tickets</td>
+                            <td>€ 1</td>
+                            </tr>
+                            <tr>
+                            <td>Student for shows over 2 hours</td>
+                            <td>€ 2</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="ticket-showcase" class="my-5">
+                <div class="container">
+                    <h3 class="mb-4 text-center" style="color: lightgray;">Shows that are currently playing:</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <img src="./resources/shows/InkedclubAlbania2_.jpg" alt="CLUB ALBANIA" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">CLUB ALBANIA</h5>
+                                    <p class="card-tex ticket-modal" data-type="date">Date: <span class="show-date"> 14/12/2023 <br>26/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>      
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <img src="./resources/shows/Inkedgrate2.jpg" alt="Shfaqja e dyte" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Grate</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 17/12/2023</br>23/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <img src="./resources/shows/udhetimGjateDrejtNates.jpg" alt="Shfaqja e trete" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Udhetim i gjate drejt nates</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 05/12/2023 </span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <img src="./resources/shows/1984.jpg" alt="Shfaqja e trete" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">1984</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">11/12/2023 <br>21/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <img src="./resources/shows/gjithckaRrethIV.jpg" alt="Shfaqja e trete" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Gjithcka rreth IV</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">09/12/2023 <br>30/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card text-center">
+                                <img src="./resources/shows/diteVere2.jpg" alt="Shfaqja e trete" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Dite Vere</h5>
+                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">03/12/2023 <br>10/12/2023</span></p>
+                                    <p class="card-text">Time: 20:00</p>
+                                </div>    
+                                <div class="card-footer">
+                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Modal for ticket information -->
+            <div class="modal" tabindex="-1" role="dialog" id="purchaseModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Buy Tickets</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form id="purchaseForm" onsubmit="return validateForm()">
+                                <!--Full name-->
+                                <div class="form-group">
+                                    <label for="fullName">Ticket Name</label>
+                                    <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required autocomplete="on">
+                                    <div id="fullName-error" class="error-message"></div>
+                                </div>
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required autocomplete="on">
+                                    <div id="email-error" class="error-message"></div>
+                                </div>
+                                <!-- Date selection using radio buttons -->
+                                <div class="form-group">
+                                    <label for="showDate" style="margin: 10px; margin-top: 20px;">Date Selection</label>
+                                    <div class="form-group" id="radioGroup">
+                                        <datalist id="show-dates"></datalist>
+                                        <label>Show Dates:</label>
+                                    </div>
+                                    <div id="showDate-error" class="error-message"></div>
+                                </div>
+                                <label style="margin: 10px; margin-top: 20px;">Ticket Selection</label><br>
+                                <!-- Quantity selection using buttons -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="regularTicketCheckbox" required>
+                                            <label class="form-check-label" for="regularTicketCheckbox">Regular Ticket</label>
+                                            <div class="quantity-control" style="display: none;">
+                                                <label for="regularTicketQuantity">Quantity:</label>
+                                                <div class="row">
+                                                    <div class="col quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary quantity" onclick="decrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control value" id="regularTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary quantity" onclick="incrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="2hoursTicketCheckbox" required>
+                                            <label class="form-check-label" for="2hoursTicketCheckbox">Show over 2 hours Ticket</label>
+                                            <div class="quantity-control" style="display: none;">
+                                                <label for="2hoursTicketQuantity">Quantity:</label>
+                                                <div class="row">
+                                                    <div class="col-md-6 quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary " onclick="decrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control" id="2hoursTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="studentTicketCheckbox" required>
+                                            <label class="form-check-label" for="studentTicketCheckbox">Student Ticket</label>
+                                            <div class="quantity-control" style="display: none;">
+                                                <label for="studentsTicketQuantity">Quantity:</label>
+                                                <div class="row">
+                                                    <div class="col quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#studentTicketQuantity', '#studentTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control" id="studentTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#studentTicketQuantity', '#studentTicketQuantity-display')">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="students2hoursTicketCheckbox" required>
+                                            <label class="form-check-label" for="students2hoursTicketCheckbox">Student for shows over 2 hours Ticket</label>
+                                            <div class="quantity-control" style="display: none;">
+                                                <label for="students2hoursTicketQuantity">Quantity:</label>
+                                                <div class="row">
+                                                    <div class="col quantity-buttons">
+                                                        <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#students2hoursTicketQuantity', '#students2hoursTicketQuantity-display')">-</button>
+                                                        <input type="text" class="form-control" id="students2hoursTicketQuantity" value="0" readonly>
+                                                        <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#students2hoursTicketQuantity', '#students2hoursTicketQuantity-display')">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="ticketSelection-error" class="error-message"></div>
+                                <output class="finalPrice"></output>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalButton">Close</button>
+                            <button type="button" class="btn btn-primary" id="submitButton">Buy Tickets</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <div class="container">
+                    <h3 class="mb-4 text-center" style="color: lightgray;">Trailers of shows currently playing:</h3>
+                    <div class="row video-section">
+                    <div class="col-md-6 position-relative">
+                        <div class="video-container">
+                            <video class="custom-controls" controls>
+                            <source src="./resources/video/clubAlbania.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                            </video>
+                            <h5 class="overlay-text">"Club Albania"</h5>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-6 position-relative">
+                        <div class="video-container">
+                            <video class="custom-controls" controls>
+                            <source src="./resources/video/udhetimIGjateDrejtNates.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                            </video>
+                            <h5 class="overlay-text">"Udhetim i gjate drejt nates"</h5>
+                        </div>
+                    </div>
+                    </div>
+                </div>     
+            </section>
+            <footer class=" text-white text-center py-3 bg-color" id="animate-trans">
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <div class="footer-icons social-links">
+                        <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
+                      </div>
+                      <p>Phone: +383 (44) 753 330</p>
+                    </div>
+                    <div class="col pt-4">
+                      <address>Address: Street Luan Haradinaj, Prishtina</address>
+                    </div>
+                    <div class="col pt-4">
+                      <p id="currentDateTime"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top" style="text-decoration: none;  color: aliceblue;">National Theater of Kosovo</a></p>
+                    </div>
+                  </div>
+                </div>
+            </footer>
+            <script>
+                $(document).ready(function() {
+                // Select the element with the ID 'remove'
+                $('#remove').remove();
+              });
+              
+            </script>
+        </main>
+    </body>
+</html>

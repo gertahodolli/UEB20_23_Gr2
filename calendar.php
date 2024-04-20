@@ -15,46 +15,7 @@
 </head>
 <body>
   <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">
-            <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse mr-5" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="index.php">Home</a>
-                </li>
-                <li class="nav-item dropdown pr-3" id="showsDropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Shows
-                    </a>
-                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
-                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.php">Shows</a>
-                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.php">Calendar</a>
-                    </div>
-                </li>
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="biletat.php">Tickets</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="aboutUs.php">About Us</a>
-                </li>
-                <li class="nav-item pr-3" style="margin-right: 5px;">
-                  <a class="nav-link" href="contact.php">Contact Us</a>
-                </li>
-                <li class="nav-item pr-3">
-                  <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="logIn.php">Log In</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+  <?php include 'navbar.php'; ?>
 </header>
 
 
@@ -68,7 +29,7 @@
         <div class="row mt-4">
         <!-- Calendar -->
             <div class="col-md-4">
-                <p class="muaji">December</p>
+            <p class="muaji"><?php $currentMonth = date('F'); echo $currentMonth; ?></p>
                 <table id="calendar">
                     <thead>
                     <tr>
@@ -82,51 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="notAvailable">27</td>
-                        <td class="notAvailable">28</td>
-                        <td class="notAvailable">29</td>
-                        <td class="notAvailable">30</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td><a href="#" class="date-link active">3</a></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><a href="#" class="date-link">5</a></td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td><a href="#" class="date-link">9</a></td>
-                        <td><a href="#" class="date-link">10</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#" class="date-link">11</a></td>
-                        <td>12</td>
-                        <td>13</td>
-                        <td><a href="#" class="date-link">14</a></td>
-                        <td>15</td>
-                        <td>16</td>
-                        <td><a href="#" class="date-link">17</a></td>
-                    </tr>
-                    <tr>
-                        <td>18</td>
-                        <td>19</td>
-                        <td>20</td>
-                        <td><a href="#" class="date-link">21</a></td>
-                        <td>22</td>
-                        <td><a href="#" class="date-link">23</a></td>
-                        <td>24</td>
-                    </tr>
-                    <tr>
-                        <td>25</td>
-                        <td><a href="#" class="date-link">26</a></td>
-                        <td>27</td>
-                        <td>28</td>
-                        <td>29</td>
-                        <td><a href="#" class="date-link">30</a></td>
-                        <td>31</td>
-                    </tr>
+                    <?php include 'generate_calendar.php'; ?>
                     </tbody>
                 </table>
                 

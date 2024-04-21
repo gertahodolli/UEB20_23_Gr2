@@ -15,7 +15,7 @@
     <body>
     <div class="color">
     <!-- Navbar -->
-    <header>
+    <header id='go-to-nav'>
     <?php include 'navbar.php'; ?>
     </header>
 

@@ -157,7 +157,7 @@ if (!isset($_SESSION['visit_count'])) {
 
 <body>
     <!-- Navbar -->
-    <header>
+    <header id='go-to-nav' >
     <?php include 'navbar.php'; ?>
     </header>
 

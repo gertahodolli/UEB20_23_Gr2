@@ -1,5 +1,27 @@
 <?php
 session_start();
+function isAuthenticated() {
+    return isset($_SESSION['logged_in']) && $_SESSION['logged_in'];
+}
+
+function checkSessionExpiry() {
+    $timeout = 1800; // e.g., 30 minutes
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeout)) {
+        session_unset();
+        session_destroy();
+        header("Location: login.php");
+        exit();
+    }
+    $_SESSION['last_activity'] = time();
+}
+
+checkSessionExpiry();
+
+// Then, verify user authentication
+if (!isAuthenticated()) {
+    header("Location: login.php"); // Redirect to login if not authenticated
+    exit();
+}
 
 // Check if login form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

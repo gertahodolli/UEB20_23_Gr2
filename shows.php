@@ -1,3 +1,36 @@
+<?php
+// Function to set a cookie
+function set_cookie($name, $value, $expiry) {
+    setcookie($name, $value, time() + $expiry, "/");
+}
+
+// Function to delete a cookie
+function delete_cookie($name) {
+    setcookie($name, "", time() - 3600, "/");
+    unset($_COOKIE[$name]);
+}
+
+// Check if a cookie is set
+$cookie_name = "bg_color";
+if(isset($_COOKIE[$cookie_name])) {
+    // Cookie exists, get its value
+    $bg_color = $_COOKIE[$cookie_name];
+} else {
+    // Cookie does not exist, set a default value
+    $bg_color = "black";
+    set_cookie($cookie_name, $bg_color, 86400); // Cookie expires in 1 day
+}
+
+// Process form submission
+if(isset($_POST['color'])) {
+    $selected_color = $_POST['color'];
+    set_cookie($cookie_name, $selected_color, 86400); // Update cookie with selected color
+    // Redirect to avoid header modification after output
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit; // Ensure script stops execution after redirection
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +44,132 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
+
+    <style>
+        /* Your provided CSS styles */
+        body {
+          background-color: <?php echo $bg_color; ?>;
+          color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+        }
+        .show-changes {
+          background-color: <?php echo $bg_color; ?>;
+        }
+        .search-bar {
+            color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>; /* Change text color based on background color */
+        }
+        
+        .search-input, .search-icon {
+        color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+        background-color: <?php echo $bg_color === 'white' ? 'white' : 'black'; ?>;
+        border-color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+        }
+        .search-input::placeholder {
+            
+        }
+
+        .bg-color {
+            background-color: <?php echo $bg_color; ?>; /* Set footer background color to match the theme */
+            color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+        }
+
+        .show-card {
+            perspective: 1000px;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .show-image {
+            position: relative;
+            width: auto;
+            height: 100%;
+            transition: transform 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .show-card:hover .show-image {
+            transform: rotateY(180deg);
+        }
+
+        .show-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .show-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            text-shadow: 2px 2px #614949;
+            text-wrap: nowrap;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0);
+            padding: 10px;
+            visibility: visible;
+            opacity: 1;
+            transition: visibility 0s, opacity 0.5s ease;
+        }
+
+        .show-card:hover .show-title {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .show-info {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .shows-img {
+            width: auto; /* Ensures images take up full width */
+            height: auto; /* Maintains aspect ratio */
+            max-height: 450px; /* Example height; adjust as needed */
+        }
+
+        .search-bar {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-bottom: 1px solid; /* Line for searching */
+            color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+          background-color: <?php echo $bg_color === 'white' ? 'white' : 'black'; ?>;
+          border-color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>; 
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>; /* Placeholder text color */
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+            background-color: <?php echo $bg_color === 'white' ? 'white' : 'black'; ?>;
+            border-color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>; /* Icon color */
+        }
+    </style>
 
 </head>
 <body>
@@ -60,129 +219,83 @@
 
     <section class="show-changes">
         <div class="container pt-5">
-            <h2 style="text-align: center; margin-bottom: 30px; color: aliceblue;">Shows</h2>
+            <h2 style="text-align: center; margin-bottom: 30px;">Shows</h2>
             <div class="search-bar ml-5">
               <input type="text" class="search-input mb-2" placeholder="Search shows...">
               <i class="fas fa-search search-icon"></i>
             </div>
             <div class="row">
-                <!-- Show 1 -->
-                <div class="col-md-4 mb-4">
-                  <div class="show-card">
-                    <div class="show-image">
-                      <img src="resources/shows/club albania.png" alt="Show 1" class="shows-img">
-                      <div class="show-title">
-                        Club Albania
-                      </div>
-                      <div class="show-info">
-                        <h3>Club Albania</h3>
-                        <!-- Additional show details -->
-                        <p>The play is based on the comedy, "After Death" by A.Z. &Ccedil;ajupi.</p>
-                        <p><b>Director:</b>  <u>Fatos Berisha</u></p>
-                        <p><i><b>Actors:</b></i> Armond Morina, Ard Islami, Armend Smajli, Maylinda Kosumovic, Naim Berisha, Teuta Krasniqi and Ylber Bardhi.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <!-- Show 2 -->
-                <div class="col-md-4 mb-4">
-                  <div class="show-card">
-                    <div class="show-image">
-                      <img src="resources/shows/1984.png" alt="Show 1" class="shows-img">
-                      <div class="show-title">
-                        1984
-                      </div>
-                      <div class="show-info">
-                        <h3>1984</h3>
-                        <!-- Additional show details -->
-                        <p>Dramatized from author George Orwell's dystopian novel</p>
-                        <p><b>Director:</b>  <u>Igor Mendjisky</u></p>
-                        <p><i><b>Actors:</b></i> Adrian Morina, Arta Selimi, Basri Lushtaku, Edona Reshitaj, Flaka Latifi, Shpejtim Kastrati, Xhejlane Godanci dhe Ylber Bardhi.</p>
+            <?php
+            // Define an array of shows with their titles and other details
+            $shows = array(
+                array(
+                    "title" => "Club Albania",
+                    "director" => "Fatos Berisha",
+                    "actors" => "Armond Morina, Ard Islami, Armend Smajli, Maylinda Kosumovic, Naim Berisha, Teuta Krasniqi and Ylber Bardhi",
+                    "description" => "The play is based on the comedy, 'After Death' by A.Z. Çajupi."
+                ),
+                array(
+                    "title" => "1984",
+                    "director" => "Igor Mendjisky",
+                    "actors" => "Adrian Morina, Arta Selimi, Basri Lushtaku, Edona Reshitaj, Flaka Latifi, Shpejtim Kastrati, Xhejlane Godanci dhe Ylber Bardhi",
+                    "description" => "Dramatized from author George Orwell's dystopian novel."
+                ),
+                array(
+                    "title" => "Udhëtim i gjatë drejt natës",
+                    "director" => "Iliriana Arifi",
+                    "actors" => "Ernest Malazogu, Arta Selimi, Allmir Suhodolli, Don Shala, Florie Bajoku",
+                    "description" => "“Udhëtimi i gjate drejt nates” for the last time this year on December 13, 2023."
+                ),
+                array(
+                    "title" => "GJITHÇKA RRETH IV",
+                    "director" => "Hervin Çuli",
+                    "actors" => "Ermira Hysaj Çerkozi, Albulena Kryeziu Bokshi, Hervin Çuli, Adrian Morina, Kushtrim Sheremeti, Rovena Lule Kuka, Natasha Sela, Endriu Hysi",
+                    "description" => "The dramas and intrigues that a person weaves with a sick ego to achieve their goals, regardless of the destruction or harm inflicted on those around them."
+                ),
+                array(
+                    "title" => "GRATË",
+                    "director" => "Nastazja Domaradzka",
+                    "actors" => "Edona Reshitaj, Gresa Pallaska, Lumnije Sopi, Sheqerie Buqaj, Shengyl Ismaili, Xhejlane Godanci",
+                    "description" => "The play 'WOMEN - or their sins in patriarchy!', is an authorial show in collaboration with the ensemble."
+                ),
+                array(
+                    "title" => "Ditë Vere",
+                    "director" => "Kaltrim Balaj",
+                    "actors" => "Andi Bajgora, Art Pasha, Era Balaj, Lumnije Sopi, Veton Osmani, Adhurim Demi, Naim Berisha",
+                    "description" => "The show will be played in the open air at the Palace of Youth and Sports in Pristina, so after getting the tickets at the ticket office of the National Theatre, the theater attendants will accompany you to the location of the show."
+                )
+                // Add more shows here
+            );
 
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <!-- Show 3 -->
+            // Function to compare titles for sorting
+            function compare_titles($show1, $show2) {
+                return strcmp($show1['title'], $show2['title']);
+            }
+
+            // Sort the shows array alphabetically based on titles
+            usort($shows, 'compare_titles');
+
+            // Loop through the sorted shows array and generate HTML for each show dynamically
+            foreach ($shows as $show) {
+                ?>
                 <div class="col-md-4 mb-4">
-                  <div class="show-card">
-                    <div class="show-image">
-                      <img src="resources/shows/udhetimi gjate drejt nates.png" alt="Show 1" class="shows-img">
-                      <div class="show-title">
-                        Udh&euml;tim i gjatë drejt natës
-                      </div>
-                      <div class="show-info">
-                        <h3>Udh&euml;tim i gjatë drejt natës</h3>
-                        <!-- Additional show details -->
-                        <p>“Udh&euml;timi i gjate drejt nates” for the last time this year on December 13, 2023.</p>
-                        <p><b>Director:</b> <u>Iliriana Arifi</u></p>
-                        <p><i><b>Actors:</b></i> Ernest Malazogu, Arta Selimi, Allmir Suhodolli, Don Shala, Florie Bajoku</p>
-                      </div>
+                    <div class="show-card">
+                        <div class="show-image">
+                            <!-- Your show image HTML -->
+                            <img src="resources/shows/<?php echo strtolower(str_replace(' ', '', $show['title'])); ?>.png" alt="<?php echo $show['title']; ?>" class="shows-img">
+                            <div class="show-title"><?php echo $show['title']; ?></div>
+                            <div class="show-info">
+                                <h3><?php echo $show['title']; ?></h3>
+                                <p><b>Director:</b> <u><?php echo $show['director']; ?></u></p>
+                                <p><i><b>Actors:</b></i> <?php echo $show['actors']; ?></p>
+                                <p><?php echo $show['description']; ?></p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              
-      
-      
-                <!-- Show 4 -->
-                <div class="col-md-4 mb-4">
-                  <div class="show-card">
-                    <div class="show-image">
-                      <img src="resources/shows/diqka rreth IV.png" alt="Show 1" class="shows-img">
-                      <div class="show-title">
-                        GJITHÇKA RRETH IV
-                      </div>
-                      <div class="show-info">
-                        <h3>GJITHÇKA RRETH IV</h3>
-                        <!-- Additional show details -->
-                        <p>"The dramas and intrigues that a person weaves with a sick ego to achieve their goals, regardless of the destruction or harm inflicted on those around them."</p>
-                        <p><b>Director:</b> <u>Hervin Çuli.</u></p>
-                        <p><i><b>Actors:</b></i> Ermira Hysaj Çerkozi, Albulena Kryeziu Bokshi, Hervin Çuli, Adrian Morina, Kushtrim Sheremeti, Rovena Lule Kuka, Natasha Sela, Endriu Hysi.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <!-- Show 5 -->
-                <div class="col-md-4 mb-4">
-                  <div class="show-card">
-                    <div class="show-image">
-                      <img src="resources/shows/Grate.png" alt="Show 1" class="shows-img">
-                      <div class="show-title">
-                        GRAT&Euml;
-                      </div>
-                      <div class="show-info">
-                        <h3>GRAT&Euml;</h3>
-                        <!-- Additional show details go here -->
-                        <p>The play "WOMEN - or their sins in patriarchy!", is an authorial show in collaboration with the ensemble.</p>
-                        <p><b>Director:</b> <u>Nastazja Domaradzka</u></p>
-                        <p><i><b>Actresses:</b></i> Edona Reshitaj, Gresa Pallaska, Lumnije Sopi, Sheqerie Buqaj, Shengyl Ismaili, Xhejlane Godanci.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <!-- Show 6 -->
-                <div class="col-md-4 mb-4">
-                  <div class="show-card">
-                    <div class="show-image">
-                      <img src="resources/shows/Ditevere.jpg" alt="Show 1" class="shows-img">
-                      <div class="show-title">
-                        Ditë Vere
-                      </div>
-                      <div class="show-info">
-                        <h3>Ditë Vere</h3>
-                        <!-- Additional show details -->
-                        <p>The show will be played in the open air at the Palace of Youth and Sports in Pristina, so after getting the tickets at the ticket office of the National Theatre, the theater attendants will accompany you to the location of the show.</p>
-                        <p><b>Director:</b> <u>Kaltrim Balaj</u></p>
-                        <p><i><b>Actresses:</b></i> Andi Bajgora, Art Pasha, Era Balaj, Lumnije Sopi, Veton Osmani, Adhurim Demi, Naim Berisha</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
+                <?php
+            }
+            ?>
 
             <div class="row mt-4 mb-5 pb-5 text-center">
                 <div class="col-md-6">
@@ -195,7 +308,7 @@
         </div>
     </section>
 
-    <footer class=" text-white text-center pb-3 bg-color">
+    <footer class=" text-center pb-3 bg-color">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -210,25 +323,28 @@
             <address>Address: Street Luan Haradinaj, Prishtina</address>
           </div>
           <div class="col pt-4">
-            <p id="currentDateTime"></p>
+          <form method="post" id="color-form" style="position: fi; bottom: 20px; right: 20px;">
+                <label for="color-select" sty>Select Background Color:</label>
+                <select name="color" id="color-select">
+                    <option value="white" <?php if($bg_color === 'white') echo 'selected'; ?>>Light</option>
+                    <option value="black" <?php if($bg_color === 'black') echo 'selected'; ?>>Dark</option>
+                    <!-- Add more color options as needed -->
+                </select>
+                <button type="submit">Save</button>
+            </form>
           </div>
         </div>
+       
         <div class="row">
           <div class="col">
             <p>&copy; <span id="remove">2023</span> National Theater of Kosovo</p></p>
           </div>
+
         </div>
       </div>
       </footer>
 
-      <script src ="resources/js/contact.js"></script>
-
-    <script>
-      // Example of using jQuery selectors for changing color
-      $(document).ready(function() {
-        $('.btn-style').css('background-color', 'red'); // Change text color for buttons
-      });
-    </script>
+      
 
 
     <!--Used remove to delete the span element containing the year-->

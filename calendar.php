@@ -1,3 +1,36 @@
+<?php
+// Function to set a cookie
+function set_cookie($name, $value, $expiry) {
+    setcookie($name, $value, time() + $expiry, "/");
+}
+
+// Function to delete a cookie
+function delete_cookie($name) {
+    setcookie($name, "", time() - 3600, "/");
+    unset($_COOKIE[$name]);
+}
+
+// Check if a cookie is set
+$cookie_name = "bg_color";
+if(isset($_COOKIE[$cookie_name])) {
+    // Cookie exists, get its value
+    $bg_color = $_COOKIE[$cookie_name];
+} else {
+    // Cookie does not exist, set a default value
+    $bg_color = "black";
+    set_cookie($cookie_name, $bg_color, 86400); // Cookie expires in 1 day
+}
+
+// Process form submission
+if(isset($_POST['color'])) {
+    $selected_color = $_POST['color'];
+    set_cookie($cookie_name, $selected_color, 86400); // Update cookie with selected color
+    // Redirect to avoid header modification after output
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit; // Ensure script stops execution after redirection
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +45,47 @@
 
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
     <title>Calendar</title>
+    <style>
+      body, html {
+              background-color: <?php echo $bg_color; ?>;
+              color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+      }
+
+      .calendar-show{
+        background-color: <?php echo $bg_color; ?>;
+        color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+      }
+
+      .calendar-show h1, .calendar-show .muaji, .show-info {
+        background-color: <?php echo $bg_color; ?>;
+        color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+    }
+
+    #calendar {
+        border-color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+    }
+
+   
+
+    .card-body {
+        background-color: <?php echo $bg_color === 'white' ? 'white' : '#333'; ?>;
+        color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+    }
+    
+
+    .btn-primary {
+        background-color: <?php echo $bg_color === 'white' ? '#007bff' : '#555'; ?>;
+        border-color: <?php echo $bg_color === 'white' ? '#007bff' : '#555'; ?>;
+    }
+
+
+
+
+      .bg-color {
+                background-color: <?php echo $bg_color; ?>;
+                color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+            }
+    </style>
 </head>
 <body>
   <header>
@@ -68,6 +142,12 @@
                               <br>
                               <br>
                               <br>
+                              <br>
+                              <br>
+                              <br>
+                              <br>
+                              <br>
+                              <br>
     
                           </div>
                       </div>
@@ -89,7 +169,7 @@
   </section>
 
 
-  <footer class=" text-white text-center py-3 bg-color" id="animate-trans">
+  <footer class="text-center py-3 bg-color" id="animate-trans">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -104,12 +184,21 @@
           <address>Address: Street Luan Haradinaj, Prishtina</address>
         </div>
         <div class="col pt-4">
-          <p id="currentDateTime"></p>
+        <form method="post" id="color-form" style="position: fi; bottom: 20px; right: 20px;">
+                <label for="color-select" sty>Select Background Color:</label>
+                <select name="color" id="color-select">
+                    <option value="white" <?php if($bg_color === 'white') echo 'selected'; ?>>Light</option>
+                    <option value="black" <?php if($bg_color === 'black') echo 'selected'; ?>>Dark</option>
+                    <!-- Add more color options as needed -->
+                </select>
+                <button type="submit">Save</button>
+            </form>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top" style="text-decoration: none;  color: aliceblue;">National Theater of Kosovo</a></p>
+          <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top" style="text-decoration: none;  color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+            }">National Theater of Kosovo</a></p>
         </div>
       </div>
     </div>

@@ -66,39 +66,48 @@
             </nav>
         </header>
         <main>
+        <?php
+            // Definimi i konstantave për çmimet e biletave
+            define("REGULAR_TICKET_PRICE", "€ 2");
+            define("SHOW_OVER_2_HOURS_PRICE", "€ 3");
+            define("KIDS_AND_SENIORS_PRICE", "Free");
+            define("STUDENT_TICKET_PRICE", "€ 1");
+            define("STUDENT_OVER_2_HOURS_PRICE", "€ 2");
+            ?>
+
             <section id="price-list" class="my-5">
-                <div class="container text-center"><!--container=fixed width-->
+                <div class="container text-center">
                     <h2 class="mb-4" style="color: lightgray;">Ticket information</h2>
-                    <div class="row justify-content-center"><!--row=bootstrap class for creating a row to contain columns-->
-                    <table>
-                        <thead>
-                            <tr>
-                            <th>Ticket Type</th>
-                            <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td>Regular Tickets</td>
-                            <td>€ 2</td>
-                            </tr>
-                            <tr>
-                            <td>Show over 2 hours</td>
-                            <td>€ 3</td>
-                            </tr>
-                            <tr>
-                            <td>Kids and Seniors</td>
-                            <td>Free</td>
-                            </tr>
-                            <tr>
-                            <td>Student Tickets</td>
-                            <td>€ 1</td>
-                            </tr>
-                            <tr>
-                            <td>Student for shows over 2 hours</td>
-                            <td>€ 2</td>
-                            </tr>
-                        </tbody>
+                    <div class="row justify-content-center">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ticket Type</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Regular Tickets</td>
+                                    <td><?php echo REGULAR_TICKET_PRICE; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Show over 2 hours</td>
+                                    <td><?php echo SHOW_OVER_2_HOURS_PRICE; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Kids and Seniors</td>
+                                    <td><?php echo KIDS_AND_SENIORS_PRICE; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Student Tickets</td>
+                                    <td><?php echo STUDENT_TICKET_PRICE; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Student for shows over 2 hours</td>
+                                    <td><?php echo STUDENT_OVER_2_HOURS_PRICE; ?></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>

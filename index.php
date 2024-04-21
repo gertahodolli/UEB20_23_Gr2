@@ -1,3 +1,49 @@
+<?php
+// Function to set a cookie
+function set_cookie($name, $value, $expiry) {
+    setcookie($name, $value, time() + $expiry, "/");
+}
+
+// Function to delete a cookie
+function delete_cookie($name) {
+    setcookie($name, "", time() - 3600, "/");
+    unset($_COOKIE[$name]);
+}
+
+// Check if a cookie is set
+$cookie_name = "bg_color";
+if(isset($_COOKIE[$cookie_name])) {
+    // Cookie exists, get its value
+    $bg_color = $_COOKIE[$cookie_name];
+} else {
+    // Cookie does not exist, set a default value
+    $bg_color = "black";
+    set_cookie($cookie_name, $bg_color, 86400); // Cookie expires in 1 day
+}
+
+// Process form submission
+if(isset($_POST['color'])) {
+    $selected_color = $_POST['color'];
+    set_cookie($cookie_name, $selected_color, 86400); // Update cookie with selected color
+    // Redirect to avoid header modification after output
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit; // Ensure script stops execution after redirection
+}
+?>
+<?php
+// Start the session
+session_start();
+
+// Check if the visit count session variable exists
+if (!isset($_SESSION['visit_count'])) {
+    // If not, initialize it to 1
+    $_SESSION['visit_count'] = 1;
+} else {
+    // If it exists, increment it by 1
+    $_SESSION['visit_count']++;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +59,10 @@
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
 
     <style>
+          body, html {
+              background-color: <?php echo $bg_color; ?>;
+              color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+          }
         .full-page {
             height: 100vh; /* Set section to full viewport height */
             background-image: url('resources/images/aboutUs(3).png'),url('second_image.jpg'); /* Default background images */
@@ -28,7 +78,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: white;
+            color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+            text-shadow: <?php echo $bg_color === 'white' ? '2px 2px 2px grey' : '2px 2px 2px black'; ?>;
             text-align: center;
             }
 
@@ -40,7 +91,7 @@
             transform: translateY(-50%);
             width: 50px;
             height: 50px;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: <?php echo $bg_color === 'white' ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)'; ?>;
             text-align: center;
             line-height: 50px;
             cursor: pointer;
@@ -69,10 +120,31 @@
             font-size: 18px;
             }
 
-            .overlay-text {
-              text-shadow: 2px 2px 2px black; /* black border around the text */
-              
+            .full-page {
+            background-color: <?php echo $bg_color; ?>; /* Adjust the background color for the full page */
             }
+
+            .bg-color {
+                background-color: <?php echo $bg_color; ?>;
+                color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+            }
+
+            .sponsor-changes{
+                background-color: <?php echo $bg_color; ?>;
+                color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+            }
+
+            section{
+                background-color: <?php echo $bg_color; ?>;
+                color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+            }
+
+            .about-changes{
+                background-color: <?php echo $bg_color; ?>;
+                color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+            }
+
+
 
         
     </style>
@@ -121,7 +193,7 @@
                   <a class="nav-link" href="contact.php">Contact Us</a>
                 </li>
                 <li class="nav-item pr-3">
-                  <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="logIn.php">Log In</a>
+                  <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="signUp.php">Log In</a>
                 </li>
             </ul>
         </div>
@@ -149,7 +221,7 @@
     <section class="container my-5">
     <div class="row">
       <div class="col-md-12">
-        <h2 class="text-center mb-5" style="color: aliceblue;">Recent Shows</h2>
+        <h2 class="text-center mb-5" style="color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;">Recent Shows</h2>
         <!-- Show 1 -->
         <div class="card mb-5">
           <div class="row g-0">
@@ -234,7 +306,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class=" text-white text-center py-3 bg-color" id="animate-trans">
+    <footer class="text-center py-3 bg-color" id="animate-trans">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -249,13 +321,22 @@
           <address>Address: Street Luan Haradinaj, Prishtina</address>
         </div>
         <div class="col pt-4">
-          <p id="currentDateTime"></p>
+        <form method="post" id="color-form" style="position: fi; bottom: 20px; right: 20px;">
+                <label for="color-select" sty>Select Background Color:</label>
+                <select name="color" id="color-select">
+                    <option value="white" <?php if($bg_color === 'white') echo 'selected'; ?>>Light</option>
+                    <option value="black" <?php if($bg_color === 'black') echo 'selected'; ?>>Dark</option>
+                    <!-- Add more color options as needed -->
+                </select>
+                <button type="submit">Save</button>
+            </form>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top" style="text-decoration: none;  color: aliceblue;">National Theater of Kosovo</a></p>
         </div>
+        <div class="col"><p>Number of Visits: <?php echo $_SESSION['visit_count']; ?></p></div>
       </div>
     </div>
     </footer>

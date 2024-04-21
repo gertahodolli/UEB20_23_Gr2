@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        html, body {
+            height: 100vh;
+            overflow-y: hidden;
+            margin: 0;
+            padding: 0;
+        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    width: 300px;
+    margin: 35px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color:  rgba(145, 15, 18, 0.7);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.error {
+    color:  rgba(145, 15, 18, 0.7);
+    background-color: #ffc4c4;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.success {
+    color: green;
+    background-color: #c4ffca;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+a {
+    color:  rgba(145, 15, 18, 0.7);
+    text-decoration: none;
+}
+.butoni{
+    width: 70%;
+    background: linear-gradient(to bottom right, rgba(145, 15, 18, 0.7), rgb(128, 61, 61));
+    color: white;
+    border: 1px solid #3d3d3d;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 15px; /* Top margin */
+    margin-bottom: 15px; /* Bottom margin */
+    margin-left: 40px; /* Left margin */
+    margin-right: 40px; /* Right margin */
+    border-radius: 4px;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.5s;
+    box-sizing: border-box;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form action="signup.php" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="butoni">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="index.html">Login here</a>.</p>
+    </div>
+</body>
+</html>

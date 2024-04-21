@@ -59,7 +59,7 @@
                         <a class="nav-link" href="contact.php">Contact Us</a>
                     </li>
                     <li class="nav-item pr-3">
-                      <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="logIn.php">Log In</a>
+                      <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="index.html">Log In</a>
                     </li>
                     </ul>
                 </div>

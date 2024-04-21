@@ -158,46 +158,12 @@ if (!isset($_SESSION['visit_count'])) {
 <body>
     <!-- Navbar -->
     <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">
-            <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse mr-5" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="index.php">Home</a>
-                </li>
-                <li class="nav-item dropdown pr-3" id="showsDropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Shows
                     </a>
-                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
-                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.php">Shows</a>
-                        <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.php">Calendar</a>
-                    </div>
-                </li>
                 <li class="nav-item pr-3">
-                    <a class="nav-link" href="biletat.php">Tickets</a>
-                </li>
-                <li class="nav-item pr-3">
-                    <a class="nav-link" href="aboutUs.php">About Us</a>
-                </li>
-                <li class="nav-item pr-3" style="margin-right: 5px;">
-                  <a class="nav-link" href="contact.php">Contact Us</a>
-                </li>
-                <li class="nav-item pr-3">
-                  <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="signUp.php">Log In</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php include 'navbar.php'; ?>
     </header>
 
     <!--Scroll to top button-->
@@ -256,7 +222,7 @@ if (!isset($_SESSION['visit_count'])) {
             </div>
           </div>
         </div>
-        <a href="calendar.html" class="btn btn-primary butonat" id="goto-calendar">View Calendar</a>
+        <a href="calendar.php" class="btn btn-primary butonat" id="goto-calendar">View Calendar</a>
       </div>
     </div>
     </section>
@@ -269,7 +235,7 @@ if (!isset($_SESSION['visit_count'])) {
           <h2 id="about-heading">History of</h2>
           <p>The National Theater of Kosovo, abbreviated <abbr title="Teatri Kombetare i Kosoves">TKK</abbr> , is the main performing arts center in Kosovo, founded in 1945 in the city of Prizren in Kosovo. It is ranked as the highest in the country. The National Theater is the only theater in Kosovo and is therefore financed by the <span style="color: rgb(145, 15, 18);" >Ministry of Culture, Youth and Sports</span> . This theater has shown more than <mark style="background-color: #4C4C4C"><a href="#animate-trans" id="myLink" style="text-decoration: none;color: aliceblue;">400 premieres</a></mark> which have been watched by more than <span id="num-calc">3</span>  million viewers. 
           </p>
-          <a href="aboutUs.html" class="btn btn-primary butonat goto-about">About Us</a>
+          <a href="aboutUs.php" class="btn btn-primary butonat goto-about">About Us</a>
         </div>
         <div class="col-md-6">
           <img  name="slide" alt="Founder Image" class="img-fluid">

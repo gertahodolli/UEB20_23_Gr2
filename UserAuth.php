@@ -10,7 +10,7 @@ class User {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
-        //e lidh me databaze tani
+        //e lidh me databaze
     }
 
     public function __destruct() {

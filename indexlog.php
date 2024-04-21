@@ -137,6 +137,9 @@ a {
     </style>
 </head>
 <body>
+<?php if (isset($login_error)): ?>
+        <p><?php echo $login_error; ?></p>
+    <?php endif; ?>
     <div class="container">
         <h2>Login</h2>
         <form action="login.php" method="post">

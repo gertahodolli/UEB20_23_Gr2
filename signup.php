@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userAuth = new UserAuth($username, $email, $password);
         if ($userAuth->signup()) {
             // Signup successful, redirect to login page
-            header("Location: index.html");
+            header("Location: indexlog.html");
             exit();
         } else {
             $message = "Signup failed. Please try again.";

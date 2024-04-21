@@ -9,12 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirmPassword = $_POST['confirmNewPassword'];
 
     if ($newPassword !== $confirmPassword) {
-        echo "<script>alert('Passwords do not match.'); window.location='index.html';</script>";
+        echo "<script>alert('Passwords do not match.'); window.location='indexlog.html';</script>";
         exit();
     }
 
     if (!isValidPassword($newPassword)) {
-        echo "<script>alert('Password must be at least 8 characters long and include at least one number and one special character.'); window.location='index.html';</script>";
+        echo "<script>alert('Password must be at least 8 characters long and include at least one number and one special character.'); window.location='indexlog.html';</script>";
         exit();
     }
 
@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->execute(['password' => $hashedPassword, 'username' => $username]);
 
     if ($result) {
-        echo "<script>alert('Your password has been updated successfully!'); window.location='index.html';</script>";
+        echo "<script>alert('Your password has been updated successfully!'); window.location='indexlog.html';</script>";
     } else {
-        echo "<script>alert('Failed to update password. Please try again.'); window.location='index.html';</script>";
+        echo "<script>alert('Failed to update password. Please try again.'); window.location='indexlog.html';</script>";
     }
 }
 

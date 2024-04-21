@@ -44,6 +44,47 @@ if (!isset($_SESSION['visit_count'])) {
 }
 ?>
 
+<?php
+$shows = [
+  [
+      'title' => 'CLUB ALBANIA',
+      'image' => './resources/shows/clubalbania.png',
+      'dates' => ['2023-12-14', '2023-12-26'],
+      'time' => '20:00'
+  ],
+  [
+      'title' => 'Grate',
+      'image' => './resources/shows/Inkedgrate2.jpg',
+      'dates' => ['2023-12-17', '2023-12-23'],
+      'time' => '20:00'
+  ],
+  [
+      'title' => 'Udhetim i gjate drejt nates',
+      'image' => './resources/shows/udhetimGjateDrejtNates.jpg',
+      'dates' => ['2023-12-05'],
+      'time' => '20:00'
+  ],
+  [
+      'title' => '1984',
+      'image' => './resources/shows/1984.jpg',
+      'dates' => ['2023-12-11', '2023-12-21'],
+      'time' => '20:00'
+  ],
+  [
+      'title' => 'Gjithcka rreth IV',
+      'image' => './resources/shows/GJITHÇKARRETHIV.png',
+      'dates' => ['2023-12-09', '2023-12-30'],
+      'time' => '20:00'
+  ],
+  [
+      'title' => 'Dite Vere',
+      'image' => './resources/shows/diteVere2.jpg',
+      'dates' => ['2023-12-03', '2023-12-10'],
+      'time' => '20:00'
+  ]
+];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,39 +225,39 @@ if (!isset($_SESSION['visit_count'])) {
       <div class="col-md-12">
         <h2 class="text-center mb-5" style="color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;">Recent Shows</h2>
         <!-- Show 1 -->
-        <div class="card mb-5">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="resources/shows/1984.png" alt="Show 1 Image" class="img-fluid">
-            </div>
-            <div class="col-md-8 recent-text-color">
-              <div class="card-body">
-                <h5 class="card-title show-date1">1984</h5>
-                <p class="card-text">Dramatized from author George Orwell's dystopian novel</p>
-                <p class="card-text"><b>Director:</b>  <u>Igor Mendjisky</u></p>
-                <p class="card-text"><i>Actors:</i> Adrian Morina, Arta Selimi, Basri Lushtaku, Edona Reshitaj, Flaka Latifi, Shpejtim Kastrati, Xhejlane Godanci dhe Ylber Bardhi.</p>
-                <p class="card-text date1"><b>Date:</b>  3/12/2023</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Show 2 -->
-        <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="resources/shows/club albania.png" alt="Show 2 Image" class="img-fluid">
-            </div>
-            <div class="col-md-8 recent-text-color">
-              <div class="card-body">
-                <h5 class="card-title show-date2">CLUB ALBANIA</h5>
-                <p class="card-text">The show is based on the comedy, "Pas Vdekjes" by A.Z. Çajupi</p>
-                <p class="card-text"><b>Director:</b> <u>Fatos Berisha</u></p>
-                <p class="card-text"><i>Actors:</i> Armond Morina, Ard Islami, Armend Smajli, Maylinda Kosumovic, Naim Berisha, Teuta Krasniqi dhe Ylber Bardhi.</p>
-                <p class="card-text date2 "><b >Date:</b> 3/12/2023</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php
+                // Sort the shows array by date in ascending order
+                usort($shows, function($a, $b) {
+                    return strtotime($a['dates'][0]) - strtotime($b['dates'][0]);
+                });
+                
+                // Display only the first two recent shows
+                $recent_shows = array_slice($shows, 0, 2);
+                
+                // Loop through the recent shows
+                foreach ($recent_shows as $show) {
+                    ?>
+                    <!-- Show card -->
+                    <div class="card mb-5">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <!-- Show image -->
+                                <img src="<?php echo $show['image']; ?>" alt="<?php echo $show['title']; ?> Image" class="img-fluid">
+                            </div>
+                            <div class="col-md-8 recent-text-color">
+                                <div class="card-body">
+                                    <!-- Show details -->
+                                    <h5 class="card-title"><?php echo $show['title']; ?></h5>
+                                    <!-- Assuming only the latest date is displayed -->
+                                    <p class="card-text"><b>Date:</b> <?php echo $show['dates'][0]; ?></p>
+                                    <p class="card-text"><b>Time:</b> <?php echo $show['time']; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
         <a href="calendar.php" class="btn btn-primary butonat" id="goto-calendar">View Calendar</a>
       </div>
     </div>
@@ -233,7 +274,7 @@ if (!isset($_SESSION['visit_count'])) {
           <a href="aboutUs.php" class="btn btn-primary butonat goto-about">About Us</a>
         </div>
         <div class="col-md-6">
-          <img  name="slide" alt="Founder Image" class="img-fluid">
+          <img src="resources\images\aboutUs(3).png" class="img-fluid" alt="">
         </div>
       </div>
     </div>
@@ -295,7 +336,7 @@ if (!isset($_SESSION['visit_count'])) {
       </div>
       <div class="row">
         <div class="col">
-          <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top" style="text-decoration: none;  color: aliceblue;">National Theater of Kosovo</a></p>
+          <p>&copy; <span id="remove">2023</span> <a href="#go-to-nav" id="top" style="text-decoration: none;color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;">National Theater of Kosovo</a></p>
         </div>
         <div class="col"><p>Number of Visits: <?php echo $_SESSION['visit_count']; ?></p></div>
       </div>
@@ -318,9 +359,9 @@ if (!isset($_SESSION['visit_count'])) {
             var img=[];
             var time=3000
         
-            img[0] = '../resources/images/aboutUs.jpg';
-            img[1] = '../resources/images/aboutUs(2).jpg';
-            img[2] = '../resources/images/aboutUs(3).png';
+            img[0] = '/resources/images/aboutUs.jpg';
+            img[1] = '/resources/images/aboutUs(2).jpg';
+            img[2] = '/resources/images/aboutUs(3).png';
             
         
           function changeImg() {

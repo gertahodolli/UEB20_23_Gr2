@@ -1,4 +1,29 @@
 <?php
+session_start();  // Start the session at the top of the script
+
+// Handle setting and deleting cookies for background color
+
+
+// Check if a feedback form was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['emri'], $_POST['feedback'], $_POST['rating'])) {
+    // Capture and sanitize the data
+    $name = filter_var($_POST['emri'], FILTER_SANITIZE_STRING);
+    $feedback = filter_var($_POST['feedback'], FILTER_SANITIZE_STRING);
+    $rating = filter_var($_POST['rating'], FILTER_VALIDATE_INT);
+
+    // Store the feedback data in session
+    $_SESSION['feedbacks'][] = ['name' => $name, 'feedback' => $feedback, 'rating' => $rating];
+
+    // Redirect to the same page to avoid form resubmission
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}
+?>
+
+<!-- Continue with your HTML and embedded PHP for display -->
+
+
+<?php
 // Function to set a cookie
 function set_cookie($name, $value, $expiry) {
     setcookie($name, $value, time() + $expiry, "/");
@@ -44,7 +69,24 @@ if(isset($_POST['color'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
+    <style>
+        .ratings-comments { /* Light grey background */
+        color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: adds shadow for better visibility */
+}
 
+.comment {
+ /* White background for each comment */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 5px solid; /* Blue left border for visual effect */
+    font-style: italic;
+    color: white;
+}
+
+    </style>
     <body>
     <div class="color">
     <!-- Navbar -->
@@ -72,7 +114,7 @@ if(isset($_POST['color'])) {
                             <p>EMAIL: <a href="mailto:boxoffice@example.com">boxoffice@gmail.com</a></p>
                             <p>IN PERSON: Street Luan Haradinaj, Prishtina</p>
                         </address>
-                        <button class="btn btn-primary butonat" onclick="openPopup()">Start Live Chat</button>
+                        
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -325,56 +367,87 @@ if(isset($_POST['color'])) {
 
    <!-- Feedback Button -->
    <div class="text-center mt-1 mb-">
-    <button class="btn btn-primary butonat" id="openFeedbackFormBtn">Feedback</button>
+        <button class="btn btn-primary" id="openFeedbackFormBtn" style="background-color: rgba(145, 15, 18, 0.7); border: none;">Feedback</button>
    </div>
 
   <!-- Feedback Popup Form -->
-  <div id="feedbackPopup" class="popup1">
+<div id="feedbackPopup" class="popup1" style="display: none;">
     <h2>Feedback Form</h2>
-    <form id="feedbackForm">
-  
-      <!-- Pjesa e formës për emër -->
-      <div class="form-section">
-        <label for="emri">Name:</label>
-        <input type="text" id="emri" name="emri" required placeholder="Your name" autocomplete="on" pattern="[A-Za-z\s]+">
-      </div>
-  
-      <!-- Pjesa e formës për email -->
-      <div class="form-section">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required placeholder="Please enter your feedback here" 
-        autocomplete="on" 
-        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
-      </div>
-  
-      <!-- Perdorimi i list -->
+    <form id="feedbackForm" method="post" action="">
+        <!-- Name Field -->
+        <div class="form-section">
+            <label for="emri">Name:</label>
+            <input type="text" id="emri" name="emri" required placeholder="Your name" autocomplete="on" pattern="[A-Za-z\s]+">
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-section">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Your email" autocomplete="on" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
+        </div>
+
+        <!-- Rating Field -->
         <div class="form-section">
             <label for="rating">Overall Satisfaction:</label>
             <input list="ratings" name="rating" id="rating" placeholder="Select your satisfaction level" required min="1" max="5">
             <datalist id="ratings">
-                <option value="1">
-                <option value="2">
-                <option value="3">
-                <option value="4">
-                <option value="5">
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
             </datalist>
         </div>
 
-      <!-- Pjesa e formës për feedback -->
-      <div class="form-section">
-        <label for="feedback">Feedback:</label>
-        <textarea id="feedback" name="feedback" rows="4" required placeholder="Please enter your feedback here" autocomplete="on" pattern="[A-Za-z0-9\s]+"></textarea>
-      </div>
-  
-       <div class="button-container">
-        <button class="btn btn-primary butonat" type="submit" id="submitBtn">Submit</button>
-        <button class="btn btn-primary butonat" type="button" id="cancelBtn">Cancel</button>
-      </div>
+        <!-- Feedback Field -->
+        <div class="form-section">
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" rows="4" required placeholder="Your feedback" autocomplete="on" pattern="[A-Za-z0-9\s]+"></textarea>
+        </div>
+
+        <!-- Form Submission Buttons -->
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+            <button type="button" class="btn btn-primary" onclick="closePopup()">Cancel</button>
+        </div>
     </form>
-    </div>
+</div>
 </div>
 </section>
 </section>
+
+<!-- Displaying Feedback -->
+<section class="ratings-comments container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Latest Ratings</h2>
+            <ul>
+                <?php
+                // Check if session variable exists and is not empty
+                if (!empty($_SESSION['feedbacks'])) {
+                    // Get the last three feedback entries
+                    $lastThreeFeedbacks = array_slice($_SESSION['feedbacks'], -3, 3, true);
+                    foreach ($lastThreeFeedbacks as $feedback) {
+                        echo "<li>" . htmlspecialchars($feedback['rating']) . " stars - " . htmlspecialchars($feedback['name']) . "</li>";
+                    }
+                }
+                ?>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h2>Comments</h2>
+            <?php
+            if (!empty($_SESSION['feedbacks'])) {
+                foreach ($lastThreeFeedbacks as $feedback) {
+                    echo "<p>\"" . htmlspecialchars($feedback['feedback']) . "\" - <em>" . htmlspecialchars($feedback['name']) . "</em></p>";
+                }
+            }
+            ?>
+        </div>
+    </div>
+</section>
+
+
 
 
        <!-- Footer -->
@@ -412,6 +485,16 @@ if(isset($_POST['color'])) {
       </div>
     </div>
     </footer>
+
+    <script>
+    document.getElementById('openFeedbackFormBtn').addEventListener('click', function() {
+        document.getElementById('feedbackPopup').style.display = 'block';
+    });
+
+    function closePopup() {
+        document.getElementById('feedbackPopup').style.display = 'none';
+    }
+</>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <script>

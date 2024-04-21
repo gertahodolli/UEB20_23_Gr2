@@ -78,6 +78,10 @@ if(isset($_POST['color'])) {
         border-color: <?php echo $bg_color === 'white' ? '#007bff' : '#555'; ?>;
     }
 
+    h6{
+      color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
+    }
+
 
 
 
@@ -134,9 +138,12 @@ if(isset($_POST['color'])) {
                       <div class="col-md-8 show-info">
                           <div class="card-body">
                               <h5 class="card-title" id="showTitle">Selected Day's Show</h5>
-                              <h6 class="card-subtitle mb-2 text-muted" id="selectedDate">Date: </h6>
+                              <h6 class="card-subtitle mb-2" id="selectedDate">Date: </h6>
                               <p class="card-text" id="director">Director: </p>
                               <p class="card-text" id="runningTime">Running Time: </p>
+                              <br>
+                              <br>
+                              <br>
                               <br>
                               <br>
                               <br>

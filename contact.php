@@ -1,3 +1,36 @@
+<?php
+// Function to set a cookie
+function set_cookie($name, $value, $expiry) {
+    setcookie($name, $value, time() + $expiry, "/");
+}
+
+// Function to delete a cookie
+function delete_cookie($name) {
+    setcookie($name, "", time() - 3600, "/");
+    unset($_COOKIE[$name]);
+}
+
+// Check if a cookie is set
+$cookie_name = "bg_color";
+if(isset($_COOKIE[$cookie_name])) {
+    // Cookie exists, get its value
+    $bg_color = $_COOKIE[$cookie_name];
+} else {
+    // Cookie does not exist, set a default value
+    $bg_color = "black";
+    set_cookie($cookie_name, $bg_color, 86400); // Cookie expires in 1 day
+}
+
+// Process form submission
+if(isset($_POST['color'])) {
+    $selected_color = $_POST['color'];
+    set_cookie($cookie_name, $selected_color, 86400); // Update cookie with selected color
+    // Redirect to avoid header modification after output
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit; // Ensure script stops execution after redirection
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -360,7 +393,16 @@
           <address>Address: Street Luan Haradinaj, Prishtina</address>
         </div>
         <div class="col pt-4">
-          <p id="currentDateTime"></p>
+        <form method="post" id="color-form" style="position: fi; bottom: 20px; right: 20px;">
+                        <label for="color-select" sty>Select Background Color:</label>
+                        <select name="color" id="color-select">
+                            <option value="white" <?php if($bg_color === 'white') echo 'selected'; ?>>Light</option>
+                            <option value="black" <?php if($bg_color === 'black') echo 'selected'; ?>>Dark</option>
+                            <!-- Add more color options as needed -->
+                        </select>
+                        <button type="submit" style="display: inline-block; background-color: white; color: black; padding: 8px 12px; border: 1px solid #007bff; border-radius: 4px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1rem; line-height: 1.5; text-align: center; cursor: pointer; box-shadow: none; transition: background-color 0.3s ease-in-out;width: 60px;">Save</button>
+
+                    </form>
         </div>
       </div>
       <div class="row">

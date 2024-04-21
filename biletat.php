@@ -1,52 +1,86 @@
+<?php
+session_start();
+
+// Establish database connection settings
+
+// Session timeout logic
+if (!isset($_SESSION['form_access_time'])) {
+    $_SESSION['form_access_time'] = time();
+} else {
+    if (time() - $_SESSION['form_access_time'] > 120) { // 120 seconds = 2 minutes
+        session_unset();
+        session_destroy();
+        header("Location: biletat.php"); // Redirect to a timeout page
+        exit;
+    }
+}
+$_SESSION['form_access_time'] = time();
+
+// Form processing for ticket purchases
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
+    $ticketType = $_POST['ticketType'];
+    $quantity = $_POST['quantity'];
+    $userId = $_SESSION['user_id']; // Assuming a user session with ID is maintained
+
+    $stmt = $conn->prepare("INSERT INTO tickets (user_id, ticket_type, quantity, purchase_date) VALUES (?, ?, ?, NOW())");
+    $stmt->bind_param("isi", $userId, $ticketType, $quantity);
+    if ($stmt->execute()) {
+        echo '<script>alert("Ticket purchased successfully!");</script>';
+    } else {
+        echo '<script>alert("Error: ' . $stmt->error . '");</script>';
+    }
+    $stmt->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" >
-        <script src="./libraries/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
-        <link rel="stylesheet" href="./resources/css/home.css">
-        <link rel="stylesheet" href="./resources/css/biletat.css">
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="./resources/js/biletat.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
-        <title>Tickets</title>
-    </head>    
-    <style>
-        body{
-            background-color: rgb(11, 11, 11);
-        }
-        .navbar{
-            height: 75px;
-        }
-        footer{
-            background: #333333;
-        }
-    </style>
-    <body>
-        <header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./libraries/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./resources/css/home.css">
+    <link rel="stylesheet" href="./resources/css/biletat.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="./resources/js/biletat.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
+    <title>Tickets</title>
+</head>
+<style>
+    body {
+        background-color: rgb(11, 11, 11);
+    }
+    .navbar {
+        height: 75px;
+    }
+    footer {
+        background: #333333;
+    }
+</style>
+<body>
+    <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="go-to-nav">
-                <a class="navbar-brand" href="index.php"> <!--specifies the link to the homepage-->
-                    <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
-                </a><!--this button is styled for toggling on smaller screens, utilizes bootstraps collapse plugin to handle the collapse behavior-->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button><!--the elements below are the collapsible elements-->
-                <div class="collapse navbar-collapse mr-5" id="navbarNav">
-                    <ul class="navbar-nav ms-auto align-items-center">
+            <a class="navbar-brand" href="index.php">
+                <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse mr-5" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item pr-3">
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown pr-3" id="showsDropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShows" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Shows
+                            Shows
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownShows">
-                          <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.php">Shows</a>
-                          <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.php">Calendar</a>
+                            <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="shows.php">Shows</a>
+                            <a class="dropdown-item dropdown-text" style="color: aliceblue;" href="calendar.php">Calendar</a>
                         </div>
                     </li>
                     <li class="nav-item pr-3">
@@ -59,60 +93,59 @@
                         <a class="nav-link" href="contact.php">Contact Us</a>
                     </li>
                     <li class="nav-item pr-3">
-                      <a class="nav-link btn btn-primary butoni" style=" margin-right: 15px;" href="index.html">Log In</a>
+                        <a class="nav-link btn btn-primary butoni" style="margin-right: 15px;" href="index.html">Log In</a>
                     </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <main>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- PHP constants and content display for ticket prices -->
         <?php
-            // Definimi i konstantave për çmimet e biletave
-            define("REGULAR_TICKET_PRICE", "€ 2");
-            define("SHOW_OVER_2_HOURS_PRICE", "€ 3");
-            define("KIDS_AND_SENIORS_PRICE", "Free");
-            define("STUDENT_TICKET_PRICE", "€ 1");
-            define("STUDENT_OVER_2_HOURS_PRICE", "€ 2");
-            ?>
-
-            <section id="price-list" class="my-5">
-                <div class="container text-center">
-                    <h2 class="mb-4" style="color: lightgray;">Ticket information</h2>
-                    <div class="row justify-content-center">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Ticket Type</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Regular Tickets</td>
-                                    <td><?php echo REGULAR_TICKET_PRICE; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Show over 2 hours</td>
-                                    <td><?php echo SHOW_OVER_2_HOURS_PRICE; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Kids and Seniors</td>
-                                    <td><?php echo KIDS_AND_SENIORS_PRICE; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Student Tickets</td>
-                                    <td><?php echo STUDENT_TICKET_PRICE; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Student for shows over 2 hours</td>
-                                    <td><?php echo STUDENT_OVER_2_HOURS_PRICE; ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        define("REGULAR_TICKET_PRICE", "€ 2");
+        define("SHOW_OVER_2_HOURS_PRICE", "€ 3");
+        define("KIDS_AND_SENIORS_PRICE", "Free");
+        define("STUDENT_TICKET_PRICE", "€ 1");
+        define("STUDENT_OVER_2_HOURS_PRICE", "€ 2");
+        ?>
+        <section id="price-list" class="my-5">
+            <div class="container text-center">
+                <h2 class="mb-4" style="color: lightgray;">Ticket information</h2>
+                <div class="row justify-content-center">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ticket Type</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Regular Tickets</td>
+                                <td><?php echo REGULAR_TICKET_PRICE; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Show over 2 hours</td>
+                                <td><?php echo SHOW_OVER_2_HOURS_PRICE; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Kids and Seniors</td>
+                                <td><?php echo KIDS_AND_SENIORS_PRICE; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Student Tickets</td>
+                                <td><?php echo STUDENT_TICKET_PRICE; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Student for shows over 2 hours</td>
+                                <td><?php echo STUDENT_OVER_2_HOURS_PRICE; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </section>
-            <section id="ticket-showcase" class="my-5">
+            </div>
+        </section>
+        <section id="ticket-showcase" class="my-5">
                 <div class="container">
                     <h3 class="mb-4 text-center" style="color: lightgray;">Shows that are currently playing:</h3>
                     <div class="row">
@@ -365,5 +398,5 @@
               
             </script>
         </main>
-    </body>
+</body>
 </html>

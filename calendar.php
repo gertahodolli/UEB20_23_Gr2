@@ -142,7 +142,6 @@ if(isset($_POST['color'])) {
                               <br>
                               <br>
                               <br>
-                              <br>
                           </div>
                       </div>
                   </div>
@@ -154,6 +153,7 @@ if(isset($_POST['color'])) {
               <a href="contact.php" class="btn btn-primary butonat">Go to Contact</a>
             </div>
             <div class="col-md-6">
+              <a href="biletat.php" class="btn btn-primary butonat">Go to Tickets</a>
             </div>
           </div>
           

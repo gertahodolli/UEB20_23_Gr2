@@ -158,11 +158,6 @@ if (!isset($_SESSION['visit_count'])) {
 <body>
     <!-- Navbar -->
     <header>
-        </button>
-
-        <div class="collapse navbar-collapse mr-5" id="navbarNav">
-                    </a>
-                <li class="nav-item pr-3">
     <?php include 'navbar.php'; ?>
     </header>
 

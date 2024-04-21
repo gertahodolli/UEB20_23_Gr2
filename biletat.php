@@ -31,37 +31,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
     }
     $stmt->close();
 }
+// Function to set a cookie
+function set_cookie($name, $value, $expiry) {
+    setcookie($name, $value, time() + $expiry, "/");
+}
+
+// Function to delete a cookie
+function delete_cookie($name) {
+    setcookie($name, "", time() - 3600, "/");
+    unset($_COOKIE[$name]);
+}
+
+// Check if a cookie is set
+$cookie_name = "bg_color";
+if(isset($_COOKIE[$cookie_name])) {
+    // Cookie exists, get its value
+    $bg_color = $_COOKIE[$cookie_name];
+} else {
+    // Cookie does not exist, set a default value
+    $bg_color = "black";
+    set_cookie($cookie_name, $bg_color, 86400); // Cookie expires in 1 day
+}
+
+// Process form submission
+if(isset($_POST['color'])) {
+    $selected_color = $_POST['color'];
+    set_cookie($cookie_name, $selected_color, 86400); // Update cookie with selected color
+    // Redirect to avoid header modification after output
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit; // Ensure script stops execution after redirection
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="./libraries/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./resources/css/home.css">
-    <link rel="stylesheet" href="./resources/css/biletat.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="./resources/js/biletat.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
-    <title>Tickets</title>
-</head>
-<style>
-    body {
-        background-color: rgb(11, 11, 11);
-    }
-    .navbar {
-        height: 75px;
-    }
-    footer {
-        background: #333333;
-    }
-</style>
-<body>
-    <header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" >
+        <script src="./libraries/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
+        <link rel="stylesheet" href="./resources/css/home.css">
+        <link rel="stylesheet" href="./resources/css/biletat.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="./resources/js/biletat.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
+        <title>Tickets</title>
+    </head>    
+    <style>
+        body{
+            background-color: rgb(11, 11, 11);
+        }
+        .navbar{
+            height: 75px;
+        }
+        footer{
+            background: #333333;
+        }
+
+    </style>
+    <body>
+        <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="go-to-nav">
             <a class="navbar-brand" href="index.php">
                 <img src="resources/images/logo1.png" alt="National Theater of Kosovo" class="navbar-logo">
@@ -149,86 +181,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
                 <div class="container">
                     <h3 class="mb-4 text-center" style="color: lightgray;">Shows that are currently playing:</h3>
                     <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="card text-center">
-                                <img src="./resources/shows/InkedclubAlbania2_.jpg" alt="CLUB ALBANIA" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">CLUB ALBANIA</h5>
-                                    <p class="card-tex ticket-modal" data-type="date">Date: <span class="show-date"> 14/12/2023 <br>26/12/2023</span></p>
-                                    <p class="card-text">Time: 20:00</p>
-                                </div>    
-                                <div class="card-footer">
-                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
-                                </div>      
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card text-center">
-                                <img src="./resources/shows/Inkedgrate2.jpg" alt="Shfaqja e dyte" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Grate</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 17/12/2023</br>23/12/2023</span></p>
-                                    <p class="card-text">Time: 20:00</p>
-                                </div>    
-                                <div class="card-footer">
-                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card text-center">
-                                <img src="./resources/shows/udhetimGjateDrejtNates.jpg" alt="Shfaqja e trete" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Udhetim i gjate drejt nates</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date"> 05/12/2023 </span></p>
-                                    <p class="card-text">Time: 20:00</p>
-                                </div>    
-                                <div class="card-footer">
-                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card text-center">
-                                <img src="./resources/shows/1984.jpg" alt="Shfaqja e trete" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">1984</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">11/12/2023 <br>21/12/2023</span></p>
-                                    <p class="card-text">Time: 20:00</p>
-                                </div>    
-                                <div class="card-footer">
-                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card text-center">
-                                <img src="./resources/shows/gjithckaRrethIV.jpg" alt="Shfaqja e trete" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Gjithcka rreth IV</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">09/12/2023 <br>30/12/2023</span></p>
-                                    <p class="card-text">Time: 20:00</p>
-                                </div>    
-                                <div class="card-footer">
-                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card text-center">
-                                <img src="./resources/shows/diteVere2.jpg" alt="Shfaqja e trete" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Dite Vere</h5>
-                                    <p class="card-text ticket-modal" data-type="date">Date: <span class="show-date">03/12/2023 <br>10/12/2023</span></p>
-                                    <p class="card-text">Time: 20:00</p>
-                                </div>    
-                                <div class="card-footer">
-                                    <button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal" onclick="openTicketForm(this)">Buy ticket</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <?php
+                // Define the shows array
+                $shows = [
+                    [
+                        'title' => 'CLUB ALBANIA',
+                        'image' => './resources/shows/InkedclubAlbania2_.jpg',
+                        'dates' => ['2023-12-14', '2023-12-26'],
+                        'time' => '20:00'
+                    ],
+                    [
+                        'title' => 'Grate',
+                        'image' => './resources/shows/Inkedgrate2.jpg',
+                        'dates' => ['2023-12-17', '2023-12-23'],
+                        'time' => '20:00'
+                    ],
+                    [
+                        'title' => 'Udhetim i gjate drejt nates',
+                        'image' => './resources/shows/udhetimGjateDrejtNates.jpg',
+                        'dates' => ['2023-12-05'],
+                        'time' => '20:00'
+                    ],
+                    [
+                        'title' => '1984',
+                        'image' => './resources/shows/1984.jpg',
+                        'dates' => ['2023-12-11', '2023-12-21'],
+                        'time' => '20:00'
+                    ],
+                    [
+                        'title' => 'Gjithcka rreth IV',
+                        'image' => './resources/shows/gjithckaRrethIV.jpg',
+                        'dates' => ['2023-12-09', '2023-12-30'],
+                        'time' => '20:00'
+                    ],
+                    [
+                        'title' => 'Dite Vere',
+                        'image' => './resources/shows/diteVere2.jpg',
+                        'dates' => ['2023-12-03', '2023-12-10'],
+                        'time' => '20:00'
+                    ]
+                ];
+
+                // Sort the shows by the earliest date using usort()
+                usort($shows, function($a, $b) {
+                    return strtotime($a['dates'][0]) - strtotime($b['dates'][0]);
+                });
+
+                // Generate HTML from the sorted array
+                foreach ($shows as $show) {
+                    echo '<div class="col-md-4 mb-4">';
+                    echo '<div class="card text-center">';
+                    echo '<img src="' . htmlspecialchars($show['image']) . '" alt="' . htmlspecialchars($show['title']) . '" class="card-img-top">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . htmlspecialchars($show['title']) . '</h5>';
+                    echo '<p class="card-text">Date: <span class="show-date">' . implode(' <br>', $show['dates']) . '</span></p>';
+                    echo '<p class="card-text">Time: ' . htmlspecialchars($show['time']) . '</p>';
+                    echo '</div>';
+                    echo '<div class="card-footer">';
+                    echo '<button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#ticketModal">Buy ticket</button>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+                ?>
             </section>
             <!-- Modal for ticket information -->
             <div class="modal" tabindex="-1" role="dialog" id="purchaseModal">
@@ -380,7 +395,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
                       <address>Address: Street Luan Haradinaj, Prishtina</address>
                     </div>
                     <div class="col pt-4">
-                      <p id="currentDateTime"></p>
+                    <form method="post" id="color-form" style="position: fi; bottom: 20px; right: 20px;">
+                        <label for="color-select" sty>Select Background Color:</label>
+                        <select name="color" id="color-select">
+                            <option value="white" <?php if($bg_color === 'white') echo 'selected'; ?>>Light</option>
+                            <option value="black" <?php if($bg_color === 'black') echo 'selected'; ?>>Dark</option>
+                            <!-- Add more color options as needed -->
+                        </select>
+                        <button type="submit">Save</button>
+                    </form>
                     </div>
                   </div>
                   <div class="row">

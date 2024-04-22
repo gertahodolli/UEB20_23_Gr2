@@ -1,36 +1,38 @@
 <?php
 session_start();
+// Vendi ku do te behet lidhja me bazën e të dhënave
 
-// Establish database connection settings
-
-// Session timeout logic
+// Logjika e skadimit të sesionit
 if (!isset($_SESSION['form_access_time'])) {
     $_SESSION['form_access_time'] = time();
 } else {
-    if (time() - $_SESSION['form_access_time'] > 120) { // 120 seconds = 2 minutes
+    if (time() - $_SESSION['form_access_time'] > 120) { // 120 sekonda = 2 minuta
         session_unset();
         session_destroy();
-        header("Location: biletat.php"); // Redirect to a timeout page
+        header("Location: biletat.php"); // Ridrejtim në një faqe të skadimit të kohës
         exit;
     }
 }
 $_SESSION['form_access_time'] = time();
 
-// Form processing for ticket purchases
+// Përpunimi i formularit për blerjet e biletave
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
     $ticketType = $_POST['ticketType'];
     $quantity = $_POST['quantity'];
-    $userId = $_SESSION['user_id']; // Assuming a user session with ID is maintained
+    $userId = $_SESSION['user_id']; // Duke supozuar që mbahet një sesion i përdoruesit me ID
 
     $stmt = $conn->prepare("INSERT INTO tickets (user_id, ticket_type, quantity, purchase_date) VALUES (?, ?, ?, NOW())");
     $stmt->bind_param("isi", $userId, $ticketType, $quantity);
     if ($stmt->execute()) {
-        echo '<script>alert("Ticket purchased successfully!");</script>';
+        echo '<script>alert("Bileta u blerë me sukses!");</script>';
     } else {
-        echo '<script>alert("Error: ' . $stmt->error . '");</script>';
+        echo '<script>alert("Gabim: ' . $stmt->error . '");</script>';
     }
     $stmt->close();
 }
+
+
+
 // Function to set a cookie
 function set_cookie($name, $value, $expiry) {
     setcookie($name, $value, time() + $expiry, "/");

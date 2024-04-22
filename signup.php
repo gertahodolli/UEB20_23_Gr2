@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $userAuth = new UserAuth($username, $email, $password);
         if ($userAuth->signup()) {
-            // Signup successful, redirect to login page
+            // Regjistrimi i suksesshëm, ridrejto në faqen e hyrjes
             header("Location: indexlog.php");
             exit();
         } else {
@@ -29,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// If there is a message, alert it and redirect to signup.html
+// Nëse ka një mesazh, sinjalizoje atë dhe ridrejto në signup.html
 if ($message) {
     echo "<script>alert('$message'); window.location='signup.html';</script>";
-    exit(); // Make sure to exit PHP execution after redirecting
+    exit(); // Sigurohuni të ndaloni ekzekutimin e PHP pas ridrejtimit
 }
 ?>

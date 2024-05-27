@@ -3,7 +3,7 @@ include 'db_connect.php'; // Include the connection script
 
 function createShfaqjeTable($conn) {
     $sql = "CREATE TABLE IF NOT EXISTS shfaqje (
-        id SERIAL PRIMARY KEY,
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
         emrin VARCHAR(255) NOT NULL,
         regjisorin VARCHAR(255),
         duration VARCHAR(10),
@@ -12,11 +12,12 @@ function createShfaqjeTable($conn) {
         foto BLOB,
         video BLOB
     )";
-    
+
     if ($conn->query($sql) === TRUE) {
         echo "Table 'shfaqje' created successfully";
     } else {
-        echo "Error creating table: " . $conn->error;
+        error_log("Error creating table: " . $conn->error);
+        echo "There was an issue creating the table. Please try again later.";
     }
 }
 
@@ -29,7 +30,8 @@ function insertShfaqje($emrin, $regjisorin, $duration, $aktoret, $pershkrimi, $f
     if ($stmt->execute()) {
         echo "New shfaqje created successfully";
     } else {
-        echo "Error: " . $stmt->error;
+        error_log("Error inserting shfaqje: " . $stmt->error);
+        echo "There was an issue creating the shfaqje. Please try again later.";
     }
     $stmt->close();
 }
@@ -43,7 +45,8 @@ function updateShfaqje($id, $emrin, $regjisorin, $duration, $aktoret, $pershkrim
     if ($stmt->execute()) {
         echo "Shfaqje updated successfully";
     } else {
-        echo "Error updating shfaqje: " . $stmt->error;
+        error_log("Error updating shfaqje: " . $stmt->error);
+        echo "There was an issue updating the shfaqje. Please try again later.";
     }
     $stmt->close();
 }
@@ -54,26 +57,28 @@ function deleteShfaqje($id, $conn) {
     if ($stmt->execute()) {
         echo "Shfaqje deleted successfully";
     } else {
-        echo "Error deleting shfaqje: " . $stmt->error;
+        error_log("Error deleting shfaqje: " . $stmt->error);
+        echo "There was an issue deleting the shfaqje. Please try again later.";
     }
     $stmt->close();
 }
 
 function createPerformancesTable($conn) {
     $sql = "CREATE TABLE IF NOT EXISTS performances (
-        id SERIAL PRIMARY KEY,
-        shfaqje_id INT NOT NULL,
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        shfaqje_id BIGINT NOT NULL,
         emri VARCHAR(255) NOT NULL,
         date DATE,
         time TIME,
         foto BLOB,
         FOREIGN KEY (shfaqje_id) REFERENCES shfaqje(id)
     )";
-    
+
     if ($conn->query($sql) === TRUE) {
         echo "Table 'performances' created successfully";
     } else {
-        echo "Error creating table: " . $conn->error;
+        error_log("Error creating table: " . $conn->error);
+        echo "There was an issue creating the table. Please try again later.";
     }
 }
 
@@ -85,7 +90,8 @@ function insertPerformance($shfaqje_id, $emri, $date, $time, $foto, $conn) {
     if ($stmt->execute()) {
         echo "New performance created successfully";
     } else {
-        echo "Error: " . $stmt->error;
+        error_log("Error inserting performance: " . $stmt->error);
+        echo "There was an issue creating the performance. Please try again later.";
     }
     $stmt->close();
 }
@@ -98,7 +104,8 @@ function updatePerformance($id, $shfaqje_id, $emri, $date, $time, $foto, $conn) 
     if ($stmt->execute()) {
         echo "Performance updated successfully";
     } else {
-        echo "Error updating performance: " . $stmt->error;
+        error_log("Error updating performance: " . $stmt->error);
+        echo "There was an issue updating the performance. Please try again later.";
     }
     $stmt->close();
 }
@@ -109,7 +116,8 @@ function deletePerformance($id, $conn) {
     if ($stmt->execute()) {
         echo "Performance deleted successfully";
     } else {
-        echo "Error deleting performance: " . $stmt->error;
+        error_log("Error deleting performance: " . $stmt->error);
+        echo "There was an issue deleting the performance. Please try again later.";
     }
     $stmt->close();
 }

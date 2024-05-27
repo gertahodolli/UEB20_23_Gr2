@@ -3,32 +3,34 @@ include 'db_connect.php'; // Include the connection script
 
 function createSponsorsTable($conn) {
     $sql = "CREATE TABLE IF NOT EXISTS sponsors (
-        id SERIAL PRIMARY KEY,
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
         emri VARCHAR(255) NOT NULL,
         dataFillimit DATE,
         foto BLOB
     )";
-    
+
     if ($conn->query($sql) === TRUE) {
         echo "Table 'sponsors' created successfully";
     } else {
-        echo "Error creating table: " . $conn->error;
+        error_log("Error creating table: " . $conn->error);
+        echo "There was an issue creating the table. Please try again later.";
     }
 }
 
 function createFeedbackTable($conn) {
     $sql = "CREATE TABLE IF NOT EXISTS feedback (
-        id SERIAL PRIMARY KEY,
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
         emri VARCHAR(255),
         email VARCHAR(255),
         satisfaction INT,
         feedback TEXT
     )";
-    
+
     if ($conn->query($sql) === TRUE) {
         echo "Table 'feedback' created successfully";
     } else {
-        echo "Error creating table: " . $conn->error;
+        error_log("Error creating table: " . $conn->error);
+        echo "There was an issue creating the table. Please try again later.";
     }
 }
 
@@ -40,7 +42,8 @@ function insertSponsor($emri, $dataFillimit, $foto, $conn) {
     if ($stmt->execute()) {
         echo "New sponsor created successfully";
     } else {
-        echo "Error: " . $stmt->error;
+        error_log("Error inserting sponsor: " . $stmt->error);
+        echo "There was an issue creating the sponsor. Please try again later.";
     }
     $stmt->close();
 }
@@ -51,7 +54,8 @@ function insertFeedback($emri, $email, $satisfaction, $feedback, $conn) {
     if ($stmt->execute()) {
         echo "New feedback submitted successfully";
     } else {
-        echo "Error: " . $stmt->error;
+        error_log("Error inserting feedback: " . $stmt->error);
+        echo "There was an issue submitting the feedback. Please try again later.";
     }
     $stmt->close();
 }
@@ -64,7 +68,8 @@ function updateSponsor($id, $emri, $dataFillimit, $foto, $conn) {
     if ($stmt->execute()) {
         echo "Sponsor updated successfully";
     } else {
-        echo "Error updating sponsor: " . $stmt->error;
+        error_log("Error updating sponsor: " . $stmt->error);
+        echo "There was an issue updating the sponsor. Please try again later.";
     }
     $stmt->close();
 }
@@ -75,7 +80,8 @@ function updateFeedback($id, $emri, $email, $satisfaction, $feedback, $conn) {
     if ($stmt->execute()) {
         echo "Feedback updated successfully";
     } else {
-        echo "Error updating feedback: " . $stmt->error;
+        error_log("Error updating feedback: " . $stmt->error);
+        echo "There was an issue updating the feedback. Please try again later.";
     }
     $stmt->close();
 }
@@ -86,7 +92,8 @@ function deleteSponsor($id, $conn) {
     if ($stmt->execute()) {
         echo "Sponsor deleted successfully";
     } else {
-        echo "Error deleting sponsor: " . $stmt->error;
+        error_log("Error deleting sponsor: " . $stmt->error);
+        echo "There was an issue deleting the sponsor. Please try again later.";
     }
     $stmt->close();
 }
@@ -97,11 +104,11 @@ function deleteFeedback($id, $conn) {
     if ($stmt->execute()) {
         echo "Feedback deleted successfully";
     } else {
-        echo "Error deleting feedback: " . $conn->error;
+        error_log("Error deleting feedback: " . $conn->error);
+        echo "There was an issue deleting the feedback. Please try again later.";
     }
     $stmt->close();
 }
-
 
 $conn->close();
 ?>

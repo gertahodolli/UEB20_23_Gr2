@@ -3,7 +3,7 @@ include 'db_connect.php'; // Include the connection script
 
 function createUserTable($conn) {
     $sql = "CREATE TABLE IF NOT EXISTS user (
-        id SERIAL PRIMARY KEY,
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
         emri VARCHAR(255),
         mbiemri VARCHAR(255),
         email VARCHAR(255) UNIQUE NOT NULL,
@@ -14,36 +14,38 @@ function createUserTable($conn) {
         student BOOLEAN,
         telefoni VARCHAR(20)
     )";
-    
+
     if ($conn->query($sql) === TRUE) {
         echo "Table 'user' created successfully";
     } else {
-        echo "Error creating table: " . $conn->error;
+        error_log("Error creating table: " . $conn->error);
+        echo "There was an issue creating the table. Please try again later.";
     }
 }
 
 function createBiletatTable($conn) {
     $sql = "CREATE TABLE IF NOT EXISTS biletat (
-        id SERIAL PRIMARY KEY,
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
         tipi VARCHAR(255) UNIQUE NOT NULL,
         cmimi NUMERIC(10, 2)
     )";
-    
+
     if ($conn->query($sql) === TRUE) {
         echo "Table 'biletat' created successfully";
     } else {
-        echo "Error creating table: " . $conn->error;
+        error_log("Error creating table: " . $conn->error);
+        echo "There was an issue creating the table. Please try again later.";
     }
 }
 
 function createShitjetTable($conn) {
     $sql = "CREATE TABLE IF NOT EXISTS shitjet (
-        id SERIAL PRIMARY KEY,
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
         time TIME,
         date DATE,
-        userId INT,
-        performancaId INT,
-        biletaId INT,
+        userId BIGINT,
+        performancaId BIGINT,
+        biletaId BIGINT,
         sasia INT,
         totali NUMERIC(10, 2),
         kaPerfunduar BOOLEAN,
@@ -51,11 +53,12 @@ function createShitjetTable($conn) {
         FOREIGN KEY (performancaId) REFERENCES performances(id),
         FOREIGN KEY (biletaId) REFERENCES biletat(id)
     )";
-    
+
     if ($conn->query($sql) === TRUE) {
         echo "Table 'shitjet' created successfully";
     } else {
-        echo "Error creating table: " . $conn->error;
+        error_log("Error creating table: " . $conn->error);
+        echo "There was an issue creating the table. Please try again later.";
     }
 }
 
@@ -65,7 +68,8 @@ function insertUser($emri, $mbiemri, $email, $username, $passHash, $salt, $mosha
     if ($stmt->execute()) {
         echo "New user created successfully";
     } else {
-        echo "Error: " . $stmt->error;
+        error_log("Error inserting user: " . $stmt->error);
+        echo "There was an issue creating the user. Please try again later.";
     }
     $stmt->close();
 }
@@ -76,7 +80,8 @@ function insertTicket($tipi, $cmimi, $conn) {
     if ($stmt->execute()) {
         echo "New ticket created successfully";
     } else {
-        echo "Error: " . $stmt->error;
+        error_log("Error inserting ticket: " . $stmt->error);
+        echo "There was an issue creating the ticket. Please try again later.";
     }
     $stmt->close();
 }
@@ -87,7 +92,8 @@ function insertSale($time, $date, $userId, $performancaId, $biletaId, $sasia, $t
     if ($stmt->execute()) {
         echo "New sale created successfully";
     } else {
-        echo "Error: " . $stmt->error;
+        error_log("Error inserting sale: " . $stmt->error);
+        echo "There was an issue creating the sale. Please try again later.";
     }
     $stmt->close();
 }
@@ -98,7 +104,8 @@ function updateUser($id, $emri, $mbiemri, $email, $username, $passHash, $salt, $
     if ($stmt->execute()) {
         echo "User updated successfully";
     } else {
-        echo "Error updating user: " . $stmt->error;
+        error_log("Error updating user: " . $stmt->error);
+        echo "There was an issue updating the user. Please try again later.";
     }
     $stmt->close();
 }
@@ -109,7 +116,8 @@ function updateTicket($id, $tipi, $cmimi, $conn) {
     if ($stmt->execute()) {
         echo "Ticket updated successfully";
     } else {
-        echo "Error updating ticket: " . $stmt->error;
+        error_log("Error updating ticket: " . $stmt->error);
+        echo "There was an issue updating the ticket. Please try again later.";
     }
     $stmt->close();
 }
@@ -120,7 +128,8 @@ function updateSale($id, $time, $date, $userId, $performancaId, $biletaId, $sasi
     if ($stmt->execute()) {
         echo "Sale updated successfully";
     } else {
-        echo "Error updating sale: " . $stmt->error;
+        error_log("Error updating sale: " . $stmt->error);
+        echo "There was an issue updating the sale. Please try again later.";
     }
     $stmt->close();
 }
@@ -131,7 +140,8 @@ function deleteUser($id, $conn) {
     if ($stmt->execute()) {
         echo "User deleted successfully";
     } else {
-        echo "Error deleting user: " . $stmt->error;
+        error_log("Error deleting user: " . $stmt->error);
+        echo "There was an issue deleting the user. Please try again later.";
     }
     $stmt->close();
 }
@@ -142,7 +152,8 @@ function deleteTicket($id, $conn) {
     if ($stmt->execute()) {
         echo "Ticket deleted successfully";
     } else {
-        echo "Error deleting ticket: " . $stmt->error;
+        error_log("Error deleting ticket: " . $stmt->error);
+        echo "There was an issue deleting the ticket. Please try again later.";
     }
     $stmt->close();
 }
@@ -153,7 +164,8 @@ function deleteSale($id, $conn) {
     if ($stmt->execute()) {
         echo "Sale deleted successfully";
     } else {
-        echo "Error deleting sale: " . $stmt->error;
+        error_log("Error deleting sale: " . $stmt->error);
+        echo "There was an issue deleting the sale. Please try again later.";
     }
     $stmt->close();
 }

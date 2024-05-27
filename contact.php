@@ -504,6 +504,32 @@ if(isset($_POST['color'])) {
           </script>
     
     <script src ="resources/js/contact.js"></script>
+    //close the popup form:
+        <script>
+    // Open the feedback form
+    document.getElementById('openFeedbackFormBtn').addEventListener('click', function() {
+        document.getElementById('feedbackPopup').style.display = 'block';
+    });
+
+    // Close the feedback form when the cancel button is clicked
+    document.querySelector('#feedbackPopup .btn.btn-primary[onclick="closePopup()"]').addEventListener('click', function() {
+        document.getElementById('feedbackPopup').style.display = 'none';
+    });
+
+    // Close the feedback form when clicking outside the form
+    window.addEventListener('click', function(event) {
+        var feedbackPopup = document.getElementById('feedbackPopup');
+        if (event.target == feedbackPopup) {
+            feedbackPopup.style.display = 'none';
+        }
+    });
+
+    // Function to close the popup (in case it's used elsewhere)
+    function closePopup() {
+        document.getElementById('feedbackPopup').style.display = 'none';
+    }
+</script>
+
     <script>
         $(document).ready(function(){
           // Show/Hide arrow button on scroll

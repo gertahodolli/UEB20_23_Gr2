@@ -221,7 +221,6 @@ if (isset($_POST['color'])) {
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14866.283348271413!2d21.1567011!3d42.6610999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x189f57f3727e8636!2sYouth%20and%20Sports%20Center!5e0!3m2!1sen!2sus!4v1651405369999!5m2!1sen!2sus" allowfullscreen>
             </iframe>
             <p>M564+CMP, Luan Haradinaj, Prishtina</p>
-                <a href="direction.php">Direction</a>
             </div>
             <section class="additional-section">
             <h5>PARKING SPOTS</h5>

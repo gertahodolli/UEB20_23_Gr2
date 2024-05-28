@@ -2,11 +2,14 @@
 session_start();
 include 'database/db_connect.php'; // Include the connection script
 
+// Check if the user is logged in and the user_id is set in the session
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
 // Session expiry logic
 if (!isset($_SESSION['form_access_time'])) {
     $_SESSION['form_access_time'] = time();
 } else {
-    if (time() - $_SESSION['form_access_time'] > 10) { // 120 seconds = 2 minutes
+    if (time() - $_SESSION['form_access_time'] > 120) { // 120 seconds = 2 minutes
         session_unset();
         session_destroy();
         header("Location: biletat.php?session_expired=true");
@@ -19,7 +22,7 @@ $_SESSION['form_access_time'] = time();
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
     $ticketType = $_POST['ticketType'];
     $quantity = $_POST['quantity'];
-    $userId = $_SESSION['user_id']; // Assuming user ID is stored in session
+    $userId = $user_id; // Using the user ID from session
 
     $stmt = $conn->prepare("INSERT INTO tickets (user_id, ticket_type, quantity, purchase_date) VALUES (?, ?, ?, NOW())");
     $stmt->bind_param("isi", $userId, $ticketType, $quantity);

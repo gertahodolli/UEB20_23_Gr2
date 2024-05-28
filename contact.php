@@ -1,28 +1,32 @@
 <?php
 session_start();  // Start the session at the top of the script
-
-// Handle setting and deleting cookies for background color
-
+require 'database/db_connect.php';  // Include the database connection file
 
 // Check if a feedback form was submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['emri'], $_POST['feedback'], $_POST['rating'])) {
-    // Capture and sanitize the data
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['emri'], $_POST['email'], $_POST['feedback'], $_POST['rating'])) {
+    
     $name = filter_var($_POST['emri'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $feedback = filter_var($_POST['feedback'], FILTER_SANITIZE_STRING);
     $rating = filter_var($_POST['rating'], FILTER_VALIDATE_INT);
-
-    // Store the feedback data in session
-    $_SESSION['feedbacks'][] = ['name' => $name, 'feedback' => $feedback, 'rating' => $rating];
-
-    // Redirect to the same page to avoid form resubmission
-    header('Location: ' . $_SERVER['PHP_SELF']);
-    exit;
+    
+    // Prepare the SQL query
+    $sql = "INSERT INTO feedback (name, email, rating, feedback) VALUES ('$name', '$email', '$rating', '$feedback')";
+    
+    // Attempt to execute the query
+    if (mysqli_query($conn, $sql)) {
+        // Store feedback in session for display
+        $_SESSION['feedbacks'][] = ['name' => $name, 'rating' => $rating, 'feedback' => $feedback];
+    } else {
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+    }
+    
+    // Close the connection
+    mysqli_close($conn);
 }
 ?>
 
 <!-- Continue with your HTML and embedded PHP for display -->
-
-
 <?php
 // Function to set a cookie
 function set_cookie($name, $value, $expiry) {
@@ -37,7 +41,7 @@ function delete_cookie($name) {
 
 // Check if a cookie is set
 $cookie_name = "bg_color";
-if(isset($_COOKIE[$cookie_name])) {
+if (isset($_COOKIE[$cookie_name])) {
     // Cookie exists, get its value
     $bg_color = $_COOKIE[$cookie_name];
 } else {
@@ -46,8 +50,8 @@ if(isset($_COOKIE[$cookie_name])) {
     set_cookie($cookie_name, $bg_color, 86400); // Cookie expires in 1 day
 }
 
-// Process form submission
-if(isset($_POST['color'])) {
+// Process form submission for color selection
+if (isset($_POST['color'])) {
     $selected_color = $_POST['color'];
     set_cookie($cookie_name, $selected_color, 86400); // Update cookie with selected color
     // Redirect to avoid header modification after output

@@ -77,7 +77,7 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" class="butoni">Login</button>
+            <button type="submit" class="butoni" >Login</button>
             <button type="button" class="butoni cancel-button" onclick="window.location='index.php';">Cancel</button>
         </form>
         <p>If you don't have an account, <a href="signup.html">register here</a>.</p>

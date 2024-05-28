@@ -32,6 +32,30 @@ if(isset($_POST['color'])) {
     header("Location: {$_SERVER['PHP_SELF']}");
     exit; // Ensure script stops execution after redirection
 }
+
+// Function to get show details by reference
+function get_show_details_by_date($conn, $date, &$details) {
+    $stmt = $conn->prepare("
+        SELECT s.emrin, s.regjisorin, s.duration, s.foto 
+        FROM performances p 
+        JOIN shfaqje s ON p.shfaqje_id = s.id 
+        WHERE p.date = ?
+    ");
+    $stmt->bind_param("s", $date);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $details = $result->fetch_assoc();
+    $stmt->close();
+}
+
+// Check if a date is provided for fetching show details
+if (isset($_POST['date'])) {
+    $date = $_POST['date'];
+    $showDetails = [];
+    get_show_details_by_date($conn, $date, $showDetails);
+    echo json_encode($showDetails);
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -207,7 +231,7 @@ if(isset($_POST['color'])) {
       
       // Fetch show details for the selected date
       $.ajax({
-        url: 'get_show_details.php',
+        url: 'calendar.php',
         method: 'POST',
         data: { date: selectedDate },
         dataType: 'json',

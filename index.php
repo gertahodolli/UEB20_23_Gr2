@@ -15,7 +15,7 @@ function delete_cookie($name) {
 
 // Check if a cookie is set
 $cookie_name = "bg_color";
-if(isset($_COOKIE[$cookie_name])) {
+if (isset($_COOKIE[$cookie_name])) {
     // Cookie exists, get its value
     $bg_color = $_COOKIE[$cookie_name];
 } else {
@@ -25,13 +25,14 @@ if(isset($_COOKIE[$cookie_name])) {
 }
 
 // Process form submission
-if(isset($_POST['color'])) {
+if (isset($_POST['color'])) {
     $selected_color = $_POST['color'];
     set_cookie($cookie_name, $selected_color, 86400); // Update cookie with selected color
     // Redirect to avoid header modification after output
     header("Location: {$_SERVER['PHP_SELF']}");
     exit; // Ensure script stops execution after redirection
 }
+
 // Start the session
 session_start();
 
@@ -43,18 +44,31 @@ if (!isset($_SESSION['visit_count'])) {
     // If it exists, increment it by 1
     $_SESSION['visit_count']++;
 }
-?>
-<?php
-// Fetch recent shows from the database
-$query = "SELECT emri, foto, date, time FROM performances ORDER BY date DESC LIMIT 2";
-$result = $conn->query($query);
 
-$recent_shows = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $recent_shows[] = $row;
+// Function to update recent shows by reference
+function update_recent_shows(&$shows) {
+    // Fetch recent shows from the database
+    include 'database/db_connect.php'; // Include database connection inside the function
+
+    $query = "SELECT emri, foto, date, time FROM performances ORDER BY date DESC LIMIT 2";
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+        $shows = [];
+        while ($row = $result->fetch_assoc()) {
+            $shows[] = $row;
+        }
     }
+
+    $conn->close(); // Close the database connection inside the function
 }
+
+// Initialize the recent shows array
+$recent_shows = [];
+
+// Update recent shows by reference
+update_recent_shows($recent_shows);
+
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +77,7 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="resources/css/home.css">
-    <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="./libraries/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -292,8 +306,6 @@ if ($result->num_rows > 0) {
     </div>
     </footer>
 
-
-
     <!-- Bootstrap JS and other scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -301,7 +313,6 @@ if ($result->num_rows > 0) {
 
         <script src ="resources/js/contact.js"></script>
         <script src="resources/js/index.js"></script>
-
 
         <script type="text/javascript">
             var i=0;

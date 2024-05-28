@@ -6,120 +6,140 @@
     <title>Sign Up</title>
     <style>
         html, body {
-            height: 100vh;
-            overflow-y: hidden;
+            height: 100%;
             margin: 0;
             padding: 0;
         }
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-}
-
-.container {
-    width: 300px;
-    margin: 35px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-button {
-    background-color:  rgba(145, 15, 18, 0.7);
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-.error {
-    color:  rgba(145, 15, 18, 0.7);
-    background-color: #ffc4c4;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-.success {
-    color: green;
-    background-color: #c4ffca;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-a {
-    color:  rgba(145, 15, 18, 0.7);
-    text-decoration: none;
-}
-.butoni{
-    width: 70%;
-    background: linear-gradient(to bottom right, rgba(145, 15, 18, 0.7), rgb(128, 61, 61));
-    color: white;
-    border: 1px solid #3d3d3d;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    margin-top: 15px; /* Top margin */
-    margin-bottom: 15px; /* Bottom margin */
-    margin-left: 40px; /* Left margin */
-    margin-right: 40px; /* Right margin */
-    border-radius: 4px;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.5s;
-    box-sizing: border-box;
-}
-
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+        .container {
+            width: 300px;
+            margin: 35px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="tel"], button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: rgba(145, 15, 18, 0.7);
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .butoni {
+            width: 70%;
+            background: linear-gradient(to bottom right, rgba(145, 15, 18, 0.7), rgb(128, 61, 61));
+            color: white;
+            border: 1px solid #3d3d3d;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-left: 40px;
+            margin-right: 40px;
+            border-radius: 4px;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.5s;
+            box-sizing: border-box;
+        }
+        .cancel-button {
+            background-color: #999;  /* Grey background for cancel */
+            color: white;
+        }
+        .form-group-inline {
+            display: flex;
+            align-items: center;
+        }
+        .form-group-inline label {
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
     </style>
+    <script>
+        function validateForm() {
+            var age = document.getElementById('age').value;
+            var phone = document.getElementById('phone').value;
+            var phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+            var errorMessage = '';
+
+            if (age <= 12) {
+                errorMessage += 'Age must be greater than 12.\n';
+            }
+            if (!phonePattern.test(phone)) {
+                errorMessage += 'Phone number must be in the format 123-456-7890.\n';
+            }
+
+            if (errorMessage) {
+                alert(errorMessage);
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h2>Sign Up</h2>
-        <form action="signup.php" method="post">
+        <form action="signup.php" method="post" onsubmit="return validateForm()">
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
             </div>
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+            <div class="form-group">
+                <input type="number" id="age" name="age" placeholder="Age" required min="0">
+            </div>
+            <div class="form-group form-group-inline">
+                <label for="student">Student:</label>
+                <input type="checkbox" id="student" name="student">
+            </div>
+            <div class="form-group">
+                <input type="tel" id="phone" name="phone" placeholder="Phone: 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
             </div>
             <button type="submit" class="butoni">Sign Up</button>
+            <button type="button" class="butoni cancel-button" onclick="window.location='index.php';">Cancel</button>
         </form>
         <p>Already have an account? <a href="indexlog.php">Login here</a>.</p>
     </div>

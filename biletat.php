@@ -257,7 +257,7 @@ if(isset($_POST['color'])) {
                         </div>
                         <!-- Ticket Type -->
                         <label style="margin: 10px; margin-top: 20px;">Ticket Selection</label><br>
-                        <div class="row">
+                        <div id="ticketTypeContainer" class="row">
                             <div class="col-md-6">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="regularTicketCheckbox" name="ticketType[]" value="Regular" required>
@@ -430,6 +430,101 @@ if(isset($_POST['color'])) {
                 $('#purchaseForm').submit();
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        fetchFilteredTickets();
+    });
+
+    function fetchFilteredTickets() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'fetch_filtered_tickets.php', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                populateTicketTypes(response);
+            }
+        };
+        xhr.send();
+    }
+
+    function populateTicketTypes(ticketTypes) {
+        var ticketTypeContainer = document.getElementById('ticketTypeContainer');
+        ticketTypeContainer.innerHTML = ''; // Clear existing options
+        ticketTypes.forEach(function(ticket) {
+            var formCheck = document.createElement('div');
+            formCheck.classList.add('form-check');
+            
+            var input = document.createElement('input');
+            input.type = 'checkbox';
+            input.classList.add('form-check-input');
+            input.id = ticket.id;
+            input.name = 'ticketType[]';
+            input.value = ticket.tipi;
+            input.required = true;
+            
+            var label = document.createElement('label');
+            label.classList.add('form-check-label');
+            label.setAttribute('for', ticket.id);
+            label.innerText = ticket.tipi;
+            
+            var quantityControl = document.createElement('div');
+            quantityControl.classList.add('quantity-control');
+            quantityControl.style.display = 'none';
+            
+            var quantityLabel = document.createElement('label');
+            quantityLabel.setAttribute('for', ticket.id + 'Quantity');
+            quantityLabel.innerText = 'Quantity:';
+            
+            var rowDiv = document.createElement('div');
+            rowDiv.classList.add('row');
+            
+            var colDiv = document.createElement('div');
+            colDiv.classList.add('col', 'quantity-buttons');
+            
+            var decrementButton = document.createElement('button');
+            decrementButton.type = 'button';
+            decrementButton.classList.add('btn', 'btn-secondary', 'quantity');
+            decrementButton.innerText = '-';
+            decrementButton.setAttribute('onclick', 'decrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
+            
+            var quantityInput = document.createElement('input');
+            quantityInput.type = 'text';
+            quantityInput.classList.add('form-control', 'value');
+            quantityInput.id = ticket.id + 'Quantity';
+            quantityInput.name = ticket.id + 'Quantity';
+            quantityInput.value = '0';
+            quantityInput.readOnly = true;
+            
+            var incrementButton = document.createElement('button');
+            incrementButton.type = 'button';
+            incrementButton.classList.add('btn', 'btn-secondary', 'quantity');
+            incrementButton.innerText = '+';
+            incrementButton.setAttribute('onclick', 'incrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
+            
+            colDiv.appendChild(decrementButton);
+            colDiv.appendChild(quantityInput);
+            colDiv.appendChild(incrementButton);
+            rowDiv.appendChild(colDiv);
+            quantityControl.appendChild(quantityLabel);
+            quantityControl.appendChild(rowDiv);
+            
+            formCheck.appendChild(input);
+            formCheck.appendChild(label);
+            formCheck.appendChild(quantityControl);
+            ticketTypeContainer.appendChild(formCheck);
+        });
+        
+        // Show/hide quantity controls based on checkbox state
+        document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.closest('.form-check').querySelector('.quantity-control').style.display = 'block';
+                } else {
+                    this.closest('.form-check').querySelector('.quantity-control').style.display = 'none';
+                }
+            });
+        });
+    }
     </script>
 </main>
 </body>

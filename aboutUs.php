@@ -1,4 +1,6 @@
 <?php
+include 'database/db_connect.php';
+
 // Function to set a cookie
 function set_cookie($name, $value, $expiry) {
     setcookie($name, $value, time() + $expiry, "/");
@@ -22,15 +24,46 @@ if(isset($_COOKIE[$cookie_name])) {
 }
 
 // Process form submission
-if(isset($_POST['color'])) {
-    $selected_color = $_POST['color'];
-    set_cookie($cookie_name, $selected_color, 86400); // Update cookie with selected color
-    // Redirect to avoid header modification after output
-    header("Location: {$_SERVER['PHP_SELF']}");
-    exit; // Ensure script stops execution after redirection
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['emri'])) {
+    // Retrieve form data
+    $emriDheMbiemri = $_POST['emri'];
+    $pozita = $_POST['puna'];
+    $email = $_POST['email'];
+    $tel = $_POST['telefoni'];
+    $mosha = $_POST['mosha'];
+    $koment = $_POST['komente'];
+
+    // Create a new connection to the database
+    include 'database/db_connect.php'; // Ensure the connection details are correct
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("INSERT INTO apliko (emriDheMbiemri, pozita, email, tel, mosha, koment) VALUES (?, ?, ?, ?, ?, ?)");
+    if ($stmt === false) {
+        die('prepare() failed: ' . htmlspecialchars($conn->error));
+    }
+
+    $bind = $stmt->bind_param("ssssis", $emriDheMbiemri, $pozita, $email, $tel, $mosha, $koment);
+    if ($bind === false) {
+        die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+    }
+
+    // Execute the statement
+    $exec = $stmt->execute();
+    if ($exec) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . htmlspecialchars($stmt->error);
+    }
+
+    // Close statement and connection
+    $stmt->close();
+    $conn->close();
+
+    // Redirect to avoid resubmission
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,10 +73,9 @@ if(isset($_POST['color'])) {
     <link rel="stylesheet" href="resources/css/aboutUs.css">
     <link rel="stylesheet" href="resources/css/home.css">
     <link rel="stylesheet" href="resources/css/modal.css">
-    <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="./libraries/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="./libraries/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="...">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="...">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-egFbsXOp+g8gP2Vj8DR5FPa/Wh0TSO+zreQ0ZwPvvlS7CdltqAcMQn3O4d2Zx15bwQPGssS1NN5cx+s/ISv6Bw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>About Us</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -51,45 +83,44 @@ if(isset($_POST['color'])) {
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
 
     <style>
-      #puzzle-container {
-          width: 300px;
-          height: 100px;
-          border: 2px solid #ccc;
-          position: relative;
-      }
+        #puzzle-container {
+            width: 300px;
+            height: 100px;
+            border: 2px solid #ccc;
+            position: relative;
+        }
 
-      #puzzle-drop-zone {
-          width: 100%;
-          height: 2px;
-          background-color: #ccc;
-          position: absolute;
-          bottom: 0;
-      }
+        #puzzle-drop-zone {
+            width: 100%;
+            height: 2px;
+            background-color: #ccc;
+            position: absolute;
+            bottom: 0;
+        }
 
-      #green-zone {
-          width: 40px; /* Adjust the width of the green zone */
-          height: 100%;
-          background-color: #4CAF50;
-          position: absolute;
-          left: 50%; /* Position it in the middle of the drop zone */
-          transform: translateX(-50%); /* Center it horizontally */
-          opacity: 0; /* Initially hide it */
-          transition: opacity 0.3s; /* Add a transition effect for smooth color change */
-      }
+        #green-zone {
+            width: 40px;
+            height: 100%;
+            background-color: #4CAF50;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
 
-      #puzzle-piece {
-          width: 80px;
-          height: 80px;
-          background-color: #4CAF50;
-          color: #fff;
-          text-align: center;
-          line-height: 80px;
-          position: absolute;
-          cursor: move;
-          clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-      }
-  </style>
-
+        #puzzle-piece {
+            width: 80px;
+            height: 80px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            line-height: 80px;
+            position: absolute;
+            cursor: move;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+    </style>
 
 </head>
 
@@ -104,7 +135,7 @@ if(isset($_POST['color'])) {
                 <hr class="divider">
                 <p>Theater is an incomparable treasure of the soul. It is one of the most powerful tools to reflect, raise questions, and inspire change in society. </p>
                 <p class="small-text">
-                  Theater is a free voice that seeks justice, humanity and a deep understanding of life.
+                    Theater is a free voice that seeks justice, humanity and a deep understanding of life.
                     <br><br>
                     <b>Azem Shkreli</b> <br> Albanian poet and literary critic.
                 </p>
@@ -250,7 +281,7 @@ if(isset($_POST['color'])) {
         </div>
         <div class="modal-body">
           <!-- Forma e re -->
-          <form action="mailto:teatri.kombetar@rks-gov.net" method="post">
+          <form id="application-form" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <!-- Input tekst -->
             <div class="mb-3">
               <label for="emri" class="form-label">Name and surname:</label>
@@ -422,7 +453,6 @@ if(isset($_POST['color'])) {
       }
   }
 </script>
-
 
 </body>
 </html>

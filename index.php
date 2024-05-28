@@ -1,4 +1,7 @@
 <?php
+// Include the database connection script
+include 'database/db_connect.php';
+
 // Function to set a cookie
 function set_cookie($name, $value, $expiry) {
     setcookie($name, $value, time() + $expiry, "/");
@@ -29,8 +32,6 @@ if(isset($_POST['color'])) {
     header("Location: {$_SERVER['PHP_SELF']}");
     exit; // Ensure script stops execution after redirection
 }
-?>
-<?php
 // Start the session
 session_start();
 
@@ -43,46 +44,17 @@ if (!isset($_SESSION['visit_count'])) {
     $_SESSION['visit_count']++;
 }
 ?>
-
 <?php
-$shows = [
-  [
-      'title' => 'CLUB ALBANIA',
-      'image' => './resources/shows/clubalbania.png',
-      'dates' => ['2023-12-14', '2023-12-26'],
-      'time' => '20:00'
-  ],
-  [
-      'title' => 'Grate',
-      'image' => './resources/shows/Inkedgrate2.jpg',
-      'dates' => ['2023-12-17', '2023-12-23'],
-      'time' => '20:00'
-  ],
-  [
-      'title' => 'Udhetim i gjate drejt nates',
-      'image' => './resources/shows/udhetimGjateDrejtNates.jpg',
-      'dates' => ['2023-12-05'],
-      'time' => '20:00'
-  ],
-  [
-      'title' => '1984',
-      'image' => './resources/shows/1984.jpg',
-      'dates' => ['2023-12-11', '2023-12-21'],
-      'time' => '20:00'
-  ],
-  [
-      'title' => 'Gjithcka rreth IV',
-      'image' => './resources/shows/GJITHÇKARRETHIV.png',
-      'dates' => ['2023-12-09', '2023-12-30'],
-      'time' => '20:00'
-  ],
-  [
-      'title' => 'Dite Vere',
-      'image' => './resources/shows/diteVere2.jpg',
-      'dates' => ['2023-12-03', '2023-12-10'],
-      'time' => '20:00'
-  ]
-];
+// Fetch recent shows from the database
+$query = "SELECT emri, foto, date, time FROM performances ORDER BY date DESC LIMIT 2";
+$result = $conn->query($query);
+
+$recent_shows = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $recent_shows[] = $row;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -184,18 +156,8 @@ $shows = [
                 background-color: <?php echo $bg_color; ?>;
                 color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;
             }
-
-
-
-        
     </style>
-
-
-
-
 </head>
-
-
 <body>
     <!-- Navbar -->
     <header id='go-to-nav' >
@@ -206,7 +168,6 @@ $shows = [
     <div id="arrow-button">&#8593;</div>
 
     <!-- Section with switching background picture -->
-
     <section class="full-page text-center">
         <div class="overlay-text fade-effect">
           <h1 id="showName">GJITHÇKA RRETH IV</h1>
@@ -216,9 +177,6 @@ $shows = [
         <div class="hover-button left" >&lt;</div>
         <div class="hover-button right">&gt;</div>
     </section>
-    
-
-
     <!-- Section with two recent shows and link to calendar -->
     <section class="container my-5">
     <div class="row">
@@ -226,15 +184,7 @@ $shows = [
         <h2 class="text-center mb-5" style="color: <?php echo $bg_color === 'white' ? 'black' : 'white'; ?>;">Recent Shows</h2>
         <!-- Show 1 -->
         <?php
-                // Sort the shows array by date in ascending order
-                usort($shows, function($a, $b) {
-                    return strtotime($a['dates'][0]) - strtotime($b['dates'][0]);
-                });
-                
-                // Display only the first two recent shows
-                $recent_shows = array_slice($shows, 0, 2);
-                
-                // Loop through the recent shows
+                // Loop through the recent shows fetched from the database
                 foreach ($recent_shows as $show) {
                     ?>
                     <!-- Show card -->
@@ -242,14 +192,13 @@ $shows = [
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- Show image -->
-                                <img src="<?php echo $show['image']; ?>" alt="<?php echo $show['title']; ?> Image" class="img-fluid">
+                                <img src="<?php echo $show['foto']; ?>" alt="<?php echo $show['emri']; ?> Image" class="img-fluid">
                             </div>
                             <div class="col-md-8 recent-text-color">
                                 <div class="card-body">
                                     <!-- Show details -->
-                                    <h5 class="card-title"><?php echo $show['title']; ?></h5>
-                                    <!-- Assuming only the latest date is displayed -->
-                                    <p class="card-text"><b>Date:</b> <?php echo $show['dates'][0]; ?></p>
+                                    <h5 class="card-title"><?php echo $show['emri']; ?></h5>
+                                    <p class="card-text"><b>Date:</b> <?php echo $show['date']; ?></p>
                                     <p class="card-text"><b>Time:</b> <?php echo $show['time']; ?></p>
                                 </div>
                             </div>
@@ -374,8 +323,6 @@ $shows = [
             }
             setTimeout("changeImg()",time);// body...
           }
-        
-        
           window.onload = changeImg;
         </script>
 
@@ -450,10 +397,7 @@ $shows = [
 
         
         });
-
-
       </script>
-
     <script>
       $(document).ready(function(){
         
@@ -476,11 +420,6 @@ $shows = [
 
       });
     </script>
-
-
-
-
-
       <script>
         $(document).ready(function(){
           $(".show-date1").click(function(){
@@ -505,8 +444,6 @@ $shows = [
           });
         });
       </script>
-
-
     <!--Used NaN, toExponential(), toString() -->
 
       <script>
@@ -530,16 +467,8 @@ $shows = [
         console.log(numberInSpan.toString());
         
         console.log(Number.MAX_VALUE);
-
-
-
-
-
       </script>
-
-
       <!--Checking if the word book is mentioned in the paragraph, using try, catch, throw and warn-->
-
       <script>
         try {
         const paragraph = document.getElementById('try-catch').innerText;
@@ -627,11 +556,10 @@ $shows = [
         });
       });
     </script>
-      
-
-
-
-    
-
 </body>
 </html>
+
+<?php
+// Close the database connection
+$conn->close();
+?>

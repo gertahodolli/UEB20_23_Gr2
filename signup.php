@@ -1,6 +1,6 @@
 <?php
 require 'UserAuth.php';
-include 'database/db_connect.php';
+include 'database/db_connect.php';  // Ensure this is the correct path to your database connection
 session_start();
 
 function isValidPassword($password) {
@@ -24,24 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!isValidPassword($password)) {
         $message = "Password must be at least 8 characters long and include at least one number and one special character.";
     } else {
-        // If the password is valid, proceed to create a new user instance
-        $userAuth = new UserAuth($firstname, $lastname, $email, $username, $password, $age, $student, $phone);
-
-        // Check if user registration is successful
+        $userAuth = new UserAuth($firstname, $lastname, $username, $email, $password, $age, $student, $phone);
         if ($userAuth->signup()) {
-            // Registration successful, redirect to the login page
             header("Location: indexlog.php");
             exit();
         } else {
-            // Handle failure, possibly due to existing username or email
             $message = "Signup failed. Please try again.";
         }
     }
 }
 
-// If there is a message, alert it and redirect to signup.html
 if ($message) {
     echo "<script>alert('$message'); window.location='signup.html';</script>";
-    exit(); // Ensure to stop PHP execution after the redirect
 }
 ?>
+<!DOCTYPE html>
+<!-- Your HTML content here -->

@@ -1,11 +1,11 @@
 <?php
-require_once 'config.php';
+require_once 'config.php';  // Ensure this file has necessary configuration
 
 class User {
     protected $firstname;
     protected $lastname;
     protected $username;
-    private $password;
+    protected $password;
     private $email;
     protected $age;
     protected $student;
@@ -23,40 +23,13 @@ class User {
         $this->hashPassword();
     }
 
-    public function __destruct() {
-        unset($this->firstname);
-        unset($this->lastname);
-        unset($this->username);
-        unset($this->password);
-        unset($this->email);
-        unset($this->age);
-        unset($this->student);
-        unset($this->phone);
+    protected function hashPassword() {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
     }
 
-    public function getUsername() { return $this->username; }
-    public function setUsername($username) { $this->username = $username; }
-
-    public function getEmail() { return $this->email; }
-    public function setEmail($email) { $this->email = $email; }
-
-    public function getFirstname() { return $this->firstname; }
-    public function setFirstname($firstname) { $this->firstname = $firstname; }
-
-    public function getLastname() { return $this->lastname; }
-    public function setLastname($lastname) { $this->lastname = $lastname; }
-
-    public function getAge() { return $this->age; }
-    public function setAge($age) { $this->age = $age; }
-
-    public function isStudent() { return $this->student; }
-    public function setStudent($student) { $this->student = $student; }
-
-    public function getPhone() { return $this->phone; }
-    public function setPhone($phone) { $this->phone = $phone; }
-
-    protected function hashPassword() { $this->password = password_hash($this->password, PASSWORD_DEFAULT); }
-    public function verifyPassword($password) { return password_verify($password, $this->password); }
+    public function verifyPassword($password) {
+        return password_verify($password, $this->password);
+    }
 }
 
 class UserAuth extends User {
@@ -64,24 +37,30 @@ class UserAuth extends User {
 
     public function __construct($firstname, $lastname, $username, $email, $password, $age, $student, $phone) {
         parent::__construct($firstname, $lastname, $username, $email, $password, $age, $student, $phone);
-        $this->db = Database::getConnection();
+        global $conn;  // Use the global connection
+        $this->db = $conn;
     }
 
     public function signup() {
-        $stmt = $this->db->prepare("INSERT INTO user (firstname, lastname, email, username, password, age, student, phone) VALUES (:firstname, :lastname, :email, :username, :password, :age, :student, :phone)");
-        $stmt->execute([
-            'firstname' => $this->firstname,
-            'lastname' => $this->lastname,
-            'email' => $this->email,
-            'username' => $this->username,
-            'password' => $this->password, // Directly use the hashed password
-            'age' => $this->age,
-            'student' => $this->student,
-            'phone' => $this->phone
-        ]);
-        return $this->db->lastInsertId() ? true : false;
+        $stmt = $this->db->prepare("INSERT INTO user (emri, mbiemri, email, username, passHash, mosha, student, telefoni) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        if ($stmt === false) {
+            error_log("Prepare failed: " . $this->db->error);
+            return false; // Prevent further execution if prepare failed
+        }
+        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+        $stmt->bind_param("sssssiis", $this->firstname, $this->lastname, $this->email, $this->username, $hashedPassword, $this->age, $this->student, $this->phone);
+        if (!$stmt->execute()) {
+            error_log("Execute failed: " . $stmt->error);
+            return false;
+        }
+        if ($stmt->affected_rows === 0) {
+            error_log("No rows affected: " . $stmt->error);
+            return false;
+        }
+        return true;
     }
-
-    // ... Login method (ensure to update as necessary)
+    
+    
+    
 }
 ?>

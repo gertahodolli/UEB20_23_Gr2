@@ -1,4 +1,6 @@
 <?php
+
+include 'database/db_connect.php';
 // Function to set a cookie
 function set_cookie($name, $value, $expiry) {
     setcookie($name, $value, time() + $expiry, "/");
@@ -177,222 +179,139 @@ if(isset($_POST['color'])) {
   <?php include 'navbar.php'; ?>
 </header>
 
+<section class="show-changes">
+    <div class="container pt-5">
+        <h2 style="text-align: center; margin-bottom: 30px;">Shows</h2>
+        <div class="search-bar ml-5">
+            <input type="text" class="search-input mb-2" placeholder="Search shows...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        <div class="row">
+        <?php 
 
-    <section class="show-changes">
-        <div class="container pt-5">
-            <h2 style="text-align: center; margin-bottom: 30px;">Shows</h2>
-            <div class="search-bar ml-5">
-              <input type="text" class="search-input mb-2" placeholder="Search shows...">
-              <i class="fas fa-search search-icon"></i>
-            </div>
-            <div class="row">
-            <?php
-            // Define an array of shows with their titles and other details
-            $shows = array(
-                array(
-                    "title" => "Club Albania",
-                    "director" => "Fatos Berisha",
-                    "actors" => "Armond Morina, Ard Islami, Armend Smajli, Maylinda Kosumovic, Naim Berisha, Teuta Krasniqi and Ylber Bardhi",
-                    "description" => "The play is based on the comedy, 'After Death' by A.Z. Çajupi."
-                ),
-                array(
-                    "title" => "1984",
-                    "director" => "Igor Mendjisky",
-                    "actors" => "Adrian Morina, Arta Selimi, Basri Lushtaku, Edona Reshitaj, Flaka Latifi, Shpejtim Kastrati, Xhejlane Godanci dhe Ylber Bardhi",
-                    "description" => "Dramatized from author George Orwell's dystopian novel."
-                ),
-                array(
-                    "title" => "Udhëtim i gjatë drejt natës",
-                    "director" => "Iliriana Arifi",
-                    "actors" => "Ernest Malazogu, Arta Selimi, Allmir Suhodolli, Don Shala, Florie Bajoku",
-                    "description" => "“Udhëtimi i gjate drejt nates” for the last time this year on December 13, 2023."
-                ),
-                array(
-                    "title" => "GJITHÇKA RRETH IV",
-                    "director" => "Hervin Çuli",
-                    "actors" => "Ermira Hysaj Çerkozi, Albulena Kryeziu Bokshi, Hervin Çuli, Adrian Morina, Kushtrim Sheremeti, Rovena Lule Kuka, Natasha Sela, Endriu Hysi",
-                    "description" => "The dramas and intrigues that a person weaves with a sick ego to achieve their goals, regardless of the destruction or harm inflicted on those around them."
-                ),
-                array(
-                    "title" => "GRATË",
-                    "director" => "Nastazja Domaradzka",
-                    "actors" => "Edona Reshitaj, Gresa Pallaska, Lumnije Sopi, Sheqerie Buqaj, Shengyl Ismaili, Xhejlane Godanci",
-                    "description" => "The play 'WOMEN - or their sins in patriarchy!', is an authorial show in collaboration with the ensemble."
-                ),
-                array(
-                    "title" => "Ditë Vere",
-                    "director" => "Kaltrim Balaj",
-                    "actors" => "Andi Bajgora, Art Pasha, Era Balaj, Lumnije Sopi, Veton Osmani, Adhurim Demi, Naim Berisha",
-                    "description" => "The show will be played in the open air at the Palace of Youth and Sports in Pristina, so after getting the tickets at the ticket office of the National Theatre, the theater attendants will accompany you to the location of the show."
-                )
-                // Add more shows here
-            );
+        // Query to fetch show data from the database
+        $stmt = $conn->prepare("SELECT emrin, regjisorin, duration, aktoret, pershkrimi, foto FROM shfaqje");
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-            // Function to compare titles for sorting
-            function compare_titles($show1, $show2) {
-                return strcmp($show1['title'], $show2['title']);
-            }
+        // Store the fetched data in an array
+        $shows = array();
+        while ($row = $result->fetch_assoc()) {
+            $shows[] = $row;
+        }
 
-            // Sort the shows array alphabetically based on titles
-            usort($shows, 'compare_titles');
+        $stmt->close();
+        $conn->close();
 
-            // Loop through the sorted shows array and generate HTML for each show dynamically
-            foreach ($shows as $show) {
-                ?>
-                <div class="col-md-4 mb-4">
-                    <div class="show-card">
-                        <div class="show-image">
-                            <!-- Your show image HTML -->
-                            <img src="resources/shows/<?php echo strtolower(str_replace(' ', '', $show['title'])); ?>.png" alt="<?php echo $show['title']; ?>" class="shows-img">
-                            <div class="show-title"><?php echo $show['title']; ?></div>
-                            <div class="show-info">
-                                <h3><?php echo $show['title']; ?></h3>
-                                <p><b>Director:</b> <u><?php echo $show['director']; ?></u></p>
-                                <p><i><b>Actors:</b></i> <?php echo $show['actors']; ?></p>
-                                <p><?php echo $show['description']; ?></p>
-                            </div>
+        // Function to compare titles for sorting
+        function compare_titles($show1, $show2) {
+            return strcmp($show1['emrin'], $show2['emrin']);
+        }
+
+        // Sort the shows array alphabetically based on titles
+        usort($shows, 'compare_titles');
+
+        // Loop through the sorted shows array and generate HTML for each show dynamically
+        foreach ($shows as $show) {
+            ?>
+            <div class="col-md-4 mb-4">
+                <div class="show-card">
+                    <div class="show-image">
+                        <!-- Display the image for the show -->
+                        <img src="<?php echo htmlspecialchars($show['foto']); ?>" alt="<?php echo htmlspecialchars($show['emrin']); ?>" class="shows-img">
+                        <div class="show-title"><?php echo htmlspecialchars($show['emrin']); ?></div>
+                        <div class="show-info">
+                            <h3><?php echo htmlspecialchars($show['emrin']); ?></h3>
+                            <p><b>Director:</b> <u><?php echo htmlspecialchars($show['regjisorin']); ?></u></p>
+                            <p><i><b>Actors:</b></i> <?php echo htmlspecialchars($show['aktoret']); ?></p>
+                            <p><?php echo htmlspecialchars($show['pershkrimi']); ?></p>
                         </div>
                     </div>
                 </div>
-                <?php
-            }
-            ?>
-
-            <div class="row mt-4 mb-5 pb-5 text-center">
-                <div class="col-md-6">
-                  <a href="calendar.php" class="btn btn-primary butonat">Go to Calendar</a>
-                </div>
-                <div class="col-md-6">
-                  <a href="biletat.php" class="btn btn-primary butonat">Go to Tickets</a>
-                </div>
-              </div>
-        </div>
-    </section>
-
-    <footer class=" text-center pb-3 bg-color">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="footer-icons social-links">
-              <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
-              <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
             </div>
-            <p>Phone: +383 (44) 753 330</p>
-          </div>
-          <div class="col pt-4">
-            <address>Address: Street Luan Haradinaj, Prishtina</address>
-          </div>
-          <div class="col pt-4">
-          <form method="post" id="color-form" style="position: fi; bottom: 20px; right: 20px;">
-                <label for="color-select" sty>Select Background Color:</label>
-                <select name="color" id="color-select">
-                    <option value="white" <?php if($bg_color === 'white') echo 'selected'; ?>>Light</option>
-                    <option value="black" <?php if($bg_color === 'black') echo 'selected'; ?>>Dark</option>
-                    <!-- Add more color options as needed -->
-                </select>
-                <button type="submit">Save</button>
-            </form>
-          </div>
+            <?php
+        }
+        ?>
         </div>
-       
+
+        <div class="row mt-4 mb-5 pb-5 text-center">
+            <div class="col-md-6">
+                <a href="calendar.php" class="btn btn-primary butonat">Go to Calendar</a>
+            </div>
+            <div class="col-md-6">
+                <a href="biletat.php" class="btn btn-primary butonat">Go to Tickets</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="text-center pb-3 bg-color">
+    <div class="container">
         <div class="row">
-          <div class="col">
-            <p>&copy; <span id="remove">2023</span> National Theater of Kosovo</p></p>
-          </div>
-
+            <div class="col">
+                <div class="footer-icons social-links">
+                    <a href="https://www.facebook.com/teatrikombetarikosoves" target="_blank" class="social-icon p-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/teatrikombetarks/" target="_blank" class="social-icon p-2"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:teatri.kombetar@rks-gov.net" class="social-icon p-2"><i class="fas fa-envelope"></i></a>
+                </div>
+                <p>Phone: +383 (44) 753 330</p>
+            </div>
+            <div class="col pt-4">
+                <address>Address: Street Luan Haradinaj, Prishtina</address>
+            </div>
+            <div class="col pt-4">
+                <form method="post" id="color-form" style="position: fi; bottom: 20px; right: 20px;">
+                    <label for="color-select" sty>Select Background Color:</label>
+                    <select name="color" id="color-select">
+                        <option value="white" <?php if($bg_color === 'white') echo 'selected'; ?>>Light</option>
+                        <option value="black" <?php if($bg_color === 'black') echo 'selected'; ?>>Dark</option>
+                        <!-- Add more color options as needed -->
+                    </select>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
         </div>
-      </div>
-      </footer>
 
-      
-
-
-    <!--Used remove to delete the span element containing the year-->
-
-    <script>
-      $(document).ready(function() {
-      // Select the element with the ID 'remove'
-      $('#remove').remove();
-    });
-
-    </script>
-
-    <!--Through filter, map and reduce funtions, sorted the shows in which Ylber Bardhi plays, shows which are directed by Kaltrim Balaj, and the total number of shows-->
-
-
-    <script>
-      // Get all the show elements
-      const showElements = document.querySelectorAll('.show-card');
-
-      // Convert NodeList to Array
-      const showsArray = Array.from(showElements);
-
-      // Filter shows where Actor Ylber Bardhi plays
-      const showsWithYlberBardhi = showsArray.filter(show => {
-        const actors = show.querySelector('.show-info').innerHTML;
-        return actors.includes('Ylber Bardhi');
-      }).map(show => {
-        return show.querySelector('.show-title').textContent;
-      });
-
-      // Extract shows directed by Kaltrim Balaj
-      const showsDirectedByKaltrimBalaj = showsArray.filter(show => {
-        const director = show.querySelector('.show-info').innerHTML;
-        return director.includes('Kaltrim Balaj');
-      }).map(show => {
-        return show.querySelector('.show-title').textContent;
-      });
-
-      // Use reduce for counting or summing up
-      const totalShows = showsArray.reduce((accumulator, currentShow) => {
-        // Perform any operation here (e.g., counting)
-        return accumulator + 1;
-      }, 0);
-
-      console.log('Shows with Ylber Bardhi:', showsWithYlberBardhi);
-      console.log('Shows directed by Kaltrim Balaj:', showsDirectedByKaltrimBalaj);
-      console.log('Total number of shows:', totalShows);
-
-      
-    </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const showElements = document.querySelectorAll('.show-card');
-        const showsArray = Array.from(showElements);
-    
-        document.querySelector('.search-input').addEventListener('input', function (event) {
-          const searchValue = event.target.value.toLowerCase();
-    
-          const filteredShows = showsArray.filter(show => {
-            const title = show.querySelector('.show-title').textContent.toLowerCase();
-            const info = show.querySelector('.show-info').textContent.toLowerCase();
-    
-            return title.includes(searchValue) || info.includes(searchValue);
-          });
-    
-          // Display matching shows and hide non-matching shows
-          showsArray.forEach(show => {
-            show.style.display = filteredShows.includes(show) ? 'block' : 'none';
-          });
-    
-          // Calculate and display total matching shows
-          const totalMatchingShows = filteredShows.reduce((accumulator, currentShow) => {
-            return accumulator + 1;
-          }, 0);
-    
-          console.log('Total matching shows:', totalMatchingShows);
-        });
-      });
-    </script>
+        <div class="row">
+            <div class="col">
+                <p>&copy; <span id="remove">2023</span> National Theater of Kosovo</p></p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script>
-  $(document).ready(function() {
-  // Select the element with the ID 'remove'
-  $('#remove').remove();
-});
+    $(document).ready(function() {
+        $('#remove').remove();
+    });
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const showElements = document.querySelectorAll('.show-card');
+        const showsArray = Array.from(showElements);
+
+        document.querySelector('.search-input').addEventListener('input', function (event) {
+            const searchValue = event.target.value.toLowerCase();
+
+            const filteredShows = showsArray.filter(show => {
+                const title = show.querySelector('.show-title').textContent.toLowerCase();
+                const info = show.querySelector('.show-info').textContent.toLowerCase();
+
+                return title.includes(searchValue) || info.includes(searchValue);
+            });
+
+            // Display matching shows and hide non-matching shows
+            showsArray.forEach(show => {
+                show.style.display = filteredShows.includes(show) ? 'block' : 'none';
+            });
+
+            // Calculate and display total matching shows
+            const totalMatchingShows = filteredShows.reduce((accumulator, currentShow) => {
+                return accumulator + 1;
+            }, 0);
+
+            console.log('Total matching shows:', totalMatchingShows);
+        });
+    });
 </script>
-
 </body>
 </html>

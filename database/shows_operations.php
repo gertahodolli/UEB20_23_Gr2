@@ -9,8 +9,8 @@ function createShfaqjeTable($conn) {
         duration VARCHAR(10),
         aktoret VARCHAR(255),
         pershkrimi TEXT,
-        foto BLOB,
-        video BLOB
+        foto VARCHAR(255),
+        video VARCHAR(255)
     )";
 
     if ($conn->query($sql) === TRUE) {
@@ -70,8 +70,8 @@ function createPerformancesTable($conn) {
         emri VARCHAR(255) NOT NULL,
         date DATE,
         time TIME,
-        foto BLOB,
-        FOREIGN KEY (shfaqje_id) REFERENCES shfaqje(id)
+        foto VARCHAR(255),
+        FOREIGN KEY (shfaqje_id) REFERENCES shfaqje(id) ON DELETE CASCADE ON UPDATE CASCADE
     )";
 
     if ($conn->query($sql) === TRUE) {

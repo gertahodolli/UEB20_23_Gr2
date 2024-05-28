@@ -1,12 +1,12 @@
 <?php
-require_once 'config.php';  // Ensure this file has necessary configuration
+require_once 'config.php'; // Ensure this file has necessary configuration
 
 class User {
     protected $firstname;
     protected $lastname;
     protected $username;
     protected $password;
-    private $email;
+    protected $email;
     protected $age;
     protected $student;
     protected $phone;
@@ -37,7 +37,7 @@ class UserAuth extends User {
 
     public function __construct($firstname, $lastname, $username, $email, $password, $age, $student, $phone) {
         parent::__construct($firstname, $lastname, $username, $email, $password, $age, $student, $phone);
-        global $conn;  // Use the global connection
+        global $conn; // Use the global connection
         $this->db = $conn;
     }
 
@@ -47,8 +47,7 @@ class UserAuth extends User {
             error_log("Prepare failed: " . $this->db->error);
             return false; // Prevent further execution if prepare failed
         }
-        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
-        $stmt->bind_param("sssssiis", $this->firstname, $this->lastname, $this->email, $this->username, $hashedPassword, $this->age, $this->student, $this->phone);
+        $stmt->bind_param("sssssiis", $this->firstname, $this->lastname, $this->email, $this->username, $this->password, $this->age, $this->student, $this->phone);
         if (!$stmt->execute()) {
             error_log("Execute failed: " . $stmt->error);
             return false;
@@ -59,8 +58,5 @@ class UserAuth extends User {
         }
         return true;
     }
-    
-    
-    
 }
 ?>

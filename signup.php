@@ -1,6 +1,6 @@
 <?php
 require 'UserAuth.php';
-include 'database/db_connect.php';  // Ensure this is the correct path to your database connection
+include 'database/db_connect.php'; // Ensure this is the correct path to your database connection
 session_start();
 
 function isValidPassword($password) {
@@ -38,5 +38,3 @@ if ($message) {
     echo "<script>alert('$message'); window.location='signup.html';</script>";
 }
 ?>
-<!DOCTYPE html>
-<!-- Your HTML content here -->

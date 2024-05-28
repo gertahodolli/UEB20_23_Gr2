@@ -249,11 +249,6 @@ if(isset($_POST['color'])) {
                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required autocomplete="on">
                             <div id="email-error" class="error-message"></div>
                         </div>
-                        <!-- Show Selection -->
-                        <div class="form-group">
-                            <label for="showSelection">Selected Show</label>
-                            <input type="text" class="form-control" id="showSelection" name="showSelection" readonly>
-                        </div>
                         <!-- Date Selection -->
                         <div class="form-group">
                             <label for="showDate">Select Date</label>

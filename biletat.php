@@ -186,7 +186,11 @@ if(isset($_POST['color'])) {
             <div class="row">
             <?php
             // Query to fetch performance data from the database
-            $stmt = $conn->prepare("SELECT p.id, p.emri, p.date, p.time, s.foto, s.emrin FROM performances p JOIN shfaqje s ON p.shfaqje_id = s.id");
+            $stmt = $conn->prepare("
+                SELECT p.id, p.emri, p.date, p.time, s.foto, s.emrin, s.duration 
+                FROM performances p 
+                JOIN shfaqje s ON p.shfaqje_id = s.id
+            ");
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -198,7 +202,8 @@ if(isset($_POST['color'])) {
                         'dates' => [],
                         'time' => $row['time'],
                         'foto' => $row['foto'],
-                        'emrin' => $row['emrin']
+                        'emrin' => $row['emrin'],
+                        'duration' => $row['duration']
                     ];
                 }
                 $shows[$row['emri']]['dates'][] = $row['date'];
@@ -221,7 +226,7 @@ if(isset($_POST['color'])) {
                 echo '<p class="card-text">Time: ' . htmlspecialchars($show['time']) . '</p>';
                 echo '</div>';
                 echo '<div class="card-footer">';
-                echo '<button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#purchaseModal" data-show-id="' . htmlspecialchars($show['id']) . '" data-show-name="' . htmlspecialchars($show['emrin']) . '" data-show-dates=\'' . json_encode($show['dates']) . '\'>Buy ticket</button>';
+                echo '<button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#purchaseModal" data-show-id="' . htmlspecialchars($show['id']) . '" data-show-name="' . htmlspecialchars($show['emrin']) . '" data-show-dates=\'' . json_encode($show['dates']) . '\' data-show-duration="' . htmlspecialchars($show['duration']) . '">Buy ticket</button>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
@@ -353,6 +358,7 @@ if(isset($_POST['color'])) {
             $('.buy-tickets-btn').click(function() {
                 var showName = $(this).data('show-name');
                 var showDates = $(this).data('show-dates');
+                var showDuration = $(this).data('show-duration');
                 var dateOptionsHtml = '';
 
                 $('#showSelection').val(showName);
@@ -365,18 +371,26 @@ if(isset($_POST['color'])) {
                 });
 
                 $('#dateOptions').html(dateOptionsHtml);
-            });
 
+                // Pass the show duration to the fetchFilteredTickets function
+                fetchFilteredTickets(showDuration);
+            });
             $('#submitButton').click(function() {
+                if (!isLoggedIn()) {
+                    alert('You must be logged in to purchase tickets.');
+                    return false;
+                }
                 $('#purchaseForm').submit();
             });
-
-            fetchFilteredTickets();
         });
 
-        function fetchFilteredTickets() {
+        function isLoggedIn() {
+            return <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+        }
+
+        function fetchFilteredTickets(showDuration) {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'biletat.php?action=fetch_filtered_tickets', true);
+            xhr.open('GET', 'fetch_filtered_tickets.php?showDuration=' + showDuration, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var response = JSON.parse(xhr.responseText);
@@ -387,80 +401,69 @@ if(isset($_POST['color'])) {
         }
 
         function populateTicketTypes(ticketTypes) {
-            var ticketTypeContainer = document.getElementById('ticketTypeContainer');
-            ticketTypeContainer.innerHTML = ''; // Clear existing options
-            ticketTypes.forEach(function(ticket) {
-                var formCheck = document.createElement('div');
-                formCheck.classList.add('form-check');
-                
-                var input = document.createElement('input');
-                input.type = 'checkbox';
-                input.classList.add('form-check-input');
-                input.id = ticket.id;
-                input.name = 'ticketType[]';
-                input.value = ticket.tipi;
-                input.dataset.price = ticket.cmimi; // Store price in data attribute
-                
-                var label = document.createElement('label');
-                label.classList.add('form-check-label');
-                label.setAttribute('for', ticket.id);
-                label.innerText = ticket.tipi;
-                
-                var quantityControl = document.createElement('div');
-                quantityControl.classList.add('quantity-control');
-                quantityControl.style.display = 'none';
-                
-                var quantityLabel = document.createElement('label');
-                quantityLabel.setAttribute('for', ticket.id + 'Quantity');
-                quantityLabel.innerText = 'Quantity:';
-                
-                var rowDiv = document.createElement('div');
-                rowDiv.classList.add('row');
-                
-                var colDiv = document.createElement('div');
-                colDiv.classList.add('col', 'quantity-buttons');
-                
-                var decrementButton = document.createElement('button');
-                decrementButton.type = 'button';
-                decrementButton.classList.add('btn', 'btn-secondary', 'quantity');
-                decrementButton.innerText = '-';
-                decrementButton.setAttribute('onclick', 'decrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
-                
-                var quantityInput = document.createElement('input');
-                quantityInput.type = 'text';
-                quantityInput.classList.add('form-control', 'value');
-                quantityInput.id = ticket.id + 'Quantity';
-                quantityInput.name = ticket.id + 'Quantity';
-                quantityInput.value = '0';
-                quantityInput.readOnly = true;
-                
-                var incrementButton = document.createElement('button');
-                incrementButton.type = 'button';
-                incrementButton.classList.add('btn', 'btn-secondary', 'quantity');
-                incrementButton.innerText = '+';
-                incrementButton.setAttribute('onclick', 'incrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
-                
-                colDiv.appendChild(decrementButton);
-                colDiv.appendChild(quantityInput);
-                colDiv.appendChild(incrementButton);
-                rowDiv.appendChild(colDiv);
-                quantityControl.appendChild(quantityLabel);
-                quantityControl.appendChild(rowDiv);
-                
-                formCheck.appendChild(input);
-                formCheck.appendChild(label);
-                formCheck.appendChild(quantityControl);
-                ticketTypeContainer.appendChild(formCheck);
-            });
+    var ticketTypeContainer = document.getElementById('ticketTypeContainer');
+    ticketTypeContainer.innerHTML = ''; // Clear existing options
+    ticketTypes.forEach(function(ticket) {
+        var formCheck = document.createElement('div');
+        formCheck.classList.add('form-check');
+        
+        var label = document.createElement('label');
+        label.classList.add('form-check-label');
+        label.innerText = ticket.tipi + ' - €' + ticket.cmimi;
+
+        var quantityControl = document.createElement('div');
+        quantityControl.classList.add('quantity-control');
+
+        var quantityLabel = document.createElement('label');
+        quantityLabel.setAttribute('for', ticket.id + 'Quantity');
+        quantityLabel.innerText = 'Quantity:';
+
+        var rowDiv = document.createElement('div');
+        rowDiv.classList.add('row');
+
+        var colDiv = document.createElement('div');
+        colDiv.classList.add('col', 'quantity-buttons');
+
+        var decrementButton = document.createElement('button');
+        decrementButton.type = 'button';
+        decrementButton.classList.add('btn', 'btn-secondary', 'quantity');
+        decrementButton.innerText = '-';
+        decrementButton.setAttribute('onclick', 'decrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
+
+        var quantityInput = document.createElement('input');
+        quantityInput.type = 'text';
+        quantityInput.classList.add('form-control', 'value');
+        quantityInput.id = ticket.id + 'Quantity';
+        quantityInput.name = ticket.id + 'Quantity';
+        quantityInput.value = '0';
+        quantityInput.readOnly = true;
+
+        var incrementButton = document.createElement('button');
+        incrementButton.type = 'button';
+        incrementButton.classList.add('btn', 'btn-secondary', 'quantity');
+        incrementButton.innerText = '+';
+        incrementButton.setAttribute('onclick', 'incrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
+
+        colDiv.appendChild(decrementButton);
+        colDiv.appendChild(quantityInput);
+        colDiv.appendChild(incrementButton);
+        rowDiv.appendChild(colDiv);
+        quantityControl.appendChild(quantityLabel);
+        quantityControl.appendChild(rowDiv);
+
+        formCheck.appendChild(label);
+        formCheck.appendChild(quantityControl);
+        ticketTypeContainer.appendChild(formCheck);
+    });
             
-            // Show/hide quantity controls based on checkbox state
-            document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    var quantityControl = this.closest('.form-check').querySelector('.quantity-control');
-                    quantityControl.style.display = this.checked ? 'block' : 'none';
-                    calculateTotal(); // Recalculate total when checkbox state changes
-                });
-            });
+            // // Show/hide quantity controls based on checkbox state
+            // document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
+            //     checkbox.addEventListener('change', function() {
+            //         var quantityControl = this.closest('.form-check').querySelector('.quantity-control');
+            //         quantityControl.style.display = this.checked ? 'block' : 'none';
+            //         calculateTotal(); // Recalculate total when checkbox state changes
+            //     });
+            // });
             
             // Initialize quantity buttons
             document.querySelectorAll('.quantity').forEach(function(button) {
@@ -508,6 +511,7 @@ if(isset($_POST['color'])) {
 if (isset($_GET['action']) && $_GET['action'] === 'fetch_filtered_tickets') {
     // Fetch filtered tickets based on user information
     $userId = $_SESSION['user_id']; // Assuming user ID is stored in session
+    $showDuration = isset($_GET['showDuration']) ? $_GET['showDuration'] : '00:00';
 
     // Fetch user information
     $stmt = $conn->prepare("SELECT mosha, student FROM user WHERE id = ?");
@@ -520,16 +524,28 @@ if (isset($_GET['action']) && $_GET['action'] === 'fetch_filtered_tickets') {
     $mosha = $user['mosha'];
     $student = $user['student'];
 
-    // Build query based on user information
+    // Convert duration to minutes for comparison
+    $durationParts = explode(':', $showDuration);
+    $showDurationMinutes = ($durationParts[0] * 60) + $durationParts[1];
+
+    // Build query based on user information and show duration
     $query = "SELECT id, tipi, cmimi FROM biletat WHERE 1=1";
     if ($student) {
-        $query .= " AND tipi IN ('Student Tickets', 'Student for shows over 2 hours')";
+        if ($showDurationMinutes > 120) {
+            $query .= " AND tipi IN ('Student for shows over 2 hours')";
+        } else {
+            $query .= " AND tipi IN ('Student Tickets')";
+        }
     } elseif ($mosha <= 10) {
         $query .= " AND tipi IN ('Kids and Seniors')";
     } elseif ($mosha > 65) {
         $query .= " AND tipi IN ('Kids and Seniors')";
     } else {
-        $query .= " AND tipi NOT IN ('Kids and Seniors')";
+        if ($showDurationMinutes > 120) {
+            $query .= " AND tipi IN ('Show over 2 hours')";
+        } else {
+            $query .= " AND tipi IN ('Regular Tickets')";
+        }
     }
 
     $result = $conn->query($query);

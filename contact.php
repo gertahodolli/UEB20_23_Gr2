@@ -243,31 +243,32 @@ if (isset($_POST['color'])) {
 
         <!-- Harta -->
         <section>
-            <div class="container-fluid bg-dark py-5">
-                <div>
-                    <div class="center-text">
-                        <h2>Getting Here</h2>
-                        <iframe
-                            width="100%"
-                            height="300"
-                            frameborder="0" style="border:0"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14866.283348271413!2d21.1567011!3d42.6610999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x189f57f3727e8636!2sYouth%20and%20Sports%20Center!5e0!3m2!1sen!2sus!4v1651405369999!5m2!1sen!2sus" allowfullscreen>
-                        </iframe>
-                        <p>M564+CMP, Luan Haradinaj, Prishtina</p>
-                    </div>
-                    <section class="additional-section">
-                        <h5>PARKING SPOTS</h5>
-                        <p>
-                            Adjacent to the theater, our spacious and well-lit parking facility offers stress-free access. 
-                            Enjoy secure and convenient on-site parking, ensuring a hassle-free experience before you even enter 
-                            the venue. Your theater visit starts with easy and welcoming parking.
-                        </p>
-                        <h5>ON A BUS</h5>
-                        <p>The following transit lines have routes that pass near the theatre: 1 & 4</p>
-                    </section>
-                </div>
-            </div>
+    <div class="container-fluid bg-dark py-5">
+        <div class="text-center">
+            <h2>Getting Here</h2>
+            <iframe
+                width="100%"
+                height="300"
+                frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14866.283348271413!2d21.1567011!3d42.6610999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x189f57f3727e8636!2sYouth%20and%20Sports%20Center!5e0!3m2!1sen!2sus!4v1651405369999!5m2!1sen!2sus" allowfullscreen>
+            </iframe>
+            <p>M564+CMP, Luan Haradinaj, Prishtina</p>
+            <a href="direction.php" class="btn btn-primary mt-2 mb-3">Get Directions</a>
+        </div>
+        <section class="additional-section mt-4">
+            <h5>PARKING SPOTS</h5>
+            <p>
+                Adjacent to the theater, our spacious and well-lit parking facility offers stress-free access. 
+                Enjoy secure and convenient on-site parking, ensuring a hassle-free experience before you even enter 
+                the venue. Your theater visit starts with easy and welcoming parking.
+            </p>
+            <h5>ON A BUS</h5>
+            <p>The following transit lines have routes that pass near the theatre: 1 & 4</p>
         </section>
+    </div>
+</section>
+
+
 
         <!-- FAQs -->
         <section class="container mt-5">

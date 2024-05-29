@@ -22,10 +22,22 @@ $_SESSION['form_access_time'] = time();
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
     $ticketType = $_POST['ticketType'];
     $quantity = $_POST['quantity'];
+    $totalPrice = $_POST['totalPrice'];
+    $showId = $_POST['showId'];
+    $showDate = $_POST['showDate'];
     $userId = $user_id; // Using the user ID from session
 
-    $stmt = $conn->prepare("INSERT INTO tickets (user_id, ticket_type, quantity, purchase_date) VALUES (?, ?, ?, NOW())");
-    $stmt->bind_param("isi", $userId, $ticketType, $quantity);
+    // Get the show date and time
+    $stmt = $conn->prepare("SELECT time FROM performances WHERE id = ?");
+    $stmt->bind_param("i", $showId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $showTime = $result->fetch_assoc()['time'];
+    $stmt->close();
+
+    // Insert the purchase into the shitjet table
+    $stmt = $conn->prepare("INSERT INTO shitjet (time, date, userId, performancaId, biletaId, sasia, totali, kaPerfunduar) VALUES (?, ?, ?, ?, ?, ?, ?, false)");
+    $stmt->bind_param("ssiiiiid", $showTime, $showDate, $userId, $showId, $ticketType, $quantity, $totalPrice);
     if ($stmt->execute()) {
         echo '<script>alert("Bileta u blerë me sukses!");</script>';
     } else {
@@ -245,7 +257,7 @@ if(isset($_POST['color'])) {
                 </div>
                 <div class="modal-body">
                     <form id="purchaseForm" method="POST" action="biletat.php" onsubmit="return validateForm()">
-                        <!--Full name-->
+                        <!-- Full name -->
                         <div class="form-group">
                             <label for="fullName">Full Name</label>
                             <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required autocomplete="on">
@@ -342,65 +354,83 @@ if(isset($_POST['color'])) {
 
     <script>
         $(document).ready(function() {
-            $('#remove').remove();
+    // Change text color for buttons
+    $('.btn-style').css('background-color', 'red');
 
-            // Show/hide quantity controls based on checkbox state
-            $('.form-check-input').change(function() {
-                if ($(this).is(':checked')) {
-                    $(this).closest('.form-check').find('.quantity-control').show();
-                } else {
-                    $(this).closest('.form-check').find('.quantity-control').hide();
-                }
-                calculateTotal(); // Recalculate total when checkbox state changes
-            });
+    // Attach event handlers
+    window.addEventListener('resize', equalizeCardHeights);
+    window.addEventListener('load', equalizeCardHeights);
 
-            // Initialize buy ticket buttons
-            $('.buy-tickets-btn').click(function() {
-                var showName = $(this).data('show-name');
-                var showDates = $(this).data('show-dates');
-                var showDuration = $(this).data('show-duration');
-                var dateOptionsHtml = '';
+    // Close modal on button click
+    $('#closeModalButton').click(function() {
+        $('#purchaseModal').modal('hide');
+    });
 
-                $('#showSelection').val(showName);
+    // Initialize buy ticket buttons
+    $('.buy-tickets-btn').click(function() {
+        var showId = $(this).data('show-id');
+        var showName = $(this).data('show-name');
+        var showDates = $(this).data('show-dates');
+        var showDuration = $(this).data('show-duration');
+        var dateOptionsHtml = '';
 
-                showDates.forEach(function(date) {
-                    dateOptionsHtml += '<div class="form-check">';
-                    dateOptionsHtml += '<input class="form-check-input" type="radio" name="showDate" value="' + date + '" required>';
-                    dateOptionsHtml += '<label class="form-check-label">' + date + '</label>';
-                    dateOptionsHtml += '</div>';
-                });
+        $('#showSelection').val(showName);
+        $('#showId').val(showId); // Set the showId in the hidden field
 
-                $('#dateOptions').html(dateOptionsHtml);
-
-                // Pass the show duration to the fetchFilteredTickets function
-                fetchFilteredTickets(showDuration);
-            });
-            $('#submitButton').click(function() {
-                if (!isLoggedIn()) {
-                    alert('You must be logged in to purchase tickets.');
-                    return false;
-                }
-                $('#purchaseForm').submit();
-            });
+        showDates.forEach(function(date) {
+            dateOptionsHtml += '<div class="form-check">';
+            dateOptionsHtml += '<input class="form-check-input" type="radio" name="showDate" value="' + date + '" required>';
+            dateOptionsHtml += '<label class="form-check-label">' + date + '</label>';
+            dateOptionsHtml += '</div>';
         });
 
-        function isLoggedIn() {
-            return <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
-        }
+        $('#dateOptions').html(dateOptionsHtml);
 
-        function fetchFilteredTickets(showDuration) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'fetch_filtered_tickets.php?showDuration=' + showDuration, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    populateTicketTypes(response);
-                }
-            };
-            xhr.send();
-        }
+        // Pass the show duration to the fetchFilteredTickets function
+        fetchFilteredTickets(showDuration);
+    });
 
-        function populateTicketTypes(ticketTypes) {
+    $('#submitButton').click(function() {
+        if (!isLoggedIn()) {
+            alert('You must be logged in to purchase tickets.');
+            return false;
+        }
+        $('#totalPrice').val($('.finalPrice').text().replace('Total: € ', '')); // Set the total price in the hidden field
+        $('#purchaseForm').submit(); // Submit the form without validation
+    });
+});
+
+function equalizeCardHeights() {
+    var cards = document.querySelectorAll('.card');
+    var maxCardHeight = 0;
+
+    cards.forEach(function(card) {
+        card.style.height = 'auto';
+        maxCardHeight = Math.max(maxCardHeight, card.offsetHeight);
+    });
+
+    cards.forEach(function(card) {
+        card.style.height = maxCardHeight + 'px';
+    });
+}
+
+function isLoggedIn() {
+    return <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+}
+
+function fetchFilteredTickets(showDuration) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'fetch_filtered_tickets.php?showDuration=' + showDuration, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            populateTicketTypes(response);
+        }
+    };
+    xhr.send();
+}
+
+function populateTicketTypes(ticketTypes) {
     var ticketTypeContainer = document.getElementById('ticketTypeContainer');
     ticketTypeContainer.innerHTML = ''; // Clear existing options
     ticketTypes.forEach(function(ticket) {
@@ -428,21 +458,22 @@ if(isset($_POST['color'])) {
         decrementButton.type = 'button';
         decrementButton.classList.add('btn', 'btn-secondary', 'quantity');
         decrementButton.innerText = '-';
-        decrementButton.setAttribute('onclick', 'decrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
+        decrementButton.setAttribute('onclick', 'decrementQuantity("#' + ticket.id + 'Quantity")');
 
         var quantityInput = document.createElement('input');
         quantityInput.type = 'text';
         quantityInput.classList.add('form-control', 'value');
         quantityInput.id = ticket.id + 'Quantity';
-        quantityInput.name = ticket.id + 'Quantity';
+        quantityInput.name = 'quantity[]'; // Change the name attribute to 'quantity[]'
         quantityInput.value = '0';
+        quantityInput.setAttribute('data-price', ticket.cmimi); // Store price in data attribute
         quantityInput.readOnly = true;
 
         var incrementButton = document.createElement('button');
         incrementButton.type = 'button';
         incrementButton.classList.add('btn', 'btn-secondary', 'quantity');
         incrementButton.innerText = '+';
-        incrementButton.setAttribute('onclick', 'incrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
+        incrementButton.setAttribute('onclick', 'incrementQuantity("#' + ticket.id + 'Quantity")');
 
         colDiv.appendChild(decrementButton);
         colDiv.appendChild(quantityInput);
@@ -455,53 +486,43 @@ if(isset($_POST['color'])) {
         formCheck.appendChild(quantityControl);
         ticketTypeContainer.appendChild(formCheck);
     });
-            
-            // // Show/hide quantity controls based on checkbox state
-            // document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-            //     checkbox.addEventListener('change', function() {
-            //         var quantityControl = this.closest('.form-check').querySelector('.quantity-control');
-            //         quantityControl.style.display = this.checked ? 'block' : 'none';
-            //         calculateTotal(); // Recalculate total when checkbox state changes
-            //     });
-            // });
-            
-            // Initialize quantity buttons
-            document.querySelectorAll('.quantity').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    calculateTotal(); // Recalculate total when quantity changes
-                });
-            });
-        }
 
-        function decrementQuantity(quantityInputSelector, displaySelector) {
-            var quantityInput = document.querySelector(quantityInputSelector);
-            var display = document.querySelector(displaySelector);
-            if (quantityInput.value > 0) {
-                quantityInput.value = parseInt(quantityInput.value) - 1;
-                display.innerText = quantityInput.value;
-            }
-            calculateTotal();
-        }
+    // Initialize quantity buttons
+    document.querySelectorAll('.quantity').forEach(function(button) {
+        button.addEventListener('click', function() {
+            calculateTotal(); // Recalculate total when quantity changes
+        });
+    });
 
-        function incrementQuantity(quantityInputSelector, displaySelector) {
-            var quantityInput = document.querySelector(quantityInputSelector);
-            var display = document.querySelector(displaySelector);
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-            display.innerText = quantityInput.value;
-            calculateTotal();
-        }
+    calculateTotal(); // Calculate total initially
+}
 
-        function calculateTotal() {
-            var total = 0;
-            document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-                if (checkbox.checked) {
-                    var quantityInput = document.getElementById(checkbox.id + 'Quantity');
-                    var price = parseFloat(checkbox.dataset.price);
-                    total += price * parseInt(quantityInput.value);
-                }
-            });
-            document.querySelector('.finalPrice').innerText = 'Total: € ' + total.toFixed(2);
+function decrementQuantity(quantityInputSelector) {
+    var quantityInput = document.querySelector(quantityInputSelector);
+    if (quantityInput.value > 0) {
+        quantityInput.value = parseInt(quantityInput.value) - 1;
+    }
+    calculateTotal();
+}
+
+function incrementQuantity(quantityInputSelector) {
+    var quantityInput = document.querySelector(quantityInputSelector);
+    quantityInput.value = parseInt(quantityInput.value) + 1;
+    calculateTotal();
+}
+
+function calculateTotal() {
+    var total = 0;
+    document.querySelectorAll('.value').forEach(function(quantityInput) {
+        var price = parseFloat(quantityInput.getAttribute('data-price'));
+        var quantity = parseInt(quantityInput.value);
+        if (!isNaN(price) && !isNaN(quantity)) {
+            total += price * quantity;
         }
+    });
+    document.querySelector('.finalPrice').innerText = 'Total: € ' + total.toFixed(2);
+}
+
     </script>
 </main>
 </body>

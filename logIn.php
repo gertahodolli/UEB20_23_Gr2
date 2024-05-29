@@ -1,5 +1,6 @@
 <?php
 session_start(); // Start the session at the very beginning
+include 'database/db_connect.php';
 
 function isAuthenticated() {
     return isset($_SESSION['logged_in']) && $_SESSION['logged_in'];

@@ -19,7 +19,7 @@ $student = $user['student'];
 $query = "SELECT id, tipi FROM biletat WHERE 1=1";
 if ($student) {
     $query .= " AND tipi IN ('Student Tickets', 'Student for shows over 2 hours')";
-} elseif ($mosha <= 10) {
+} elseif ($mosha < 15) {
     $query .= " AND tipi IN ('Kids and Seniors')";
 } elseif ($mosha > 65) {
     $query .= " AND tipi IN ('Kids and Seniors')";

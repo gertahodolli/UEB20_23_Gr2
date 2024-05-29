@@ -136,11 +136,11 @@ if(isset($_POST['color'])) {
 <main>
     <!-- PHP constants and content display for ticket prices -->
     <?php
-    define("REGULAR_TICKET_PRICE", "€ 2");
-    define("SHOW_OVER_2_HOURS_PRICE", "€ 3");
-    define("KIDS_AND_SENIORS_PRICE", "Free");
-    define("STUDENT_TICKET_PRICE", "€ 1");
-    define("STUDENT_OVER_2_HOURS_PRICE", "€ 2");
+    define("REGULAR_TICKET_PRICE", 2);
+    define("SHOW_OVER_2_HOURS_PRICE", 3);
+    define("KIDS_AND_SENIORS_PRICE", 0);
+    define("STUDENT_TICKET_PRICE", 1);
+    define("STUDENT_OVER_2_HOURS_PRICE", 2);
     ?>
     <section id="price-list" class="my-5">
         <div class="container text-center">
@@ -156,23 +156,23 @@ if(isset($_POST['color'])) {
                     <tbody>
                         <tr>
                             <td>Regular Tickets</td>
-                            <td><?php echo REGULAR_TICKET_PRICE; ?></td>
+                            <td>€ <?php echo REGULAR_TICKET_PRICE; ?></td>
                         </tr>
                         <tr>
                             <td>Show over 2 hours</td>
-                            <td><?php echo SHOW_OVER_2_HOURS_PRICE; ?></td>
+                            <td>€ <?php echo SHOW_OVER_2_HOURS_PRICE; ?></td>
                         </tr>
                         <tr>
                             <td>Kids and Seniors</td>
-                            <td><?php echo KIDS_AND_SENIORS_PRICE; ?></td>
+                            <td><?php echo KIDS_AND_SENIORS_PRICE == 0 ? 'Free' : '€ ' . KIDS_AND_SENIORS_PRICE; ?></td>
                         </tr>
                         <tr>
                             <td>Student Tickets</td>
-                            <td><?php echo STUDENT_TICKET_PRICE; ?></td>
+                            <td>€ <?php echo STUDENT_TICKET_PRICE; ?></td>
                         </tr>
                         <tr>
                             <td>Student for shows over 2 hours</td>
-                            <td><?php echo STUDENT_OVER_2_HOURS_PRICE; ?></td>
+                            <td>€ <?php echo STUDENT_OVER_2_HOURS_PRICE; ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -261,70 +261,7 @@ if(isset($_POST['color'])) {
                         <!-- Ticket Type -->
                         <label style="margin: 10px; margin-top: 20px;">Ticket Selection</label><br>
                         <div id="ticketTypeContainer" class="row">
-                            <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="regularTicketCheckbox" name="ticketType[]" value="Regular" required>
-                                    <label class="form-check-label" for="regularTicketCheckbox">Regular Ticket</label>
-                                    <div class="quantity-control" style="display: none;">
-                                        <label for="regularTicketQuantity">Quantity:</label>
-                                        <div class="row">
-                                            <div class="col quantity-buttons">
-                                                <button type="button" class="btn btn-secondary quantity" onclick="decrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">-</button>
-                                                <input type="text" class="form-control value" id="regularTicketQuantity" name="regularTicketQuantity" value="0" readonly>
-                                                <button type="button" class="btn btn-secondary quantity" onclick="incrementQuantity('#regularTicketQuantity', '#regularTicketQuantity-display')">+</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>    
-                            <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="2hoursTicketCheckbox" name="ticketType[]" value="Over2Hours" required>
-                                    <label class="form-check-label" for="2hoursTicketCheckbox">Show over 2 hours Ticket</label>
-                                    <div class="quantity-control" style="display: none;">
-                                        <label for="2hoursTicketQuantity">Quantity:</label>
-                                        <div class="row">
-                                            <div class="col-md-6 quantity-buttons">
-                                                <button type="button" class="btn btn-secondary " onclick="decrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">-</button>
-                                                <input type="text" class="form-control" id="2hoursTicketQuantity" name="2hoursTicketQuantity" value="0" readonly>
-                                                <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#2hoursTicketQuantity', '#2hoursTicketQuantity-display')">+</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="studentTicketCheckbox" name="ticketType[]" value="Student" required>
-                                    <label class="form-check-label" for="studentTicketCheckbox">Student Ticket</label>
-                                    <div class="quantity-control" style="display: none;">
-                                        <label for="studentTicketQuantity">Quantity:</label>
-                                        <div class="row">
-                                            <div class="col quantity-buttons">
-                                                <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#studentTicketQuantity', '#studentTicketQuantity-display')">-</button>
-                                                <input type="text" class="form-control" id="studentTicketQuantity" name="studentTicketQuantity" value="0" readonly>
-                                                <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#studentTicketQuantity', '#studentTicketQuantity-display')">+</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="students2hoursTicketCheckbox" name="ticketType[]" value="StudentOver2Hours" required>
-                                    <label class="form-check-label" for="students2hoursTicketCheckbox">Student for shows over 2 hours Ticket</label>
-                                    <div class="quantity-control" style="display: none;">
-                                        <label for="students2hoursTicketQuantity">Quantity:</label>
-                                        <div class="row">
-                                            <div class="col quantity-buttons">
-                                                <button type="button" class="btn btn-secondary" onclick="decrementQuantity('#students2hoursTicketQuantity', '#students2hoursTicketQuantity-display')">-</button>
-                                                <input type="text" class="form-control" id="students2hoursTicketQuantity" name="students2hoursTicketQuantity" value="0" readonly>
-                                                <button type="button" class="btn btn-secondary" onclick="incrementQuantity('#students2hoursTicketQuantity', '#students2hoursTicketQuantity-display')">+</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Ticket types will be populated dynamically -->
                         </div>
                         <div id="ticketSelection-error" class="error-message"></div>
                         <output class="finalPrice"></output>
@@ -409,6 +346,7 @@ if(isset($_POST['color'])) {
                 } else {
                     $(this).closest('.form-check').find('.quantity-control').hide();
                 }
+                calculateTotal(); // Recalculate total when checkbox state changes
             });
 
             // Initialize buy ticket buttons
@@ -432,103 +370,178 @@ if(isset($_POST['color'])) {
             $('#submitButton').click(function() {
                 $('#purchaseForm').submit();
             });
+
+            fetchFilteredTickets();
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-        fetchFilteredTickets();
-    });
+        function fetchFilteredTickets() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'biletat.php?action=fetch_filtered_tickets', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    populateTicketTypes(response);
+                }
+            };
+            xhr.send();
+        }
 
-    function fetchFilteredTickets() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'fetch_filtered_tickets.php', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                populateTicketTypes(response);
+        function populateTicketTypes(ticketTypes) {
+            var ticketTypeContainer = document.getElementById('ticketTypeContainer');
+            ticketTypeContainer.innerHTML = ''; // Clear existing options
+            ticketTypes.forEach(function(ticket) {
+                var formCheck = document.createElement('div');
+                formCheck.classList.add('form-check');
+                
+                var input = document.createElement('input');
+                input.type = 'checkbox';
+                input.classList.add('form-check-input');
+                input.id = ticket.id;
+                input.name = 'ticketType[]';
+                input.value = ticket.tipi;
+                input.dataset.price = ticket.cmimi; // Store price in data attribute
+                
+                var label = document.createElement('label');
+                label.classList.add('form-check-label');
+                label.setAttribute('for', ticket.id);
+                label.innerText = ticket.tipi;
+                
+                var quantityControl = document.createElement('div');
+                quantityControl.classList.add('quantity-control');
+                quantityControl.style.display = 'none';
+                
+                var quantityLabel = document.createElement('label');
+                quantityLabel.setAttribute('for', ticket.id + 'Quantity');
+                quantityLabel.innerText = 'Quantity:';
+                
+                var rowDiv = document.createElement('div');
+                rowDiv.classList.add('row');
+                
+                var colDiv = document.createElement('div');
+                colDiv.classList.add('col', 'quantity-buttons');
+                
+                var decrementButton = document.createElement('button');
+                decrementButton.type = 'button';
+                decrementButton.classList.add('btn', 'btn-secondary', 'quantity');
+                decrementButton.innerText = '-';
+                decrementButton.setAttribute('onclick', 'decrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
+                
+                var quantityInput = document.createElement('input');
+                quantityInput.type = 'text';
+                quantityInput.classList.add('form-control', 'value');
+                quantityInput.id = ticket.id + 'Quantity';
+                quantityInput.name = ticket.id + 'Quantity';
+                quantityInput.value = '0';
+                quantityInput.readOnly = true;
+                
+                var incrementButton = document.createElement('button');
+                incrementButton.type = 'button';
+                incrementButton.classList.add('btn', 'btn-secondary', 'quantity');
+                incrementButton.innerText = '+';
+                incrementButton.setAttribute('onclick', 'incrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
+                
+                colDiv.appendChild(decrementButton);
+                colDiv.appendChild(quantityInput);
+                colDiv.appendChild(incrementButton);
+                rowDiv.appendChild(colDiv);
+                quantityControl.appendChild(quantityLabel);
+                quantityControl.appendChild(rowDiv);
+                
+                formCheck.appendChild(input);
+                formCheck.appendChild(label);
+                formCheck.appendChild(quantityControl);
+                ticketTypeContainer.appendChild(formCheck);
+            });
+            
+            // Show/hide quantity controls based on checkbox state
+            document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    var quantityControl = this.closest('.form-check').querySelector('.quantity-control');
+                    quantityControl.style.display = this.checked ? 'block' : 'none';
+                    calculateTotal(); // Recalculate total when checkbox state changes
+                });
+            });
+            
+            // Initialize quantity buttons
+            document.querySelectorAll('.quantity').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    calculateTotal(); // Recalculate total when quantity changes
+                });
+            });
+        }
+
+        function decrementQuantity(quantityInputSelector, displaySelector) {
+            var quantityInput = document.querySelector(quantityInputSelector);
+            var display = document.querySelector(displaySelector);
+            if (quantityInput.value > 0) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+                display.innerText = quantityInput.value;
             }
-        };
-        xhr.send();
-    }
+            calculateTotal();
+        }
 
-    function populateTicketTypes(ticketTypes) {
-        var ticketTypeContainer = document.getElementById('ticketTypeContainer');
-        ticketTypeContainer.innerHTML = ''; // Clear existing options
-        ticketTypes.forEach(function(ticket) {
-            var formCheck = document.createElement('div');
-            formCheck.classList.add('form-check');
-            
-            var input = document.createElement('input');
-            input.type = 'checkbox';
-            input.classList.add('form-check-input');
-            input.id = ticket.id;
-            input.name = 'ticketType[]';
-            input.value = ticket.tipi;
-            input.required = true;
-            
-            var label = document.createElement('label');
-            label.classList.add('form-check-label');
-            label.setAttribute('for', ticket.id);
-            label.innerText = ticket.tipi;
-            
-            var quantityControl = document.createElement('div');
-            quantityControl.classList.add('quantity-control');
-            quantityControl.style.display = 'none';
-            
-            var quantityLabel = document.createElement('label');
-            quantityLabel.setAttribute('for', ticket.id + 'Quantity');
-            quantityLabel.innerText = 'Quantity:';
-            
-            var rowDiv = document.createElement('div');
-            rowDiv.classList.add('row');
-            
-            var colDiv = document.createElement('div');
-            colDiv.classList.add('col', 'quantity-buttons');
-            
-            var decrementButton = document.createElement('button');
-            decrementButton.type = 'button';
-            decrementButton.classList.add('btn', 'btn-secondary', 'quantity');
-            decrementButton.innerText = '-';
-            decrementButton.setAttribute('onclick', 'decrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
-            
-            var quantityInput = document.createElement('input');
-            quantityInput.type = 'text';
-            quantityInput.classList.add('form-control', 'value');
-            quantityInput.id = ticket.id + 'Quantity';
-            quantityInput.name = ticket.id + 'Quantity';
-            quantityInput.value = '0';
-            quantityInput.readOnly = true;
-            
-            var incrementButton = document.createElement('button');
-            incrementButton.type = 'button';
-            incrementButton.classList.add('btn', 'btn-secondary', 'quantity');
-            incrementButton.innerText = '+';
-            incrementButton.setAttribute('onclick', 'incrementQuantity("#' + ticket.id + 'Quantity", "#' + ticket.id + 'Quantity-display")');
-            
-            colDiv.appendChild(decrementButton);
-            colDiv.appendChild(quantityInput);
-            colDiv.appendChild(incrementButton);
-            rowDiv.appendChild(colDiv);
-            quantityControl.appendChild(quantityLabel);
-            quantityControl.appendChild(rowDiv);
-            
-            formCheck.appendChild(input);
-            formCheck.appendChild(label);
-            formCheck.appendChild(quantityControl);
-            ticketTypeContainer.appendChild(formCheck);
-        });
-        
-        // Show/hide quantity controls based on checkbox state
-        document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    this.closest('.form-check').querySelector('.quantity-control').style.display = 'block';
-                } else {
-                    this.closest('.form-check').querySelector('.quantity-control').style.display = 'none';
+        function incrementQuantity(quantityInputSelector, displaySelector) {
+            var quantityInput = document.querySelector(quantityInputSelector);
+            var display = document.querySelector(displaySelector);
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            display.innerText = quantityInput.value;
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            var total = 0;
+            document.querySelectorAll('.form-check-input').forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    var quantityInput = document.getElementById(checkbox.id + 'Quantity');
+                    var price = parseFloat(checkbox.dataset.price);
+                    total += price * parseInt(quantityInput.value);
                 }
             });
-        });
-    }
+            document.querySelector('.finalPrice').innerText = 'Total: € ' + total.toFixed(2);
+        }
     </script>
 </main>
 </body>
 </html>
+
+<?php
+if (isset($_GET['action']) && $_GET['action'] === 'fetch_filtered_tickets') {
+    // Fetch filtered tickets based on user information
+    $userId = $_SESSION['user_id']; // Assuming user ID is stored in session
+
+    // Fetch user information
+    $stmt = $conn->prepare("SELECT mosha, student FROM user WHERE id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+
+    $mosha = $user['mosha'];
+    $student = $user['student'];
+
+    // Build query based on user information
+    $query = "SELECT id, tipi, cmimi FROM biletat WHERE 1=1";
+    if ($student) {
+        $query .= " AND tipi IN ('Student Tickets', 'Student for shows over 2 hours')";
+    } elseif ($mosha <= 10) {
+        $query .= " AND tipi IN ('Kids and Seniors')";
+    } elseif ($mosha > 65) {
+        $query .= " AND tipi IN ('Kids and Seniors')";
+    } else {
+        $query .= " AND tipi NOT IN ('Kids and Seniors')";
+    }
+
+    $result = $conn->query($query);
+
+    $ticketTypes = array();
+    while ($row = $result->fetch_assoc()) {
+        $ticketTypes[] = $row;
+    }
+
+    echo json_encode($ticketTypes);
+
+    $conn->close();
+    exit;
+}
+?>

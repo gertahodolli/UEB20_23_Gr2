@@ -48,16 +48,22 @@ function insertSponsor($emri, $dataFillimit, $foto, $conn) {
     $stmt->close();
 }
 
-function insertFeedback($emri, $email, $satisfaction, $feedback, $conn) {
-    $stmt = $conn->prepare("INSERT INTO feedback (emri, email, satisfaction, feedback) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssis", $emri, $email, $satisfaction, $feedback);
-    if ($stmt->execute()) {
-        echo "New feedback submitted successfully";
+function createFeedbackTable($conn) {
+    $sql = "CREATE TABLE IF NOT EXISTS feedback (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        rating INT NOT NULL,
+        feedback TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Table 'feedback' created successfully";
     } else {
-        error_log("Error inserting feedback: " . $stmt->error);
-        echo "There was an issue submitting the feedback. Please try again later.";
+        error_log("Error creating table: " . $conn->error);
+        echo "There was an issue creating the table. Please try again later.";
     }
-    $stmt->close();
 }
 
 function updateSponsor($id, $emri, $dataFillimit, $foto, $conn) {

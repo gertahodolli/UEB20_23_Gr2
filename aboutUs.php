@@ -30,6 +30,17 @@ function sanitize_input(&$data) {
     $data = htmlspecialchars($data);
 }
 
+// Function to process form data
+function process_form_data(&$emriDheMbiemri, &$pozita, &$email, &$tel, &$mosha, &$koment) {
+  // Example processing: convert all data to uppercase
+  $emriDheMbiemri = strtoupper($emriDheMbiemri);
+  $pozita = strtoupper($pozita);
+  $email = strtolower($email);
+  $tel = preg_replace("/[^0-9]/", "", $tel); // Remove all non-numeric characters from phone
+  $mosha = (int)$mosha; // Ensure age is an integer
+  $koment = ucfirst($koment); // Capitalize the first letter of the comment
+}
+
 // Process form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['emri'])) {
     // Retrieve form data

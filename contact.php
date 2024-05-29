@@ -8,6 +8,29 @@ require 'vendors/phpmailer/src/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+// Global variable to keep track of feedback count
+$feedback_count = 0;
+
+// Function to increment feedback count by reference
+function &increment_feedback_count() {
+    global $feedback_count;
+    $feedback_count++;
+    return $feedback_count;
+}
+
+// Function to get feedback count by reference
+function &get_feedback_count() {
+    global $feedback_count;
+    return $feedback_count;
+}
+
+// Function to reset feedback count
+function reset_feedback_count() {
+    global $feedback_count;
+    unset($feedback_count);
+    $feedback_count = 0;
+}
+
 // Check if a feedback form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['emri'], $_POST['email'], $_POST['feedback'], $_POST['rating'])) {
     
@@ -23,6 +46,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['emri'], $_POST['email
     if (mysqli_query($conn, $sql)) {
         // Store feedback in session for display
         $_SESSION['feedbacks'][] = ['name' => $name, 'rating' => $rating, 'feedback' => $feedback];
+        
+        // Increment feedback count
+        $count = &increment_feedback_count();
+        echo "Feedback count after increment: $count<br>";
+
+        // Get feedback count
+        $current_count = &get_feedback_count();
+        echo "Current feedback count: $current_count<br>";
+
+        // Reset feedback count if it exceeds a certain number (e.g., 100)
+        if ($current_count > 100) {
+            reset_feedback_count();
+            echo "Feedback count reset.<br>";
+        }
         
         // Send email using PHPMailer
         $mail = new PHPMailer(true);
@@ -60,7 +97,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['emri'], $_POST['email
     // Close the connection
     mysqli_close($conn);
 }
+
+function process_feedback_references(&$feedback_array) {
+    foreach ($feedback_array as &$feedback) {
+        // Example processing: append a timestamp to each feedback entry
+        $feedback['processed_at'] = date('Y-m-d H:i:s');
+    }
+}
+
+// Add this function call after fetching feedbacks from the session
+if (!empty($_SESSION['feedbacks'])) {
+    // Get the last three feedback entries as references
+    $lastThreeFeedbacks = array_slice($_SESSION['feedbacks'], -3, 3, true);
+    process_feedback_references($lastThreeFeedbacks);
+}
+
 ?>
+
 
 <!-- Continue with your HTML and embedded PHP for display -->
 <?php

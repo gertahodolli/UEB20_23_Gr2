@@ -149,11 +149,43 @@ if (isset($_POST['color'])) {
                     <div class="col-sm-4 ">
                         <div class="">
                             <h2>Contact</h2>
-                            <address>
-                                <p>CALL: <a href="tel:+38344753330">+383(44) 753330</a></p>
-                                <p>EMAIL: <a href="mailto:boxoffice@example.com">boxoffice@gmail.com</a></p>
-                                <p>IN PERSON: Street Luan Haradinaj, Prishtina</p>
-                            </address>
+                            <?php
+                                // Path to the text file
+                                $file_path = 'resources/contact_info.txt';
+
+                                // Check if the file exists
+                                if (file_exists($file_path)) {
+
+                                    $file_size = filesize($file_path);
+                                        if ($file_size > 1) {
+                                    // Open the file in read mode
+                                    $file = fopen($file_path, 'r');
+
+                                    // Read the file content
+                                    $content = fread($file, filesize($file_path));
+
+                                    // Close the file
+                                    fclose($file);
+
+                                    // Display the content with appropriate HTML tags
+                                    $lines = explode("\n", $content);
+                                    echo '<address>';
+                                    foreach ($lines as $line) {
+                                        // Convert each line to a paragraph
+                                        if (strpos($line, 'CALL:') !== false) {
+                                            echo '<p>CALL: <a href="tel:+38344753330">' . htmlspecialchars(substr($line, 6)) . '</a></p>';
+                                        } elseif (strpos($line, 'EMAIL:') !== false) {
+                                            echo '<p>EMAIL: <a href="mailto:boxoffice@example.com">' . htmlspecialchars(substr($line, 7)) . '</a></p>';
+                                        } else {
+                                            echo '<p>' . htmlspecialchars($line) . '</p>';
+                                        }
+                                    }
+                                    echo '</address>';
+                                }
+                                } else {
+                                    echo '<p>Contact information not available.</p>';
+                                }
+                                ?>
                         </div>
                     </div>
                     <div class="col-sm-4">

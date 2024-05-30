@@ -49,11 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['emri'], $_POST['email
         
         // Increment feedback count
         $count = &increment_feedback_count();
-        echo "Feedback count after increment: $count<br>";
 
         // Get feedback count
         $current_count = &get_feedback_count();
-        echo "Current feedback count: $current_count<br>";
 
         // Reset feedback count if it exceeds a certain number (e.g., 100)
         if ($current_count > 100) {
@@ -85,8 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['emri'], $_POST['email
                              "Rating: $rating<br>" .
                              "Feedback: $feedback";
             
-            $mail->send();
-            echo 'Feedback has been sent successfully';
+            // Store success message in session and redirect
+            $_SESSION['feedback_message'] = 'Feedback has been sent successfully';
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit;
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
@@ -189,6 +189,14 @@ if (isset($_POST['color'])) {
 
         <!--Scroll to top button-->
         <div id="arrow-button">&#8593;</div>
+
+         <!-- Feedback Success Message -->
+         <?php
+        if (isset($_SESSION['feedback_message'])) {
+            echo "<script type='text/javascript'>showAlert('{$_SESSION['feedback_message']}');</script>";
+            unset($_SESSION['feedback_message']);
+        }
+        ?>
 
         <section class="contact">
             <div class="container">

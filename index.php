@@ -507,8 +507,6 @@ update_recent_shows($recent_shows);
       // Add the new paragraph to the element with class 'card-body'
       $('.card-body').add(newParagraph.appendTo('.card-body'));
 
-      // Set the text for the newly added paragraph
-      newParagraph.html('<b>New date:</b> 5/12/2023');
     });
       </script>
 

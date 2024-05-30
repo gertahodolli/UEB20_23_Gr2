@@ -20,30 +20,59 @@ $_SESSION['form_access_time'] = time();
 
 // Handle form submission for ticket purchases
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
-    $ticketType = $_POST['ticketType'];
-    $quantity = $_POST['quantity'];
-    $totalPrice = $_POST['totalPrice'];
-    $showId = $_POST['showId'];
-    $showDate = $_POST['showDate'];
-    $userId = $user_id; // Using the user ID from session
+    saveTicketPurchase($conn, $user_id);
+}
 
-    // Get the show date and time
-    $stmt = $conn->prepare("SELECT time FROM performances WHERE id = ?");
-    $stmt->bind_param("i", $showId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $showTime = $result->fetch_assoc()['time'];
-    $stmt->close();
+// Function to save ticket purchase
+function saveTicketPurchase($conn, $userId) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buyTickets'])) {
+        // Decode JSON strings to arrays
+        $biletaIds = json_decode($_POST['biletaIds'], true);
+        $quantities = json_decode($_POST['quantities'], true);
+        $totalPrice = $_POST['totalPrice'];
+        $showId = $_POST['showId'];
+        $showDate = $_POST['showDate'];
 
-    // Insert the purchase into the shitjet table
-    $stmt = $conn->prepare("INSERT INTO shitjet (time, date, userId, performancaId, biletaId, sasia, totali, kaPerfunduar) VALUES (?, ?, ?, ?, ?, ?, ?, false)");
-    $stmt->bind_param("ssiiiiid", $showTime, $showDate, $userId, $showId, $ticketType, $quantity, $totalPrice);
-    if ($stmt->execute()) {
+        // Get the show date and time
+        $stmt = $conn->prepare("SELECT time FROM performances WHERE id = ?");
+        if (!$stmt) {
+            echo 'Prepare failed: (' . $conn->errno . ') ' . $conn->error;
+            return;
+        }
+
+        $stmt->bind_param("i", $showId);
+        if (!$stmt->execute()) {
+            echo 'Execute failed: (' . $stmt->errno . ') ' . $stmt->error;
+            return;
+        }
+
+        $result = $stmt->get_result();
+        if (!$result) {
+            echo 'Getting result set failed: (' . $stmt->errno . ') ' . $stmt->error;
+            return;
+        }
+
+        $showTime = $result->fetch_assoc()['time'];
+        $stmt->close();
+
+        // Insert each ticket purchase into the shitjet table
+        foreach ($biletaIds as $index => $biletaId) {
+            $quantity = $quantities[$index];
+            $stmt = $conn->prepare("INSERT INTO shitjet (time, date, userId, performancaId, biletaId, sasia, totali, kaPerfunduar) VALUES (?, ?, ?, ?, ?, ?, ?, false)");
+            if (!$stmt) {
+                echo 'Prepare failed: (' . $conn->errno . ') ' . $conn->error;
+                return;
+            }
+
+            $stmt->bind_param("ssiiiiid", $showTime, $showDate, $userId, $showId, $biletaId, $quantity, $totalPrice);
+            if (!$stmt->execute()) {
+                echo 'Execute failed: (' . $stmt->errno . ') ' . $stmt->error;
+            }
+            $stmt->close();
+        }
+        
         echo '<script>alert("Bileta u blerë me sukses!");</script>';
-    } else {
-        echo '<script>alert("Gabim: ' . $stmt->error . '");</script>';
     }
-    $stmt->close();
 }
 
 // Function to set a cookie
@@ -78,6 +107,7 @@ if(isset($_POST['color'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,7 +120,6 @@ if(isset($_POST['color'])) {
     <link rel="stylesheet" href="./resources/css/biletat.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="./resources/js/biletat.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" type="image/png" href="resources/images/logo1.png"/>
     <title>Tickets</title>
@@ -139,7 +168,7 @@ if(isset($_POST['color'])) {
                     <a class="nav-link" href="contact.php">Contact Us</a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a class="nav-link btn btn-primary butoni" style="margin-right: 15px;" href="index.html">Log In</a>
+                    <a class="nav-link btn btn-primary butoni" style="margin-right: 15px;" href="indexlog.php">Log In</a>
                 </li>
             </ul>
         </div>
@@ -238,7 +267,7 @@ if(isset($_POST['color'])) {
                 echo '<p class="card-text">Time: ' . htmlspecialchars($show['time']) . '</p>';
                 echo '</div>';
                 echo '<div class="card-footer">';
-                echo '<button class="btn btn-primary buy-tickets-btn" data-toggle="modal" data-target="#purchaseModal" data-show-id="' . htmlspecialchars($show['id']) . '" data-show-name="' . htmlspecialchars($show['emrin']) . '" data-show-dates=\'' . json_encode($show['dates']) . '\' data-show-duration="' . htmlspecialchars($show['duration']) . '">Buy ticket</button>';
+                echo '<button class="btn btn-primary buy-tickets-btn" data-bs-toggle="modal" data-bs-target="#purchaseModal" data-show-id="' . htmlspecialchars($show['id']) . '" data-show-name="' . htmlspecialchars($show['emrin']) . '" data-show-dates=\'' . json_encode($show['dates']) . '\' data-show-duration="' . htmlspecialchars($show['duration']) . '">Buy ticket</button>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
@@ -248,49 +277,54 @@ if(isset($_POST['color'])) {
         </div>
     </section>
 
-    <!-- Modal for ticket information -->
-    <div class="modal" tabindex="-1" role="dialog" id="purchaseModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Buy Tickets</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="purchaseForm" method="POST" action="biletat.php" onsubmit="return validateForm()">
-                        <!-- Full name -->
-                        <div class="form-group">
-                            <label for="fullName">Full Name</label>
-                            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required autocomplete="on">
-                            <div id="fullName-error" class="error-message"></div>
-                        </div>
-                        <!-- Email -->
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required autocomplete="on">
-                            <div id="email-error" class="error-message"></div>
-                        </div>
-                        <!-- Date Selection -->
-                        <div class="form-group">
-                            <label for="showDate">Select Date</label>
-                            <div id="dateOptions"></div>
-                            <div id="showDate-error" class="error-message"></div>
-                        </div>
-                        <!-- Ticket Type -->
-                        <label style="margin: 10px; margin-top: 20px;">Ticket Selection</label><br>
-                        <div id="ticketTypeContainer" class="row">
-                            <!-- Ticket types will be populated dynamically -->
-                        </div>
-                        <div id="ticketSelection-error" class="error-message"></div>
-                        <output class="finalPrice"></output>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalButton">Close</button>
-                    <button type="button" class="btn btn-primary" id="submitButton">Buy Tickets</button>
-                </div>
+<!-- Modal for ticket information -->
+<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="purchaseModalLabel">Buy Tickets</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form id="purchaseForm" method="POST" action="biletat.php" onsubmit="return validateForm()">
+    <!-- Hidden fields to store show details -->
+    <input type="hidden" id="showId" name="showId">
+    <input type="hidden" id="biletaIds" name="biletaIds">
+    <input type="hidden" id="quantities" name="quantities">
+    <input type="hidden" id="totalPrice" name="totalPrice">
+    <!-- Other form fields -->
+    <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required autocomplete="on">
+        <div id="fullName-error" class="error-message"></div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required autocomplete="on">
+        <div id="email-error" class="error-message"></div>
+    </div>
+    <div class="form-group">
+        <label for="showDate">Select Date</label>
+        <div id="dateOptions"></div>
+        <div id="showDate-error" class="error-message"></div>
+    </div>
+    <label style="margin: 10px; margin-top: 20px;">Ticket Selection</label><br>
+    <div id="ticketTypeContainer" class="row"></div>
+    <div id="ticketSelection-error" class="error-message"></div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">Close</button>
+    <button type="button" class="btn btn-primary" id="submitButton">Buy Tickets</button>
+</div>
+    <output class="finalPrice"></output>
+</form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">Close</button>
             </div>
         </div>
     </div>
+</div>
+
 
     <section>
         <div class="container">
@@ -353,19 +387,7 @@ if(isset($_POST['color'])) {
     </footer>
 
     <script>
-        $(document).ready(function() {
-    // Change text color for buttons
-    $('.btn-style').css('background-color', 'red');
-
-    // Attach event handlers
-    window.addEventListener('resize', equalizeCardHeights);
-    window.addEventListener('load', equalizeCardHeights);
-
-    // Close modal on button click
-    $('#closeModalButton').click(function() {
-        $('#purchaseModal').modal('hide');
-    });
-
+      $(document).ready(function() {
     // Initialize buy ticket buttons
     $('.buy-tickets-btn').click(function() {
         var showId = $(this).data('show-id');
@@ -374,155 +396,188 @@ if(isset($_POST['color'])) {
         var showDuration = $(this).data('show-duration');
         var dateOptionsHtml = '';
 
-        $('#showSelection').val(showName);
         $('#showId').val(showId); // Set the showId in the hidden field
 
+        // Populate the date options
         showDates.forEach(function(date) {
             dateOptionsHtml += '<div class="form-check">';
             dateOptionsHtml += '<input class="form-check-input" type="radio" name="showDate" value="' + date + '" required>';
             dateOptionsHtml += '<label class="form-check-label">' + date + '</label>';
             dateOptionsHtml += '</div>';
         });
-
         $('#dateOptions').html(dateOptionsHtml);
 
-        // Pass the show duration to the fetchFilteredTickets function
+        // Fetch ticket types based on show duration
         fetchFilteredTickets(showDuration);
+
+        // Show the modal
+        $('#purchaseModal').modal('show');
     });
 
+    // Close modal on button click
+    $('#closeModalButton').click(function() {
+        $('#purchaseModal').modal('hide');
+    });
+
+    // Handle form submission
     $('#submitButton').click(function() {
         if (!isLoggedIn()) {
             alert('You must be logged in to purchase tickets.');
             return false;
         }
+
+        // Populate hidden fields for biletaId and quantity
+        var biletaIds = [];
+        var quantities = [];
+        $('.value').each(function() {
+            if (parseInt($(this).val()) > 0) {
+                biletaIds.push($(this).attr('id').replace('Quantity', ''));
+                quantities.push($(this).val());
+            }
+        });
+
+        $('#biletaIds').val(JSON.stringify(biletaIds));
+        $('#quantities').val(JSON.stringify(quantities));
         $('#totalPrice').val($('.finalPrice').text().replace('Total: € ', '')); // Set the total price in the hidden field
-        $('#purchaseForm').submit(); // Submit the form without validation
+
+        $('#purchaseForm').submit(); // Submit the form
     });
 });
 
-function equalizeCardHeights() {
-    var cards = document.querySelectorAll('.card');
-    var maxCardHeight = 0;
-
-    cards.forEach(function(card) {
-        card.style.height = 'auto';
-        maxCardHeight = Math.max(maxCardHeight, card.offsetHeight);
+function fetchFilteredTickets(showDuration) {
+    $.ajax({
+        url: 'fetch_filtered_tickets.php',
+        method: 'GET',
+        data: { showDuration: showDuration },
+        success: function(response) {
+            var ticketTypes = JSON.parse(response);
+            populateTicketTypes(ticketTypes);
+        }
     });
+}
 
-    cards.forEach(function(card) {
-        card.style.height = maxCardHeight + 'px';
+function populateTicketTypes(ticketTypes) {
+    var ticketTypeContainer = $('#ticketTypeContainer');
+    ticketTypeContainer.empty(); // Clear existing options
+    ticketTypes.forEach(function(ticket) {
+        var formCheck = $('<div class="form-check"></div>');
+        var label = $('<label class="form-check-label"></label>').text(ticket.tipi + ' - €' + ticket.cmimi);
+        var quantityControl = $('<div class="quantity-control"></div>');
+        var rowDiv = $('<div class="row"></div>');
+        var colDiv = $('<div class="col quantity-buttons"></div>');
+        var decrementButton = $('<button type="button" class="btn btn-secondary quantity">-</button>');
+        var quantityInput = $('<input type="text" class="form-control value" data-price="' + ticket.cmimi + '">').attr('id', ticket.id + 'Quantity').attr('name', 'quantity[]').val('0').prop('readonly', true);
+        var incrementButton = $('<button type="button" class="btn btn-secondary quantity">+</button>');
+
+        decrementButton.click(function() {
+            var quantity = parseInt(quantityInput.val());
+            if (quantity > 0) quantityInput.val(quantity - 1);
+            calculateTotal();
+        });
+        incrementButton.click(function() {
+            quantityInput.val(parseInt(quantityInput.val()) + 1);
+            calculateTotal();
+        });
+
+        colDiv.append(decrementButton).append(quantityInput).append(incrementButton);
+        rowDiv.append(colDiv);
+        quantityControl.append(rowDiv);
+        formCheck.append(label).append(quantityControl);
+        ticketTypeContainer.append(formCheck);
     });
+    calculateTotal();
+}
+
+function calculateTotal() {
+    var total = 0;
+    $('.value').each(function() {
+        var price = parseFloat($(this).data('price'));
+        var quantity = parseInt($(this).val());
+        if (!isNaN(price) && !isNaN(quantity)) {
+            total += price * quantity;
+        }
+    });
+    $('.finalPrice').text('Total: € ' + total.toFixed(2));
 }
 
 function isLoggedIn() {
     return <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
 }
 
-function fetchFilteredTickets(showDuration) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'fetch_filtered_tickets.php?showDuration=' + showDuration, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var response = JSON.parse(xhr.responseText);
-            populateTicketTypes(response);
-        }
-    };
-    xhr.send();
-}
 
-function populateTicketTypes(ticketTypes) {
-    var ticketTypeContainer = document.getElementById('ticketTypeContainer');
-    ticketTypeContainer.innerHTML = ''; // Clear existing options
-    ticketTypes.forEach(function(ticket) {
-        var formCheck = document.createElement('div');
-        formCheck.classList.add('form-check');
-        
-        var label = document.createElement('label');
-        label.classList.add('form-check-label');
-        label.innerText = ticket.tipi + ' - €' + ticket.cmimi;
+function validateForm() {
+    var isValid = true;
 
-        var quantityControl = document.createElement('div');
-        quantityControl.classList.add('quantity-control');
-
-        var quantityLabel = document.createElement('label');
-        quantityLabel.setAttribute('for', ticket.id + 'Quantity');
-        quantityLabel.innerText = 'Quantity:';
-
-        var rowDiv = document.createElement('div');
-        rowDiv.classList.add('row');
-
-        var colDiv = document.createElement('div');
-        colDiv.classList.add('col', 'quantity-buttons');
-
-        var decrementButton = document.createElement('button');
-        decrementButton.type = 'button';
-        decrementButton.classList.add('btn', 'btn-secondary', 'quantity');
-        decrementButton.innerText = '-';
-        decrementButton.setAttribute('onclick', 'decrementQuantity("#' + ticket.id + 'Quantity")');
-
-        var quantityInput = document.createElement('input');
-        quantityInput.type = 'text';
-        quantityInput.classList.add('form-control', 'value');
-        quantityInput.id = ticket.id + 'Quantity';
-        quantityInput.name = 'quantity[]'; // Change the name attribute to 'quantity[]'
-        quantityInput.value = '0';
-        quantityInput.setAttribute('data-price', ticket.cmimi); // Store price in data attribute
-        quantityInput.readOnly = true;
-
-        var incrementButton = document.createElement('button');
-        incrementButton.type = 'button';
-        incrementButton.classList.add('btn', 'btn-secondary', 'quantity');
-        incrementButton.innerText = '+';
-        incrementButton.setAttribute('onclick', 'incrementQuantity("#' + ticket.id + 'Quantity")');
-
-        colDiv.appendChild(decrementButton);
-        colDiv.appendChild(quantityInput);
-        colDiv.appendChild(incrementButton);
-        rowDiv.appendChild(colDiv);
-        quantityControl.appendChild(quantityLabel);
-        quantityControl.appendChild(rowDiv);
-
-        formCheck.appendChild(label);
-        formCheck.appendChild(quantityControl);
-        ticketTypeContainer.appendChild(formCheck);
-    });
-
-    // Initialize quantity buttons
-    document.querySelectorAll('.quantity').forEach(function(button) {
-        button.addEventListener('click', function() {
-            calculateTotal(); // Recalculate total when quantity changes
-        });
-    });
-
-    calculateTotal(); // Calculate total initially
-}
-
-function decrementQuantity(quantityInputSelector) {
-    var quantityInput = document.querySelector(quantityInputSelector);
-    if (quantityInput.value > 0) {
-        quantityInput.value = parseInt(quantityInput.value) - 1;
+    // Full name validation
+    var fullName = $('#fullName').val();
+    if (fullName.trim() === '') {
+        $('#fullName-error').text('Full Name is required.');
+        isValid = false;
+    } else {
+        $('#fullName-error').text('');
     }
-    calculateTotal();
-}
 
-function incrementQuantity(quantityInputSelector) {
-    var quantityInput = document.querySelector(quantityInputSelector);
-    quantityInput.value = parseInt(quantityInput.value) + 1;
-    calculateTotal();
-}
+    // Email validation
+    var email = $('#email').val();
+    if (email.trim() === '') {
+        $('#email-error').text('Email is required.');
+        isValid = false;
+    } else {
+        $('#email-error').text('');
+    }
 
-function calculateTotal() {
-    var total = 0;
-    document.querySelectorAll('.value').forEach(function(quantityInput) {
-        var price = parseFloat(quantityInput.getAttribute('data-price'));
-        var quantity = parseInt(quantityInput.value);
-        if (!isNaN(price) && !isNaN(quantity)) {
-            total += price * quantity;
+    // Date validation
+    if (!$('input[name="showDate"]:checked').val()) {
+        $('#showDate-error').text('Please select a date.');
+        isValid = false;
+    } else {
+        $('#showDate-error').text('');
+    }
+
+    // Ticket selection validation
+    var selectedTickets = false;
+    $('.value').each(function() {
+        if (parseInt($(this).val()) > 0) {
+            selectedTickets = true;
+            return false;
         }
     });
-    document.querySelector('.finalPrice').innerText = 'Total: € ' + total.toFixed(2);
+    if (!selectedTickets) {
+        $('#ticketSelection-error').text('Please select at least one ticket.');
+        isValid = false;
+    } else {
+        $('#ticketSelection-error').text('');
+    }
+
+    return isValid;
 }
 
+
+        function decrementQuantity(quantityInputSelector) {
+            var quantityInput = document.querySelector(quantityInputSelector);
+            if (quantityInput.value > 0) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+            calculateTotal();
+        }
+
+        function incrementQuantity(quantityInputSelector) {
+            var quantityInput = document.querySelector(quantityInputSelector);
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            var total = 0;
+            document.querySelectorAll('.value').forEach(function(quantityInput) {
+                var price = parseFloat(quantityInput.getAttribute('data-price'));
+                var quantity = parseInt(quantityInput.value);
+                if (!isNaN(price) && !isNaN(quantity)) {
+                    total += price * quantity;
+                }
+            });
+            document.querySelector('.finalPrice').innerText = 'Total: € ' + total.toFixed(2);
+        }
     </script>
 </main>
 </body>

@@ -318,9 +318,6 @@ if(isset($_POST['color'])) {
     <output class="finalPrice"></output>
 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">Close</button>
-            </div>
         </div>
     </div>
 </div>
